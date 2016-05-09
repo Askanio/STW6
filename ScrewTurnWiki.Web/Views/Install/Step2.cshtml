@@ -1,0 +1,110 @@
+﻿@using ScrewTurn.Wiki.Web.Code.Extensions
+@using ScrewTurn.Wiki.Web.Localization.Install
+@using ScrewTurn.Wiki.Web.Models
+@model InstallViewModel
+@{
+    Layout = "~/Views/Install/Layout.cshtml";
+}
+@Url.InstallerScriptLink("step2.js")
+<script type="text/javascript">
+	$(document).ready(function ()
+	{
+		var messages =
+		{
+		    successTitle: "@InstallStrings.SharedSuccess",
+		    failureTitle: "@InstallStrings.SharedFailure",
+		    failureTestDbConnectionMessage: "@InstallStrings.Step2TestDbConnectionFailureMessage",
+		};
+
+	    var wizard = new ScrewTurn.Wiki.Web.Installer.InstallWizard();
+	    var step2 = new ScrewTurn.Wiki.Web.Installer.Step2(wizard, messages);
+	    step2.bindEvents();
+	});
+</script>
+
+<p class="text-center lead">@InstallStrings.Stage2</p>
+
+<p>
+    @InstallStrings.Step2Intro
+</p>
+
+<form role="form" method="post" id="step2-form" action="@Url.Action("Step3","Install")">
+    @Html.HiddenFor(h => h.LanguageCode)
+    @Html.HiddenFor(h => h.PublicDirectory)
+    <!-- Database connection string -->
+    <div class="form-group">
+        <fieldset>
+            <legend>@InstallStrings.Step2DatabaseConnectionString</legend>
+            <p>
+                @InstallStrings.Step2ConnectionStringCreateDatabase
+            </p>
+
+            <!-- Example db connection strings collapsed table -->
+            <div class="form-group">
+                <a data-toggle="collapse" href="#connectionstrings-table">@InstallStrings.Step2ExampleConnectionStrings ...</a>
+                <table id="connectionstrings-table" class="collapse table table-striped table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Database</th>
+                            <th>Connection string</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>SQL Server Express</td>
+                            <td class="example" data-dbtype="SqlServer">Database=MyDataBase;Server=.\SQLEXPRESS;uid=username;pwd=password;</td>
+                        </tr>
+                        <tr>
+                            <td>SQL Server Express (integrated security)</td>
+                            <td class="example" data-dbtype="SqlServer">Database=MyDataBase;Server=.\SQLEXPRESS;Integrated Security=SSPI</td>
+                        </tr>
+                        @*<tr>
+                            <td>SQL Server App_Data file-based</td>
+                            <td class="example" data-dbtype="SqlServer2012">Server=.\SQLExpress;AttachDbFilename=|DataDirectory|\stw.mdf;Integrated Security=True;User Instance=True</td>
+                        </tr>*@
+                        <tr>
+                            <td>SQL Server Compact</td>
+                            <td class="example" data-dbtype="SqlServerCe">Data Source=|DataDirectory|\MyDataBase.sdf;</td>
+                        </tr>
+                        <tr>
+                            <td>Microsoft Azure</td>
+                            <td class="example" data-dbtype="Azure">DefaultEndpointsProtocol=https;AccountName=MyAccountName;AccountKey=MyAccountKey;</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Database type -->
+            <div class="form-group">
+                <label>@InstallStrings.Step2DatabaseType</label>
+                @Html.BootstrapDropDownListFor(s => s.ConnectionSchemeName, Model.ConnectionSchemesAsSelectList, InstallStrings.Step2DatabaseType)
+            </div>
+
+            <!-- Database connection string -->
+            <div class="form-group">
+                <label>@InstallStrings.Step2DatabaseConnectionString</label>
+                @Html.BootstrapTextBoxFor(s => s.ConnectionString, InstallStrings.Step2ConnectionStringsHelp)
+            </div>
+
+            <!-- Test button -->
+            <div class="form-group">
+                <p>
+                    <button id="testdbconnection" class="btn btn-info test-button" type="button">
+                        @InstallStrings.ButtonTest
+                    </button>
+                    <label id="testdbconnection-info"></label>
+                </p>
+            </div>
+        </fieldset>
+    </div>
+</form>
+
+@section BottomButtons
+{
+    <div class="previous">
+        <div class="btn btn-default">
+            @Html.ActionLink(@InstallStrings.SharedBack, "Step1", new { language = Model.LanguageCode })
+        </div>
+    </div>
+    <button type="submit" class="continue btn btn-success pull-right">@InstallStrings.SharedNextButton</button>
+}

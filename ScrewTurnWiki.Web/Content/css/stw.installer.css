@@ -1,0 +1,77 @@
+﻿/* 
+This contains the shared ScrewTurnWiki installer CSS definitions, used on all installer pages.
+*/
+body {
+    font-family: Verdana, Arial, Helvetica, sans-serif;
+    letter-spacing: .01em;
+    font-size: 12px;
+    background-color: gainsboro !important;
+    padding: 50px 0px;
+}
+a {
+    color: #000;
+}
+h1 {
+    font-size: 24px;
+}
+h3 {
+    display: inline;
+    box-shadow: 0 1px rgba(255, 255, 255, 0.9);
+    text-shadow: 0 1px rgba(255, 255, 255, 0.9);
+}
+
+/* Continue + previous buttons */
+#bottom-buttons {
+    padding-top: 10px;
+}
+.previous {
+    float: left;
+    padding: 10px;
+    font-weight: bold;
+}
+
+#installer-container {
+    width: 850px;
+    border: 1px solid #aaa;
+    border-radius: 5px;
+    padding: 10px;
+    background-color: #fff;
+}
+#logo {
+    text-align: center;
+}
+#content {
+    padding: 30px;
+}
+#footer {
+    margin-top: 30px;
+    text-align: center;
+}
+
+/* Index page */
+#language {
+    font-size: 1.5em;
+    list-style: none;
+    padding-left: 18px !important;
+}
+    #language li {
+        margin-bottom: 5px;
+    }
+    #language a {
+        color: #2f2f2f;
+        text-decoration: none;
+    }
+        #language a:hover {
+            text-decoration: underline;
+        }
+
+/*.form-group{
+    margin-bottom: 20px;
+}*/
+
+.test-success{
+    color: #3c763d;
+}
+.test-error{
+    color: #a94442;
+}

@@ -1,0 +1,38 @@
+﻿@using ScrewTurn.Wiki.Web.Code.Extensions
+@using ScrewTurnWiki.Web
+<!DOCTYPE html>
+<html>
+<head>
+    <title>ScrewTurnWiki Install</title>
+    @*<link rel="shortcut icon" href="@Url.Content("~/Content/Images/favicon.png")" />*@
+    @Url.CssLink("stw.installer.css")
+    @Scripts.Render(BundleConfig.JqueryJS)
+    @Scripts.Render(BundleConfig.JqueryUIJS)
+    @Styles.Render(BundleConfig.JqueryUICss)
+    @Scripts.Render(BundleConfig.BootstrapJS)
+    @Styles.Render(BundleConfig.BootstrapCss)
+    @Scripts.Render(BundleConfig.BootboxJS)
+
+    @Url.ScriptLink("~/Install/InstallerJsVars")
+    @Url.ScriptLink("stw/installer/installwizard.js")
+</head>
+
+<body>
+    <div id="installer-container" class="container">
+        <!-- Logo -->
+        <div id="logo" class="row">
+            <img src="@Url.Content("~/Content/Images/STWLogo.png")" alt="logo" />
+        </div>
+
+        <!-- Content-->
+        <div id="content" class="row">
+            @RenderBody()
+
+            <!-- Previous + Continue buttons -->
+            <div id="bottom-buttons">
+                @RenderSection("BottomButtons")
+            </div>
+        </div>
+    </div>
+</body>
+</html>

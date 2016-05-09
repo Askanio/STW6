@@ -1,0 +1,56 @@
+﻿@using ScrewTurn.Wiki.Web.Code.Extensions
+@model ScrewTurn.Wiki.Web.Models.WikiBaseModel
+<!DOCTYPE html>
+<html dir="@Model.Direction" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@Model.Title</title>
+@foreach (var htmlHead in Model.HtmlHeads)
+{
+    @htmlHead
+}
+    @*@Html.Partial("HeadContent")*@
+    @Url.ScriptLink("stw/common/commonwizard.js")
+    @Url.ScriptLink("~/Shared/SharedJsVars")
+</head>
+<body>
+<div id="HeaderDiv">
+    @Model.Header
+</div>
+
+<div id="ContainerDiv">
+
+    <div id="SidebarDiv">
+        <div id="SidebarHeaderDiv">
+            <!-- Used for layout purposes only -->
+        </div>
+        <div id="SidebarContentDiv">
+            @Model.Sidebar
+        </div>
+        <div id="SidebarFooterDiv">
+            <!-- Used for layout purposes only -->
+        </div>
+    </div>
+    <div id="MainDiv">
+        <div id="MainHeaderDiv">
+            <!-- Used for layout purposes only -->
+        </div>
+        @Model.PageHeader
+        @RenderBody()
+        @Model.PageFooter
+        <div id="MainFooterDiv">
+            <!-- Used for layout purposes only -->
+        </div>
+    </div>
+
+</div>
+
+<div id="FooterDiv">
+    @Model.Footer
+</div>
+
+@RenderSection("scripts", required: false)
+</body>
+</html>

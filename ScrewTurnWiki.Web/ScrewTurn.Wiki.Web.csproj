@@ -1,0 +1,509 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\Microsoft.Net.Compilers.1.2.1\build\Microsoft.Net.Compilers.props" Condition="Exists('..\packages\Microsoft.Net.Compilers.1.2.1\build\Microsoft.Net.Compilers.props')" />
+  <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.1\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.1\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{030B6E72-B12C-4060-8749-A82E41AA5CCB}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>ScrewTurn.Wiki.Web</RootNamespace>
+    <AssemblyName>ScrewTurn.Wiki.Web</AssemblyName>
+    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
+    <MvcBuildViews>false</MvcBuildViews>
+    <UseIISExpress>true</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+    <TypeScriptToolsVersion>1.8</TypeScriptToolsVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Antlr3.Runtime, Version=3.5.0.2, Culture=neutral, PublicKeyToken=eb42632606e9261f, processorArchitecture=MSIL">
+      <HintPath>..\packages\Antlr.3.5.0.2\lib\Antlr3.Runtime.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Autofac, Version=3.5.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+      <HintPath>..\packages\Autofac.3.5.2\lib\net40\Autofac.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Autofac.Integration.Mvc, Version=3.3.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+      <HintPath>..\packages\Autofac.Mvc5.3.3.4\lib\net45\Autofac.Integration.Mvc.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.1\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Newtonsoft.Json, Version=8.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.8.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.Routing" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http">
+    </Reference>
+    <Reference Include="System.Net.Http.WebRequest">
+    </Reference>
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.3\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Optimization">
+      <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.1.1.3\lib\net40\System.Web.Optimization.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.3\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="WebGrease, Version=1.6.5135.21930, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\WebGrease.1.6.0\lib\WebGrease.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\AssemblyVersion.cs">
+      <Link>Code\AssemblyVersion.cs</Link>
+    </Compile>
+    <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="App_Start\FilterConfig.cs" />
+    <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Code\FileDataExtension.cs" />
+    <Compile Include="Code\Files\AttachmentRouteHandler.cs" />
+    <Compile Include="Code\ImageHelper.cs" />
+    <Compile Include="Code\IoCConfig.cs" />
+    <Compile Include="Code\Extensions\BootstrapHtmlExtensions.cs" />
+    <Compile Include="Code\Extensions\UrlHelperExtensions.cs" />
+    <Compile Include="Code\LoginTools.cs" />
+    <Compile Include="Code\PageHelper.cs" />
+    <Compile Include="Code\ResourceExchanger.cs" />
+    <Compile Include="Code\ValidationAttributes\WikisValidator.cs" />
+    <Compile Include="Controllers\AttachmentController.cs" />
+    <Compile Include="Controllers\BaseController.cs" />
+    <Compile Include="Controllers\ConfigurationTesterController.cs" />
+    <Compile Include="Controllers\PageController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\InstallController.cs" />
+    <Compile Include="Controllers\UserController.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Code\Files\FileHandler.cs" />
+    <Compile Include="Localization\Common\AttachmentViewer.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AttachmentViewer.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Localization\Common\Default.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Default.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Localization\Install\InstallStrings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>InstallStrings.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Localization\Messages\Messages.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Messages.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Home\AttachmentViewerModel.cs" />
+    <Compile Include="Models\Home\EmailNotification.cs" />
+    <Compile Include="Models\InstallViewModel.cs" />
+    <Compile Include="Models\LanguageViewModel.cs" />
+    <Compile Include="Models\TestResult.cs" />
+    <Compile Include="Models\WikiBaseModel.cs" />
+    <Compile Include="Models\WikiPageModel.cs" />
+    <Compile Include="Models\Home\DiscussionModel.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\bootstrap\css\bootstrap-theme.css" />
+    <Content Include="Content\bootstrap\css\bootstrap-theme.min.css" />
+    <Content Include="Content\bootstrap\css\bootstrap.css" />
+    <Content Include="Content\bootstrap\css\bootstrap.min.css" />
+    <Content Include="Content\bootstrap\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Content\css\stw.installer.css" />
+    <Content Include="Content\Images\Blank.png" />
+    <Content Include="Content\Images\File.png" />
+    <Content Include="Content\Images\STWLogo.png" />
+    <Content Include="Content\jquery\css\jquery-ui.css" />
+    <Content Include="Content\jquery\css\jquery-ui.min.css" />
+    <Content Include="Content\jquery\css\jquery-ui.structure.css" />
+    <Content Include="Content\jquery\css\jquery-ui.structure.min.css" />
+    <Content Include="Content\jquery\css\jquery-ui.theme.css" />
+    <Content Include="Content\jquery\css\jquery-ui.theme.min.css" />
+    <Content Include="Content\jquery\css\images\ui-icons_444444_256x240.png" />
+    <Content Include="Content\jquery\css\images\ui-icons_555555_256x240.png" />
+    <Content Include="Content\jquery\css\images\ui-icons_777620_256x240.png" />
+    <Content Include="Content\jquery\css\images\ui-icons_777777_256x240.png" />
+    <Content Include="Content\jquery\css\images\ui-icons_cc0000_256x240.png" />
+    <Content Include="Content\jquery\css\images\ui-icons_ffffff_256x240.png" />
+    <None Include="Scripts\jquery-2.2.3.intellisense.js" />
+    <Content Include="Content\Themes\Default\Scripts.js" />
+    <Content Include="Scripts\jquery-2.2.3.js" />
+    <Content Include="Scripts\jquery-2.2.3.min.js" />
+    <Content Include="Scripts\jquery-ui.js" />
+    <Content Include="Scripts\jquery-ui.min.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
+    <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Scripts\Readme.txt" />
+    <Content Include="Content\Themes\Admin.css" />
+    <Content Include="Content\Themes\Default-v2\Icon.ico" />
+    <Content Include="Content\Themes\Default-v2\Images\Attachment.png" />
+    <Content Include="Content\Themes\Default-v2\Images\Background.gif" />
+    <Content Include="Content\Themes\Default-v2\Images\DropDown.png" />
+    <Content Include="Content\Themes\Default-v2\Images\EmailNotifOff-Discussion.png" />
+    <Content Include="Content\Themes\Default-v2\Images\EmailNotifOff.png" />
+    <Content Include="Content\Themes\Default-v2\Images\EmailNotifOn-Discussion.png" />
+    <Content Include="Content\Themes\Default-v2\Images\EmailNotifOn.png" />
+    <Content Include="Content\Themes\Default-v2\Images\ExternalLink.gif" />
+    <Content Include="Content\Themes\Default-v2\Images\File.png" />
+    <Content Include="Content\Themes\Default-v2\Images\Message.png" />
+    <Content Include="Content\Themes\Default-v2\Images\MessageDelete.png" />
+    <Content Include="Content\Themes\Default-v2\Images\MessageEdit.png" />
+    <Content Include="Content\Themes\Default-v2\Images\MessageReply.png" />
+    <Content Include="Content\Themes\Default-v2\Images\Page.png" />
+    <Content Include="Content\Themes\Default-v2\Images\Print.png" />
+    <Content Include="Content\Themes\Default-v2\Images\Redirect.png" />
+    <Content Include="Content\Themes\Default-v2\Images\RSS-Discussion.png" />
+    <Content Include="Content\Themes\Default-v2\Images\RSS.png" />
+    <Content Include="Content\Themes\Default-v2\Images\Search.png" />
+    <Content Include="Content\Themes\Default-v2\Print_Styles.css" />
+    <Content Include="Content\Themes\Default-v2\Screen_Styles.css" />
+    <Content Include="Content\Themes\Default-v2\Scripts.js" />
+    <Content Include="Content\Themes\Default\Icon.ico" />
+    <Content Include="Content\Themes\Default\Images\Attachment.png" />
+    <Content Include="Content\Themes\Default\Images\DropDown.png" />
+    <Content Include="Content\Themes\Default\Images\EmailNotifOff-Discussion.png" />
+    <Content Include="Content\Themes\Default\Images\EmailNotifOff.png" />
+    <Content Include="Content\Themes\Default\Images\EmailNotifOn-Discussion.png" />
+    <Content Include="Content\Themes\Default\Images\EmailNotifOn.png" />
+    <Content Include="Content\Themes\Default\Images\ExternalLink.gif" />
+    <Content Include="Content\Themes\Default\Images\File.png" />
+    <Content Include="Content\Themes\Default\Images\MainBackground.gif" />
+    <Content Include="Content\Themes\Default\Images\Message.png" />
+    <Content Include="Content\Themes\Default\Images\MessageDelete.png" />
+    <Content Include="Content\Themes\Default\Images\MessageEdit.png" />
+    <Content Include="Content\Themes\Default\Images\MessageReply.png" />
+    <Content Include="Content\Themes\Default\Images\Page.png" />
+    <Content Include="Content\Themes\Default\Images\Print.png" />
+    <Content Include="Content\Themes\Default\Images\Redirect.png" />
+    <Content Include="Content\Themes\Default\Images\RSS-Discussion.png" />
+    <Content Include="Content\Themes\Default\Images\RSS.png" />
+    <Content Include="Content\Themes\Default\Images\Search.png" />
+    <Content Include="Content\Themes\Default\Print_Styles.css" />
+    <Content Include="Content\Themes\Default\Screen_Styles.css" />
+    <Content Include="Content\Themes\Editor.css" />
+    <Content Include="Content\Themes\prettyPhoto.css" />
+    <Content Include="Content\Themes\Print.css" />
+    <Content Include="favicon.ico" />
+    <Content Include="Global.asax" />
+    <Content Include="Content\bootstrap\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Content\bootstrap\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="Content\bootstrap\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="Content\bootstrap\fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="Content\bootstrap\css\bootstrap.min.css.map" />
+    <Content Include="Content\bootstrap\css\bootstrap.css.map" />
+    <Content Include="Content\bootstrap\css\bootstrap-theme.min.css.map" />
+    <Content Include="Content\bootstrap\css\bootstrap-theme.css.map" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="Scripts\jquery-2.2.3.min.map" />
+    <None Include="Scripts\_references.js" />
+    <Content Include="Scripts\bootbox.js" />
+    <Content Include="Scripts\bootbox.min.js" />
+    <Content Include="Content\bootstrap\js\bootstrap.js" />
+    <Content Include="Content\bootstrap\js\bootstrap.min.js" />
+    <Content Include="Scripts\respond.js" />
+    <Content Include="Scripts\respond.matchmedia.addListener.js" />
+    <Content Include="Scripts\respond.matchmedia.addListener.min.js" />
+    <Content Include="Scripts\respond.min.js" />
+    <Content Include="Views\Shared\EmailNotification.cshtml" />
+    <Content Include="Views\Shared\SharedJsVars.cshtml" />
+    <TypeScriptCompile Include="Scripts\stw\common\wikipage.ts" />
+    <TypeScriptCompile Include="Scripts\stw\typescript-ref\commonconstants.ts" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Views\Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Shared\Error.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Home\WikiPage.cshtml" />
+    <Content Include="Views\Install\Step2.cshtml" />
+    <Content Include="Views\Install\Step3.cshtml" />
+    <Content Include="Views\Install\Step4.cshtml" />
+    <Content Include="Views\Shared\_CleanLayout.cshtml" />
+    <None Include="Views\Attachment\AttachmentViewer.cshtml" />
+    <None Include="Views\Home\Discussion.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+    <Folder Include="Views\User\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="packages.config" />
+    <Content Include="Content\Themes\Default-v2\Default-v2.rar" />
+    <Content Include="Content\web.config" />
+    <None Include="Project_Readme.html" />
+    <Content Include="StwSettings.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <None Include="Properties\PublishProfiles\ScrewTurnWiki.pubxml" />
+    <Content Include="Views\Install\Layout.cshtml" />
+    <Content Include="Views\Install\Index.cshtml" />
+    <Content Include="Views\Install\Step1.cshtml" />
+    <Content Include="Views\Install\InstallerJsVars.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ScrewTurnWiki.Core\ScrewTurn.Wiki.Core.csproj">
+      <Project>{c353a35c-86d0-4154-9500-4f88caab29c3}</Project>
+      <Name>ScrewTurn.Wiki.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ScrewTurnWiki.FSProviders\ScrewTurn.Wiki.FSProviders.csproj">
+      <Project>{1ef2d87b-c7df-4ef1-bbd8-f73bf7ffc07f}</Project>
+      <Name>ScrewTurn.Wiki.FSProviders</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ScrewTurnWiki.PluginFramework\ScrewTurn.Wiki.PluginFramework.csproj">
+      <Project>{531a83d6-76f9-4014-91c5-295818e2d948}</Project>
+      <Name>ScrewTurn.Wiki.PluginFramework</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ScrewTurnWiki.SqlServerProviders\ScrewTurn.Wiki.SqlServerProviders.csproj">
+      <Project>{ecb488d9-c8e9-41e0-be27-27f41f76f8a0}</Project>
+      <Name>ScrewTurn.Wiki.SqlServerProviders</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Localization\Common\AttachmentViewer.af-ZA.resx" />
+    <EmbeddedResource Include="Localization\Common\AttachmentViewer.cs-CZ.resx" />
+    <EmbeddedResource Include="Localization\Common\AttachmentViewer.da-DK.resx" />
+    <EmbeddedResource Include="Localization\Common\AttachmentViewer.de-DE.resx" />
+    <EmbeddedResource Include="Localization\Common\AttachmentViewer.es-ES.resx" />
+    <EmbeddedResource Include="Localization\Common\AttachmentViewer.fa-IR.resx" />
+    <EmbeddedResource Include="Localization\Common\AttachmentViewer.fr-FR.resx" />
+    <EmbeddedResource Include="Localization\Common\AttachmentViewer.hi-IN.resx" />
+    <EmbeddedResource Include="Localization\Common\AttachmentViewer.hu-HU.resx" />
+    <EmbeddedResource Include="Localization\Common\AttachmentViewer.it-IT.resx" />
+    <EmbeddedResource Include="Localization\Common\AttachmentViewer.ja-JP.resx" />
+    <EmbeddedResource Include="Localization\Common\AttachmentViewer.ko-KR.resx" />
+    <EmbeddedResource Include="Localization\Common\AttachmentViewer.lv-LV.resx" />
+    <EmbeddedResource Include="Localization\Common\AttachmentViewer.nb-NO.resx" />
+    <EmbeddedResource Include="Localization\Common\AttachmentViewer.nl-NL.resx" />
+    <EmbeddedResource Include="Localization\Common\AttachmentViewer.pl-PL.resx" />
+    <EmbeddedResource Include="Localization\Common\AttachmentViewer.pt-BR.resx" />
+    <EmbeddedResource Include="Localization\Common\AttachmentViewer.pt-PT.resx" />
+    <EmbeddedResource Include="Localization\Common\AttachmentViewer.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>AttachmentViewer.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Localization\Common\AttachmentViewer.ro-RO.resx" />
+    <EmbeddedResource Include="Localization\Common\AttachmentViewer.ru-RU.resx" />
+    <EmbeddedResource Include="Localization\Common\AttachmentViewer.sk-SK.resx" />
+    <EmbeddedResource Include="Localization\Common\AttachmentViewer.sr-Latn-CS.resx" />
+    <EmbeddedResource Include="Localization\Common\AttachmentViewer.sv-SE.resx" />
+    <EmbeddedResource Include="Localization\Common\AttachmentViewer.tr-TR.resx" />
+    <EmbeddedResource Include="Localization\Common\AttachmentViewer.uk-UA.resx" />
+    <EmbeddedResource Include="Localization\Common\AttachmentViewer.vi-VN.resx" />
+    <EmbeddedResource Include="Localization\Common\AttachmentViewer.zh-cn.resx" />
+    <EmbeddedResource Include="Localization\Common\AttachmentViewer.zh-tw.resx" />
+    <EmbeddedResource Include="Localization\Common\Default.af-ZA.resx" />
+    <EmbeddedResource Include="Localization\Common\Default.cs-CZ.resx" />
+    <EmbeddedResource Include="Localization\Common\Default.da-DK.resx" />
+    <EmbeddedResource Include="Localization\Common\Default.de-DE.resx" />
+    <EmbeddedResource Include="Localization\Common\Default.es-ES.resx" />
+    <EmbeddedResource Include="Localization\Common\Default.fa-IR.resx" />
+    <EmbeddedResource Include="Localization\Common\Default.fr-FR.resx" />
+    <EmbeddedResource Include="Localization\Common\Default.hi-IN.resx" />
+    <EmbeddedResource Include="Localization\Common\Default.hu-HU.resx" />
+    <EmbeddedResource Include="Localization\Common\Default.it-IT.resx" />
+    <EmbeddedResource Include="Localization\Common\Default.ja-JP.resx" />
+    <EmbeddedResource Include="Localization\Common\Default.ko-KR.resx" />
+    <EmbeddedResource Include="Localization\Common\Default.lv-LV.resx" />
+    <EmbeddedResource Include="Localization\Common\Default.nb-NO.resx" />
+    <EmbeddedResource Include="Localization\Common\Default.nl-NL.resx" />
+    <EmbeddedResource Include="Localization\Common\Default.pl-PL.resx" />
+    <EmbeddedResource Include="Localization\Common\Default.pt-BR.resx" />
+    <EmbeddedResource Include="Localization\Common\Default.pt-PT.resx" />
+    <EmbeddedResource Include="Localization\Common\Default.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Default.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Localization\Common\Default.ro-RO.resx" />
+    <EmbeddedResource Include="Localization\Common\Default.ru-RU.resx" />
+    <EmbeddedResource Include="Localization\Common\Default.sk-SK.resx" />
+    <EmbeddedResource Include="Localization\Common\Default.sr-Latn-CS.resx" />
+    <EmbeddedResource Include="Localization\Common\Default.sv-SE.resx" />
+    <EmbeddedResource Include="Localization\Common\Default.tr-TR.resx" />
+    <EmbeddedResource Include="Localization\Common\Default.uk-UA.resx" />
+    <EmbeddedResource Include="Localization\Common\Default.vi-VN.resx" />
+    <EmbeddedResource Include="Localization\Common\Default.zh-cn.resx" />
+    <EmbeddedResource Include="Localization\Common\Default.zh-tw.resx" />
+    <EmbeddedResource Include="Localization\Install\InstallStrings.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>InstallStrings.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Localization\Install\InstallStrings.ru.resx" />
+    <EmbeddedResource Include="Localization\Messages\Messages.af-ZA.resx" />
+    <EmbeddedResource Include="Localization\Messages\Messages.cs-CZ.resx" />
+    <EmbeddedResource Include="Localization\Messages\Messages.da-DK.resx" />
+    <EmbeddedResource Include="Localization\Messages\Messages.de-DE.resx" />
+    <EmbeddedResource Include="Localization\Messages\Messages.es-ES.resx" />
+    <EmbeddedResource Include="Localization\Messages\Messages.fa-IR.resx" />
+    <EmbeddedResource Include="Localization\Messages\Messages.fr-FR.resx" />
+    <EmbeddedResource Include="Localization\Messages\Messages.hi-IN.resx" />
+    <EmbeddedResource Include="Localization\Messages\Messages.hu-HU.resx" />
+    <EmbeddedResource Include="Localization\Messages\Messages.it-IT.resx" />
+    <EmbeddedResource Include="Localization\Messages\Messages.ja-JP.resx" />
+    <EmbeddedResource Include="Localization\Messages\Messages.ko-KR.resx" />
+    <EmbeddedResource Include="Localization\Messages\Messages.lv-LV.resx" />
+    <EmbeddedResource Include="Localization\Messages\Messages.nb-NO.resx" />
+    <EmbeddedResource Include="Localization\Messages\Messages.nl-NL.resx" />
+    <EmbeddedResource Include="Localization\Messages\Messages.pl-PL.resx" />
+    <EmbeddedResource Include="Localization\Messages\Messages.pt-BR.resx" />
+    <EmbeddedResource Include="Localization\Messages\Messages.pt-PT.resx" />
+    <EmbeddedResource Include="Localization\Messages\Messages.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Messages.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Localization\Messages\Messages.ro-RO.resx" />
+    <EmbeddedResource Include="Localization\Messages\Messages.ru-RU.resx" />
+    <EmbeddedResource Include="Localization\Messages\Messages.sk-SK.resx" />
+    <EmbeddedResource Include="Localization\Messages\Messages.sr-Latn-CS.resx" />
+    <EmbeddedResource Include="Localization\Messages\Messages.sv-SE.resx" />
+    <EmbeddedResource Include="Localization\Messages\Messages.tr-TR.resx" />
+    <EmbeddedResource Include="Localization\Messages\Messages.uk-UA.resx" />
+    <EmbeddedResource Include="Localization\Messages\Messages.vi-VN.resx" />
+    <EmbeddedResource Include="Localization\Messages\Messages.zh-cn.resx" />
+    <EmbeddedResource Include="Localization\Messages\Messages.zh-tw.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <TypeScriptCompile Include="Scripts\stw\common\commonwizard.ts" />
+    <TypeScriptCompile Include="Scripts\stw\installer\step4.ts" />
+    <TypeScriptCompile Include="Scripts\stw\installer\installwizard.ts" />
+    <TypeScriptCompile Include="Scripts\stw\installer\step1.ts" />
+    <TypeScriptCompile Include="Scripts\stw\installer\step3.ts" />
+    <TypeScriptCompile Include="Scripts\stw\installer\step2.ts" />
+    <TypeScriptCompile Include="Scripts\stw\typescript-ref\installerconstants.ts" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets')" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <Target Name="MvcBuildViews" AfterTargets="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
+    <AspNetCompiler VirtualPath="temp" PhysicalPath="$(WebProjectOutputDir)" />
+  </Target>
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>3286</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:3286/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.1\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.1\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.Net.Compilers.1.2.1\build\Microsoft.Net.Compilers.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Net.Compilers.1.2.1\build\Microsoft.Net.Compilers.props'))" />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target> -->
+</Project>

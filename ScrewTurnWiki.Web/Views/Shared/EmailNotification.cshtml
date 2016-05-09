@@ -1,0 +1,3 @@
+﻿@model ScrewTurn.Wiki.Web.Models.Home.EmailNotification
+
+@Ajax.ActionLink("-", "EmailNotification", "User", new {page = Model.PageFullName, discussMode = Model.DiscussMode}, new AjaxOptions {UpdateTargetId = "EmailNotificationDiv"}, new {@class = Model.CssClass, @title = Model.ToolTip, @type = "image", @src = "~/Content/Images/Blank.png"}) 

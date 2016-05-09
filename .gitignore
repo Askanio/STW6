@@ -234,3 +234,4 @@ _Pvt_Extensions
 
 # FAKE - F# Make
 .fake/
+/ScrewTurnWiki.Web/public/root/Attachments

@@ -1,0 +1,97 @@
+﻿@using ScrewTurn.Wiki.Web.Code
+@using ScrewTurn.Wiki.Web.Code.Extensions
+@using ScrewTurn.Wiki.Web.Localization.Install
+@using ScrewTurn.Wiki.Web.Models
+@model InstallViewModel
+@{
+    Layout = "~/Views/Install/Layout.cshtml";
+}
+@Url.InstallerScriptLink("step3.js")
+<script type="text/javascript">
+    $(document).ready(function () {
+        var messages =
+		{
+		    buttonDeleteTitle: "@InstallStrings.SharedDelete",
+		    checkLengthError1: "@InstallStrings.SharedCheckLengthError1",
+		    checkLengthError2: "@InstallStrings.SharedCheckLengthError2",
+		    checkLengthError3: "@InstallStrings.SharedCheckLengthError3",
+		    wikinameExistsError: "@InstallStrings.Step3WikinameExistsError",
+		    wikinameInValidCharacters: "@InstallStrings.Step3WikinameInValidCharacters",
+		    hostsInValidCharacters: "@InstallStrings.Step3HostsInValidCharacters",
+		    buttonCreateWikiTitle: "@InstallStrings.Step3ButtonCreateWikiTitle",
+		    buttonCancelTitle: "@InstallStrings.SharedCancel",
+		    wikiNameTitle: "@InstallStrings.Step3WikiNameTitleColumnHeading",
+		    hostsTitle: "@InstallStrings.Step3HostsTitleColumnHeading",
+		};
+
+        var wizard = new ScrewTurn.Wiki.Web.Installer.InstallWizard();
+        var step3 = new ScrewTurn.Wiki.Web.Installer.Step3(wizard, messages);
+        step3.bindEvents();
+    });
+</script>
+
+<div id="dialog-form" class="form-area" title="@InstallStrings.Step3ButtonCreateWikiTitle">
+    <p class="validateTips">@InstallStrings.Step3FieldsRequireMessage</p>
+
+    <form>
+        <fieldset>
+            <div class="form-group">
+                <label for="wikiname-edit">@InstallStrings.Step3WikiNameTitleColumnHeading</label>
+                <input type="text" name="wikiname-edit" id="wikiname-edit" value="" class="form-control" placeholder="wiki1">
+            </div>
+            <div class="form-group">
+                <label for="host-edit">@InstallStrings.Step3HostsTitleColumnHeading</label>
+                <input type="text" name="host-edit" id="host-edit" value="" class="form-control" placeholder="wiki1.acme.com;alias.acme.com">
+            </div>
+            <!-- Allow form submission with keyboard without duplicating the dialog button -->
+           <input tabindex="-1" style="position:absolute; top:-1000px">
+</fieldset>
+    </form>
+</div>
+
+<p class="text-center lead">@InstallStrings.Stage3</p>
+
+<p>
+    @InstallStrings.Step3Intro
+</p>
+
+<form role="form" method="post" id="step3-form" action="@Url.Action("Step4","Install")">
+    @Html.HiddenFor(h => h.LanguageCode)
+    @Html.HiddenFor(h => h.PublicDirectory)
+    @Html.HiddenFor(h => h.ConnectionString)
+    @Html.HiddenFor(h => h.ConnectionSchemeName)
+    @Html.HiddenFor(h => h.AdvancedSettings)
+    <table id="wikis" class="table table-striped" name="Wikis">
+        <thead>
+            <tr>
+                <th>@InstallStrings.Step3WikiNameTitleColumnHeading</th>
+                <th>@InstallStrings.Step3HostsTitleColumnHeading</th>
+                <th></th>
+            </tr>
+        </thead>
+        @foreach (var wiki in Model.Wikis)
+        {
+            <tr>
+                <td>@wiki.Key</td>
+                <td>@wiki.Value<input type="hidden" name="Wikis[@wiki.Key]" value="@wiki.Value"/></td>
+                @if (wiki.Key != "root")
+                {
+                    @*<td class="edit">@Html.ActionLink(Messages.Edit, "Edit", new { @class = "btn btn-xs btn-primary" })</td>*@
+                    <td>@Html.ActionLink(InstallStrings.SharedDelete, "Delete", new {@class = "btn btn-xs btn-primary btn-danger", @href = '#', @onclick = "$(this).parents('tr').remove(); return false;"})</td>
+                }
+            </tr>
+        }
+    </table>
+    <br />
+    <button id="create-wiki" class="btn btn-primary" type="button">@InstallStrings.Step3ButtonCreateNewWikiTitle</button>
+</form>
+
+@section BottomButtons
+{
+    <div class="previous">
+        <div class="btn btn-default">
+            @Html.ActionLink(@InstallStrings.SharedBack, "Step1", new { language = Model.LanguageCode })
+        </div>
+    </div>
+    <button type="submit" class="continue btn btn-success pull-right">@InstallStrings.SharedNextButton</button>
+}

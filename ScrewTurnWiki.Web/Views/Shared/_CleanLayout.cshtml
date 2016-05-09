@@ -1,0 +1,41 @@
+﻿@using ScrewTurn.Wiki.Web.Code.Extensions
+@using ScrewTurn.Wiki.Web.Localization.Messages
+@using ScrewTurnWiki.Web
+@model ScrewTurn.Wiki.Web.Models.WikiBaseModel
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>@ViewData["Title"]</title>
+    @Scripts.Render(BundleConfig.JqueryJS)
+    @Scripts.Render(BundleConfig.BootstrapJS)
+    @Styles.Render(BundleConfig.BootstrapCss)
+    @Scripts.Render(BundleConfig.BootboxJS)
+
+    @Url.ScriptLink("stw/common/commonwizard.js")
+
+    @Model.HtmlHead
+    @RenderSection("HtmlHead", required: false)
+    @*@Html.Partial("HeadContent")*@
+</head>
+<body id="BodyClean">
+    <script type="text/javascript">
+    var STW_INSTALLER_WOOPS = "@Messages.SharedUnexpectedError";
+    </script>
+<div id="HeaderSADiv">
+    @Model.Header
+</div>
+
+<div id="NavigationSADiv">
+</div>
+
+<div id="ContainerSADiv">
+    @RenderBody()
+</div>
+
+<div id="FooterSADiv">
+    @Model.Footer
+</div>
+</body>
+</html>

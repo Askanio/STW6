@@ -1,0 +1,37 @@
+﻿@using ScrewTurn.Wiki.Web.Localization.Common
+@using ScrewTurn.Wiki.Web.Localization.Messages
+@model IList<ScrewTurn.Wiki.Web.Models.Home.AttachmentViewerModel>
+
+@if (Model.Count > 0)
+{
+    <table id="AttachmentViewerTable" class="generic" cellpadding="0" cellspacing="0">
+        <thead>
+        <tr class="tableheader">
+            <th>&nbsp;</th>
+            <th>@AttachmentViewer.LblName_Text</th>
+            <th>@AttachmentViewer.LblSize_Text</th>
+        </tr>
+        </thead>
+        <tbody>
+        @for (int i = 0; i < Model.Count; i++)
+        {
+            if (i%2 == 0)
+            {
+                <tr class="tablerow">
+                    <td><img src="~/Content/Images/File.png" alt="-"/></td>
+                    <td><a href='@Model[i].Name' title="@Messages.Download">@Model[i].Name</a></td>
+                    <td>@Model[i].Size</td>
+                </tr>
+            }
+            else
+            {
+                <tr class="tablerowalternate">
+                    <td><img src="~/Content/Images/File.png" alt="-"/></td>
+                    <td><a href='@Model[i].Link' title="@Messages.Download">@Model[i].Link</a></td>
+                    <td>@Model[i].Size</td>
+                </tr>
+            }
+        }
+        </tbody>
+    </table>
+}

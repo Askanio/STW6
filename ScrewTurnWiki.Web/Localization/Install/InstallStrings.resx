@@ -1,0 +1,303 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="ButtonTest" xml:space="preserve">
+    <value>Test</value>
+  </data>
+  <data name="SharedBack" xml:space="preserve">
+    <value>Back</value>
+  </data>
+  <data name="SharedCancel" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="SharedCheckLengthError1" xml:space="preserve">
+    <value>Length of</value>
+  </data>
+  <data name="SharedCheckLengthError2" xml:space="preserve">
+    <value>must be between</value>
+  </data>
+  <data name="SharedCheckLengthError3" xml:space="preserve">
+    <value>and</value>
+  </data>
+  <data name="SharedContinue" xml:space="preserve">
+    <value>Continue</value>
+  </data>
+  <data name="SharedDelete" xml:space="preserve">
+    <value>Delete</value>
+  </data>
+  <data name="SharedFailure" xml:space="preserve">
+    <value>Failure!</value>
+  </data>
+  <data name="SharedNextButton" xml:space="preserve">
+    <value>Next</value>
+  </data>
+  <data name="SharedSuccess" xml:space="preserve">
+    <value>Success!</value>
+  </data>
+  <data name="Step1Intro" xml:space="preserve">
+    <value>Thank for you downloading ScrewTurnWiki engine.</value>
+  </data>
+  <data name="Step1PublicDirectory" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Step1PublicDirectoryFailureMessage" xml:space="preserve">
+    <value>Unable to write to the public directory.</value>
+  </data>
+  <data name="Step1PublicDirectoryHelp" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Step1PublicDirectorySuccessMessage" xml:space="preserve">
+    <value>The public directory can be written to.</value>
+  </data>
+  <data name="Step1WebConfig" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Step1WebConfigFailureMessage" xml:space="preserve">
+    <value>Unable to write to the web.config file.</value>
+  </data>
+  <data name="Step1WebConfigHelp" xml:space="preserve">
+    <value>In order to proceed, first we need to test if you have write access to the web.config file.</value>
+  </data>
+  <data name="Step3ButtonCreateNewWikiTitle" xml:space="preserve">
+    <value>Create new wiki</value>
+  </data>
+  <data name="Step3ButtonCreateWikiTitle" xml:space="preserve">
+    <value>Create a wiki</value>
+  </data>
+  <data name="Step3FieldsRequireMessage" xml:space="preserve">
+    <value>All form fields are required.</value>
+  </data>
+  <data name="Step3HostsInValidCharacters" xml:space="preserve">
+    <value>Hosts field only allow : any letter, 0-9, underscores, dash, semicolon, point</value>
+  </data>
+  <data name="Step3HostsTitleColumnHeading" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Step3Intro" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Step3WikinameExistsError" xml:space="preserve">
+    <value>This wikiname is exists</value>
+  </data>
+  <data name="Step3WikinameInValidCharacters" xml:space="preserve">
+    <value>Wikiname field only allow : any letter, 0-9, underscores, dash</value>
+  </data>
+  <data name="Step3WikiNameTitleColumnHeading" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Step2ConnectionStringCreateDatabase" xml:space="preserve">
+    <value>Note: you will need to create the database first.</value>
+  </data>
+  <data name="Step2ConnectionStrings" xml:space="preserve">
+    <value>Connection string</value>
+  </data>
+  <data name="Step2ConnectionStringsHelp" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Step2DatabaseConnectionString" xml:space="preserve">
+    <value>Connection string</value>
+  </data>
+  <data name="Step2DatabaseType" xml:space="preserve">
+    <value>Database type</value>
+  </data>
+  <data name="Step2ExampleConnectionStrings" xml:space="preserve">
+    <value>Example connection strings</value>
+  </data>
+  <data name="Step2Intro" xml:space="preserve">
+    <value />
+  </data>
+  <data name="ValidationPublicDirectoryEmpty" xml:space="preserve">
+    <value>The name of public directory is empty.</value>
+  </data>
+  <data name="Step2TestDbConnectionFailureMessage" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Stage1" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Stage2" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Stage3" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Stage4" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Step4FailureGoBackAndCheck" xml:space="preserve">
+    <value>Please go back through the installation steps and check your settings. The error message was:</value>
+  </data>
+  <data name="Step4FailureTitle" xml:space="preserve">
+    <value>An error occurred during the install</value>
+  </data>
+  <data name="Step4FinalizeInstall" xml:space="preserve">
+    <value>Restart site</value>
+  </data>
+  <data name="Step4SuccessTitle" xml:space="preserve">
+    <value>Installation successful</value>
+  </data>
+  <data name="Step4SuccessSummary" xml:space="preserve">
+    <value />
+  </data>
+  <data name="FailureInstall" xml:space="preserve">
+    <value>An error ocurred installing</value>
+  </data>
+  <data name="SharedUnexpectedError" xml:space="preserve">
+    <value>Something went wrong</value>
+  </data>
+  <data name="Step4BtnPasswordSave_Text" xml:space="preserve">
+    <value>Save Password</value>
+  </data>
+  <data name="Step4ChangeMasterPassword_Text" xml:space="preserve">
+    <value>Set Master Password</value>
+  </data>
+  <data name="Step4CheckEqualPasswordMessage" xml:space="preserve">
+    <value>Passwords are not equal</value>
+  </data>
+  <data name="Step4DescriptionPassword_Text" xml:space="preserve">
+    <value>You must configure the password for the built-in 'admin' account. Make sure you use a very strong password as the built-in 'admin' account can perform any operation in the wiki.</value>
+  </data>
+  <data name="Step4NewAdminPassResultMessage" xml:space="preserve">
+    <value>Master password saved successfully</value>
+  </data>
+  <data name="Step4NewPassword" xml:space="preserve">
+    <value>New Password</value>
+  </data>
+  <data name="Step4NewPassword_Text" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Step4NewPassword_ToolTip" xml:space="preserve">
+    <value>Type here the master password</value>
+  </data>
+  <data name="Step4PasswordInvalidCharactersMessage" xml:space="preserve">
+    <value>Password field only allow : a-z 0-9</value>
+  </data>
+  <data name="Step4PasswordRequiredMessage" xml:space="preserve">
+    <value>The password is required. Length of password must be between 6 and 30.</value>
+  </data>
+  <data name="Step4ReNewPassword" xml:space="preserve">
+    <value>New Password (Repeat)</value>
+  </data>
+  <data name="Step4ReNewPassword_Text" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Step4ReNewPassword_ToolTip" xml:space="preserve">
+    <value>Repeat the master password</value>
+  </data>
+</root>

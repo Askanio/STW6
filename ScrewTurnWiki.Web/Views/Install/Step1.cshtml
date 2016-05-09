@@ -1,0 +1,75 @@
+﻿@using ScrewTurn.Wiki.Web.Code.Extensions
+@using ScrewTurn.Wiki.Web.Localization.Install
+@using ScrewTurn.Wiki.Web.Models
+@model InstallViewModel
+@{
+    Layout = "~/Views/Install/Layout.cshtml";
+}
+@Url.InstallerScriptLink("step1.js")
+<script type="text/javascript">
+    $(document).ready(function () {
+        var messages =
+		{
+		    successTitle: "@InstallStrings.SharedSuccess",
+		    failureTitle: "@InstallStrings.SharedFailure",
+		    failureWebConfigTestMessage: "@InstallStrings.Step1WebConfigFailureMessage",
+		    failurePublicDirectoryTestMessage: "@InstallStrings.Step1PublicDirectoryFailureMessage",
+		};
+
+        var wizard = new ScrewTurn.Wiki.Web.Installer.InstallWizard();
+        var step1 = new ScrewTurn.Wiki.Web.Installer.Step1(wizard, messages);
+        step1.bindEvents();
+    });
+</script>
+
+<p class="text-center lead">@InstallStrings.Stage1</p>
+
+    <p>
+        @InstallStrings.Step1Intro
+    </p>
+    <form role="form" method="post" id="step1-form" action="@Url.Action("Step2","Install")">
+        @Html.HiddenFor(h => h.LanguageCode)
+        <!-- Web config -->
+        <div class="form-group">
+            <fieldset>
+                <legend>@InstallStrings.Step1WebConfig</legend>
+                <p>
+                    @InstallStrings.Step1WebConfigHelp
+                </p>
+                <p>
+                    <button id="testwebconfig" class="btn btn-info" type="button">
+                        @InstallStrings.ButtonTest
+                    </button>
+                    <label id="testwebconfig-info"></label>
+                </p>
+            </fieldset>
+        </div>
+        <!-- Public directory -->
+        <div class="form-group">
+            <fieldset>
+                <legend>@InstallStrings.Step1PublicDirectory</legend>
+                <div class="form-group">
+                    <p>
+                        @InstallStrings.Step1PublicDirectoryHelp
+                    </p>
+                    @Html.BootstrapTextBoxFor(model => model.PublicDirectory, InstallStrings.Step1PublicDirectoryHelp)
+                    @Html.ValidationMessageFor(model => model.PublicDirectory)
+                </div>
+                <p>
+                    <button id="testpublicdirectory" class="btn btn-info" type="button">
+                        @InstallStrings.ButtonTest
+                    </button>
+                    <label id="testpublicdirectory-info"></label>
+                </p>
+            </fieldset>
+        </div>
+    </form>
+    @section BottomButtons
+{
+        <div class="previous">
+            <div class="btn btn-default">
+                @Html.ActionLink(@InstallStrings.SharedBack, "Index", new { language = Model.LanguageCode })
+            </div>
+        </div>
+        <button type="submit" class="continue disabled btn btn-success pull-right">@InstallStrings.SharedNextButton</button>
+    }

@@ -1,0 +1,95 @@
+﻿@using ScrewTurn.Wiki.Web.Code.Extensions
+@using ScrewTurn.Wiki.Web.Localization.Install
+@using ScrewTurn.Wiki.Web.Models
+@model InstallViewModel
+@{
+    Layout = "~/Views/Install/Layout.cshtml";
+}
+@Url.InstallerScriptLink("step4.js")
+<script type="text/javascript">
+    $(document).ready(function () {
+        var messages =
+		{
+		    checkLengthError: "@InstallStrings.Step4PasswordRequiredMessage",
+		    checkRegexpError: "@InstallStrings.Step4PasswordInvalidCharactersMessage",
+		    checkEqualError: "@InstallStrings.Step4CheckEqualPasswordMessage",
+		    titleError: "@InstallStrings.SharedFailure",
+		    passwordSaveSuccess: "@InstallStrings.Step4NewAdminPassResultMessage",
+		};
+
+        var wizard = new ScrewTurn.Wiki.Web.Installer.InstallWizard();
+        var step4 = new ScrewTurn.Wiki.Web.Installer.Step4(wizard, messages, @Model.NeedMasterPassword.ToString().ToLower());
+        step4.bindEvents();
+    });
+</script>
+<p class="text-center lead">@InstallStrings.Stage4</p>
+
+@if (Model.Installed || !Model.Installed && ViewData.ModelState.IsValid)
+{
+	<!-- Successful install -->
+    <div class="alert alert-info">
+        <strong>@InstallStrings.Step4SuccessTitle</strong>
+        <br/>    
+    </div>
+    @*<form class="form-horizontal">*@
+    <div id="setPassword">
+        <div class="form-group">
+            <h3>@InstallStrings.Step4ChangeMasterPassword_Text</h3>
+            @InstallStrings.Step4DescriptionPassword_Text
+            <br/><br/>
+            <div class="form-group">
+                <label class="col-sm-3 control-label">@InstallStrings.Step4NewPassword</label>
+                <div class="col-sm-9">
+                    @Html.Password("newPwd", "", new {title = @InstallStrings.Step4NewPassword_ToolTip, placeholder = @InstallStrings.Step4NewPassword_Text, cssclass = "form-control"})
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label">@InstallStrings.Step4ReNewPassword</label>
+                <div class="col-sm-9">
+                    @Html.Password("reNewPwd", "", new {title = @InstallStrings.Step4ReNewPassword_ToolTip, placeholder = @InstallStrings.Step4ReNewPassword_Text, cssclass = "form-control"})
+                </div>
+            </div>
+        </div>
+        <br/><br/>
+        <div class="form-group">
+                <button id="btnSave" class="btn btn-info" type="button">
+                    @InstallStrings.Step4BtnPasswordSave_Text
+                </button>
+                <p id="result">
+                </p>
+        </div>
+    </div>
+    @*</form>*@
+
+    @section BottomButtons
+    {
+            <div id="completed">
+                <div class="alert alert-info">
+                    @InstallStrings.Step4SuccessSummary
+                </div>
+                <div class="continue">
+                    <a class="btn btn-success pull-right" href="@Url.Action("FinalizeInstall", "Install")">@InstallStrings.Step4FinalizeInstall</a>
+                </div>
+            </div>
+        }
+        }
+        else
+        {
+        <!-- Failed install -->
+        <div class="alert alert-warning">
+            <h4>@InstallStrings.Step4FailureTitle</h4>
+            <br />
+            @InstallStrings.Step4FailureGoBackAndCheck
+            <br /><br />
+            <pre style="width:100%;overflow:scroll;">
+			@Html.ValidationSummary()
+		</pre>
+        </div>
+
+        @section BottomButtons
+	{
+            <div class="previous">
+                <a class="btn btn-danger pull-left" href="javascript:history.go(-1)">&lt; @InstallStrings.SharedBack</a>
+            </div>
+        }
+        }
