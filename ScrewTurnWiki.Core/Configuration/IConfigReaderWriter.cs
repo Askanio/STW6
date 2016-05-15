@@ -42,5 +42,12 @@ namespace ScrewTurn.Wiki.Configuration
         /// An empty string if no error occurred; otherwise the error message.
         /// </returns>
         string TestPublicDirectory(string publicDirectory);
+
+        /// <summary>
+        /// Check need set master-password
+        /// </summary>
+        /// <param name="applicationSettings"></param>
+        /// <returns></returns>
+        bool NeedMasterPassword(ApplicationSettings applicationSettings);
     }
 }

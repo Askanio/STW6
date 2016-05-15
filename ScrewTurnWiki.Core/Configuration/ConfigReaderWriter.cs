@@ -78,8 +78,12 @@ namespace ScrewTurn.Wiki.Configuration
             return settings;
         }
 
-
-        private bool NeedMasterPassword(ApplicationSettings applicationSettings)
+        /// <summary>
+        /// Check need set master-password
+        /// </summary>
+        /// <param name="applicationSettings"></param>
+        /// <returns></returns>
+        public bool NeedMasterPassword(ApplicationSettings applicationSettings)
         {
             if (applicationSettings.Installed)
             {

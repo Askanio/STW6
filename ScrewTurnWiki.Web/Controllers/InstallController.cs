@@ -32,16 +32,16 @@ namespace ScrewTurn.Wiki.Web.Controllers
             _configReaderWriter = configReaderWriter;
         }
 
-        /// <summary>
-        /// Returns Javascript 'constants' for the installer.
-        /// </summary>
-        public ActionResult InstallerJsVars()
-        {
-            if (Settings.Installed && !Settings.NeedMasterPassword)
-                return Content("");
+        ///// <summary>
+        ///// Returns Javascript 'constants' for the installer.
+        ///// </summary>
+        //public ActionResult InstallerJsVars()
+        //{
+        //    if (Settings.Installed && !Settings.NeedMasterPassword)
+        //        return Content("");
 
-            return View();
-        }
+        //    return View();
+        //}
 
         /// <summary>
         /// Displays the language choice page.
@@ -72,6 +72,7 @@ namespace ScrewTurn.Wiki.Web.Controllers
         /// <summary>
         /// Displays the DB settings (step2).
         /// </summary>
+        [ValidateAntiForgeryToken]
         public ActionResult Step2(InstallViewModel model)
         {
             if (Settings.Installed && !Settings.NeedMasterPassword)
@@ -85,6 +86,7 @@ namespace ScrewTurn.Wiki.Web.Controllers
         /// <summary>
         /// Displays the wikis (step3).
         /// </summary>
+        [ValidateAntiForgeryToken]
         public ActionResult Step3(InstallViewModel model)
         {
             if (Settings.Installed && !Settings.NeedMasterPassword)
@@ -102,6 +104,7 @@ namespace ScrewTurn.Wiki.Web.Controllers
 		/// Validates the POST'd <see cref="InstallViewModel"/> object. If the settings are valid,
 		/// an attempt is made to install using this.
         /// </summary>
+        [ValidateAntiForgeryToken]
         public ActionResult Step4(InstallViewModel model)
         {
             if (Settings.Installed && !Settings.NeedMasterPassword)
@@ -109,7 +112,6 @@ namespace ScrewTurn.Wiki.Web.Controllers
 
             SetLanguage(model.LanguageCode);
             model.Installed = Settings.Installed;
-            model.NeedMasterPassword = Settings.NeedMasterPassword;
 
             if (!Settings.Installed)
             {
@@ -119,6 +121,8 @@ namespace ScrewTurn.Wiki.Web.Controllers
                     {
                         var settings = MappingToApplicationSettings(model);
                         _configReaderWriter.Save(settings);
+                        model.NeedMasterPassword = _configReaderWriter.NeedMasterPassword(settings); // Global settings provider is actual - refresh field NeedMasterPassword
+                        model.Installed = true;
                     }
                 }
                 catch (Exception e)
@@ -134,6 +138,10 @@ namespace ScrewTurn.Wiki.Web.Controllers
                     ModelState.AddModelError(InstallStrings.FailureInstall, e.Message + e);
                 }
             }
+            else
+            {
+                model.NeedMasterPassword = Settings.NeedMasterPassword;                
+            }
 
             return View(model);
         }
@@ -148,6 +156,7 @@ namespace ScrewTurn.Wiki.Web.Controllers
             try
             {
                 GlobalSettings.SetMasterPassword(Hash.Compute(password));
+                Settings.NeedMasterPassword = false; // need for FinalizeInstall
             }
             catch (Exception ex)
             {
@@ -169,7 +178,7 @@ namespace ScrewTurn.Wiki.Web.Controllers
             {
                 Log.LogEntry("WebApp shutdown requested", EntryType.General, SessionFacade.CurrentUsername, null);
                 Response.Clear();
-                Response.Write(String.Format(Messages.WebApplicationShutdown, "Default") + "\n\n");
+                Response.Write(String.Format(Messages.WebApplicationShutdown, "/Default") + "\n\n");
                 Response.Flush();
                 Response.Close();
                 Log.LogEntry("Executing WebApp shutdown", EntryType.General, Log.SystemUsername, null);

@@ -45,7 +45,7 @@ var ScrewTurn;
                         });
                         this._form = this._dialog.find("form").on("submit", function (event) {
                             event.preventDefault();
-                            this.AddUser();
+                            this.AddWiki();
                         });
                         Step3.instance = this;
                     }
@@ -119,3 +119,4 @@ var ScrewTurn;
         })(Web = Wiki.Web || (Wiki.Web = {}));
     })(Wiki = ScrewTurn.Wiki || (ScrewTurn.Wiki = {}));
 })(ScrewTurn || (ScrewTurn = {}));
+//# sourceMappingURL=step3.js.map

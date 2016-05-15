@@ -58,7 +58,7 @@ module ScrewTurn.Wiki.Web.Installer {
 
             this._form = this._dialog.find("form").on("submit", function (event) {
                 event.preventDefault();
-                this.AddUser();
+                this.AddWiki();
             });
 
             Step3.instance = this;

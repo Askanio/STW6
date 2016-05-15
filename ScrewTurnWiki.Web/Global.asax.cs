@@ -185,7 +185,8 @@ namespace ScrewTurn.Wiki.Web
         protected void Application_End(object sender, EventArgs e)
         {
             // Try to cleanly shutdown the application and providers
-            StartupTools.Shutdown();
+            if (ApplicationSettings.Instance.Installed)
+                StartupTools.Shutdown();
         }
 
         protected void Application_EndRequest(object sender, EventArgs e)
@@ -217,7 +218,7 @@ namespace ScrewTurn.Wiki.Web
 
         protected void Application_AcquireRequestState(object sender, EventArgs e)
         {
-            if (HttpContext.Current.Session != null)
+            if (ApplicationSettings.Instance.Installed && HttpContext.Current.Session != null)
             {
                 // Try to automatically login the user through the cookie
                 LoginTools.TryAutoLogin(Tools.DetectCurrentWiki());

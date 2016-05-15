@@ -328,7 +328,6 @@
     <Content Include="Views\Install\Layout.cshtml" />
     <Content Include="Views\Install\Index.cshtml" />
     <Content Include="Views\Install\Step1.cshtml" />
-    <Content Include="Views\Install\InstallerJsVars.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ScrewTurnWiki.Core\ScrewTurn.Wiki.Core.csproj">

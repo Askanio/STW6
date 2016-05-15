@@ -15,16 +15,28 @@ namespace ScrewTurn.Wiki.Web
             //routes.IgnoreRoute("favicon.ico");
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
+            routes.MapRoute(
+                "Installer",
+                "Install/{action}",
+                new { controller = "Install" }
+                );
+
+            //routes.MapRoute(
+            //    "CreateMasterPassword",
+            //    "Install/{action}/{password}",
+            //    new { controller = "Install", action = "action", password = UrlParameter.Optional }
+            //    );
+
             // http://www.prideparrot.com/blog/archive/2012/7/understanding_routing
 
             // Attachment files
             AttachmentRouteHandler.RegisterRoute(routes);
 
-            routes.MapRoute(
-                "CreateMasterPassword",
-                "user/CreateMasterPassword",
-                new {controller = "User", action = "CreateMasterPassword"}
-                );
+            //routes.MapRoute(
+            //    "CreateMasterPassword",
+            //    "user/CreateMasterPassword",
+            //    new {controller = "User", action = "CreateMasterPassword"}
+            //    );
 
 
             routes.MapRoute(
