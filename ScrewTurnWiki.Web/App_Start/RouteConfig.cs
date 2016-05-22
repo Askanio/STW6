@@ -21,12 +21,6 @@ namespace ScrewTurn.Wiki.Web
                 new { controller = "Install" }
                 );
 
-            //routes.MapRoute(
-            //    "CreateMasterPassword",
-            //    "Install/{action}/{password}",
-            //    new { controller = "Install", action = "action", password = UrlParameter.Optional }
-            //    );
-
             // http://www.prideparrot.com/blog/archive/2012/7/understanding_routing
 
             // Attachment files
@@ -38,11 +32,22 @@ namespace ScrewTurn.Wiki.Web
             //    new {controller = "User", action = "CreateMasterPassword"}
             //    );
 
+            routes.MapRoute(
+                "Error",
+                "Error/{ns}",
+                new {controller = "Common", action = "Error", ns = UrlParameter.Optional }
+                );
+
+            routes.MapRoute(
+                "PageNotFound",
+                "PageNotFound/{page}",
+                new {controller = "Common", action = "PageNotFound", page = UrlParameter.Optional}
+                );
 
             routes.MapRoute(
                 "PageViewCode",
-                "{id}/Code",
-                defaults: new {controller = "Home", action = "PageViewCode" },
+                "{page}/Code",
+                defaults: new {controller = "Wiki", action = "PageViewCode" },
                 constraints: new
                 {
                     httpMethod = new HttpMethodConstraint("GET")
@@ -51,8 +56,8 @@ namespace ScrewTurn.Wiki.Web
 
             routes.MapRoute(
                 "PageDiscuss",
-                "{id}/Discuss",
-                defaults: new {controller = "Home", action = "PageDiscuss" },
+                "{page}/Discuss",
+                defaults: new {controller = "Wiki", action = "PageDiscuss" },
                 constraints: new
                 {
                     httpMethod = new HttpMethodConstraint("GET")
@@ -61,8 +66,8 @@ namespace ScrewTurn.Wiki.Web
 
             routes.MapRoute(
                 "Page",
-                "{id}",
-                defaults: new {controller = "Home", action = "Page"},
+                "{page}",
+                defaults: new {controller = "Wiki", action = "Page"},
                 constraints: new
                 {
                     //id = "[^?<>|:*&%'#\"\\/+].*", // []
@@ -73,7 +78,7 @@ namespace ScrewTurn.Wiki.Web
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
-                defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
+                defaults: new { controller = "Wiki", action = "Index", id = UrlParameter.Optional }
             );
         }
     }

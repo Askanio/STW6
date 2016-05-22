@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using ScrewTurn.Wiki.PluginFramework;
 using ScrewTurn.Wiki.Web.Localization.Messages;
-using ScrewTurn.Wiki.Web.Models.Home;
+using ScrewTurn.Wiki.Web.Models.Wiki;
 
 namespace ScrewTurn.Wiki.Web.Code
 {

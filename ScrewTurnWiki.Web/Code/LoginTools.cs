@@ -87,7 +87,7 @@ namespace ScrewTurn.Wiki.Web.Code
                 if (target.StartsWith("http:") || target.StartsWith("https:")) HttpContext.Current.Response.Redirect(target);
                 else UrlTools.Redirect(UrlTools.BuildUrl(wiki, target));
             }
-            else if (goHome) UrlTools.Redirect(UrlTools.BuildUrl(wiki, "Default.aspx")); // TODO: RedirectToAction
+            else if (goHome) UrlTools.Redirect(UrlTools.BuildUrl(wiki, "Default"));
         }
 
         /// <summary>

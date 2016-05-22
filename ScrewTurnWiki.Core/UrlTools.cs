@@ -108,9 +108,11 @@ namespace ScrewTurn.Wiki {
 		/// </summary>
 		/// <param name="target">The target URL.</param>
 		/// <param name="addNamespace">A value indicating whether to add the namespace.</param>
-		public static void Redirect(string target, bool addNamespace) {
+		public static void Redirect(string target, bool addNamespace)
+		{
+		    target = String.Concat("/", target);
 			string nspace = HttpContext.Current.Request["NS"];
-			if(nspace == null || nspace.Length == 0 || !addNamespace) HttpContext.Current.Response.Redirect(target);
+			if(string.IsNullOrEmpty(nspace) || !addNamespace) HttpContext.Current.Response.Redirect(target);
 			else HttpContext.Current.Response.Redirect(target + (target.Contains("?") ? "&" : "?") + "NS=" + Tools.UrlEncode(nspace));
 		}
 
@@ -161,8 +163,8 @@ namespace ScrewTurn.Wiki {
 		/// <param name="chunks">The chunks to append.</param>
 		public static void BuildUrl(string wiki, StringBuilder destination, params string[] chunks) {
 			if(destination == null) throw new ArgumentNullException("destination");
-
-			destination.Append(BuildUrl(wiki, chunks));
+		    destination.Append("/");
+            destination.Append(BuildUrl(wiki, chunks));
 		}
 
 		/// <summary>

@@ -3153,7 +3153,7 @@ namespace ScrewTurn.Wiki {
 			}
 
 			StringBuilder sb = new StringBuilder(500);
-			sb.Append("<select class=\"namespacedropdown\" onchange=\"javascript:var sel = this.value; document.location = (sel != '' ? (sel + '.') : '') + 'Default.aspx';\">");
+			sb.Append("<select class=\"namespacedropdown\" onchange=\"javascript:var sel = this.value; document.location = (sel != '' ? (sel + '.') : '') + 'Default';\">");
 
 			foreach(string nspace in allowedNamespaces) {
 				sb.AppendFormat("<option{0} value=\"{1}\">{2}</option>", nspace == ns ? " selected=\"selected\"" : "",

@@ -1,0 +1,51 @@
+﻿
+@using ScrewTurn.Wiki.Web.Code.Extensions
+@using ScrewTurn.Wiki.Web.Localization.Common
+@using ScrewTurn.Wiki.Web.Localization.Messages
+@using ScrewTurnWiki.Web
+@model ScrewTurn.Wiki.Web.Models.WikiSABaseModel
+<!DOCTYPE html>
+<html dir="@Model.Direction" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@Model.Title</title>
+    @foreach (var htmlHead in Model.HtmlHeads)
+    {
+        @htmlHead
+    }
+    @Scripts.Render(BundleConfig.ModernizrJS)
+    @Scripts.Render(BundleConfig.JqueryJS)
+    @Scripts.Render(BundleConfig.BootboxJS)
+
+    @Url.ScriptLink("stw/common/commonwizard.js")
+</head>
+<body id="SABody">
+<script type="text/javascript">
+    var CONFIRM_MESSAGE = "@Messages.ConfirmOperation";
+</script>
+    <form id="FrmMasterSA">
+        <div id="HeaderSADiv">
+            @Model.Header
+        </div>
+
+        <div id="NavigationSADiv">
+            @if (Model.LnkPreviousPageUrl != null)
+            {
+                <a id="lnkPreviousPage" href="@Model.LnkPreviousPageUrl" title="@MasterPageSA.LnkPreviousPage_ToolTip">@MasterPageSA.LnkPreviousPage_Text</a>
+            }
+            &bull;
+            <a id="lnkMainPage" href="@Model.LnkMainPageUrl" title="@MasterPageSA.LnkMainPage_ToolTip">@MasterPageSA.LnkMainPage_Text</a>
+        </div>
+        
+        <div id="ContainerSADiv">
+            @RenderBody()
+        </div>
+
+        <div id="FooterSADiv">
+            @Model.Footer
+        </div>
+    </form>
+</body>
+</html>

@@ -7,7 +7,7 @@ using ScrewTurn.Wiki.Configuration;
 using ScrewTurn.Wiki.PluginFramework;
 using ScrewTurn.Wiki.Web.Code;
 using ScrewTurn.Wiki.Web.Models;
-using ScrewTurn.Wiki.Web.Models.Home;
+using ScrewTurn.Wiki.Web.Models.Wiki;
 
 namespace ScrewTurn.Wiki.Web.Controllers
 {

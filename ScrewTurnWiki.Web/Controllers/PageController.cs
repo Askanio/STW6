@@ -3,11 +3,14 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading;
 using System.Web;
 using System.Web.Mvc;
+using Microsoft.Ajax.Utilities;
 using ScrewTurn.Wiki.PluginFramework;
+using ScrewTurn.Wiki.Web.Localization.Messages;
 using ScrewTurn.Wiki.Web.Models;
 
 namespace ScrewTurn.Wiki.Web.Controllers
@@ -18,89 +21,44 @@ namespace ScrewTurn.Wiki.Web.Controllers
     public class PageController : BaseController
     {
         /// <summary>
-        /// The name of the current wiki using the <b>Wiki</b> parameter in the query string.
-        /// </summary>
-        protected string CurrentWiki { get; private set; }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public ApplicationSettings AppSettings { get; private set; }
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="PageController"/> class.
         /// </summary>
-        /// <param name="appSettings"></param>
-        public PageController(ApplicationSettings appSettings)
+        /// <param name="settings"></param>
+        public PageController(ApplicationSettings settings) : base(settings)
         {
-            AppSettings = appSettings;
+        }
+
+        #region SA
+
+        [NonAction]
+        protected void PrepareSAModel(WikiSABaseModel model, string currentNamespace)
+        {
+            string nspace = currentNamespace;
+            if (string.IsNullOrEmpty(nspace)) nspace = "";
+            else nspace += ".";
+            model.LnkMainPageUrl = "/" + nspace + "Default";
+
+                string referrer = Request.UrlReferrer != null ? Request.UrlReferrer.FixHost().ToString() : "";
+                if (!string.IsNullOrEmpty(referrer))
+                    model.LnkPreviousPageUrl = new MvcHtmlString(referrer);
+
+            FillSAHtmlHead(model);
+            FillDefaultHeader(model, currentNamespace, null);
+            FillDefaultFooter(model, currentNamespace, null);
         }
 
         /// <summary>
-        /// Called before the action method is invoked.
+        /// Prints the HTML head tag.
         /// </summary>
-        /// <param name="filterContext">Information about the current request and action.</param>
-        protected override void OnActionExecuting(ActionExecutingContext filterContext)
+        private void FillSAHtmlHead(WikiBaseModel model)
         {
-            // Redirect if ScrewTurnWiki isn't installed or an upgrade is needed.
-            if (!AppSettings.Installed)
-            {
-                if (!(filterContext.Controller is InstallController))
-                    filterContext.Result = new RedirectResult(this.Url.Action("Index", "Install"));
-                return;
-            }
-            if (AppSettings.Installed && AppSettings.NeedMasterPassword)
-            {
-                if (!(filterContext.Controller is InstallController))
-                    filterContext.Result = new RedirectResult(this.Url.Action("Step4", "Install"));
-                return;
-            }
-            //else if (ApplicationSettings.UpgradeRequired)
-            //{
-            //    if (!(filterContext.Controller is UpgradeController))
-            //        filterContext.Result = new RedirectResult(this.Url.Action("Index", "Upgrade"));
-
-            //    return;
-            //}
-
-            CurrentWiki = Tools.DetectCurrentWiki();
-
-            InitializeCulture();
+            var htmlHead =
+                MvcHtmlString.Create(Tools.GetIncludes(CurrentWiki, Tools.DetectCurrentNamespace()) + "\r\n" +
+                                     Host.Instance.GetAllHtmlHeadContent(CurrentWiki));
+            model.HtmlHeads.Add(htmlHead);
         }
 
-        private void InitializeCulture()
-        {
-            // First, look for hard-stored user preferences
-            // If they are not available, look at the cookie
-
-            string culture = Preferences.LoadLanguageFromUserData(CurrentWiki);
-            if (culture == null) culture = Preferences.LoadLanguageFromCookie();
-
-            if (culture != null)
-            {
-                Thread.CurrentThread.CurrentCulture = new CultureInfo(culture);
-                Thread.CurrentThread.CurrentUICulture = new CultureInfo(culture);
-            }
-            else {
-                try
-                {
-                    if (Settings.GetDefaultLanguage(CurrentWiki).Equals("-"))
-                    {
-                        Thread.CurrentThread.CurrentCulture = new CultureInfo("en-US");
-                        Thread.CurrentThread.CurrentUICulture = new CultureInfo("en-US");
-                    }
-                    else {
-                        Thread.CurrentThread.CurrentCulture = new CultureInfo(Settings.GetDefaultLanguage(CurrentWiki));
-                        Thread.CurrentThread.CurrentUICulture = new CultureInfo(Settings.GetDefaultLanguage(CurrentWiki));
-                    }
-                }
-                catch
-                {
-                    Thread.CurrentThread.CurrentCulture = new CultureInfo("en-US");
-                    Thread.CurrentThread.CurrentUICulture = new CultureInfo("en-US");
-                }
-            }
-        }
+        #endregion
 
         #region Default
 
@@ -117,6 +75,7 @@ namespace ScrewTurn.Wiki.Web.Controllers
         /// <summary>
         /// Prints the page header and page footer.
         /// </summary>
+        [NonAction]
         public void FillDefaultPageHeaderAndFooter(WikiBaseModel model, string currentNamespace, string currentPageFullName)
         {
             string h = Settings.GetProvider(CurrentWiki).GetMetaDataItem(MetaDataItem.PageHeader, currentNamespace);
@@ -167,7 +126,7 @@ namespace ScrewTurn.Wiki.Web.Controllers
             if (nspace == null) nspace = "";
             else if (nspace.Length > 0) nspace += ".";
 
-            var htmlHead =  MvcHtmlString.Create(
+            var htmlHead = MvcHtmlString.Create(
                     sb.ToString()
                         .Replace("######______INCLUDES______######", Tools.GetIncludes(CurrentWiki, currentNamespace))
                         .Replace("######______NAMESPACE______######", nspace));
@@ -178,6 +137,7 @@ namespace ScrewTurn.Wiki.Web.Controllers
         /// <summary>
         /// Prints the header.
         /// </summary>
+        [NonAction]
         public void FillDefaultHeader(WikiBaseModel model, string currentNamespace, string currentPageFullName)
         {
             string h = FormattingPipeline.FormatWithPhase1And2(CurrentWiki, Settings.GetProvider(CurrentWiki).GetMetaDataItem(MetaDataItem.Header, currentNamespace),
@@ -189,6 +149,7 @@ namespace ScrewTurn.Wiki.Web.Controllers
         /// <summary>
         /// Prints the footer.
         /// </summary>
+        [NonAction]
         public void FillDefaultFooter(WikiBaseModel model, string currentNamespace, string currentPageFullName)
         {
             string f = FormattingPipeline.FormatWithPhase1And2(CurrentWiki, Settings.GetProvider(CurrentWiki).GetMetaDataItem(MetaDataItem.Footer, currentNamespace),

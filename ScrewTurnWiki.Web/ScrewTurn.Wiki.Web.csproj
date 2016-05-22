@@ -144,9 +144,11 @@
     <Compile Include="Code\ValidationAttributes\WikisValidator.cs" />
     <Compile Include="Controllers\AttachmentController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
+    <Compile Include="Controllers\CommonController.cs" />
     <Compile Include="Controllers\ConfigurationTesterController.cs" />
-    <Compile Include="Controllers\PageController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\PageController.cs" />
+    <Compile Include="Controllers\WikiController.cs" />
     <Compile Include="Controllers\InstallController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Global.asax.cs">
@@ -163,6 +165,21 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Default.resx</DependentUpon>
     </Compile>
+    <Compile Include="Localization\Common\Error.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Error.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Localization\Common\MasterPageSA.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MasterPageSA.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Localization\Common\PageNotFound.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PageNotFound.resx</DependentUpon>
+    </Compile>
     <Compile Include="Localization\Install\InstallStrings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -173,14 +190,16 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Messages.resx</DependentUpon>
     </Compile>
-    <Compile Include="Models\Home\AttachmentViewerModel.cs" />
-    <Compile Include="Models\Home\EmailNotification.cs" />
+    <Compile Include="Models\Common\PageNotFoundModel.cs" />
+    <Compile Include="Models\Wiki\AttachmentViewerModel.cs" />
+    <Compile Include="Models\Wiki\EmailNotification.cs" />
     <Compile Include="Models\InstallViewModel.cs" />
     <Compile Include="Models\LanguageViewModel.cs" />
     <Compile Include="Models\TestResult.cs" />
     <Compile Include="Models\WikiBaseModel.cs" />
     <Compile Include="Models\WikiPageModel.cs" />
-    <Compile Include="Models\Home\DiscussionModel.cs" />
+    <Compile Include="Models\Wiki\DiscussionModel.cs" />
+    <Compile Include="Models\WikiSABaseModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -191,6 +210,7 @@
     <Content Include="Content\bootstrap\fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Content\css\stw.installer.css" />
     <Content Include="Content\Images\Blank.png" />
+    <Content Include="Content\Images\Error.png" />
     <Content Include="Content\Images\File.png" />
     <Content Include="Content\Images\STWLogo.png" />
     <Content Include="Content\jquery\css\jquery-ui.css" />
@@ -286,7 +306,8 @@
     <Content Include="Scripts\respond.matchmedia.addListener.min.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Views\Shared\EmailNotification.cshtml" />
-    <Content Include="Views\Shared\SharedJsVars.cshtml" />
+    <Content Include="Views\Shared\_SALayout.cshtml" />
+    <Content Include="Views\Shared\Error.cshtml" />
     <TypeScriptCompile Include="Scripts\stw\common\wikipage.ts" />
     <TypeScriptCompile Include="Scripts\stw\typescript-ref\commonconstants.ts" />
     <Content Include="Web.config">
@@ -302,18 +323,19 @@
       <SubType>Designer</SubType>
     </Content>
     <Content Include="Views\_ViewStart.cshtml" />
-    <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Home\WikiPage.cshtml" />
+    <Content Include="Views\Wiki\WikiPage.cshtml" />
     <Content Include="Views\Install\Step2.cshtml" />
     <Content Include="Views\Install\Step3.cshtml" />
     <Content Include="Views\Install\Step4.cshtml" />
     <Content Include="Views\Shared\_CleanLayout.cshtml" />
     <None Include="Views\Attachment\AttachmentViewer.cshtml" />
-    <None Include="Views\Home\Discussion.cshtml" />
+    <Content Include="Views\Common\PageNotFound.cshtml" />
+    <None Include="Views\Wiki\Discussion.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Home\" />
     <Folder Include="Views\User\" />
   </ItemGroup>
   <ItemGroup>
@@ -412,42 +434,164 @@
     <EmbeddedResource Include="Localization\Common\Default.vi-VN.resx" />
     <EmbeddedResource Include="Localization\Common\Default.zh-cn.resx" />
     <EmbeddedResource Include="Localization\Common\Default.zh-tw.resx" />
+    <EmbeddedResource Include="Localization\Common\Error.af-ZA.resx" />
+    <EmbeddedResource Include="Localization\Common\Error.cs-CZ.resx" />
+    <EmbeddedResource Include="Localization\Common\Error.da-DK.resx" />
+    <EmbeddedResource Include="Localization\Common\Error.de-DE.resx" />
+    <EmbeddedResource Include="Localization\Common\Error.es-ES.resx" />
+    <EmbeddedResource Include="Localization\Common\Error.fa-IR.resx" />
+    <EmbeddedResource Include="Localization\Common\Error.fr-FR.resx" />
+    <EmbeddedResource Include="Localization\Common\Error.hi-IN.resx" />
+    <EmbeddedResource Include="Localization\Common\Error.hu-HU.resx" />
+    <EmbeddedResource Include="Localization\Common\Error.it-IT.resx" />
+    <EmbeddedResource Include="Localization\Common\Error.ja-JP.resx" />
+    <EmbeddedResource Include="Localization\Common\Error.ko-KR.resx" />
+    <EmbeddedResource Include="Localization\Common\Error.lv-LV.resx" />
+    <EmbeddedResource Include="Localization\Common\Error.nb-NO.resx" />
+    <EmbeddedResource Include="Localization\Common\Error.nl-NL.resx" />
+    <EmbeddedResource Include="Localization\Common\Error.pl-PL.resx" />
+    <EmbeddedResource Include="Localization\Common\Error.pt-BR.resx" />
+    <EmbeddedResource Include="Localization\Common\Error.pt-PT.resx" />
+    <EmbeddedResource Include="Localization\Common\Error.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Error.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Localization\Common\Error.ro-RO.resx" />
+    <EmbeddedResource Include="Localization\Common\Error.ru-RU.resx" />
+    <EmbeddedResource Include="Localization\Common\Error.sk-SK.resx" />
+    <EmbeddedResource Include="Localization\Common\Error.sr-Latn-CS.resx" />
+    <EmbeddedResource Include="Localization\Common\Error.sv-SE.resx" />
+    <EmbeddedResource Include="Localization\Common\Error.tr-TR.resx" />
+    <EmbeddedResource Include="Localization\Common\Error.uk-UA.resx" />
+    <EmbeddedResource Include="Localization\Common\Error.vi-VN.resx" />
+    <EmbeddedResource Include="Localization\Common\Error.zh-cn.resx" />
+    <EmbeddedResource Include="Localization\Common\Error.zh-tw.resx" />
+    <EmbeddedResource Include="Localization\Common\MasterPageSA.af-ZA.resx" />
+    <EmbeddedResource Include="Localization\Common\MasterPageSA.cs-CZ.resx" />
+    <EmbeddedResource Include="Localization\Common\MasterPageSA.da-DK.resx" />
+    <EmbeddedResource Include="Localization\Common\MasterPageSA.de-DE.resx" />
+    <EmbeddedResource Include="Localization\Common\MasterPageSA.es-ES.resx" />
+    <EmbeddedResource Include="Localization\Common\MasterPageSA.fa-IR.resx" />
+    <EmbeddedResource Include="Localization\Common\MasterPageSA.fr-FR.resx" />
+    <EmbeddedResource Include="Localization\Common\MasterPageSA.hi-IN.resx" />
+    <EmbeddedResource Include="Localization\Common\MasterPageSA.hu-HU.resx" />
+    <EmbeddedResource Include="Localization\Common\MasterPageSA.it-IT.resx" />
+    <EmbeddedResource Include="Localization\Common\MasterPageSA.ja-JP.resx" />
+    <EmbeddedResource Include="Localization\Common\MasterPageSA.ko-KR.resx" />
+    <EmbeddedResource Include="Localization\Common\MasterPageSA.lv-LV.resx" />
+    <EmbeddedResource Include="Localization\Common\MasterPageSA.nb-NO.resx" />
+    <EmbeddedResource Include="Localization\Common\MasterPageSA.nl-NL.resx" />
+    <EmbeddedResource Include="Localization\Common\MasterPageSA.pl-PL.resx" />
+    <EmbeddedResource Include="Localization\Common\MasterPageSA.pt-BR.resx" />
+    <EmbeddedResource Include="Localization\Common\MasterPageSA.pt-PT.resx" />
+    <EmbeddedResource Include="Localization\Common\MasterPageSA.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>MasterPageSA.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Localization\Common\MasterPageSA.ro-RO.resx" />
+    <EmbeddedResource Include="Localization\Common\MasterPageSA.ru-RU.resx" />
+    <EmbeddedResource Include="Localization\Common\MasterPageSA.sk-SK.resx" />
+    <EmbeddedResource Include="Localization\Common\MasterPageSA.sr-Latn-CS.resx" />
+    <EmbeddedResource Include="Localization\Common\MasterPageSA.sv-SE.resx" />
+    <EmbeddedResource Include="Localization\Common\MasterPageSA.tr-TR.resx" />
+    <EmbeddedResource Include="Localization\Common\MasterPageSA.uk-UA.resx" />
+    <EmbeddedResource Include="Localization\Common\MasterPageSA.vi-VN.resx" />
+    <EmbeddedResource Include="Localization\Common\MasterPageSA.zh-cn.resx" />
+    <EmbeddedResource Include="Localization\Common\MasterPageSA.zh-tw.resx" />
+    <EmbeddedResource Include="Localization\Common\PageNotFound.af-ZA.resx" />
+    <EmbeddedResource Include="Localization\Common\PageNotFound.cs-CZ.resx" />
+    <EmbeddedResource Include="Localization\Common\PageNotFound.da-DK.resx" />
+    <EmbeddedResource Include="Localization\Common\PageNotFound.de-DE.resx" />
+    <EmbeddedResource Include="Localization\Common\PageNotFound.es-ES.resx" />
+    <EmbeddedResource Include="Localization\Common\PageNotFound.fa-IR.resx" />
+    <EmbeddedResource Include="Localization\Common\PageNotFound.fr-FR.resx" />
+    <EmbeddedResource Include="Localization\Common\PageNotFound.hi-IN.resx" />
+    <EmbeddedResource Include="Localization\Common\PageNotFound.hu-HU.resx" />
+    <EmbeddedResource Include="Localization\Common\PageNotFound.it-IT.resx" />
+    <EmbeddedResource Include="Localization\Common\PageNotFound.ja-JP.resx" />
+    <EmbeddedResource Include="Localization\Common\PageNotFound.ko-KR.resx" />
+    <EmbeddedResource Include="Localization\Common\PageNotFound.lv-LV.resx" />
+    <EmbeddedResource Include="Localization\Common\PageNotFound.nb-NO.resx" />
+    <EmbeddedResource Include="Localization\Common\PageNotFound.nl-NL.resx" />
+    <EmbeddedResource Include="Localization\Common\PageNotFound.pl-PL.resx" />
+    <EmbeddedResource Include="Localization\Common\PageNotFound.pt-BR.resx" />
+    <EmbeddedResource Include="Localization\Common\PageNotFound.pt-PT.resx" />
+    <EmbeddedResource Include="Localization\Common\PageNotFound.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>PageNotFound.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Localization\Common\PageNotFound.ro-RO.resx" />
+    <EmbeddedResource Include="Localization\Common\PageNotFound.ru-RU.resx" />
+    <EmbeddedResource Include="Localization\Common\PageNotFound.sk-SK.resx" />
+    <EmbeddedResource Include="Localization\Common\PageNotFound.sr-Latn-CS.resx" />
+    <EmbeddedResource Include="Localization\Common\PageNotFound.sv-SE.resx" />
+    <EmbeddedResource Include="Localization\Common\PageNotFound.tr-TR.resx" />
+    <EmbeddedResource Include="Localization\Common\PageNotFound.uk-UA.resx" />
+    <EmbeddedResource Include="Localization\Common\PageNotFound.vi-VN.resx" />
+    <EmbeddedResource Include="Localization\Common\PageNotFound.zh-cn.resx" />
+    <EmbeddedResource Include="Localization\Common\PageNotFound.zh-tw.resx" />
     <EmbeddedResource Include="Localization\Install\InstallStrings.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>InstallStrings.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Localization\Install\InstallStrings.ru.resx" />
-    <EmbeddedResource Include="Localization\Messages\Messages.af-ZA.resx" />
+    <EmbeddedResource Include="Localization\Messages\Messages.af-ZA.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="Localization\Messages\Messages.cs-CZ.resx" />
     <EmbeddedResource Include="Localization\Messages\Messages.da-DK.resx" />
-    <EmbeddedResource Include="Localization\Messages\Messages.de-DE.resx" />
+    <EmbeddedResource Include="Localization\Messages\Messages.de-DE.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="Localization\Messages\Messages.es-ES.resx" />
     <EmbeddedResource Include="Localization\Messages\Messages.fa-IR.resx" />
     <EmbeddedResource Include="Localization\Messages\Messages.fr-FR.resx" />
-    <EmbeddedResource Include="Localization\Messages\Messages.hi-IN.resx" />
+    <EmbeddedResource Include="Localization\Messages\Messages.hi-IN.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="Localization\Messages\Messages.hu-HU.resx" />
     <EmbeddedResource Include="Localization\Messages\Messages.it-IT.resx" />
     <EmbeddedResource Include="Localization\Messages\Messages.ja-JP.resx" />
     <EmbeddedResource Include="Localization\Messages\Messages.ko-KR.resx" />
-    <EmbeddedResource Include="Localization\Messages\Messages.lv-LV.resx" />
-    <EmbeddedResource Include="Localization\Messages\Messages.nb-NO.resx" />
-    <EmbeddedResource Include="Localization\Messages\Messages.nl-NL.resx" />
+    <EmbeddedResource Include="Localization\Messages\Messages.lv-LV.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Localization\Messages\Messages.nb-NO.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Localization\Messages\Messages.nl-NL.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="Localization\Messages\Messages.pl-PL.resx" />
-    <EmbeddedResource Include="Localization\Messages\Messages.pt-BR.resx" />
-    <EmbeddedResource Include="Localization\Messages\Messages.pt-PT.resx" />
+    <EmbeddedResource Include="Localization\Messages\Messages.pt-BR.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Localization\Messages\Messages.pt-PT.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="Localization\Messages\Messages.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Messages.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Localization\Messages\Messages.ro-RO.resx" />
+    <EmbeddedResource Include="Localization\Messages\Messages.ro-RO.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="Localization\Messages\Messages.ru-RU.resx" />
-    <EmbeddedResource Include="Localization\Messages\Messages.sk-SK.resx" />
-    <EmbeddedResource Include="Localization\Messages\Messages.sr-Latn-CS.resx" />
+    <EmbeddedResource Include="Localization\Messages\Messages.sk-SK.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Localization\Messages\Messages.sr-Latn-CS.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="Localization\Messages\Messages.sv-SE.resx" />
-    <EmbeddedResource Include="Localization\Messages\Messages.tr-TR.resx" />
+    <EmbeddedResource Include="Localization\Messages\Messages.tr-TR.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="Localization\Messages\Messages.uk-UA.resx" />
-    <EmbeddedResource Include="Localization\Messages\Messages.vi-VN.resx" />
+    <EmbeddedResource Include="Localization\Messages\Messages.vi-VN.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="Localization\Messages\Messages.zh-cn.resx" />
     <EmbeddedResource Include="Localization\Messages\Messages.zh-tw.resx" />
   </ItemGroup>

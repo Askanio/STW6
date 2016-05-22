@@ -49,7 +49,7 @@ namespace ScrewTurn.Wiki.Web.Controllers
         public ActionResult Index()
         {
             if (Settings.Installed && !Settings.NeedMasterPassword)
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("Index", "Wiki");
 
             Thread.CurrentThread.CurrentUICulture = new CultureInfo("en");
 
@@ -62,7 +62,7 @@ namespace ScrewTurn.Wiki.Web.Controllers
         public ActionResult Step1(string language)
         {
             if (Settings.Installed && !Settings.NeedMasterPassword)
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("Index", "Wiki");
 
             SetLanguage(language);
 
@@ -76,7 +76,7 @@ namespace ScrewTurn.Wiki.Web.Controllers
         public ActionResult Step2(InstallViewModel model)
         {
             if (Settings.Installed && !Settings.NeedMasterPassword)
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("Index", "Wiki");
 
             SetLanguage(model.LanguageCode);
 
@@ -90,7 +90,7 @@ namespace ScrewTurn.Wiki.Web.Controllers
         public ActionResult Step3(InstallViewModel model)
         {
             if (Settings.Installed && !Settings.NeedMasterPassword)
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("Index", "Wiki");
 
             SetLanguage(model.LanguageCode);
 
@@ -108,7 +108,7 @@ namespace ScrewTurn.Wiki.Web.Controllers
         public ActionResult Step4(InstallViewModel model)
         {
             if (Settings.Installed && !Settings.NeedMasterPassword)
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("Index", "Wiki");
 
             SetLanguage(model.LanguageCode);
             model.Installed = Settings.Installed;

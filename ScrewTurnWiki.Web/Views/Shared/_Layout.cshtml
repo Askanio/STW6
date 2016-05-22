@@ -1,4 +1,6 @@
 ﻿@using ScrewTurn.Wiki.Web.Code.Extensions
+@using ScrewTurn.Wiki.Web.Localization.Messages
+@using ScrewTurnWiki.Web
 @model ScrewTurn.Wiki.Web.Models.WikiBaseModel
 <!DOCTYPE html>
 <html dir="@Model.Direction" xmlns="http://www.w3.org/1999/xhtml">
@@ -11,11 +13,20 @@
 {
     @htmlHead
 }
-    @*@Html.Partial("HeadContent")*@
+    @Scripts.Render(BundleConfig.ModernizrJS)
+    @*@Scripts.Render(BundleConfig.JqueryUnobtrusiveJS)*@
+    @Scripts.Render(BundleConfig.JqueryJS)
+    @Scripts.Render(BundleConfig.JqueryUIJS)
+    @Styles.Render(BundleConfig.JqueryUICss)
+    @*@Scripts.Render(BundleConfig.BootboxJS)*@
+    @*@Scripts.Render(BundleConfig.RespondJS)*@
+
     @Url.ScriptLink("stw/common/commonwizard.js")
-    @Url.ScriptLink("~/Shared/SharedJsVars")
 </head>
 <body>
+<script type="text/javascript">
+    var CONFIRM_MESSAGE = "@Messages.ConfirmOperation";
+</script>
 <div id="HeaderDiv">
     @Model.Header
 </div>

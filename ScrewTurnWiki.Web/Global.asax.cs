@@ -179,7 +179,7 @@ namespace ScrewTurn.Wiki.Web
             }
             catch { }
             EmailTools.NotifyError(ex, url);
-            if (!Request.PhysicalPath.ToLowerInvariant().Contains("error.aspx")) ScrewTurn.Wiki.UrlTools.Redirect("Error.aspx"); // TODO: RedirectToAction
+            if (!Request.PhysicalPath.ToLowerInvariant().Contains("error")) ScrewTurn.Wiki.UrlTools.Redirect("Error"); // TODO: RedirectToAction
         }
 
         protected void Application_End(object sender, EventArgs e)

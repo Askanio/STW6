@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Web.Mvc;
-using ScrewTurn.Wiki.Web.Models.Home;
+using ScrewTurn.Wiki.Web.Models.Wiki;
 
 namespace ScrewTurn.Wiki.Web.Models
 {
