@@ -10,6 +10,7 @@ using System.Web;
 using System.Web.Mvc;
 using Microsoft.Ajax.Utilities;
 using ScrewTurn.Wiki.PluginFramework;
+using ScrewTurn.Wiki.Web.Code;
 using ScrewTurn.Wiki.Web.Localization.Messages;
 using ScrewTurn.Wiki.Web.Models;
 
@@ -20,6 +21,22 @@ namespace ScrewTurn.Wiki.Web.Controllers
     /// </summary>
     public class PageController : BaseController
     {
+
+        /// <summary>
+        /// The correct <see cref="T:PageInfo" /> object associated to the current page using the <b>Page</b> and <b>NS</b> parameters in the query string.
+        /// </summary>
+        public string CurrentPageFullName { get; set; }
+
+        /// <summary>
+        /// Page in the given wiki
+        /// </summary>
+        public PageContent CurrentPage { get; set; }
+
+        /// <summary>
+        /// The name of the current namespace using the <b>NS</b> parameter in the query string.
+        /// </summary>
+        public string CurrentNamespace { get; set; }
+
         /// <summary>
         /// Initializes a new instance of the <see cref="PageController"/> class.
         /// </summary>
@@ -160,6 +177,72 @@ namespace ScrewTurn.Wiki.Web.Controllers
 
         #endregion Default
 
+        //#region Detect and set CurrentNamespace and CurrentPage
+
+        ///// <summary>
+        ///// Detect and set CurrentNamespace and CurrentPage
+        ///// </summary>
+        ///// <param name="pageName"></param>
+        ///// <param name="notFoundPageName">Name of Page for redirect if return false</param>
+        ///// <returns>true - ok, false - CurrentNamespace or CurrentPage not exists</returns>
+        //[NonAction]
+        //protected bool InitializeCurrentPage(string pageName, out string notFoundPageName)
+        //{
+        //    // Try to detect current namespace
+        //    CurrentNamespace = PageHelper.DetectNamespace(pageName);
+
+        //    if (!ExistsCurrentNamespace())
+        //    {
+        //        notFoundPageName = pageName;
+        //        return false;
+        //    }
+
+        //    SetCurrentPage(pageName);
+
+        //    // Verifies the need for a redirect and performs it.
+        //    if (CurrentPage == null)
+        //    {
+        //        notFoundPageName = Tools.UrlEncode(CurrentPageFullName);
+        //        return false;
+        //    }
+
+        //    notFoundPageName = null;
+        //    return true;
+        //}
+
+        //private bool ExistsCurrentNamespace()
+        //{
+        //    if (!string.IsNullOrEmpty(CurrentNamespace))
+        //    {
+        //        // Verify that namespace exists
+        //        return Pages.FindNamespace(Tools.DetectCurrentWiki(), CurrentNamespace) != null;
+        //    }
+        //    return true; // default "root"
+        //}
+
+
+        //private void SetCurrentPage(string pageName)
+        //{
+        //    CurrentPageFullName = GetCurrentPageFullName(pageName);
+
+        //    CurrentPage = Pages.FindPage(CurrentWiki, CurrentPageFullName);
+        //}
+
+        //private string GetCurrentPageFullName(string pageName)
+        //{
+        //    // Trim Namespace. from pageName
+        //    if (!string.IsNullOrEmpty(CurrentNamespace))
+        //        pageName = pageName.Substring(CurrentNamespace.Length + 1);
+
+        //    if (string.IsNullOrEmpty(pageName) || pageName == "Default")
+        //        pageName = Settings.GetDefaultPage(CurrentWiki);
+
+        //    return string.IsNullOrEmpty(CurrentNamespace)
+        //        ? pageName
+        //        : $"{CurrentNamespace}.{pageName}";
+        //}
+
+        //#endregion
 
         //#region Clean
 

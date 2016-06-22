@@ -6,7 +6,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using ScrewTurn.Wiki.Web.Code.ValidationAttributes;
+using ScrewTurn.Wiki.Web.Code.Attributes;
 
 namespace ScrewTurn.Wiki.Web.Models
 {

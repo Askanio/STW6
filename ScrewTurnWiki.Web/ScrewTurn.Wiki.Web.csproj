@@ -132,6 +132,8 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Code\Attributes\CheckActionForPage.cs" />
+    <Compile Include="Code\Attributes\CheckExistPage.cs" />
     <Compile Include="Code\FileDataExtension.cs" />
     <Compile Include="Code\Files\AttachmentRouteHandler.cs" />
     <Compile Include="Code\ImageHelper.cs" />
@@ -141,11 +143,13 @@
     <Compile Include="Code\LoginTools.cs" />
     <Compile Include="Code\PageHelper.cs" />
     <Compile Include="Code\ResourceExchanger.cs" />
-    <Compile Include="Code\ValidationAttributes\WikisValidator.cs" />
+    <Compile Include="Code\RevisionRow.cs" />
+    <Compile Include="Code\Attributes\WikisValidator.cs" />
     <Compile Include="Controllers\AttachmentController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\CommonController.cs" />
     <Compile Include="Controllers\ConfigurationTesterController.cs" />
+    <Compile Include="Controllers\HistoryController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PageController.cs" />
     <Compile Include="Controllers\WikiController.cs" />
@@ -170,6 +174,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Error.resx</DependentUpon>
     </Compile>
+    <Compile Include="Localization\Common\History.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>History.resx</DependentUpon>
+    </Compile>
     <Compile Include="Localization\Common\MasterPageSA.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -192,6 +201,7 @@
     </Compile>
     <Compile Include="Models\Common\PageNotFoundModel.cs" />
     <Compile Include="Models\Wiki\AttachmentViewerModel.cs" />
+    <Compile Include="Models\Wiki\DiffModel.cs" />
     <Compile Include="Models\Wiki\EmailNotification.cs" />
     <Compile Include="Models\InstallViewModel.cs" />
     <Compile Include="Models\LanguageViewModel.cs" />
@@ -200,6 +210,7 @@
     <Compile Include="Models\WikiPageModel.cs" />
     <Compile Include="Models\Wiki\DiscussionModel.cs" />
     <Compile Include="Models\WikiSABaseModel.cs" />
+    <Compile Include="Models\Wiki\HistoryModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -308,6 +319,8 @@
     <Content Include="Views\Shared\EmailNotification.cshtml" />
     <Content Include="Views\Shared\_SALayout.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
+    <Content Include="Views\History\History.cshtml" />
+    <TypeScriptCompile Include="Scripts\stw\common\historypage.ts" />
     <TypeScriptCompile Include="Scripts\stw\common\wikipage.ts" />
     <TypeScriptCompile Include="Scripts\stw\typescript-ref\commonconstants.ts" />
     <Content Include="Web.config">
@@ -331,6 +344,7 @@
     <Content Include="Views\Shared\_CleanLayout.cshtml" />
     <None Include="Views\Attachment\AttachmentViewer.cshtml" />
     <Content Include="Views\Common\PageNotFound.cshtml" />
+    <Content Include="Views\History\Diff.cshtml" />
     <None Include="Views\Wiki\Discussion.cshtml" />
   </ItemGroup>
   <ItemGroup>
@@ -466,6 +480,38 @@
     <EmbeddedResource Include="Localization\Common\Error.vi-VN.resx" />
     <EmbeddedResource Include="Localization\Common\Error.zh-cn.resx" />
     <EmbeddedResource Include="Localization\Common\Error.zh-tw.resx" />
+    <EmbeddedResource Include="Localization\Common\History.af-ZA.resx" />
+    <EmbeddedResource Include="Localization\Common\History.cs-CZ.resx" />
+    <EmbeddedResource Include="Localization\Common\History.da-DK.resx" />
+    <EmbeddedResource Include="Localization\Common\History.de-DE.resx" />
+    <EmbeddedResource Include="Localization\Common\History.es-ES.resx" />
+    <EmbeddedResource Include="Localization\Common\History.fa-IR.resx" />
+    <EmbeddedResource Include="Localization\Common\History.fr-FR.resx" />
+    <EmbeddedResource Include="Localization\Common\History.hi-IN.resx" />
+    <EmbeddedResource Include="Localization\Common\History.hu-HU.resx" />
+    <EmbeddedResource Include="Localization\Common\History.it-IT.resx" />
+    <EmbeddedResource Include="Localization\Common\History.ja-JP.resx" />
+    <EmbeddedResource Include="Localization\Common\History.ko-KR.resx" />
+    <EmbeddedResource Include="Localization\Common\History.lv-LV.resx" />
+    <EmbeddedResource Include="Localization\Common\History.nb-NO.resx" />
+    <EmbeddedResource Include="Localization\Common\History.nl-NL.resx" />
+    <EmbeddedResource Include="Localization\Common\History.pl-PL.resx" />
+    <EmbeddedResource Include="Localization\Common\History.pt-BR.resx" />
+    <EmbeddedResource Include="Localization\Common\History.pt-PT.resx" />
+    <EmbeddedResource Include="Localization\Common\History.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>History.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Localization\Common\History.ro-RO.resx" />
+    <EmbeddedResource Include="Localization\Common\History.ru-RU.resx" />
+    <EmbeddedResource Include="Localization\Common\History.sk-SK.resx" />
+    <EmbeddedResource Include="Localization\Common\History.sr-Latn-CS.resx" />
+    <EmbeddedResource Include="Localization\Common\History.sv-SE.resx" />
+    <EmbeddedResource Include="Localization\Common\History.tr-TR.resx" />
+    <EmbeddedResource Include="Localization\Common\History.uk-UA.resx" />
+    <EmbeddedResource Include="Localization\Common\History.vi-VN.resx" />
+    <EmbeddedResource Include="Localization\Common\History.zh-cn.resx" />
+    <EmbeddedResource Include="Localization\Common\History.zh-tw.resx" />
     <EmbeddedResource Include="Localization\Common\MasterPageSA.af-ZA.resx" />
     <EmbeddedResource Include="Localization\Common\MasterPageSA.cs-CZ.resx" />
     <EmbeddedResource Include="Localization\Common\MasterPageSA.da-DK.resx" />

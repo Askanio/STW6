@@ -9,6 +9,7 @@ using System.Web.Mvc;
 using System.Web.UI;
 using ScrewTurn.Wiki.Configuration;
 using ScrewTurn.Wiki.PluginFramework;
+using ScrewTurn.Wiki.Web.Code;
 using ScrewTurn.Wiki.Web.Localization.Messages;
 using ScrewTurn.Wiki.Web.Models;
 using ScrewTurn.Wiki.Web.Models.Common;
@@ -54,7 +55,7 @@ namespace ScrewTurn.Wiki.Web.Controllers
             var model = new PageNotFoundModel();
             model.Title = Messages.PageNotFoundTitle + " - " + Settings.GetWikiTitle(CurrentWiki);
 
-            var currentNamespace = DetectCurrentNamespace(page);
+            var currentNamespace = PageHelper.DetectNamespace(page);
 
             base.PrepareDefaultModel(model, currentNamespace, page);
 

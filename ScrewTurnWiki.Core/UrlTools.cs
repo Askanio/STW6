@@ -152,7 +152,7 @@ namespace ScrewTurn.Wiki {
                 if ((tempStringLower.Contains(GlobalSettings.PageExtension) || tempStringLower.Contains(".aspx")) && !tempString.StartsWith(Tools.UrlEncode(nspace) + ".")) temp.Insert(0, nspace + ".");
 			}
 
-			return temp.ToString();
+			return String.Concat("/", temp.ToString());
 		}
 
 		/// <summary>
@@ -163,7 +163,6 @@ namespace ScrewTurn.Wiki {
 		/// <param name="chunks">The chunks to append.</param>
 		public static void BuildUrl(string wiki, StringBuilder destination, params string[] chunks) {
 			if(destination == null) throw new ArgumentNullException("destination");
-		    destination.Append("/");
             destination.Append(BuildUrl(wiki, chunks));
 		}
 

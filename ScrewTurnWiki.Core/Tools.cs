@@ -113,7 +113,7 @@ namespace ScrewTurn.Wiki {
 			string url = "";
 			string currentWiki = DetectCurrentWiki();
 			if(nspace == null && currentPageFullName == Settings.GetDefaultPage(currentWiki)) url = Settings.GetMainUrl(currentWiki).ToString();
-			else url = Settings.GetMainUrl(currentWiki).ToString().TrimEnd('/') + "/" + currentPageFullName + GlobalSettings.PageExtension;
+			else url = Settings.GetMainUrl(currentWiki).TrimEnd('/') + "/" + currentPageFullName + GlobalSettings.PageExtension;
 
 			// Case sensitive
 			if(url == requestUrl) return "";

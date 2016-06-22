@@ -47,21 +47,31 @@ namespace ScrewTurn.Wiki.Web
             routes.MapRoute(
                 "PageViewCode",
                 "{page}/Code",
-                defaults: new {controller = "Wiki", action = "PageViewCode" },
-                constraints: new
-                {
-                    httpMethod = new HttpMethodConstraint("GET")
-                }
+                defaults: new {controller = "Wiki", action = "PageViewCode" }
                 );
 
             routes.MapRoute(
                 "PageDiscuss",
                 "{page}/Discuss",
-                defaults: new {controller = "Wiki", action = "PageDiscuss" },
-                constraints: new
-                {
-                    httpMethod = new HttpMethodConstraint("GET")
-                }
+                defaults: new {controller = "Wiki", action = "PageDiscuss" }
+                );
+
+            routes.MapRoute(
+                "PageHistory",
+                "{page}/History",
+                defaults: new {controller = "History", action = "Index" }
+                );
+
+            routes.MapRoute(
+                "PageHistoryRollback",
+                "{page}/Rollback",
+                defaults: new {controller = "History", action = "Rollback" }
+                );
+
+            routes.MapRoute(
+                "PageHistoryDiff",
+                "{page}/Diff",
+                defaults: new {controller = "History", action = "Diff"}
                 );
 
             routes.MapRoute(

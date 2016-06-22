@@ -15,7 +15,7 @@ namespace ScrewTurn.Wiki.Web.Controllers
         /// <summary>
         /// The name of the current wiki using the <b>Wiki</b> parameter in the query string.
         /// </summary>
-        protected string CurrentWiki
+        public string CurrentWiki
         {
             get
             {
@@ -141,19 +141,6 @@ namespace ScrewTurn.Wiki.Web.Controllers
                     Thread.CurrentThread.CurrentUICulture = new CultureInfo("en-US");
                 }
             }
-        }
-
-        [NonAction]
-        protected string DetectCurrentNamespace(string pageName)
-        {
-            if (string.IsNullOrEmpty(pageName))
-                return "";
-
-            var index = pageName.IndexOf(".", StringComparison.InvariantCulture);
-            if (index == -1)
-                return "";
-
-            return pageName.Substring(0, index);
         }
     }
 }

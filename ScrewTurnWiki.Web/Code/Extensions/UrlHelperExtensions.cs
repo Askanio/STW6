@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
+using System.Text;
 using System.Web;
 using System.Web.Mvc;
 
@@ -14,6 +15,49 @@ namespace ScrewTurn.Wiki.Web.Code.Extensions
     public static class UrlHelperExtensions
     {
         private static string _assemblyVersion;
+
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="pageName"></param>
+        /// <param name="chunks"></param>
+        /// <returns></returns>
+        public static MvcHtmlString BuildPageUrl(string pageName, params string[] chunks)
+        {
+            if (chunks == null) throw new ArgumentNullException("chunks");
+
+            StringBuilder temp = new StringBuilder(chunks.Length * 10);
+            foreach (string chunk in chunks)
+            {
+                temp.Append(chunk);
+            }
+
+            string tempString = $"/{pageName}{temp.ToString()}";
+
+            return new MvcHtmlString(tempString);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="pageName"></param>
+        /// <param name="chunks"></param>
+        /// <returns></returns>
+        public static MvcHtmlString BuildPageEncodeUrl(string pageName, params string[] chunks)
+        {
+            if (chunks == null) throw new ArgumentNullException("chunks");
+
+            StringBuilder temp = new StringBuilder(chunks.Length * 10);
+            foreach (string chunk in chunks)
+            {
+                temp.Append(chunk);
+            }
+
+            string tempString = $"/{Tools.UrlEncode(pageName)}{temp.ToString()}";
+
+            return new MvcHtmlString(tempString);
+        }
 
         /// <summary>
         /// Provides a CSS link tag for the CSS file provided. If the relative path does not begin with ~ then

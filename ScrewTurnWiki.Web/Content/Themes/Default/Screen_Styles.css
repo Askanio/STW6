@@ -67,6 +67,18 @@ div.globalcaptcha input {
 	width: 144px;
 }
 
+.btn {
+    background-color: #86BE36;
+    border: solid 1px #609020;
+    color: #FFFFFF !important;
+    cursor: pointer;
+    padding: 2px;
+    text-decoration: none !important;
+}
+a.btn:hover {
+    background-color: #769F29 !important;
+}
+
 /* Small text */
 .small, small {
 	font-size: 11px;

@@ -81,21 +81,21 @@ The ##WIKITITLE## Team.";
 		/// The default content of the sidebar.
 		/// </summary>
 		public const string SidebarContent = @"<div style=""float: right;"">
-<a href=""RSS.aspx"" title=""Update notifications for {WIKITITLE} (RSS 2.0)""><img src=""{THEMEPATH}Images/RSS.png"" alt=""RSS"" /></a>
-<a href=""RSS.aspx?Discuss=1"" title=""Update notifications for {WIKITITLE} Discussions (RSS 2.0)""><img src=""{THEMEPATH}Images/RSS-Discussion.png"" alt=""RSS"" /></a></div>
+<a href=""RSS"" title=""Update notifications for {WIKITITLE} (RSS 2.0)""><img src=""{THEMEPATH}Images/RSS.png"" alt=""RSS"" /></a>
+<a href=""RSS?Discuss=1"" title=""Update notifications for {WIKITITLE} Discussions (RSS 2.0)""><img src=""{THEMEPATH}Images/RSS-Discussion.png"" alt=""RSS"" /></a></div>
 
 * '''[MainPage|Main Page]'''
 
-* [RandPage.aspx|Random Page]
-* [Edit.aspx|Create a new Page]
-* [AllPages.aspx|All Pages]
-* [Category.aspx|Categories]
-* [NavPath.aspx|Navigation Paths]
+* [RandPage|Random Page]
+* [Edit|Create a new Page]
+* [AllPages|All Pages]
+* [Category|Categories]
+* [NavPath|Navigation Paths]
 
-* [AdminHome.aspx|Administration]
-* [Upload.aspx|File Management]
+* [AdminHome|Administration]
+* [Upload|File Management]
 
-* [Register.aspx|Create Account]
+* [Register|Create Account]
 
 <small>'''Search the wiki'''</small>{BR}
 {SEARCHBOX}
@@ -106,22 +106,22 @@ The ##WIKITITLE## Team.";
 		/// The default content of the sidebar of a sub-namespace.
 		/// </summary>
 		public const string SidebarContentForSubNamespace = @"<div style=""float: right;"">
-<a href=""{NAMESPACE}.RSS.aspx"" title=""Update notifications for {WIKITITLE} ({NAMESPACE}) (RSS 2.0)""><img src=""{THEMEPATH}Images/RSS.png"" alt=""RSS"" /></a>
-<a href=""{NAMESPACE}.RSS.aspx?Discuss=1"" title=""Update notifications for {WIKITITLE} Discussions ({NAMESPACE}) (RSS 2.0)""><img src=""{THEMEPATH}Images/RSS-Discussion.png"" alt=""RSS"" /></a></div>
+<a href=""{NAMESPACE}.RSS"" title=""Update notifications for {WIKITITLE} ({NAMESPACE}) (RSS 2.0)""><img src=""{THEMEPATH}Images/RSS.png"" alt=""RSS"" /></a>
+<a href=""{NAMESPACE}.RSS?Discuss=1"" title=""Update notifications for {WIKITITLE} Discussions ({NAMESPACE}) (RSS 2.0)""><img src=""{THEMEPATH}Images/RSS-Discussion.png"" alt=""RSS"" /></a></div>
 
 * '''[MainPage|Main Page]'''
 * [++MainPage|Main Page (root)]
 
-* [RandPage.aspx|Random Page]
-* [Edit.aspx|Create a new Page]
-* [AllPages.aspx|All Pages]
-* [Category.aspx|Categories]
-* [NavPath.aspx|Navigation Paths]
+* [RandPage|Random Page]
+* [Edit|Create a new Page]
+* [AllPages|All Pages]
+* [Category|Categories]
+* [NavPath|Navigation Paths]
 
-* [AdminHome.aspx|Administration]
-* [Upload.aspx|File Management]
+* [AdminHome|Administration]
+* [Upload|File Management]
 
-* [Register.aspx|Create Account]
+* [Register|Create Account]
 
 <small>'''Search the wiki'''</small>{BR}
 {SEARCHBOX}

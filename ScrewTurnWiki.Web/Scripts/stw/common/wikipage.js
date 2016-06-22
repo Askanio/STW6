@@ -1,4 +1,4 @@
-/// <reference path="../typescript-ref/installerconstants.ts" />
+/// <reference path="../typescript-ref/commonconstants.ts" />
 var ScrewTurn;
 (function (ScrewTurn) {
     var Wiki;

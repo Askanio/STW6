@@ -54,5 +54,22 @@ namespace ScrewTurn.Wiki.Web.Code
             }
             return null;
         }
+
+        /// <summary>
+        /// Exstract namespace from name of page
+        /// </summary>
+        /// <param name="pageName"></param>
+        /// <returns></returns>
+        public static string DetectNamespace(string pageName)
+        {
+            if (string.IsNullOrEmpty(pageName))
+                return "";
+
+            var index = pageName.IndexOf(".", StringComparison.InvariantCulture);
+            if (index == -1)
+                return "";
+
+            return pageName.Substring(0, index);
+        }
     }
 }

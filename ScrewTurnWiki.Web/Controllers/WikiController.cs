@@ -10,6 +10,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using ScrewTurn.Wiki.PluginFramework;
 using ScrewTurn.Wiki.Web.Code;
+using ScrewTurn.Wiki.Web.Code.Attributes;
 using ScrewTurn.Wiki.Web.Localization.Messages;
 using ScrewTurn.Wiki.Web.Models;
 using ScrewTurn.Wiki.Web.Models.Wiki;
@@ -18,22 +19,7 @@ namespace ScrewTurn.Wiki.Web.Controllers
 {
     public class WikiController : PageController
     {
-        /// <summary>
-        /// Page in the given wiki
-        /// </summary>
-        private PageContent CurrentPage { get; set; }
-
-        /// <summary>
-        /// The name of the current namespace using the <b>NS</b> parameter in the query string.
-        /// </summary>
-        private string CurrentNamespace { get; set; }
-
-        /// <summary>
-        /// The correct <see cref="T:PageInfo" /> object associated to the current page using the <b>Page</b> and <b>NS</b> parameters in the query string.
-        /// </summary>
-        private string CurrentPageFullName { get; set; }
-
-
+      
         private bool DiscussMode { get; set; }
 
         private bool ViewCodeMode { get; set; }
@@ -59,62 +45,65 @@ namespace ScrewTurn.Wiki.Web.Controllers
         }
 
         [HttpGet]
+        [CheckExistPage]
         public ActionResult Index()
         {
             DiscussMode = Request["Discuss"] != null;
             ViewCodeMode = Request["Code"] != null && !DiscussMode;
             if (!Settings.GetEnableViewPageCodeFeature(CurrentWiki)) ViewCodeMode = false;
 
-            return GeneratePage("");           
+            return GeneratePage();           
         }
 
         [HttpGet]
+        [CheckExistPage(PageParamName = "page")]
         public ActionResult Page(string page, string from)
         {
-            return GeneratePage(page);
+            return GeneratePage();
         }
 
         [HttpGet]
+        [CheckExistPage(PageParamName = "page")]
         public ActionResult PageDiscuss(string page)
         {
             DiscussMode = true;
-            return GeneratePage(page);
+            return GeneratePage();
         }
 
         [HttpGet]
+        [CheckExistPage(PageParamName = "page")]
         public ActionResult PageViewCode(string page)
         {
             ViewCodeMode = true;
-            return GeneratePage(page);
+            return GeneratePage();
         }
 
-        private ActionResult GeneratePage(string pageName)
+        private ActionResult GeneratePage()
         {
-            // Try to detect current namespace
-            CurrentNamespace = DetectCurrentNamespace(pageName);
+            //string notFoundPageName;
+            //if (!InitializeCurrentPage(pageName, out notFoundPageName))
+            //    return RedirectToAction("PageNotFound", "Common", new { page = notFoundPageName });
 
-            if (!ExistsCurrentNamespace())
-                return RedirectToAction("PageNotFound", "Common", new { page = pageName });
-            //HttpContext.Current.Response.Redirect("~/PageNotFound.aspx?Page=" + pageName);
-            
-            SetCurrentPageFullName(pageName);
+            //// Try to detect current namespace
+            //CurrentNamespace = DetectCurrentNamespace(pageName);
 
-            CurrentPage = Pages.FindPage(CurrentWiki, CurrentPageFullName);
+            //if (!ExistsCurrentNamespace())
+            //    return RedirectToAction("PageNotFound", "Common", new { page = pageName });
 
-            // Verifies the need for a redirect and performs it.
-            if (CurrentPage == null)
-            {
-                return RedirectToAction("PageNotFound", "Common", new { page = CurrentPageFullName });
-                //UrlTools.Redirect(UrlTools.BuildUrl(CurrentWiki, "PageNotFound.aspx?Page=", Tools.UrlEncode(Tools.DetectCurrentFullName())));
-            }
+            //SetCurrentPage(pageName);
+
+            //// Verifies the need for a redirect and performs it.
+            //if (CurrentPage == null)
+            //    return RedirectToAction("PageNotFound", "Common", new { page = Tools.UrlEncode(CurrentPageFullName) });
+
             if (Request["Edit"] == "1")
             {
                 UrlTools.Redirect(UrlTools.BuildUrl(CurrentWiki, "Edit.aspx?Page=", Tools.UrlEncode(CurrentPage.FullName))); // TODO:
             }
-            if (Request["History"] == "1")
-            {
-                UrlTools.Redirect(UrlTools.BuildUrl(CurrentWiki, "History.aspx?Page=", Tools.UrlEncode(CurrentPage.FullName))); // TODO:
-            }
+            //if (Request["History"] == "1")
+            //{
+            //    UrlTools.Redirect(UrlTools.BuildUrl(CurrentWiki, "History.aspx?Page=", Tools.UrlEncode(CurrentPage.FullName))); // TODO:
+            //}
 
             var model = new WikiPageModel();
             base.PrepareDefaultModel(model, CurrentNamespace, CurrentPageFullName);
@@ -122,30 +111,6 @@ namespace ScrewTurn.Wiki.Web.Controllers
             FillModel(model);
 
             return View("WikiPage", model);
-        }
-
-        private bool ExistsCurrentNamespace()
-        {
-            if (!string.IsNullOrEmpty(CurrentNamespace))
-            {
-                // Verify that namespace exists
-                return Pages.FindNamespace(Tools.DetectCurrentWiki(), CurrentNamespace) != null;
-            }
-            return true; // default "root"
-        }
-
-        private void SetCurrentPageFullName(string pageName)
-        {
-            // Trim Namespace. from pageName
-            if (!string.IsNullOrEmpty(CurrentNamespace))
-                pageName = pageName.Substring(CurrentNamespace.Length + 1);
-
-            if (string.IsNullOrEmpty(pageName) || pageName == "Default")
-                pageName = Settings.GetDefaultPage(CurrentWiki);
-
-            CurrentPageFullName = string.IsNullOrEmpty(CurrentNamespace)
-                ? pageName
-                : $"{CurrentNamespace}.{pageName}";
         }
 
         //[HttpGet]
@@ -263,6 +228,7 @@ namespace ScrewTurn.Wiki.Web.Controllers
             }
 
             model.PageFullName = CurrentPage.FullName;
+            model.PageFullNameEncode = Tools.UrlEncode(CurrentPage.FullName);
             model.AttachmentViewerVisible = canDownloadAttachments;
             
             model.PageInfoVisible = Settings.GetEnablePageInfoDiv(CurrentWiki);
@@ -385,7 +351,7 @@ namespace ScrewTurn.Wiki.Web.Controllers
                 model.HistoryLink =
                     new MvcHtmlString(string.Format(@"<a id=""HistoryLink"" title=""{0}"" href=""{1}"">{2}</a>",
                         Messages.ViewPageHistory,
-                        UrlTools.BuildUrl(CurrentWiki, "History.aspx?Page=", Tools.UrlEncode(CurrentPage.FullName)),
+                        UrlTools.BuildUrl(CurrentWiki, Tools.UrlEncode(CurrentPage.FullName), "/History"),
                         Messages.History));
             }
 

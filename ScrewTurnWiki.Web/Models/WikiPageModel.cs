@@ -35,6 +35,8 @@ namespace ScrewTurn.Wiki.Web.Models
 
         public string PageFullName { get; set; }
 
+        public string PageFullNameEncode { get; set; }
+
         [AllowHtml]
         public MvcHtmlString EmailNotification { get; set; }
 

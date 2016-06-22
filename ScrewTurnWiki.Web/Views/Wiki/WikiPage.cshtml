@@ -127,7 +127,7 @@
 <div id="PageAttachmentsDiv" style="position: absolute; left: 10000px;">
     @if (Model.AttachmentViewerVisible)
     {
-        @Html.Action("AttachmentViewer", "Attachment", new {pageFullName = @Model.PageFullName})
+        @Html.Action("AttachmentViewer", "Attachment", new {pageFullName = @Model.PageFullNameEncode})
     }
 </div>
 

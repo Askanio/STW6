@@ -328,7 +328,7 @@ namespace ScrewTurn.Wiki {
 									if(currentPageFullName != null) {
 										sb.Insert(match.Index, @"<a href=""" +
 											UrlTools.BuildUrl(wiki, "RSS.aspx?Page=", Tools.UrlEncode(currentPageFullName)) +
-											@""" title=""" + Exchanger.ResourceExchanger.GetResource("RssForThisPage") + @"""><img src=""" +
+											@""" title=""" + Exchanger.ResourceExchanger.GetResource("RssForThisPage") + @"""><img src=""/" +
 											Themes.ListThemeFiles(wiki, Settings.GetTheme(wiki, Tools.DetectCurrentNamespace()), "Images/RSS.png") + @""" alt=""RSS"" /></a>");
 									}
 									break;
