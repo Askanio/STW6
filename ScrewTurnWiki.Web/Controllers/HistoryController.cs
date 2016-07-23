@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using System.Text;
-using System.Web;
 using System.Web.Mvc;
-using System.Web.UI;
-using System.Web.UI.WebControls;
-using Microsoft.Ajax.Utilities;
 using ScrewTurn.Wiki.Configuration;
 using ScrewTurn.Wiki.PluginFramework;
 using ScrewTurn.Wiki.Web.Code;
@@ -29,17 +23,10 @@ namespace ScrewTurn.Wiki.Web.Controllers
 
         [HttpGet]
         [CheckExistPage(PageParamName = "page")]
+        [AllowActionForPage(Action = AllowActionForPage.ActionForPages.ReadPage, Order = 2)]
+        [AllowActionForPage(Action = AllowActionForPage.ActionForPages.ManagePage, Order = 3)]
         public ActionResult Rollback(string page, int revision)
         {
-            AuthChecker authChecker = new AuthChecker(Collectors.CollectorsBox.GetSettingsProvider(CurrentWiki));
-            var canRollback = authChecker.CheckActionForPage(CurrentPage.FullName, Actions.ForPages.ManagePage,
-                SessionFacade.GetCurrentUsername(), SessionFacade.GetCurrentGroupNames(CurrentWiki));
-            if (!canRollback) UrlTools.Redirect("AccessDenied.aspx"); // TODO:
-
-            //string notFoundPageName;
-            //if (!InitializeCurrentPage(page, out notFoundPageName))
-            //    return RedirectToAction("PageNotFound", "Common", new { page = notFoundPageName });
-
             Log.LogEntry("Page rollback requested for " + CurrentPage.FullName + " to rev. " + revision.ToString(), EntryType.General, SessionFacade.GetCurrentUsername(), CurrentWiki);
             Pages.Rollback(CurrentPage, revision);
 
@@ -49,15 +36,11 @@ namespace ScrewTurn.Wiki.Web.Controllers
         }
 
         [HttpGet]
-        [CheckExistPage(PageParamName = "page")]
+        [CheckExistPage(PageParamName = "page", Order = 1)]
+        [AllowActionForPage(Action = AllowActionForPage.ActionForPages.ReadPage, Order = 2)]
         public ActionResult Index(string page, int? revision, string rev1, string rev2)
         {
-            //string notFoundPageName;
-            //if (!InitializeCurrentPage(page, out notFoundPageName))
-            //    return RedirectToAction("PageNotFound", "Common", new { page = notFoundPageName });
-
             var model = GetModel(revision, rev1, rev2);
-
             return View("History", model);
         }
 
@@ -74,11 +57,9 @@ namespace ScrewTurn.Wiki.Web.Controllers
             var canRollback = authChecker.CheckActionForPage(CurrentPage.FullName, Actions.ForPages.ManagePage,
                     SessionFacade.GetCurrentUsername(), SessionFacade.GetCurrentGroupNames(CurrentWiki));
 
-            model.LblTitle = Messages.PageHistory + ": " + FormattingPipeline.PrepareTitle(CurrentWiki, CurrentPage.Title, false, FormattingContext.PageContent, CurrentPage.FullName);
-
-            bool canView = authChecker.CheckActionForPage(CurrentPage.FullName, Actions.ForPages.ReadPage,
-                    SessionFacade.GetCurrentUsername(), SessionFacade.GetCurrentGroupNames(CurrentWiki));
-            if (!canView) UrlTools.Redirect("AccessDenied.aspx"); // TODO:
+            model.LblTitle = Messages.PageHistory + ": " +
+                             FormattingPipeline.PrepareTitle(CurrentWiki, CurrentPage.Title, false,
+                                 FormattingContext.PageContent, CurrentPage.FullName);
 
             //string rev1 =  Request["Rev1"]
             //string rev2 =  Request["Rev2"]
@@ -216,7 +197,8 @@ namespace ScrewTurn.Wiki.Web.Controllers
         }
 
         [HttpGet]
-        [CheckExistPage(PageParamName = "page")]
+        [CheckExistPage(PageParamName = "page", Order = 1)]
+        [AllowActionForPage(Action = AllowActionForPage.ActionForPages.ReadPage, Order = 2)]
         public ActionResult Diff(string page, string rev1, string rev2)
         {
             var model = new DiffModel();
@@ -239,11 +221,6 @@ namespace ScrewTurn.Wiki.Web.Controllers
             //    return;
             //}
 
-            AuthChecker authChecker = new AuthChecker(Collectors.CollectorsBox.GetSettingsProvider(CurrentWiki));
-
-            bool canView = authChecker.CheckActionForPage(CurrentPage.FullName, Actions.ForPages.ReadPage,
-                SessionFacade.GetCurrentUsername(), SessionFacade.GetCurrentGroupNames(CurrentWiki));
-            if (!canView) UrlTools.Redirect("AccessDenied.aspx");
 
             int revision1 = -1;
             int revision2 = -1;
@@ -305,7 +282,7 @@ namespace ScrewTurn.Wiki.Web.Controllers
             if (!draft)
             {
                 model.LblBack = new MvcHtmlString(string.Format(@"<a href=""{0}"">&laquo; {1}</a>",
-                    UrlTools.BuildUrl(CurrentWiki, "History.aspx?Page=", Tools.UrlEncode(page), "&amp;Rev1=",
+                    UrlTools.BuildUrl(CurrentWiki, Tools.UrlEncode(page), "/History?Rev1=",
                         rev1, "&amp;Rev2=", rev2),
                     Messages.Back));
             }
@@ -317,7 +294,7 @@ namespace ScrewTurn.Wiki.Web.Controllers
 
             sb.Append(result);
 
-            model.LblBack = new MvcHtmlString(sb.ToString());
+            model.LblDiff = new MvcHtmlString(sb.ToString());
 
             return View("Diff", model);
         }

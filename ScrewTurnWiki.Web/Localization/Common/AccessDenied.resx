@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -117,13 +117,13 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="lblDescriptionResource1.Text" xml:space="preserve">
-    <value>Nemáte práva pro tuto stránku.</value>
+  <data name="LblDescription_Text" xml:space="preserve">
+    <value>You do not have access to this page.</value>
   </data>
-  <data name="lblTitleResource1.Text" xml:space="preserve">
-    <value>Přístup odmítnut</value>
+  <data name="LblTitle_Text" xml:space="preserve">
+    <value>Access Denied</value>
   </data>
-  <data name="PageResource1.Title" xml:space="preserve">
-    <value>Nepojmenovaná stránka</value>
+  <data name="Page_Title" xml:space="preserve">
+    <value>Untitled Page</value>
   </data>
 </root>

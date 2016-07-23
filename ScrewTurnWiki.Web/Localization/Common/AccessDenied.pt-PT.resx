@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -117,13 +117,13 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="lblDescriptionResource1.Text" xml:space="preserve">
-    <value>شما به این صفحه دسترسی ندارید</value>
+  <data name="LblDescription_Text" xml:space="preserve">
+    <value>Não tem acesso a esta Página</value>
   </data>
-  <data name="lblTitleResource1.Text" xml:space="preserve">
-    <value>غیر قابل دسترسی</value>
+  <data name="LblTitle_Text" xml:space="preserve">
+    <value>Acesso Negado</value>
   </data>
-  <data name="PageResource1.Title" xml:space="preserve">
-    <value>صفحه بی نام</value>
+  <data name="Page_Title" xml:space="preserve">
+    <value>Página sem Título</value>
   </data>
 </root>

@@ -48,6 +48,26 @@ namespace ScrewTurn.Wiki.Web.Controllers
             return View("Error", model);
         }
 
+        public ActionResult AccessDenied()
+        {
+            var model = new AccessDeniedModel();
+
+            model.Title = Messages.AccessDeniedTitle + " - " + Settings.GetWikiTitle(CurrentWiki);
+
+            PrepareSAModel(model, CurrentNamespace);
+
+            string n = Settings.GetProvider(CurrentWiki).GetMetaDataItem(MetaDataItem.AccessDeniedNotice, null);
+            if (!string.IsNullOrEmpty(n))
+            {
+                n = FormattingPipeline.FormatWithPhase1And2(CurrentWiki, n, false, FormattingContext.Other, null);
+            }
+            if (!string.IsNullOrEmpty(n))
+                model.Description =
+                    new MvcHtmlString(FormattingPipeline.FormatWithPhase3(CurrentWiki, n, FormattingContext.Other, null));
+
+            return View("AccessDenied", model);
+        }
+
         #region PageNotFound
 
         public ActionResult PageNotFound(string page)
@@ -74,6 +94,7 @@ namespace ScrewTurn.Wiki.Web.Controllers
 
             return View("PageNotFound", model);
         }
+
 
 
         /// <summary>

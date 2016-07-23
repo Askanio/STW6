@@ -39,6 +39,12 @@ namespace ScrewTurn.Wiki.Web
                 );
 
             routes.MapRoute(
+                "AccessDenied",
+                "AccessDenied",
+                new {controller = "Common", action = "AccessDenied"}
+                );
+
+            routes.MapRoute(
                 "PageNotFound",
                 "PageNotFound/{page}",
                 new {controller = "Common", action = "PageNotFound", page = UrlParameter.Optional}

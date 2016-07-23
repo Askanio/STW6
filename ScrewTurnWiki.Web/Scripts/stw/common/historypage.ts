@@ -24,7 +24,8 @@ module ScrewTurn.Wiki.Web.Common {
             var rev1 = $('#lstRev1').val();
             var rev2 = $('#lstRev2').val();
             var path = "/" + this.page + "/Diff?rev1=" + rev1 + "&rev2=" + rev2;
-            $(this).attr("href", path);
+            //$(this).attr("href", path);
+            window.location.href = path;
         }
 
     }
