@@ -45,6 +45,12 @@ namespace ScrewTurn.Wiki.Web
                 );
 
             routes.MapRoute(
+                "RandPage",
+                "RandPage",
+                new {controller = "Common", action = "RandPage" }
+                );
+
+            routes.MapRoute(
                 "PageNotFound",
                 "PageNotFound/{page}",
                 new {controller = "Common", action = "PageNotFound", page = UrlParameter.Optional}
