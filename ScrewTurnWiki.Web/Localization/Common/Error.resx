@@ -118,7 +118,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="LblDescription_Text" xml:space="preserve">
-    <value>We're sorry, an error occurred while processing your request. The error information has been registered and it will be investigated.&lt;br /&gt;Please restart from the &lt;a href="Default.aspx"&gt;Main Page&lt;/a&gt;.</value>
+    <value>We're sorry, an error occurred while processing your request. The error information has been registered and it will be investigated.&lt;br /&gt;Please restart from the &lt;a href="Default"&gt;Main Page&lt;/a&gt;.</value>
   </data>
   <data name="LblError_Text" xml:space="preserve">
     <value>System Error</value>

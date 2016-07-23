@@ -112,13 +112,13 @@
     <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="LblDescription_Text" xml:space="preserve">
-    <value>요청 진행중 에러가 발생했습니다. 에러정보는 등록되며 추후 조사될 것입니다.&lt;br /&gt;&lt;a href="Default.aspx"&gt;메인페이지&lt;/a&gt;에서 재시작하시기 바랍니다.</value>
+    <value>요청 진행중 에러가 발생했습니다. 에러정보는 등록되며 추후 조사될 것입니다.&lt;br /&gt;&lt;a href="Default"&gt;메인페이지&lt;/a&gt;에서 재시작하시기 바랍니다.</value>
   </data>
   <data name="LblError_Text" xml:space="preserve">
     <value>시스템 에러</value>

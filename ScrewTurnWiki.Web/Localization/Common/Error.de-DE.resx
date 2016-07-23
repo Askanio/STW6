@@ -112,13 +112,13 @@
     <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="LblDescription_Text" xml:space="preserve">
-    <value>Während der Bearbeitung Ihrer Anfrage ist ein Fehler aufgetreten. Die Fehlerinformatinoen wurden protokolliert und werden zur Beseitigung des Fehlers näher untersucht.&lt;br /&gt;Bitte beginnen Sie erneut bei der &lt;a href="Default.aspx"&gt;Startseite&lt;/a&gt;.</value>
+    <value>Während der Bearbeitung Ihrer Anfrage ist ein Fehler aufgetreten. Die Fehlerinformatinoen wurden protokolliert und werden zur Beseitigung des Fehlers näher untersucht.&lt;br /&gt;Bitte beginnen Sie erneut bei der &lt;a href="Default"&gt;Startseite&lt;/a&gt;.</value>
     <comment>We're sorry, an error occurred while processing your request. The error information has been registered and it will investigated.&lt;br /&gt;Please restart from the &lt;a href="Default.aspx"&gt;Main Page&lt;/a&gt;.</comment>
   </data>
   <data name="LblError_Text" xml:space="preserve">

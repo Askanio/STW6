@@ -61,7 +61,7 @@ namespace ScrewTurn.Wiki.Web.Localization.Common {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to We&apos;re sorry, an error occurred while processing your request. The error information has been registered and it will be investigated.&lt;br /&gt;Please restart from the &lt;a href=&quot;Default.aspx&quot;&gt;Main Page&lt;/a&gt;..
+        ///   Looks up a localized string similar to We&apos;re sorry, an error occurred while processing your request. The error information has been registered and it will be investigated.&lt;br /&gt;Please restart from the &lt;a href=&quot;Default&quot;&gt;Main Page&lt;/a&gt;..
         /// </summary>
         public static string LblDescription_Text {
             get {

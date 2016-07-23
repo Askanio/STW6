@@ -112,13 +112,13 @@
     <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="LblDescription_Text" xml:space="preserve">
-    <value>Dessverre skjedde det en feil. Feilinformasjonen er registrert og vil bli undersøkt.&lt;br /&gt;Vennligst start på nytt fra &lt;a href="Default.aspx"&gt;startsiden&lt;/a&gt;.</value>
+    <value>Dessverre skjedde det en feil. Feilinformasjonen er registrert og vil bli undersøkt.&lt;br /&gt;Vennligst start på nytt fra &lt;a href="Default"&gt;startsiden&lt;/a&gt;.</value>
     <comment>We're sorry, an error occurred while processing your request. The error information has been registered and it will investigated.&lt;br /&gt;Please restart from the &lt;a href="Default.aspx"&gt;Main Page&lt;/a&gt;.</comment>
   </data>
   <data name="LblError_Text" xml:space="preserve">

@@ -112,13 +112,13 @@
     <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="LblDescription_Text" xml:space="preserve">
-    <value>Nous sommes désolés, une erreur est survenue lors du traitement de votre requête. Cette erreur a été enregistrée.&lt;br /&gt;Veuillez retourner sur la &lt;a href="Default.aspx"&gt;Page Principale&lt;/a&gt;.</value>
+    <value>Nous sommes désolés, une erreur est survenue lors du traitement de votre requête. Cette erreur a été enregistrée.&lt;br /&gt;Veuillez retourner sur la &lt;a href="Default"&gt;Page Principale&lt;/a&gt;.</value>
   </data>
   <data name="LblError_Text" xml:space="preserve">
     <value>Erreur Système</value>
