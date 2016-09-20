@@ -510,7 +510,7 @@ namespace ScrewTurn.Wiki.Web.Controllers
         /// <returns>The link URL.</returns>
         private string GetCategoryLink(string category)
         {
-            return UrlTools.BuildUrl(CurrentWiki, "AllPages.aspx?Cat=", Tools.UrlEncode(category));
+            return UrlTools.BuildUrl(CurrentWiki, "AllPages?Cat=", Tools.UrlEncode(category));
         }
 
         /// <summary>

@@ -25,6 +25,19 @@ p {
 	color: #009900;
 }
 
+.loader{
+    position: absolute;
+    z-index: 800;
+    background-image: url('/Content/Images/Wait.gif');
+    background-repeat: no-repeat;
+    background-position: center center;
+    width: 100%;
+    height: 100%;
+    opacity: 0.6;
+    background-color: #CCCCCC;
+    display: none;
+} 
+
 input, label {
 	font-family: Verdana, Arial, Helvetica, sans-serif;
 	font-size: 12px;
@@ -1295,7 +1308,7 @@ p.excerpt b.searchkeyword, b.searchkeyword {
 
 /* END User.aspx */
 
-/* BEGIN AllPages.aspx */
+/* BEGIN AllPages */
 
 #PageSelectorDiv {
 	margin: 6px 0px 6px 0px;
@@ -1319,7 +1332,7 @@ p.excerpt b.searchkeyword, b.searchkeyword {
   font-weight: bold;  
 }
 
-/* END AllPages.aspx */
+/* END AllPages */
 
 /* BEGIN Post.aspx */
 

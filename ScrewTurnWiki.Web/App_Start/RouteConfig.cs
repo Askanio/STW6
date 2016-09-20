@@ -56,6 +56,19 @@ namespace ScrewTurn.Wiki.Web
                 new {controller = "Common", action = "PageNotFound", page = UrlParameter.Optional}
                 );
 
+            //routes.MapRoute(
+            //    "AllPages1",
+            //    "AllPages/{ns}/{page}",
+            //    new {controller = "Common", action = "Index", page = UrlParameter.Optional}
+            //    );
+
+            routes.MapRoute(
+                "AllPages",
+                "{page}",
+                new {controller = "AllPages", action = "Index"},
+                new { page = @"^(.*\.|)AllPages$" }
+                );
+
             routes.MapRoute(
                 "PageViewCode",
                 "{page}/Code",

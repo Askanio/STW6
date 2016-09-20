@@ -7,6 +7,7 @@ using System.Threading;
 using System.Web;
 using System.Web.Mvc;
 using ScrewTurn.Wiki.Configuration;
+using ScrewTurn.Wiki.PluginFramework;
 
 namespace ScrewTurn.Wiki.Web.Controllers
 {
@@ -27,9 +28,24 @@ namespace ScrewTurn.Wiki.Web.Controllers
         private string _currentWiki = null;
 
         /// <summary>
+        /// The name of the current namespace using the <b>NS</b> parameter in the query string.
+        /// </summary>
+        public string CurrentNamespace { get; set; }
+
+        /// <summary>
         /// 
         /// </summary>
         public ApplicationSettings AppSettings { get; private set; }
+
+        /// <summary>
+        /// Detects the correct <see cref="T:NamespaceInfo" /> object associated to the current namespace.
+        /// </summary>
+        /// <returns>The correct <see cref="T:NamespaceInfo" /> object, or <c>null</c>.</returns>
+        public NamespaceInfo DetectNamespaceInfo()
+        {
+            NamespaceInfo nsinfo = CurrentNamespace != null ? Pages.FindNamespace(CurrentWiki, CurrentNamespace) : null;
+            return nsinfo;
+        }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="BaseController"/> class.

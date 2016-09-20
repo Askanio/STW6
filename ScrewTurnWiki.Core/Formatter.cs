@@ -354,7 +354,7 @@ namespace ScrewTurn.Wiki {
 									break;
 								case "CATEGORIES":
 									List<CategoryInfo> cats = Pages.GetCategories(wiki, ns);
-									string pageName = ns != null ? NameTools.GetFullName(ns.Name, "AllPages") + ".aspx" : "AllPages.aspx";
+									string pageName = ns != null ? NameTools.GetFullName(ns.Name, "AllPages") : "AllPages";
 									pageName += "?Cat=";
 									string categories = "<ul><li>" + string.Join("</li><li>",
 										(from c in cats
@@ -1689,7 +1689,7 @@ namespace ScrewTurn.Wiki {
 	    /// <returns>The link.</returns>
 	    private static string BuildNamespaceLink(string wiki, string nspace) {
 			return "<a href=\"" + (string.IsNullOrEmpty(nspace) ? "" : Tools.UrlEncode(nspace) + ".") +
-				"Default.aspx\" class=\"pagelink\" title=\"" + (string.IsNullOrEmpty(nspace) ? "" : Tools.UrlEncode(nspace)) + "\">" +
+				"Default\" class=\"pagelink\" title=\"" + (string.IsNullOrEmpty(nspace) ? "" : Tools.UrlEncode(nspace)) + "\">" +
                 (string.IsNullOrEmpty(nspace) ? WebUtility.HtmlEncode(Settings.GetRootNamespaceName(wiki)) : nspace) + "</a>";
 		}
 
@@ -2284,10 +2284,10 @@ namespace ScrewTurn.Wiki {
 				else {
 					if(targetUrl.StartsWith("c:") || targetUrl.StartsWith("C:")) {
 						// Category link
-						//sb.Append(@"<a href=""AllPages.aspx?Cat=");
+						//sb.Append(@"<a href=""AllPages?Cat=");
 						//sb.Append(Tools.UrlEncode(a.Substring(2)));
 						sb.Append(@"<a href=""");
-						UrlTools.BuildUrl(wiki, sb, "AllPages.aspx?Cat=", Tools.UrlEncode(targetUrl.Substring(2)));
+						UrlTools.BuildUrl(wiki, sb, "AllPages?Cat=", Tools.UrlEncode(targetUrl.Substring(2)));
 						sb.Append(@""" class=""systemlink"" title=""");
 						if(!isImage && title.Length > 0) sb.Append(nstripped);
 						else if(isImage && imageTitle.Length > 0) sb.Append(imageTitleStripped);
@@ -2874,10 +2874,10 @@ namespace ScrewTurn.Wiki {
 			List<CategoryInfo> categories = Pages.GetCategories(wiki, currentNamespace);
 			for(int i = 0; i < categories.Count; i++) {
 				if(categories[i].Pages.Length > 0) {
-					//sb.Append(@"<a href=""AllPages.aspx?Cat=");
+					//sb.Append(@"<a href=""AllPages?Cat=");
 					//sb.Append(Tools.UrlEncode(categories[i].FullName));
 					sb.Append(@"<a href=""");
-					UrlTools.BuildUrl(wiki, sb, "AllPages.aspx?Cat=", Tools.UrlEncode(categories[i].FullName));
+					UrlTools.BuildUrl(wiki, sb, "AllPages?Cat=", Tools.UrlEncode(categories[i].FullName));
 					sb.Append(@""" class=""CloudLink"" style=""font-size: ");
 					sb.Append(ComputeSize((float)categories[i].Pages.Length / (float)tot * 100F).ToString());
 					sb.Append(@"px;"">");

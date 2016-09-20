@@ -71,5 +71,36 @@ namespace ScrewTurn.Wiki.Web.Code
 
             return pageName.Substring(0, index);
         }
+
+        /// <summary>
+        /// Check that namespace exists
+        /// </summary>
+        /// <param name="currentWiki"></param>
+        /// <param name="currentNamespace"></param>
+        /// <returns></returns>
+        public static bool ExistsCurrentNamespace(string currentWiki, string currentNamespace)
+        {
+            if (!string.IsNullOrEmpty(currentNamespace))
+            {
+                // Verify that namespace exists
+                return Pages.FindNamespace(currentWiki, currentNamespace) != null;
+            }
+            return true; // default "root"
+        }
+
+        ///// <summary>
+        ///// Check and Verify that namespace exists
+        ///// </summary>
+        ///// <param name="currentWiki"></param>
+        ///// <param name="currentNamespace"></param>
+        ///// <returns></returns>
+        //public static string CheckNamespace(string currentWiki, string currentNamespace)
+        //{
+        //    if (string.IsNullOrEmpty(currentNamespace))
+        //        return "";
+
+        //    // Verify that namespace exists
+        //    return Pages.FindNamespace(currentWiki, currentNamespace) != null ? currentNamespace : "";
+        //}
     }
 }

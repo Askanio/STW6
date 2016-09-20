@@ -33,11 +33,6 @@ namespace ScrewTurn.Wiki.Web.Controllers
         public PageContent CurrentPage { get; set; }
 
         /// <summary>
-        /// The name of the current namespace using the <b>NS</b> parameter in the query string.
-        /// </summary>
-        public string CurrentNamespace { get; set; }
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="PageController"/> class.
         /// </summary>
         /// <param name="settings"></param>

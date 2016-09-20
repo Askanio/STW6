@@ -132,8 +132,12 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="Code\Attributes\AllowActionForPage.cs" />
-    <Compile Include="Code\Attributes\CheckExistPage.cs" />
+    <Compile Include="Code\Attributes\CheckAllowPageActionAttribute.cs" />
+    <Compile Include="Code\Attributes\CheckAllowNamespaceActionAttribute.cs" />
+    <Compile Include="Code\Attributes\CheckExistPageAttribute.cs" />
+    <Compile Include="Code\Attributes\DetectNamespaceFromPageAttribute.cs" />
+    <Compile Include="Code\Attributes\CheckAndSetNamespaceAttribute.cs" />
+    <Compile Include="Code\ExtendedPageInfo.cs" />
     <Compile Include="Code\FileDataExtension.cs" />
     <Compile Include="Code\Files\AttachmentRouteHandler.cs" />
     <Compile Include="Code\ImageHelper.cs" />
@@ -142,16 +146,20 @@
     <Compile Include="Code\Extensions\UrlHelperExtensions.cs" />
     <Compile Include="Code\LoginTools.cs" />
     <Compile Include="Code\PageHelper.cs" />
+    <Compile Include="Code\PageSortingTools.cs" />
     <Compile Include="Code\ResourceExchanger.cs" />
     <Compile Include="Code\RevisionRow.cs" />
-    <Compile Include="Code\Attributes\WikisValidator.cs" />
+    <Compile Include="Code\Attributes\WikisValidatorAttribute.cs" />
+    <Compile Include="Controllers\AllPagesController.cs" />
     <Compile Include="Controllers\AttachmentController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
+    <Compile Include="Controllers\CategoriesController.cs" />
     <Compile Include="Controllers\CommonController.cs" />
     <Compile Include="Controllers\ConfigurationTesterController.cs" />
     <Compile Include="Controllers\HistoryController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PageController.cs" />
+    <Compile Include="Controllers\SearchController.cs" />
     <Compile Include="Controllers\WikiController.cs" />
     <Compile Include="Controllers\InstallController.cs" />
     <Compile Include="Controllers\UserController.cs" />
@@ -163,6 +171,11 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>AccessDenied.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Localization\Common\AllPages.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AllPages.resx</DependentUpon>
     </Compile>
     <Compile Include="Localization\Common\AttachmentViewer.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -217,6 +230,8 @@
     <Compile Include="Models\Wiki\DiscussionModel.cs" />
     <Compile Include="Models\WikiSABaseModel.cs" />
     <Compile Include="Models\Wiki\HistoryModel.cs" />
+    <Compile Include="Models\Wiki\AllPagesModel.cs" />
+    <Compile Include="Models\Common\RegionContent.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -227,9 +242,11 @@
     <Content Include="Content\bootstrap\fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Content\css\stw.installer.css" />
     <Content Include="Content\Images\Blank.png" />
+    <Content Include="Content\Images\Comment.png" />
     <Content Include="Content\Images\Error.png" />
     <Content Include="Content\Images\File.png" />
     <Content Include="Content\Images\STWLogo.png" />
+    <Content Include="Content\Images\Wait.gif" />
     <Content Include="Content\jquery\css\jquery-ui.css" />
     <Content Include="Content\jquery\css\jquery-ui.min.css" />
     <Content Include="Content\jquery\css\jquery-ui.structure.css" />
@@ -322,10 +339,12 @@
     <Content Include="Scripts\respond.matchmedia.addListener.js" />
     <Content Include="Scripts\respond.matchmedia.addListener.min.js" />
     <Content Include="Scripts\respond.min.js" />
+    <Content Include="Scripts\stw\common\common.js" />
     <Content Include="Views\Shared\EmailNotification.cshtml" />
     <Content Include="Views\Shared\_SALayout.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\History\History.cshtml" />
+    <Content Include="Views\Shared\RegionContent.cshtml" />
     <TypeScriptCompile Include="Scripts\stw\common\historypage.ts" />
     <TypeScriptCompile Include="Scripts\stw\common\wikipage.ts" />
     <TypeScriptCompile Include="Scripts\stw\typescript-ref\commonconstants.ts" />
@@ -352,11 +371,16 @@
     <Content Include="Views\Common\PageNotFound.cshtml" />
     <Content Include="Views\History\Diff.cshtml" />
     <Content Include="Views\Common\AccessDenied.cshtml" />
+    <Content Include="Views\Wiki\AllPages.cshtml" />
     <None Include="Views\Wiki\Discussion.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\AllPages\" />
+    <Folder Include="Views\Categories\" />
     <Folder Include="Views\Home\" />
+    <Folder Include="Views\Search\" />
+    <Folder Include="Views\SpecialPage\" />
     <Folder Include="Views\User\" />
   </ItemGroup>
   <ItemGroup>
@@ -423,6 +447,38 @@
     <EmbeddedResource Include="Localization\Common\AccessDenied.vi-VN.resx" />
     <EmbeddedResource Include="Localization\Common\AccessDenied.zh-cn.resx" />
     <EmbeddedResource Include="Localization\Common\AccessDenied.zh-tw.resx" />
+    <EmbeddedResource Include="Localization\Common\AllPages.af-ZA.resx" />
+    <EmbeddedResource Include="Localization\Common\AllPages.cs-CZ.resx" />
+    <EmbeddedResource Include="Localization\Common\AllPages.da-DK.resx" />
+    <EmbeddedResource Include="Localization\Common\AllPages.de-DE.resx" />
+    <EmbeddedResource Include="Localization\Common\AllPages.es-ES.resx" />
+    <EmbeddedResource Include="Localization\Common\AllPages.fa-IR.resx" />
+    <EmbeddedResource Include="Localization\Common\AllPages.fr-FR.resx" />
+    <EmbeddedResource Include="Localization\Common\AllPages.hi-IN.resx" />
+    <EmbeddedResource Include="Localization\Common\AllPages.hu-HU.resx" />
+    <EmbeddedResource Include="Localization\Common\AllPages.it-IT.resx" />
+    <EmbeddedResource Include="Localization\Common\AllPages.ja-JP.resx" />
+    <EmbeddedResource Include="Localization\Common\AllPages.ko-KR.resx" />
+    <EmbeddedResource Include="Localization\Common\AllPages.lv-LV.resx" />
+    <EmbeddedResource Include="Localization\Common\AllPages.nb-NO.resx" />
+    <EmbeddedResource Include="Localization\Common\AllPages.nl-NL.resx" />
+    <EmbeddedResource Include="Localization\Common\AllPages.pl-PL.resx" />
+    <EmbeddedResource Include="Localization\Common\AllPages.pt-BR.resx" />
+    <EmbeddedResource Include="Localization\Common\AllPages.pt-PT.resx" />
+    <EmbeddedResource Include="Localization\Common\AllPages.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>AllPages.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Localization\Common\AllPages.ro-RO.resx" />
+    <EmbeddedResource Include="Localization\Common\AllPages.ru-RU.resx" />
+    <EmbeddedResource Include="Localization\Common\AllPages.sk-SK.resx" />
+    <EmbeddedResource Include="Localization\Common\AllPages.sr-Latn-CS.resx" />
+    <EmbeddedResource Include="Localization\Common\AllPages.sv-SE.resx" />
+    <EmbeddedResource Include="Localization\Common\AllPages.tr-TR.resx" />
+    <EmbeddedResource Include="Localization\Common\AllPages.uk-UA.resx" />
+    <EmbeddedResource Include="Localization\Common\AllPages.vi-VN.resx" />
+    <EmbeddedResource Include="Localization\Common\AllPages.zh-cn.resx" />
+    <EmbeddedResource Include="Localization\Common\AllPages.zh-tw.resx" />
     <EmbeddedResource Include="Localization\Common\AttachmentViewer.af-ZA.resx" />
     <EmbeddedResource Include="Localization\Common\AttachmentViewer.cs-CZ.resx" />
     <EmbeddedResource Include="Localization\Common\AttachmentViewer.da-DK.resx" />
