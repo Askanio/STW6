@@ -9,7 +9,7 @@ using ScrewTurn.Wiki.Web.Controllers;
 namespace ScrewTurn.Wiki.Web.Code.Attributes
 {
     /// <summary>
-    /// Check exists page and set it to PageController's parametrs
+    /// Check exists page and set it to PageController's parametrs: CurrentPage, CurrentPageFullName, CurrentNamespace
     /// </summary>
     [AttributeUsage(AttributeTargets.Method, AllowMultiple = false)]
     public class CheckExistPageAttribute : ActionFilterAttribute

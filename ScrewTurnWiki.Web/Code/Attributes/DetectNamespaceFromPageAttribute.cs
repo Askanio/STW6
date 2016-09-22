@@ -8,14 +8,14 @@ namespace ScrewTurn.Wiki.Web.Code.Attributes
     /// <summary>
     /// Detect namespace and set it to SpecialPageController's parametrs
     /// </summary>
-    [AttributeUsageAttribute(AttributeTargets.Method, AllowMultiple = false)]
+    [AttributeUsage(AttributeTargets.Method, AllowMultiple = false)]
     public class DetectNamespaceFromPageAttribute : ActionFilterAttribute
     {
         public string PageParamName { get; set; }
 
         public override void OnActionExecuting(ActionExecutingContext filterContext)
         {
-            var controller = filterContext.Controller as BaseController;
+            var controller = filterContext.Controller as PageController;
             if (controller == null)
                 return;
 

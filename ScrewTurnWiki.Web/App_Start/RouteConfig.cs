@@ -65,8 +65,15 @@ namespace ScrewTurn.Wiki.Web
             routes.MapRoute(
                 "AllPages",
                 "{page}",
-                new {controller = "AllPages", action = "Index"},
+                new {controller = "AllPages", action = "GetAllPages" },
                 new { page = @"^(.*\.|)AllPages$" }
+                );
+
+            routes.MapRoute(
+                "Category",
+                "{page}",
+                new {controller = "Category", action = "GetCategory" },
+                new {page = @"^(.*\.|)Category$" }
                 );
 
             routes.MapRoute(
@@ -84,7 +91,7 @@ namespace ScrewTurn.Wiki.Web
             routes.MapRoute(
                 "PageHistory",
                 "{page}/History",
-                defaults: new {controller = "History", action = "Index" }
+                defaults: new {controller = "History", action = "GetHistory" }
                 );
 
             routes.MapRoute(

@@ -9,7 +9,7 @@ using ScrewTurn.Wiki.Web.Controllers;
 namespace ScrewTurn.Wiki.Web.Code.Attributes
 {
     /// <summary>
-    /// Check and set namespace to <see cref="BaseController"/>
+    /// Check and set namespace to <see cref="PageController"/>
     /// </summary>
     [AttributeUsage(AttributeTargets.Method, AllowMultiple = false)]
     public class CheckAndSetNamespaceAttribute : ActionFilterAttribute
@@ -18,7 +18,7 @@ namespace ScrewTurn.Wiki.Web.Code.Attributes
 
         public override void OnActionExecuting(ActionExecutingContext filterContext)
         {
-            var controller = filterContext.Controller as BaseController;
+            var controller = filterContext.Controller as PageController;
             if (controller == null)
                 return;
 

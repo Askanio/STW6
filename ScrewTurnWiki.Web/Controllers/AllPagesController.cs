@@ -35,8 +35,8 @@ namespace ScrewTurn.Wiki.Web.Controllers
         /// <returns></returns>
         [HttpGet]
         [DetectNamespaceFromPage(PageParamName = "page", Order = 1)]
-        [CheckAllowNamespaceAction(Action = CheckAllowNamespaceActionAttribute.ActionForNamespaces.ReadPages, Order = 2)]
-        public ActionResult Index(string page, string cat, string sortBy, bool reverse = false)
+        [CheckActionForNamespace(Action = CheckActionForNamespaceAttribute.ActionForNamespaces.ReadPages, Order = 2)]
+        public ActionResult GetAllPages(string page, string cat, string sortBy, bool reverse = false)
         {
             var model = new AllPagesModel();
             base.PrepareDefaultModel(model, CurrentNamespace, CurrentPageFullName);
@@ -86,7 +86,7 @@ namespace ScrewTurn.Wiki.Web.Controllers
         /// </summary>
         [HttpGet]
         [CheckAndSetNamespace(NamespaceParamName = "nspace", Order = 1)]
-        [CheckAllowNamespaceAction(Action = CheckAllowNamespaceActionAttribute.ActionForNamespaces.ReadPages, Order = 2)
+        [CheckActionForNamespace(Action = CheckActionForNamespaceAttribute.ActionForNamespaces.ReadPages, Order = 2)
         ]
         public ActionResult GetPages(string nspace, int? page, string cat, string sortBy, bool reverse = false)
         {
