@@ -53,7 +53,7 @@ namespace ScrewTurn.Wiki {
 			if (customEditorCss!= null && customEditorCss.Count>0) result.AppendFormat(@"<link rel=""stylesheet"" href=""/{0}"" type=""text/css"" />" + "\n", customEditorCss[0]);
 			else result.Append(@"<link rel=""stylesheet"" href=""/Content/Themes/Editor.css"" type=""text/css"" />" + "\n");
 			// OpenSearch
-            result.AppendFormat(@"<link rel=""search"" href=""/Search?OpenSearch=1"" type=""application/opensearchdescription+xml"" title=""{0}"" />" + "\n", Settings.GetWikiTitle(wiki) + " - Search");
+            result.AppendFormat(@"<link rel=""search"" href=""/Search/Opensearch"" type=""application/opensearchdescription+xml"" title=""{0}"" />" + "\n", Settings.GetWikiTitle(wiki) + " - Search");
 
             result.Append(@"<link rel=""stylesheet"" href=""/Content/Themes/prettyPhoto.css"" type=""text/css"" />" + "\n"); // TODO: Move to adjust styles
 

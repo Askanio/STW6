@@ -51,6 +51,12 @@ namespace ScrewTurn.Wiki.Web
                 );
 
             routes.MapRoute(
+                "Opensearch",
+                "Search/Opensearch",
+                new {controller = "Search", action = "GetOpenSearchDescription" }
+                );
+
+            routes.MapRoute(
                 "PageNotFound",
                 "PageNotFound/{page}",
                 new {controller = "Common", action = "PageNotFound", page = UrlParameter.Optional}
@@ -61,6 +67,13 @@ namespace ScrewTurn.Wiki.Web
             //    "AllPages/{ns}/{page}",
             //    new {controller = "Common", action = "Index", page = UrlParameter.Optional}
             //    );
+
+            routes.MapRoute(
+                "Search",
+                "{page}",
+                new {controller = "Search", action = "Search" },
+                new {page = @"^(.*\.|)Search$" }
+                );
 
             routes.MapRoute(
                 "AllPages",

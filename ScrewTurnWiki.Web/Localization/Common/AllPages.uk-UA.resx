@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -128,12 +128,6 @@
   </data>
   <data name="LnkSearch_ToolTip" xml:space="preserve">
     <value>Знайти</value>
-  </data>
-  <data name="PnlPageList_GroupingText" xml:space="preserve">
-    <value />
-  </data>
-  <data name="PnlPageList_ToolTip" xml:space="preserve">
-    <value />
   </data>
   <data name="LblDescription_Text" xml:space="preserve">
     <value>Перелік сторінок цього Простору Імен</value>

@@ -150,6 +150,7 @@
     <Compile Include="Code\ResourceExchanger.cs" />
     <Compile Include="Code\RevisionRow.cs" />
     <Compile Include="Code\Attributes\WikisValidatorAttribute.cs" />
+    <Compile Include="Code\SearchResultRow.cs" />
     <Compile Include="Controllers\AllPagesController.cs" />
     <Compile Include="Controllers\AttachmentController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
@@ -212,6 +213,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>PageNotFound.resx</DependentUpon>
     </Compile>
+    <Compile Include="Localization\Common\Search.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Search.resx</DependentUpon>
+    </Compile>
     <Compile Include="Localization\Install\InstallStrings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -224,6 +230,7 @@
     </Compile>
     <Compile Include="Models\Common\AccessDeniedModel.cs" />
     <Compile Include="Models\Common\PageNotFoundModel.cs" />
+    <Compile Include="Models\Common\SearchModel.cs" />
     <Compile Include="Models\Wiki\AttachmentViewerModel.cs" />
     <Compile Include="Models\Wiki\CategoryModel.cs" />
     <Compile Include="Models\Wiki\DiffModel.cs" />
@@ -251,6 +258,7 @@
     <Content Include="Content\Images\Comment.png" />
     <Content Include="Content\Images\Error.png" />
     <Content Include="Content\Images\File.png" />
+    <Content Include="Content\Images\SearchIcon.ico" />
     <Content Include="Content\Images\STWLogo.png" />
     <Content Include="Content\Images\Wait.gif" />
     <Content Include="Content\jquery\css\jquery-ui.css" />
@@ -352,6 +360,7 @@
     <Content Include="Views\History\History.cshtml" />
     <Content Include="Views\Shared\RegionContent.cshtml" />
     <TypeScriptCompile Include="Scripts\stw\common\historypage.ts" />
+    <TypeScriptCompile Include="Scripts\stw\common\search.ts" />
     <TypeScriptCompile Include="Scripts\stw\common\wikipage.ts" />
     <TypeScriptCompile Include="Scripts\stw\typescript-ref\commonconstants.ts" />
     <Content Include="Web.config">
@@ -379,14 +388,14 @@
     <Content Include="Views\Common\AccessDenied.cshtml" />
     <Content Include="Views\Wiki\AllPages.cshtml" />
     <Content Include="Views\Wiki\Category.cshtml" />
+    <Content Include="Views\Common\Search\Search.cshtml" />
+    <Content Include="Views\Common\Search\SearchResult.cshtml" />
     <None Include="Views\Wiki\Discussion.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\AllPages\" />
     <Folder Include="Views\Categories\" />
     <Folder Include="Views\Home\" />
-    <Folder Include="Views\Search\" />
     <Folder Include="Views\SpecialPage\" />
     <Folder Include="Views\User\" />
   </ItemGroup>
@@ -710,6 +719,38 @@
     <EmbeddedResource Include="Localization\Common\PageNotFound.vi-VN.resx" />
     <EmbeddedResource Include="Localization\Common\PageNotFound.zh-cn.resx" />
     <EmbeddedResource Include="Localization\Common\PageNotFound.zh-tw.resx" />
+    <EmbeddedResource Include="Localization\Common\Search.af-ZA.resx" />
+    <EmbeddedResource Include="Localization\Common\Search.cs-CZ.resx" />
+    <EmbeddedResource Include="Localization\Common\Search.da-DK.resx" />
+    <EmbeddedResource Include="Localization\Common\Search.de-DE.resx" />
+    <EmbeddedResource Include="Localization\Common\Search.es-ES.resx" />
+    <EmbeddedResource Include="Localization\Common\Search.fa-IR.resx" />
+    <EmbeddedResource Include="Localization\Common\Search.fr-FR.resx" />
+    <EmbeddedResource Include="Localization\Common\Search.hi-IN.resx" />
+    <EmbeddedResource Include="Localization\Common\Search.hu-HU.resx" />
+    <EmbeddedResource Include="Localization\Common\Search.it-IT.resx" />
+    <EmbeddedResource Include="Localization\Common\Search.ja-JP.resx" />
+    <EmbeddedResource Include="Localization\Common\Search.ko-KR.resx" />
+    <EmbeddedResource Include="Localization\Common\Search.lv-LV.resx" />
+    <EmbeddedResource Include="Localization\Common\Search.nb-NO.resx" />
+    <EmbeddedResource Include="Localization\Common\Search.nl-NL.resx" />
+    <EmbeddedResource Include="Localization\Common\Search.pl-PL.resx" />
+    <EmbeddedResource Include="Localization\Common\Search.pt-BR.resx" />
+    <EmbeddedResource Include="Localization\Common\Search.pt-PT.resx" />
+    <EmbeddedResource Include="Localization\Common\Search.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Search.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Localization\Common\Search.ro-RO.resx" />
+    <EmbeddedResource Include="Localization\Common\Search.ru-RU.resx" />
+    <EmbeddedResource Include="Localization\Common\Search.sk-SK.resx" />
+    <EmbeddedResource Include="Localization\Common\Search.sr-Latn-CS.resx" />
+    <EmbeddedResource Include="Localization\Common\Search.sv-SE.resx" />
+    <EmbeddedResource Include="Localization\Common\Search.tr-TR.resx" />
+    <EmbeddedResource Include="Localization\Common\Search.uk-UA.resx" />
+    <EmbeddedResource Include="Localization\Common\Search.vi-VN.resx" />
+    <EmbeddedResource Include="Localization\Common\Search.zh-cn.resx" />
+    <EmbeddedResource Include="Localization\Common\Search.zh-tw.resx" />
     <EmbeddedResource Include="Localization\Install\InstallStrings.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>InstallStrings.Designer.cs</LastGenOutput>
