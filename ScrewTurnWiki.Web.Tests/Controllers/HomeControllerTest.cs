@@ -13,19 +13,19 @@ namespace ScrewTurn.Wiki.Web.Tests.Controllers
     [TestClass]
     public class HomeControllerTest
     {
-        [TestMethod]
-        public void Index()
-        {
-            var settings = new ApplicationSettings();
-            // Arrange
-            HomeController controller = new HomeController(settings);
+        //[TestMethod]
+        //public void Index()
+        //{
+        //    var settings = new ApplicationSettings();
+        //    // Arrange
+        //    HomeController controller = new HomeController(settings);
 
-            // Act
-            ViewResult result = controller.Index() as ViewResult;
+        //    // Act
+        //    ViewResult result = controller.Index() as ViewResult;
 
-            // Assert
-            Assert.IsNotNull(result);
-        }
+        //    // Assert
+        //    Assert.IsNotNull(result);
+        //}
 
 
         //[TestMethod]
