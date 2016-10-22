@@ -9,6 +9,8 @@ References\Tools\ResxSync\resxsync.exe ScrewTurnWiki.Web\Localization\Common\His
 References\Tools\ResxSync\resxsync.exe ScrewTurnWiki.Web\Localization\Common\MasterPageSA.resx *
 References\Tools\ResxSync\resxsync.exe ScrewTurnWiki.Web\Localization\Common\PageNotFound.resx *
 References\Tools\ResxSync\resxsync.exe ScrewTurnWiki.Web\Localization\Common\AccessDenied.resx *
-
+References\Tools\ResxSync\resxsync.exe ScrewTurnWiki.Web\Localization\Common\Search.resx *
+References\Tools\ResxSync\resxsync.exe ScrewTurnWiki.Web\Localization\Common\AllPages.resx *
+References\Tools\ResxSync\resxsync.exe ScrewTurnWiki.Web\Localization\Common\Category.resx *
 
 References\Tools\ResxSync\resxsync.exe ScrewTurnWiki.Web\Localization\Messages\Messages.resx *

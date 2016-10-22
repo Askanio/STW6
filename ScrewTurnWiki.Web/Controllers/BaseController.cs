@@ -7,6 +7,7 @@ using System.Threading;
 using System.Web;
 using System.Web.Mvc;
 using ScrewTurn.Wiki.Configuration;
+using ScrewTurn.Wiki.PluginFramework;
 
 namespace ScrewTurn.Wiki.Web.Controllers
 {

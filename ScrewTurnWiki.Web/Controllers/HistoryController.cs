@@ -23,8 +23,8 @@ namespace ScrewTurn.Wiki.Web.Controllers
 
         [HttpGet]
         [CheckExistPage(PageParamName = "page")]
-        [AllowActionForPage(Action = AllowActionForPage.ActionForPages.ReadPage, Order = 2)]
-        [AllowActionForPage(Action = AllowActionForPage.ActionForPages.ManagePage, Order = 3)]
+        [CheckActionForPageAttribute(Action = CheckActionForPageAttribute.ActionForPages.ReadPage, Order = 2)]
+        [CheckActionForPageAttribute(Action = CheckActionForPageAttribute.ActionForPages.ManagePage, Order = 3)]
         public ActionResult Rollback(string page, int revision)
         {
             Log.LogEntry("Page rollback requested for " + CurrentPage.FullName + " to rev. " + revision.ToString(), EntryType.General, SessionFacade.GetCurrentUsername(), CurrentWiki);
@@ -37,8 +37,8 @@ namespace ScrewTurn.Wiki.Web.Controllers
 
         [HttpGet]
         [CheckExistPage(PageParamName = "page", Order = 1)]
-        [AllowActionForPage(Action = AllowActionForPage.ActionForPages.ReadPage, Order = 2)]
-        public ActionResult Index(string page, int? revision, string rev1, string rev2)
+        [CheckActionForPageAttribute(Action = CheckActionForPageAttribute.ActionForPages.ReadPage, Order = 2)]
+        public ActionResult GetHistory(string page, int? revision, string rev1, string rev2)
         {
             var model = GetModel(revision, rev1, rev2);
             return View("History", model);
@@ -57,9 +57,9 @@ namespace ScrewTurn.Wiki.Web.Controllers
             var canRollback = authChecker.CheckActionForPage(CurrentPage.FullName, Actions.ForPages.ManagePage,
                     SessionFacade.GetCurrentUsername(), SessionFacade.GetCurrentGroupNames(CurrentWiki));
 
-            model.LblTitle = Messages.PageHistory + ": " +
+            model.LblTitle = new MvcHtmlString(Messages.PageHistory + ": " +
                              FormattingPipeline.PrepareTitle(CurrentWiki, CurrentPage.Title, false,
-                                 FormattingContext.PageContent, CurrentPage.FullName);
+                                 FormattingContext.PageContent, CurrentPage.FullName));
 
             //string rev1 =  Request["Rev1"]
             //string rev2 =  Request["Rev2"]
@@ -198,7 +198,7 @@ namespace ScrewTurn.Wiki.Web.Controllers
 
         [HttpGet]
         [CheckExistPage(PageParamName = "page", Order = 1)]
-        [AllowActionForPage(Action = AllowActionForPage.ActionForPages.ReadPage, Order = 2)]
+        [CheckActionForPageAttribute(Action = CheckActionForPageAttribute.ActionForPages.ReadPage, Order = 2)]
         public ActionResult Diff(string page, string rev1, string rev2)
         {
             var model = new DiffModel();

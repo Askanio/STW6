@@ -21,6 +21,10 @@ namespace ScrewTurn.Wiki.Web.Controllers
     /// </summary>
     public class PageController : BaseController
     {
+        /// <summary>
+        /// The name of the current namespace using the <b>NS</b> parameter in the query string.
+        /// </summary>
+        public string CurrentNamespace { get; set; }
 
         /// <summary>
         /// The correct <see cref="T:PageInfo" /> object associated to the current page using the <b>Page</b> and <b>NS</b> parameters in the query string.
@@ -33,9 +37,14 @@ namespace ScrewTurn.Wiki.Web.Controllers
         public PageContent CurrentPage { get; set; }
 
         /// <summary>
-        /// The name of the current namespace using the <b>NS</b> parameter in the query string.
+        /// Detects the correct <see cref="T:NamespaceInfo" /> object associated to the current namespace.
         /// </summary>
-        public string CurrentNamespace { get; set; }
+        /// <returns>The correct <see cref="T:NamespaceInfo" /> object, or <c>null</c>.</returns>
+        public NamespaceInfo DetectNamespaceInfo()
+        {
+            NamespaceInfo nsinfo = CurrentNamespace != null ? Pages.FindNamespace(CurrentWiki, CurrentNamespace) : null;
+            return nsinfo;
+        }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="PageController"/> class.
@@ -92,8 +101,7 @@ namespace ScrewTurn.Wiki.Web.Controllers
         /// <summary>
         /// Prints the page header and page footer.
         /// </summary>
-        [NonAction]
-        public void FillDefaultPageHeaderAndFooter(WikiBaseModel model, string currentNamespace, string currentPageFullName)
+        private void FillDefaultPageHeaderAndFooter(WikiBaseModel model, string currentNamespace, string currentPageFullName)
         {
             string h = Settings.GetProvider(CurrentWiki).GetMetaDataItem(MetaDataItem.PageHeader, currentNamespace);
             h = @"<div id=""PageInternalHeaderDiv"">" + FormattingPipeline.FormatWithPhase1And2(CurrentWiki, h, false, FormattingContext.PageHeader, currentPageFullName) + "</div>";
@@ -154,8 +162,7 @@ namespace ScrewTurn.Wiki.Web.Controllers
         /// <summary>
         /// Prints the header.
         /// </summary>
-        [NonAction]
-        public void FillDefaultHeader(WikiBaseModel model, string currentNamespace, string currentPageFullName)
+        private void FillDefaultHeader(WikiBaseModel model, string currentNamespace, string currentPageFullName)
         {
             string h = FormattingPipeline.FormatWithPhase1And2(CurrentWiki, Settings.GetProvider(CurrentWiki).GetMetaDataItem(MetaDataItem.Header, currentNamespace),
                 false, FormattingContext.Header, currentPageFullName);
@@ -166,8 +173,7 @@ namespace ScrewTurn.Wiki.Web.Controllers
         /// <summary>
         /// Prints the footer.
         /// </summary>
-        [NonAction]
-        public void FillDefaultFooter(WikiBaseModel model, string currentNamespace, string currentPageFullName)
+        private void FillDefaultFooter(WikiBaseModel model, string currentNamespace, string currentPageFullName)
         {
             string f = FormattingPipeline.FormatWithPhase1And2(CurrentWiki, Settings.GetProvider(CurrentWiki).GetMetaDataItem(MetaDataItem.Footer, currentNamespace),
                 false, FormattingContext.Footer, currentPageFullName);

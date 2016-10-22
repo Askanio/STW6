@@ -112,13 +112,13 @@
     <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="LblDescription_Text" xml:space="preserve">
-    <value>Wystąpił błąd podczas przetwarzania żądania. Informacje o błędzie zostały zarejestrowane i będą weryfikowane. &lt;br /&gt; Prosimy ponownie uruchomić &lt;a href="Default.aspx"&gt;stronę główną serwisu&lt;/ a&gt;. Przepraszamy za utrudnienia.</value>
+    <value>Wystąpił błąd podczas przetwarzania żądania. Informacje o błędzie zostały zarejestrowane i będą weryfikowane. &lt;br /&gt; Prosimy ponownie uruchomić &lt;a href="Default"&gt;stronę główną serwisu&lt;/ a&gt;. Przepraszamy za utrudnienia.</value>
   </data>
   <data name="LblError_Text" xml:space="preserve">
     <value>Błąd systemu</value>

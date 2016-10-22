@@ -207,13 +207,15 @@ namespace ScrewTurn.Wiki.Web.Controllers
             string currentUsername = SessionFacade.GetCurrentUsername();
             string[] currentGroups = SessionFacade.GetCurrentGroupNames(CurrentWiki);
 
+            //TODO: To Attribute
             AuthChecker authChecker = new AuthChecker(Collectors.CollectorsBox.GetSettingsProvider(CurrentWiki));
 
             bool canView = authChecker.CheckActionForPage(CurrentPage.FullName, Actions.ForPages.ReadPage, currentUsername, currentGroups);
             bool canEdit = false;
             bool canEditWithApproval = false;
             Pages.CanEditPage(CurrentWiki, CurrentPage.FullName, currentUsername, currentGroups, out canEdit, out canEditWithApproval);
-            if (canEditWithApproval && canEdit) canEditWithApproval = false;
+            if (canEditWithApproval && canEdit)
+                canEditWithApproval = false;
             bool canDownloadAttachments = authChecker.CheckActionForPage(CurrentPage.FullName, Actions.ForPages.DownloadAttachments, currentUsername, currentGroups);
             bool canSetPerms = authChecker.CheckActionForGlobals(Actions.ForGlobals.ManagePermissions, currentUsername, currentGroups);
             bool canAdmin = authChecker.CheckActionForPage(CurrentPage.FullName, Actions.ForPages.ManagePage, currentUsername, currentGroups);
@@ -510,7 +512,7 @@ namespace ScrewTurn.Wiki.Web.Controllers
         /// <returns>The link URL.</returns>
         private string GetCategoryLink(string category)
         {
-            return UrlTools.BuildUrl(CurrentWiki, "AllPages.aspx?Cat=", Tools.UrlEncode(category));
+            return UrlTools.BuildUrl(CurrentWiki, "AllPages?Cat=", Tools.UrlEncode(category));
         }
 
         /// <summary>

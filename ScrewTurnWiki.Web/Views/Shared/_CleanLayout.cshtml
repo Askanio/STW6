@@ -15,7 +15,10 @@
 
     @Url.ScriptLink("stw/common/commonwizard.js")
 
-    @Model.HtmlHead
+    @foreach (var htmlHead in Model.HtmlHeads)
+    {
+        @htmlHead
+    }
     @RenderSection("HtmlHead", required: false)
     @*@Html.Partial("HeadContent")*@
 </head>

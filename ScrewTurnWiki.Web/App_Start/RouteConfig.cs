@@ -45,9 +45,48 @@ namespace ScrewTurn.Wiki.Web
                 );
 
             routes.MapRoute(
+                "RandPage",
+                "RandPage",
+                new {controller = "Common", action = "RandPage" }
+                );
+
+            routes.MapRoute(
+                "Opensearch",
+                "Search/Opensearch",
+                new {controller = "Search", action = "GetOpenSearchDescription" }
+                );
+
+            routes.MapRoute(
                 "PageNotFound",
                 "PageNotFound/{page}",
                 new {controller = "Common", action = "PageNotFound", page = UrlParameter.Optional}
+                );
+
+            //routes.MapRoute(
+            //    "AllPages1",
+            //    "AllPages/{ns}/{page}",
+            //    new {controller = "Common", action = "Index", page = UrlParameter.Optional}
+            //    );
+
+            routes.MapRoute(
+                "Search",
+                "{page}",
+                new {controller = "Search", action = "Search" },
+                new {page = @"^(.*\.|)Search$" }
+                );
+
+            routes.MapRoute(
+                "AllPages",
+                "{page}",
+                new {controller = "AllPages", action = "GetAllPages" },
+                new { page = @"^(.*\.|)AllPages$" }
+                );
+
+            routes.MapRoute(
+                "Category",
+                "{page}",
+                new {controller = "Category", action = "GetCategory" },
+                new {page = @"^(.*\.|)Category$" }
                 );
 
             routes.MapRoute(
@@ -65,7 +104,7 @@ namespace ScrewTurn.Wiki.Web
             routes.MapRoute(
                 "PageHistory",
                 "{page}/History",
-                defaults: new {controller = "History", action = "Index" }
+                defaults: new {controller = "History", action = "GetHistory" }
                 );
 
             routes.MapRoute(
