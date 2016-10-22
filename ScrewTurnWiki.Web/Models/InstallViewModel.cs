@@ -41,7 +41,7 @@ namespace ScrewTurn.Wiki.Web.Models
 
         public bool NeedMasterPassword { get; set; }
 
-        [WikisValidator]
+        [WikisValidatorAttribute]
         public Dictionary<string, string> Wikis { get; set; }
 
         /// <summary>

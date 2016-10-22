@@ -66,9 +66,9 @@ namespace ScrewTurn.Wiki {
 		/// </summary>
 		public const string EditSectionPlaceHolder = "%%%%EditSectionPlaceHolder%%%%"; // This string is also used in History.aspx.cs
 		private const string TocTitlePlaceHolder = "%%%%TocTitlePlaceHolder%%%%";
-		private const string UpReplacement = "GetFile?File="; // "GetFile.aspx?File="
-        private const string ExtendedUpReplacement = "GetFile?$File="; // "GetFile.aspx?$File="
-        private const string ExtendedUpReplacementForAttachment = "GetFile?$Page=@&File="; // "GetFile.aspx?$Page=@&File="
+		private const string UpReplacement = "GetFile?File=";
+        private const string ExtendedUpReplacement = "GetFile?$File=";
+        private const string ExtendedUpReplacementForAttachment = "GetFile?$Page=@&File=";
         private const string SingleBrPlaceHolder = "%%%%SingleBrPlaceHolder%%%%";
 		private const string SectionLinkTextPlaceHolder = "%%%%SectionLinkTextPlaceHolder%%%%";
 
@@ -327,7 +327,7 @@ namespace ScrewTurn.Wiki {
 								case "RSSPAGE":
 									if(currentPageFullName != null) {
 										sb.Insert(match.Index, @"<a href=""" +
-											UrlTools.BuildUrl(wiki, "RSS.aspx?Page=", Tools.UrlEncode(currentPageFullName)) +
+											UrlTools.BuildUrl(wiki, "RSS?Page=", Tools.UrlEncode(currentPageFullName)) +
 											@""" title=""" + Exchanger.ResourceExchanger.GetResource("RssForThisPage") + @"""><img src=""/" +
 											Themes.ListThemeFiles(wiki, Settings.GetTheme(wiki, Tools.DetectCurrentNamespace()), "Images/RSS.png") + @""" alt=""RSS"" /></a>");
 									}
@@ -344,7 +344,7 @@ namespace ScrewTurn.Wiki {
 								case "SEARCHBOX":
 									string textBoxId = "SB" + Guid.NewGuid().ToString("N");
 
-									string nsstring = ns != null ? NameTools.GetFullName(ns.Name, "Search") + ".aspx" : "Search.aspx";
+									string nsstring = ns != null ? NameTools.GetFullName(ns.Name, "Search") : "Search";
                                     //string doSearchFunction = "<nowiki><nobr><script type=\"text/javascript\"><!--\r\n" + @"function _DoSearch_" + textBoxId + "() { document.location = '" + nsstring + @"?AllNamespaces=1&FilesAndAttachments=1&Query=' + encodeURI(document.getElementById('" + textBoxId + "').value); }" + "\r\n// -->\r\n</script>";
 									string doSearchFunction = "<nowiki><nobr><script type=\"text/javascript\">\r\n" + @"function _DoSearch_" + textBoxId + "() { document.location = '" + nsstring + @"?AllNamespaces=1&FilesAndAttachments=1&Query=' + encodeURI(document.getElementById('" + textBoxId + "').value); }" + "\r\n// \r\n</script>";
                                     sb.Insert(match.Index, doSearchFunction +
@@ -354,7 +354,7 @@ namespace ScrewTurn.Wiki {
 									break;
 								case "CATEGORIES":
 									List<CategoryInfo> cats = Pages.GetCategories(wiki, ns);
-									string pageName = ns != null ? NameTools.GetFullName(ns.Name, "AllPages") + ".aspx" : "AllPages.aspx";
+									string pageName = ns != null ? NameTools.GetFullName(ns.Name, "AllPages") : "AllPages";
 									pageName += "?Cat=";
 									string categories = "<ul><li>" + string.Join("</li><li>",
 										(from c in cats
@@ -564,9 +564,9 @@ namespace ScrewTurn.Wiki {
                     }
 
                     var urlType = "url";
-                    if (url.StartsWith("GetFile?Page=")) // "GetFile.aspx?Page="
+                    if (url.StartsWith("GetFile?Page="))
                         urlType = "wiki";
-                    else if (url.StartsWith("GetFile?File=")) // "GetFile.aspx?File="
+                    else if (url.StartsWith("GetFile?File="))
                         urlType = "wikiImg";
 
                     if (sizeW > 0 && urlType == "wiki")
@@ -738,7 +738,7 @@ namespace ScrewTurn.Wiki {
                                     @"data-wiki-type-size=""full"" data-wiki-align=""{0}"" data-wiki-border=""frame"" data-wiki-size-width=""0"" ", bbalign);
                                 parameters.AppendFormat(
                                     @"data-wiki-url-type=""{0}"" data-wiki-link=""{1}"" data-wiki-desc=""{2}""  ",
-                                    url.StartsWith("GetFile") ? "wiki" : "url", bigUrl, title); // "GetFile.aspx"
+                                    url.StartsWith("GetFile") ? "wiki" : "url", bigUrl, title);
                                 var style = new StringBuilder(100);
                                 style.Append("margin: 10px;");
                                 if (bbalign != "auto")
@@ -816,7 +816,7 @@ namespace ScrewTurn.Wiki {
                                     @"data-wiki-type-size=""full"" data-wiki-align="""" data-wiki-border=""frame"" data-wiki-size-width=""0"" ");
                                 parameters.AppendFormat(
                                     @"data-wiki-url-type=""{0}"" data-wiki-link=""{1}"" data-wiki-desc=""{2}"" ",
-                                    url.StartsWith("GetFile") ? "wiki" : "url", bigUrl, title); //"GetFile.aspx"
+                                    url.StartsWith("GetFile") ? "wiki" : "url", bigUrl, title);
                                 img.Append(@"<img src=""");
                                 img.Append(url);
                                 img.AppendFormat(@" style=""margin: 10px;"" {0}/>", parameters);
@@ -1689,7 +1689,7 @@ namespace ScrewTurn.Wiki {
 	    /// <returns>The link.</returns>
 	    private static string BuildNamespaceLink(string wiki, string nspace) {
 			return "<a href=\"" + (string.IsNullOrEmpty(nspace) ? "" : Tools.UrlEncode(nspace) + ".") +
-				"Default.aspx\" class=\"pagelink\" title=\"" + (string.IsNullOrEmpty(nspace) ? "" : Tools.UrlEncode(nspace)) + "\">" +
+				"Default\" class=\"pagelink\" title=\"" + (string.IsNullOrEmpty(nspace) ? "" : Tools.UrlEncode(nspace)) + "\">" +
                 (string.IsNullOrEmpty(nspace) ? WebUtility.HtmlEncode(Settings.GetRootNamespaceName(wiki)) : nspace) + "</a>";
 		}
 
@@ -2252,7 +2252,7 @@ namespace ScrewTurn.Wiki {
                 // mc
 				sb.Append(@" href=""");
 				//sb.Append(a);
-				if(targetUrl.ToLowerInvariant().StartsWith("getfile")) sb.Append(targetUrl); // "getfile.aspx"
+				if(targetUrl.ToLowerInvariant().StartsWith("getfile")) sb.Append(targetUrl);
                 else UrlTools.BuildUrl(wiki, sb, targetUrl);
 				sb.Append(@""" title=""");
 				if(!isImage && title.Length > 0) sb.Append(nstripped);
@@ -2284,10 +2284,10 @@ namespace ScrewTurn.Wiki {
 				else {
 					if(targetUrl.StartsWith("c:") || targetUrl.StartsWith("C:")) {
 						// Category link
-						//sb.Append(@"<a href=""AllPages.aspx?Cat=");
+						//sb.Append(@"<a href=""AllPages?Cat=");
 						//sb.Append(Tools.UrlEncode(a.Substring(2)));
 						sb.Append(@"<a href=""");
-						UrlTools.BuildUrl(wiki, sb, "AllPages.aspx?Cat=", Tools.UrlEncode(targetUrl.Substring(2)));
+						UrlTools.BuildUrl(wiki, sb, "AllPages?Cat=", Tools.UrlEncode(targetUrl.Substring(2)));
 						sb.Append(@""" class=""systemlink"" title=""");
 						if(!isImage && title.Length > 0) sb.Append(nstripped);
 						else if(isImage && imageTitle.Length > 0) sb.Append(imageTitleStripped);
@@ -2510,7 +2510,7 @@ namespace ScrewTurn.Wiki {
 
 			StringBuilder sb = new StringBuilder(100);
 			sb.Append(@"<a href=""");
-			UrlTools.BuildUrl(wiki, sb, "Edit.aspx?Page=", Tools.UrlEncode(page), "&amp;Section=", id.ToString());
+			UrlTools.BuildUrl(wiki, sb, "Edit?Page=", Tools.UrlEncode(page), "&amp;Section=", id.ToString());
 			sb.Append(@""" class=""editsectionlink"">");
 			sb.Append(EditSectionPlaceHolder);
 			sb.Append("</a>");
@@ -2874,10 +2874,10 @@ namespace ScrewTurn.Wiki {
 			List<CategoryInfo> categories = Pages.GetCategories(wiki, currentNamespace);
 			for(int i = 0; i < categories.Count; i++) {
 				if(categories[i].Pages.Length > 0) {
-					//sb.Append(@"<a href=""AllPages.aspx?Cat=");
+					//sb.Append(@"<a href=""AllPages?Cat=");
 					//sb.Append(Tools.UrlEncode(categories[i].FullName));
 					sb.Append(@"<a href=""");
-					UrlTools.BuildUrl(wiki, sb, "AllPages.aspx?Cat=", Tools.UrlEncode(categories[i].FullName));
+					UrlTools.BuildUrl(wiki, sb, "AllPages?Cat=", Tools.UrlEncode(categories[i].FullName));
 					sb.Append(@""" class=""CloudLink"" style=""font-size: ");
 					sb.Append(ComputeSize((float)categories[i].Pages.Length / (float)tot * 100F).ToString());
 					sb.Append(@"px;"">");
@@ -3176,7 +3176,7 @@ namespace ScrewTurn.Wiki {
 
 			StringBuilder sb = new StringBuilder(200);
 			sb.Append("<a href=\"");
-			sb.Append(UrlTools.BuildUrl(wiki, "Profile.aspx"));
+			sb.Append(UrlTools.BuildUrl(wiki, "Profile"));
 			sb.Append("\" class=\"systemlink\" title=\"");
 			sb.Append(Exchanger.ResourceExchanger.GetResource("GoToYourProfile"));
 			sb.Append("\">");
@@ -3194,7 +3194,7 @@ namespace ScrewTurn.Wiki {
 		private static string GetLanguageLink(string wiki, string username) {
 			StringBuilder sb = new StringBuilder(200);
 			sb.Append("<a href=\"");
-			sb.Append(UrlTools.BuildUrl(wiki, "Language.aspx"));
+			sb.Append(UrlTools.BuildUrl(wiki, "Language"));
 			sb.Append("\" class=\"systemlink\" title=\"");
 			sb.Append(Exchanger.ResourceExchanger.GetResource("SelectYourLanguage"));
 			sb.Append("\">");
@@ -3212,7 +3212,7 @@ namespace ScrewTurn.Wiki {
 			string login = Exchanger.ResourceExchanger.GetResource("Login");
 			StringBuilder sb = new StringBuilder(200);
 			sb.Append("<a href=\"");
-			sb.Append(UrlTools.BuildUrl(wiki, "Login.aspx?Redirect=", Tools.UrlEncode(Tools.GetCurrentUrlFixed())));
+			sb.Append(UrlTools.BuildUrl(wiki, "Login?Redirect=", Tools.UrlEncode(Tools.GetCurrentUrlFixed())));
 			sb.Append("\" class=\"systemlink\" title=\"");
 			sb.Append(login);
 			sb.Append("\">");
@@ -3230,7 +3230,7 @@ namespace ScrewTurn.Wiki {
 			string login = Exchanger.ResourceExchanger.GetResource("Logout");
 			StringBuilder sb = new StringBuilder(200);
 			sb.Append("<a href=\"");
-			sb.Append(UrlTools.BuildUrl(wiki, "Login.aspx?ForceLogout=1&amp;Redirect=", Tools.UrlEncode(Tools.GetCurrentUrlFixed())));
+			sb.Append(UrlTools.BuildUrl(wiki, "Login?ForceLogout=1&amp;Redirect=", Tools.UrlEncode(Tools.GetCurrentUrlFixed())));
 			sb.Append("\" class=\"systemlink\" title=\"");
 			sb.Append(login);
 			sb.Append("\">");

@@ -1,0 +1,77 @@
+﻿@using ScrewTurn.Wiki.Web.Code.Extensions
+@using ScrewTurn.Wiki.Web.Localization.Common
+@model ScrewTurn.Wiki.Web.Models.Common.SearchModel
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@Url.StwScriptLink("search.js")
+<script type="text/javascript">
+    $(document).ready(function () {
+        var wizard = new ScrewTurn.Wiki.Web.Common.CommonWizard();
+        var search = new ScrewTurn.Wiki.Web.Common.Search(wizard);
+        search.bindEvents();
+    });
+</script>
+
+@{
+    AjaxOptions ajaxOptions = new AjaxOptions
+    {
+        UpdateTargetId = "ResultsDiv",
+        //LoadingElementDuration = 1000,
+        //LoadingElementId = "loading"
+    };
+}
+
+<h1 class="pagetitlesystem">@Search.LblTitle_Text</h1>
+<p>@Html.Raw(@Search.LblInstructions_Text)</p>
+
+@using (Ajax.BeginForm("SearchResult", "Search", ajaxOptions))
+{
+
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(model => model.Namespace)
+    <div id="SearchControlsDiv">
+        @Html.TextBoxFor(m => m.Query, @Model.Query, new { @class = "textbox" })
+        <input type="submit" class="button" value="@Search.BtnGo_Text" /><br />
+
+        <div id="RadiosDiv">
+            @Html.RadioButton("searchType", Model.AtLeastOneWord, Model.AtLeastOneWord)
+            @Html.LabelFor(m => m.AtLeastOneWord, @Search.RdoAtLeastOneWord_Text)
+            @Html.RadioButton("searchType", @Model.AllWords, @Model.AllWords)
+            @Html.LabelFor(m => m.AllWords, @Search.RdoAllWords_Text)
+            @Html.RadioButton("searchType", @Model.ExactPhrase, @Model.ExactPhrase)
+            @Html.LabelFor(m => m.ExactPhrase, @Search.RdoExactPhrase_Text)
+        </div>
+
+        @Html.CheckBoxFor(m => m.IsAllNamespaces)
+        @Html.LabelFor(m => m.IsAllNamespaces, @Search.ChkAllNamespaces_Text)
+        <br/>
+        @Html.CheckBoxFor(m => m.IsFilesAndAttachments, @Model.IsFilesAndAttachments)
+        @Html.LabelFor(m => m.IsFilesAndAttachments, @Search.ChkFilesAndAttachments_Text)
+    </div>
+
+    <div id="CategoryFilterDiv">
+        <h4>@Search.LblCategoryFilter_Text</h4>
+        <a href="#" id="SelectAll">@Search.LblSelectAll_Text</a> &mdash;
+        <a href="#" id="SelectNone">@Search.LblSelectNone_Text</a> &mdash;
+        <a href="#" id="SelectInverse">@Search.LblSelectInverse_Text</a>
+        <div id="CategoryFilterInternalDiv">
+            <i>
+                @Html.CheckBoxFor(m => m.IsUncategorizedPages, @Model.IsUncategorizedPages)
+                @Html.LabelFor(m => m.IsUncategorizedPages, @Search.ChkUncategorizedPages_Text)
+            </i><br/>
+            @for (var i = 0; i < Model.Categories.Count(); i++)
+            {
+                var cat = Model.Categories[i];
+                @Html.HiddenFor(model => model.Categories[i].Text)
+                @Html.HiddenFor(model => model.Categories[i].Value)
+                @Html.CheckBoxFor(model => model.Categories[i].Selected)
+                @Html.LabelFor(model => model.Categories[i].Value, cat.Text)
+                <br />
+            }
+        </div>
+    </div>
+}
+<div id="ResultsDiv">
+</div>
+

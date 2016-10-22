@@ -3,22 +3,22 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Web.Mvc;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
 using ScrewTurn.Wiki.Web;
 using ScrewTurn.Wiki.Web.Controllers;
 using ScrewTurn.Wiki.Configuration;
 
 namespace ScrewTurn.Wiki.Web.Tests.Controllers
 {
-    [TestClass]
+    [TestFixture]
     public class HomeControllerTest
     {
-        [TestMethod]
+        [Test]
         public void Index()
         {
             var settings = new ApplicationSettings();
             // Arrange
-            HomeController controller = new HomeController(settings);
+            WikiController controller = new WikiController(settings);
 
             // Act
             ViewResult result = controller.Index() as ViewResult;
@@ -28,7 +28,7 @@ namespace ScrewTurn.Wiki.Web.Tests.Controllers
         }
 
 
-        //[TestMethod]
+        //[Test]
         //public void TestPrivateMethod()
         //{
         //    var settings = new ApplicationSettings();
@@ -40,7 +40,7 @@ namespace ScrewTurn.Wiki.Web.Tests.Controllers
         //    privateObject.Invoke("PrintField");
         //}
 
-        //[TestMethod]
+        //[Test]
         //public void About()
         //{
         //    var settings = new ApplicationSettings();
@@ -54,7 +54,7 @@ namespace ScrewTurn.Wiki.Web.Tests.Controllers
         //    Assert.AreEqual("Your application description page.", result.ViewBag.Message);
         //}
 
-        //[TestMethod]
+        //[Test]
         //public void Contact()
         //{
         //    var settings = new ApplicationSettings();

@@ -17,7 +17,8 @@ namespace ScrewTurn.Wiki.Web.Models.Wiki
             BtnCompareEnabled = true;
         }
 
-        public string LblTitle { get; set; }
+        [AllowHtml]
+        public MvcHtmlString LblTitle { get; set; }
 
         [AllowHtml]
         public MvcHtmlString LblHistory { get; set; }

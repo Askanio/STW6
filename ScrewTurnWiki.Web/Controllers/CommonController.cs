@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Routing;
 using System.Web.UI;
 using ScrewTurn.Wiki.Configuration;
 using ScrewTurn.Wiki.PluginFramework;
@@ -66,6 +67,19 @@ namespace ScrewTurn.Wiki.Web.Controllers
                     new MvcHtmlString(FormattingPipeline.FormatWithPhase3(CurrentWiki, n, FormattingContext.Other, null));
 
             return View("AccessDenied", model);
+        }
+
+        public ActionResult RandPage()
+        {
+            List<PageContent> pages = Pages.GetPages(CurrentWiki, Tools.DetectCurrentNamespaceInfo());
+            Random r = new Random();
+            //UrlTools.Redirect(pages[r.Next(0, pages.Count)].FullName + GlobalSettings.PageExtension);
+
+            RouteValueDictionary routeValueDictionary = new RouteValueDictionary();
+            routeValueDictionary.Add("controller", "Wiki");
+            routeValueDictionary.Add("action", "Page");
+            routeValueDictionary.Add("page", pages[r.Next(0, pages.Count)].FullName);
+            return new RedirectToRouteResult(routeValueDictionary);
         }
 
         #region PageNotFound
