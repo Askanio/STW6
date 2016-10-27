@@ -11,14 +11,16 @@ using ScrewTurn.Wiki.Configuration;
 namespace ScrewTurn.Wiki.Web.Tests.Controllers
 {
     [TestFixture]
-    public class HomeControllerTest
+    public class InstallControllerTest
     {
-        [Test]
-        public void Index()
+            [Test]
+            public void Installer()
         {
             var settings = new ApplicationSettings();
+            IConfigReaderWriter configReaderWriter = GetApplicationSettings();
+
             // Arrange
-            WikiController controller = new WikiController(settings);
+            InstallController controller = new InstallController(settings, configReaderWriter);
 
             // Act
             ViewResult result = controller.Index() as ViewResult;
