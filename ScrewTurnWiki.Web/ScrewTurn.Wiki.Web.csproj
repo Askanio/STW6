@@ -426,7 +426,9 @@
     <Folder Include="Views\SpecialPage\" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="packages.config" />
+    <Content Include="packages.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Content\Themes\Default-v2\Default-v2.rar" />
     <Content Include="Content\web.config" />
     <None Include="Project_Readme.html" />

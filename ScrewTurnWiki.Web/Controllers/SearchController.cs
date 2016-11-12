@@ -33,8 +33,8 @@ namespace ScrewTurn.Wiki.Web.Controllers
 
         private const int MaxResults = 30;
 
-        private readonly Dictionary<string, SearchOptions> searchModeMap =
-            new Dictionary<string, SearchOptions>() { { "1", SearchOptions.AtLeastOneWord }, { "2", SearchOptions.AllWords }, { "3", SearchOptions.ExactPhrase } };
+        //private readonly Dictionary<string, SearchOptions> searchModeMap =
+        //    new Dictionary<string, SearchOptions>() { { "1", SearchOptions.AtLeastOneWord }, { "2", SearchOptions.AllWords }, { "3", SearchOptions.ExactPhrase } };
 
         /// <summary>
         /// Generates the OpenSearch description XML document and renders it to output.
@@ -66,7 +66,8 @@ namespace ScrewTurn.Wiki.Web.Controllers
 
         [HttpGet]
         [DetectNamespaceFromPage(PageParamName = "page", Order = 1)]
-        public ActionResult Search(string page, string allNamespaces, string filesAndAttachments, string searchUncategorized, string mode, string query)
+        public ActionResult Search(string page, string allNamespaces, string filesAndAttachments,
+            string searchUncategorized, string mode, string query)
         {
             //bool allNamespaces = false;
             //if (Request["AllNamespaces"] != null)
@@ -95,7 +96,6 @@ namespace ScrewTurn.Wiki.Web.Controllers
                 isSearchUncategorized = searchUncategorized == "1";
 
             var model = new SearchModel();
-
             base.PrepareDefaultModel(model, CurrentNamespace, CurrentPageFullName);
 
             model.Namespace = CurrentNamespace;
@@ -104,28 +104,33 @@ namespace ScrewTurn.Wiki.Web.Controllers
 
             //txtQuery.Focus();
 
-                //string[] queryStringCategories = null;
-                //if (categories != null)
-                //{
-                //    queryStringCategories = categories.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
-                //    Array.Sort(queryStringCategories);
-                //}
+            //string[] queryStringCategories = null;
+            //if (categories != null)
+            //{
+            //    queryStringCategories = categories.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
+            //    Array.Sort(queryStringCategories);
+            //}
 
             model.IsAllNamespaces = isAllNamespaces;
 
-                model.IsUncategorizedPages = isSearchUncategorized;
+            model.IsUncategorizedPages = isSearchUncategorized;
 
-                if (query != null)
+            if (query != null)
+            {
+                model.IsAllNamespaces = allNamespaces == "1";
+                model.IsFilesAndAttachments = isFilesAndAttachments;
+            }
+
+            List<CategoryInfo> allCategories = Pages.GetCategories(CurrentWiki, DetectNamespaceInfo());
+            var lstCategories = new List<SelectListItem>();
+            // Populate categories list and select specified categories if any
+            foreach (CategoryInfo cat in allCategories)
+                lstCategories.Add(new SelectListItem()
                 {
-                    model.IsAllNamespaces = allNamespaces == "1";
-                    model.IsFilesAndAttachments = isFilesAndAttachments;
-                }
-
-                List<CategoryInfo> allCategories = Pages.GetCategories(CurrentWiki, DetectNamespaceInfo());
-                var lstCategories = new List<SelectListItem>();
-                // Populate categories list and select specified categories if any
-           foreach (CategoryInfo cat in allCategories)
-            lstCategories.Add(new SelectListItem(){ Selected = false, Text = NameTools.GetLocalName(cat.FullName) , Value = cat.FullName });
+                    Selected = false,
+                    Text = NameTools.GetLocalName(cat.FullName),
+                    Value = cat.FullName
+                });
 
             model.Categories = lstCategories;
 
@@ -133,33 +138,46 @@ namespace ScrewTurn.Wiki.Web.Controllers
 
             // Select mode if specified
             if (mode != null)
+            {
+                switch (mode)
                 {
-                    switch (mode)
-                    {
-                        case "1":
-                            model.AtLeastOneWord = true;
-                            model.AllWords = false;
-                            model.ExactPhrase = false;
-                            break;
-                        case "2":
-                            model.AtLeastOneWord = false;
-                            model.AllWords = true;
-                            model.ExactPhrase = false;
-                            break;
-                        default:
-                            model.AtLeastOneWord = false;
-                            model.AllWords = false;
-                            model.ExactPhrase = true;
-                            break;
-                    }
+                    case "1":
+                        model.AtLeastOneWord = true;
+                        model.AllWords = false;
+                        model.ExactPhrase = false;
+                        break;
+                    case "2":
+                        model.AtLeastOneWord = false;
+                        model.AllWords = true;
+                        model.ExactPhrase = false;
+                        break;
+                    default:
+                        model.AtLeastOneWord = false;
+                        model.AllWords = false;
+                        model.ExactPhrase = true;
+                        break;
                 }
+            }
 
-                if (query != null)
+            if (!string.IsNullOrEmpty(query))
+            {
+                model.Query = query;
+
+                SearchOptions searchOptionMode = SearchOptions.ExactPhrase;
+                if (model.AtLeastOneWord)
+                    searchOptionMode = SearchOptions.AtLeastOneWord;
+                if (model.AllWords)
+                    searchOptionMode = SearchOptions.AllWords;
+
+                var selectedCategories = new List<string>();
+                var searchResult = PerformSearch(model.Query, searchOptionMode, selectedCategories, model.IsUncategorizedPages, model.IsAllNamespaces, model.IsFilesAndAttachments);
+
+                if (searchResult != null && searchResult.Count > 0)
                 {
-                    model.Query = query;
-
-                    //btnGo_Click(sender, e);
+                    var result = base.RenderPartialViewToString("~/Views/Common/Search/SearchResult.cshtml", searchResult);
+                    model.SearchResult = new MvcHtmlString(result);
                 }
+            }
 
             return View("~/Views/Common/Search/Search.cshtml", model);
         }
@@ -168,42 +186,40 @@ namespace ScrewTurn.Wiki.Web.Controllers
         [ValidateAntiForgeryToken]
         public PartialViewResult SearchResult(SearchModel model)
         {
-            //if (ModelState.IsValid)
-            //{
-
-            //}
-
-            if (PageHelper.ExistsCurrentNamespace(CurrentWiki, model.Namespace))
+            var searchResult = new List<SearchResultRow>();
+            if (!ModelState.IsValid)
             {
-                CurrentNamespace = model.Namespace;
-            }
-            
+                if (PageHelper.ExistsCurrentNamespace(CurrentWiki, model.Namespace))
+                {
+                    CurrentNamespace = model.Namespace;
+                }
 
-            SearchOptions mode = SearchOptions.ExactPhrase;
-            if (model.AtLeastOneWord)
-                mode = SearchOptions.AtLeastOneWord;
-            if (model.AllWords)
-                mode = SearchOptions.AllWords;
+                SearchOptions mode = SearchOptions.ExactPhrase;
+                if (model.AtLeastOneWord)
+                    mode = SearchOptions.AtLeastOneWord;
+                if (model.AllWords)
+                    mode = SearchOptions.AllWords;
 
-            List<CategoryInfo> allCategories = Pages.GetCategories(CurrentWiki, DetectNamespaceInfo());
-            List<string> selectedCategories;
-            // Populate categories list and select specified categories if any
-            var selected = model.Categories.Where(t => t.Selected).ToList();
-            if (selected.Any())
-            {
-                selectedCategories = new List<string>(model.Categories.Count(t => t.Selected));
-                foreach (CategoryInfo cat in allCategories)
-                    if (selected.Any(t => t.Value == cat.FullName))
+                List<CategoryInfo> allCategories = Pages.GetCategories(CurrentWiki, DetectNamespaceInfo());
+                List<string> selectedCategories;
+                // Populate categories list and select specified categories if any
+                var selected = model.Categories.Where(t => t.Selected).ToList();
+                if (selected.Any())
+                {
+                    selectedCategories = new List<string>(model.Categories.Count(t => t.Selected));
+                    foreach (CategoryInfo cat in allCategories)
+                        if (selected.Any(t => t.Value == cat.FullName))
+                            selectedCategories.Add(cat.FullName);
+                }
+                else
+                {
+                    selectedCategories = new List<string>(allCategories.Count);
+                    foreach (CategoryInfo cat in allCategories)
                         selectedCategories.Add(cat.FullName);
-            }
-            else
-            {
-                selectedCategories = new List<string>(allCategories.Count);
-                foreach (CategoryInfo cat in allCategories)
-                    selectedCategories.Add(cat.FullName);
+                }
+                searchResult = PerformSearch(model.Query, mode, selectedCategories, model.IsUncategorizedPages, model.IsAllNamespaces, model.IsFilesAndAttachments);
             }
 
-            var searchResult = PerformSearch(model.Query, mode, selectedCategories, model.IsUncategorizedPages, model.IsAllNamespaces, model.IsFilesAndAttachments);
             return PartialView("~/Views/Common/Search/SearchResult.cshtml", searchResult);
         }
 
