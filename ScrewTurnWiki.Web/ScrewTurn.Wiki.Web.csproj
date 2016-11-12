@@ -67,6 +67,14 @@
       <HintPath>..\packages\Newtonsoft.Json.8.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="nunit.framework, Version=3.5.0.0, Culture=neutral, PublicKeyToken=2638cd05610744eb, processorArchitecture=MSIL">
+      <HintPath>..\packages\NUnit.3.5.0\lib\net45\nunit.framework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Recaptcha, Version=1.0.5.0, Culture=neutral, PublicKeyToken=9afc4d65b28c38c2, processorArchitecture=MSIL">
+      <HintPath>..\packages\recaptcha.1.0.5.0\lib\.NetFramework 4.0\Recaptcha.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -132,12 +140,14 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Code\Attributes\CaptchaValidatorAttribute.cs" />
     <Compile Include="Code\Attributes\CheckActionForPageAttribute.cs" />
     <Compile Include="Code\Attributes\CheckActionForNamespaceAttribute.cs" />
     <Compile Include="Code\Attributes\CheckExistPageAttribute.cs" />
     <Compile Include="Code\Attributes\DetectNamespaceFromPageAttribute.cs" />
     <Compile Include="Code\Attributes\CheckAndSetNamespaceAttribute.cs" />
     <Compile Include="Code\ExtendedPageInfo.cs" />
+    <Compile Include="Code\Extensions\CaptchaExtensions.cs" />
     <Compile Include="Code\FileDataExtension.cs" />
     <Compile Include="Code\Files\AttachmentRouteHandler.cs" />
     <Compile Include="Code\ImageHelper.cs" />
@@ -151,6 +161,9 @@
     <Compile Include="Code\RevisionRow.cs" />
     <Compile Include="Code\Attributes\WikisValidatorAttribute.cs" />
     <Compile Include="Code\SearchResultRow.cs" />
+    <Compile Include="Code\Validators\BaseReqularExpressionAttribute.cs" />
+    <Compile Include="Code\Validators\DynamicReqularExpressionAttribute.cs" />
+    <Compile Include="Code\Validators\PasswordValidationAttribute.cs" />
     <Compile Include="Controllers\AllPagesController.cs" />
     <Compile Include="Controllers\AttachmentController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
@@ -203,6 +216,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>History.resx</DependentUpon>
     </Compile>
+    <Compile Include="Localization\Common\Login.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Login.resx</DependentUpon>
+    </Compile>
     <Compile Include="Localization\Common\MasterPageSA.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -229,8 +247,13 @@
       <DependentUpon>Messages.resx</DependentUpon>
     </Compile>
     <Compile Include="Models\Common\AccessDeniedModel.cs" />
+    <Compile Include="Models\User\LoginBaseModel.cs" />
     <Compile Include="Models\Common\PageNotFoundModel.cs" />
     <Compile Include="Models\Common\SearchModel.cs" />
+    <Compile Include="Models\User\LoginModel.cs" />
+    <Compile Include="Models\User\LogoutModel.cs" />
+    <Compile Include="Models\User\PasswordRecoveryModel.cs" />
+    <Compile Include="Models\User\PasswordResetModel.cs" />
     <Compile Include="Models\Wiki\AttachmentViewerModel.cs" />
     <Compile Include="Models\Wiki\CategoryModel.cs" />
     <Compile Include="Models\Wiki\DiffModel.cs" />
@@ -390,6 +413,10 @@
     <Content Include="Views\Wiki\Category.cshtml" />
     <Content Include="Views\Common\Search\Search.cshtml" />
     <Content Include="Views\Common\Search\SearchResult.cshtml" />
+    <Content Include="Views\User\Login.cshtml" />
+    <Content Include="Views\User\Logout.cshtml" />
+    <Content Include="Views\User\PasswordReset.cshtml" />
+    <Content Include="Views\User\PasswordRecovery.cshtml" />
     <None Include="Views\Wiki\Discussion.cshtml" />
   </ItemGroup>
   <ItemGroup>
@@ -397,7 +424,6 @@
     <Folder Include="Views\Categories\" />
     <Folder Include="Views\Home\" />
     <Folder Include="Views\SpecialPage\" />
-    <Folder Include="Views\User\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
@@ -655,6 +681,38 @@
     <EmbeddedResource Include="Localization\Common\History.vi-VN.resx" />
     <EmbeddedResource Include="Localization\Common\History.zh-cn.resx" />
     <EmbeddedResource Include="Localization\Common\History.zh-tw.resx" />
+    <EmbeddedResource Include="Localization\Common\Login.af-ZA.resx" />
+    <EmbeddedResource Include="Localization\Common\Login.cs-CZ.resx" />
+    <EmbeddedResource Include="Localization\Common\Login.da-DK.resx" />
+    <EmbeddedResource Include="Localization\Common\Login.de-DE.resx" />
+    <EmbeddedResource Include="Localization\Common\Login.es-ES.resx" />
+    <EmbeddedResource Include="Localization\Common\Login.fa-IR.resx" />
+    <EmbeddedResource Include="Localization\Common\Login.fr-FR.resx" />
+    <EmbeddedResource Include="Localization\Common\Login.hi-IN.resx" />
+    <EmbeddedResource Include="Localization\Common\Login.hu-HU.resx" />
+    <EmbeddedResource Include="Localization\Common\Login.it-IT.resx" />
+    <EmbeddedResource Include="Localization\Common\Login.ja-JP.resx" />
+    <EmbeddedResource Include="Localization\Common\Login.ko-KR.resx" />
+    <EmbeddedResource Include="Localization\Common\Login.lv-LV.resx" />
+    <EmbeddedResource Include="Localization\Common\Login.nb-NO.resx" />
+    <EmbeddedResource Include="Localization\Common\Login.nl-NL.resx" />
+    <EmbeddedResource Include="Localization\Common\Login.pl-PL.resx" />
+    <EmbeddedResource Include="Localization\Common\Login.pt-BR.resx" />
+    <EmbeddedResource Include="Localization\Common\Login.pt-PT.resx" />
+    <EmbeddedResource Include="Localization\Common\Login.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Login.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Localization\Common\Login.ro-RO.resx" />
+    <EmbeddedResource Include="Localization\Common\Login.ru-RU.resx" />
+    <EmbeddedResource Include="Localization\Common\Login.sk-SK.resx" />
+    <EmbeddedResource Include="Localization\Common\Login.sr-Latn-CS.resx" />
+    <EmbeddedResource Include="Localization\Common\Login.sv-SE.resx" />
+    <EmbeddedResource Include="Localization\Common\Login.tr-TR.resx" />
+    <EmbeddedResource Include="Localization\Common\Login.uk-UA.resx" />
+    <EmbeddedResource Include="Localization\Common\Login.vi-VN.resx" />
+    <EmbeddedResource Include="Localization\Common\Login.zh-cn.resx" />
+    <EmbeddedResource Include="Localization\Common\Login.zh-tw.resx" />
     <EmbeddedResource Include="Localization\Common\MasterPageSA.af-ZA.resx" />
     <EmbeddedResource Include="Localization\Common\MasterPageSA.cs-CZ.resx" />
     <EmbeddedResource Include="Localization\Common\MasterPageSA.da-DK.resx" />

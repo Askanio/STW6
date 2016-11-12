@@ -225,7 +225,7 @@ namespace ScrewTurn.Wiki.Web.Controllers
 
             if (!canView)
             {
-                if (SessionFacade.LoginKey == null) UrlTools.Redirect("Login?Redirect=" + Tools.UrlEncode(Tools.GetCurrentUrlFixed()));
+                if (SessionFacade.LoginKey == null) UrlTools.Redirect("User/Login?ReturnUrl=" + Tools.UrlEncode(Tools.GetCurrentUrlFixed()));
                 else UrlTools.Redirect(UrlTools.BuildUrl(CurrentWiki, "AccessDenied"));
             }
 

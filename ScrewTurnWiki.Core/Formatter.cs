@@ -3212,7 +3212,7 @@ namespace ScrewTurn.Wiki {
 			string login = Exchanger.ResourceExchanger.GetResource("Login");
 			StringBuilder sb = new StringBuilder(200);
 			sb.Append("<a href=\"");
-			sb.Append(UrlTools.BuildUrl(wiki, "Login?Redirect=", Tools.UrlEncode(Tools.GetCurrentUrlFixed())));
+			sb.Append(UrlTools.BuildUrl(wiki, "User/Login?ReturnUrl=", Tools.UrlEncode(Tools.GetCurrentUrlFixed())));
 			sb.Append("\" class=\"systemlink\" title=\"");
 			sb.Append(login);
 			sb.Append("\">");
@@ -3230,8 +3230,8 @@ namespace ScrewTurn.Wiki {
 			string login = Exchanger.ResourceExchanger.GetResource("Logout");
 			StringBuilder sb = new StringBuilder(200);
 			sb.Append("<a href=\"");
-			sb.Append(UrlTools.BuildUrl(wiki, "Login?ForceLogout=1&amp;Redirect=", Tools.UrlEncode(Tools.GetCurrentUrlFixed())));
-			sb.Append("\" class=\"systemlink\" title=\"");
+			sb.Append(UrlTools.BuildUrl(wiki, "User/ForceLogout?Redirect=", Tools.UrlEncode(Tools.GetCurrentUrlFixed()))); // "Login?ForceLogout=1&amp;Redirect="
+            sb.Append("\" class=\"systemlink\" title=\"");
 			sb.Append(login);
 			sb.Append("\">");
 			sb.Append(login);
