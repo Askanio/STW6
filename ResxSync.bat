@@ -1,6 +1,10 @@
 
 @echo off
 
+References\Tools\ResxSync\resxsync.exe ScrewTurnWiki.Web\Localization\Admin\Admin.resx *
+References\Tools\ResxSync\resxsync.exe ScrewTurnWiki.Web\Localization\Admin\AdminHome.resx *
+References\Tools\ResxSync\resxsync.exe ScrewTurnWiki.Web\Localization\Admin\AdminGroups.resx *
+References\Tools\ResxSync\resxsync.exe ScrewTurnWiki.Web\Localization\Admin\AclActionsSelector.resx *
 
 References\Tools\ResxSync\resxsync.exe ScrewTurnWiki.Web\Localization\Common\Default.resx *
 References\Tools\ResxSync\resxsync.exe ScrewTurnWiki.Web\Localization\Common\AttachmentViewer.resx *

@@ -96,7 +96,7 @@ namespace ScrewTurn.Wiki.Web.Controllers
                 isSearchUncategorized = searchUncategorized == "1";
 
             var model = new SearchModel();
-            base.PrepareDefaultModel(model, CurrentNamespace, CurrentPageFullName);
+            base.PrepareDefaultModel(model, CurrentNamespace, page);
 
             model.Namespace = CurrentNamespace;
 
@@ -301,6 +301,7 @@ namespace ScrewTurn.Wiki.Web.Controllers
                 else if (res.DocumentType == DocumentType.File)
                 {
                     FileDocument doc = res.Document as FileDocument;
+                    if (doc == null) continue;
                     string[] fields = doc.FileName.Split('|');
                     IFilesStorageProviderV60 provider = Collectors.CollectorsBox.FilesProviderCollector.GetProvider(fields[0], CurrentWiki);
                     string directory = Tools.GetDirectoryName(fields[1]);

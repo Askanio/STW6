@@ -524,8 +524,10 @@ namespace ScrewTurn.Wiki {
 
 			UserGroup result = group.Provider.ModifyUserGroup(group, description);
 
-			if(result != null) {
-				Host.Instance.OnUserGroupActivity(result, UserGroupActivity.GroupModified);
+			if(result != null)
+			{
+                Host.Instance.OnUserGroupActivity(result, UserGroupActivity.GroupModified);
+			    Cache.RemoveCachedItem(group.Provider.CurrentWiki, "UserGroups");
 				Log.LogEntry("User Group " + group.Name + " updated", EntryType.General, Log.SystemUsername, group.Provider.CurrentWiki);
 			}
 			else Log.LogEntry("Update failed for User Group " + result.Name, EntryType.Error, Log.SystemUsername, group.Provider.CurrentWiki);
@@ -547,7 +549,7 @@ namespace ScrewTurn.Wiki {
 			bool done = group.Provider.RemoveUserGroup(group);
 
 			if(done) {
-				Host.Instance.OnUserGroupActivity(group, UserGroupActivity.GroupRemoved);
+                Host.Instance.OnUserGroupActivity(group, UserGroupActivity.GroupRemoved);
                 Cache.RemoveCachedItem(wiki, "UserGroups");
 				Log.LogEntry("User Group " + group.Name + " deleted", EntryType.General, Log.SystemUsername, wiki);
 			}
@@ -569,7 +571,7 @@ namespace ScrewTurn.Wiki {
 
 			if(result != null) {
 				Host.Instance.OnUserAccountActivity(result, UserAccountActivity.AccountMembershipChanged);
-                Cache.RemoveCachedItems("UserGroups");
+                Cache.RemoveCachedItem(user.Provider.CurrentWiki, "UserGroups");
 				Log.LogEntry("Group membership set for User " + user.Username, EntryType.General, Log.SystemUsername, user.Provider.CurrentWiki);
 			}
 			else Log.LogEntry("Could not set group membership for User " + user.Username, EntryType.Error, Log.SystemUsername, user.Provider.CurrentWiki);

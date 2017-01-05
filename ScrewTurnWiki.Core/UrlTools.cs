@@ -188,7 +188,8 @@ namespace ScrewTurn.Wiki {
                 if ((tempStringLower.Contains(GlobalSettings.PageExtension) || tempStringLower.Contains(".aspx")) && !tempString.StartsWith(Tools.UrlEncode(nspace) + ".")) temp.Insert(0, nspace + ".");
 			}
 
-			return String.Concat("/", temp.ToString());
+            
+			return String.Concat(temp[0] != '/' ? "/" : "", temp.ToString());
 		}
 
 		/// <summary>

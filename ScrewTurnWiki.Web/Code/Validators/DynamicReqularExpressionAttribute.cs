@@ -14,7 +14,7 @@ namespace ScrewTurn.Wiki.Web.Code.Validators
 
         protected override ValidationResult IsValid(object value, ValidationContext validationContext)
         {
-            //         [AllowHtml]
+            //[AllowHtml]
             //public string NewPasswordValidationExpression { get; set; }
             //Sample:  [DynamicReqularExpression(PatternProperty = "NewPasswordValidationExpression", ErrorMessageResourceName = "InvalidPassword", ErrorMessageResourceType = typeof(Messages))]
 

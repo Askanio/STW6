@@ -652,7 +652,7 @@ namespace ScrewTurn.Wiki {
                                 img.Append(bigUrl);
                                 img.Append(@""" title="""); //  class=""internal""
                                 img.Append(Exchanger.ResourceExchanger.GetResource("ImageEnlarge"));
-                                img.Append(@"""><img src=""/Images/Enlarge.png"" alt="""" height=""11"" width=""15""></a>");
+                                img.Append(@"""><img src=""/Content/Images/Enlarge.png"" alt="""" height=""11"" width=""15""></a>");
                                 img.Append("</div>");
                             }
 

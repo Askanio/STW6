@@ -15,6 +15,8 @@ namespace ScrewTurn.Wiki.Web
             //routes.IgnoreRoute("favicon.ico");
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
+            routes.MapMvcAttributeRoutes();
+
             routes.MapRoute(
                 "Installer",
                 "Install/{action}",
@@ -31,6 +33,31 @@ namespace ScrewTurn.Wiki.Web
             //    "user/CreateMasterPassword",
             //    new {controller = "User", action = "CreateMasterPassword"}
             //    );
+
+            //routes.MapRoute(
+            //    "Login",
+            //    "Login",
+            //    new {controller = "User", action = "Login" }
+            //    );
+
+            //routes.MapRoute(
+            //    "ForceLogout",
+            //    "ForceLogout",
+            //    new {controller = "User", action = "ForceLogout" }
+            //    );
+
+            //routes.MapRoute(
+            //    "Activate",
+            //    "Activate",
+            //    new {controller = "User", action = "Activate" }
+            //    );
+
+            //routes.MapRoute(
+            //    "Activate",
+            //    "Activate",
+            //    new {controller = "User", action = "Activate"}
+            //    );
+
 
             routes.MapRoute(
                 "Error",

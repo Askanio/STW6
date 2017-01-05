@@ -10,7 +10,7 @@ using ScrewTurn.Wiki.Web.Controllers;
 namespace ScrewTurn.Wiki.Web.Code.Attributes
 {
     /// <summary>
-    /// Check allow action for page (Only after <see cref="CheckExistPage"/>)
+    /// Check allow action for page (Only after <see cref="CheckExistPageAttribute"/>)
     /// </summary>
     [AttributeUsageAttribute(AttributeTargets.Method, AllowMultiple = true)]
     public class CheckActionForPageAttribute : ActionFilterAttribute

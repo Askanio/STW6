@@ -15,14 +15,17 @@ namespace ScrewTurn.Wiki {
 	/// </summary>
 	public static class Pages {
 
-		#region Namespaces
+        // TODO: Use cache
+        private static readonly CacheBase Cache = new CacheBase(new TimeSpan(24, 0, 0));
 
-		/// <summary>
-		/// Gets all the namespaces of the given wiki, sorted.
-		/// </summary>
-		/// <param name="wiki">The wiki.</param>
-		/// <returns>The namespaces, sorted.</returns>
-		public static List<NamespaceInfo> GetNamespaces(string wiki) {
+        #region Namespaces
+
+        /// <summary>
+        /// Gets all the namespaces of the given wiki, sorted.
+        /// </summary>
+        /// <param name="wiki">The wiki.</param>
+        /// <returns>The namespaces, sorted.</returns>
+        public static List<NamespaceInfo> GetNamespaces(string wiki) {
 			List<NamespaceInfo> result = new List<NamespaceInfo>(10);
 
 			int count = 0;
