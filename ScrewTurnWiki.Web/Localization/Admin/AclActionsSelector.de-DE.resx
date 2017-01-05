@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -124,11 +124,5 @@
   <data name="LblGrant_Text" xml:space="preserve">
     <value>Zulassen</value>
     <comment>Grant</comment>
-  </data>
-  <data name="LstActionsDeny_ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="LstActionsGrant_ToolTip" xml:space="preserve">
-    <value />
   </data>
 </root>

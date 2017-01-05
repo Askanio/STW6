@@ -162,9 +162,6 @@
   <data name="LblDescription_Text" xml:space="preserve">
     <value>Description</value>
   </data>
-  <data name="LblDescription2_Text" xml:space="preserve">
-    <value>Description</value>
-  </data>
   <data name="LblEditTitle_Text" xml:space="preserve">
     <value>Group Details</value>
   </data>
@@ -177,13 +174,7 @@
   <data name="LblName_Text" xml:space="preserve">
     <value>Name</value>
   </data>
-  <data name="LblName2_Text" xml:space="preserve">
-    <value>Name</value>
-  </data>
   <data name="LblProvider_Text" xml:space="preserve">
-    <value>Provider</value>
-  </data>
-  <data name="LblProvider2_Text" xml:space="preserve">
     <value>Provider</value>
   </data>
   <data name="LblResult_Text" xml:space="preserve">
@@ -194,15 +185,6 @@
   </data>
   <data name="Page_Title" xml:space="preserve">
     <value>Administration</value>
-  </data>
-  <data name="PnlEditGroup_GroupingText" xml:space="preserve">
-    <value />
-  </data>
-  <data name="PnlGroupDetails_GroupingText" xml:space="preserve">
-    <value />
-  </data>
-  <data name="PnlList_GroupingText" xml:space="preserve">
-    <value />
   </data>
   <data name="RevName_ErrorMessage" xml:space="preserve">
     <value>Invalid Name</value>

@@ -123,15 +123,6 @@
   <data name="LblResult_Text" xml:space="preserve">
     <value />
   </data>
-  <data name="PnlEditGroup_GroupingText" xml:space="preserve">
-    <value />
-  </data>
-  <data name="PnlGroupDetails_GroupingText" xml:space="preserve">
-    <value />
-  </data>
-  <data name="PnlList_GroupingText" xml:space="preserve">
-    <value />
-  </data>
   <data name="RevName_Text" xml:space="preserve">
     <value />
   </data>
@@ -186,9 +177,6 @@
   <data name="LblDescription_Text" xml:space="preserve">
     <value>Popis</value>
   </data>
-  <data name="LblDescription2_Text" xml:space="preserve">
-    <value>Popis</value>
-  </data>
   <data name="LblEditTitle_Text" xml:space="preserve">
     <value>Detail skupiny</value>
   </data>
@@ -201,13 +189,7 @@
   <data name="LblName_Text" xml:space="preserve">
     <value>Název</value>
   </data>
-  <data name="LblName2_Text" xml:space="preserve">
-    <value>Název</value>
-  </data>
   <data name="LblProvider_Text" xml:space="preserve">
-    <value>Poskytovatel</value>
-  </data>
-  <data name="LblProvider2_Text" xml:space="preserve">
     <value>Poskytovatel</value>
   </data>
   <data name="LblUsers_Text" xml:space="preserve">
