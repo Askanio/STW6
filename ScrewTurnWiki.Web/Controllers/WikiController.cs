@@ -534,7 +534,7 @@ namespace ScrewTurn.Wiki.Web.Controllers
                     model.RssLink =
                         new MvcHtmlString(
                             string.Format(@"<a id=""RssLink"" href=""{0}"" title=""{1}"" target=""_blank""{2}>RSS</a>",
-                                UrlTools.BuildUrl(CurrentWiki, "RSS.aspx?Page=", Tools.UrlEncode(CurrentPage.FullName),
+                                UrlTools.BuildUrl(CurrentWiki, "RSS?Page=", Tools.UrlEncode(CurrentPage.FullName),
                                     DiscussMode ? "&amp;Discuss=1" : ""),
                                 DiscussMode ? Messages.RssForThisDiscussion : Messages.RssForThisPage,
                                 DiscussMode ? " class=\"discuss\"" : ""));

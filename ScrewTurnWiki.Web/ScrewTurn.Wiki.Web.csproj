@@ -205,6 +205,7 @@
     <Compile Include="Controllers\HistoryController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PageController.cs" />
+    <Compile Include="Controllers\RssController.cs" />
     <Compile Include="Controllers\SearchController.cs" />
     <Compile Include="Controllers\WikiController.cs" />
     <Compile Include="Controllers\InstallController.cs" />
@@ -446,6 +447,7 @@
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\History\History.cshtml" />
     <Content Include="Views\Shared\RegionContent.cshtml" />
+    <Content Include="Views\Wiki\Rss.cshtml" />
     <TypeScriptCompile Include="Scripts\stw\common\historypage.ts" />
     <TypeScriptCompile Include="Scripts\stw\common\search.ts" />
     <TypeScriptCompile Include="Scripts\stw\common\wikipage.ts" />
@@ -507,9 +509,9 @@
     <Folder Include="Views\Admin\Snippets\" />
     <Folder Include="Views\Admin\Theme\" />
     <Folder Include="Views\Admin\Users\" />
-    <Folder Include="Views\BaseAdmin\" />
     <Folder Include="Views\Categories\" />
     <Folder Include="Views\Home\" />
+    <Folder Include="Views\RSS\" />
     <Folder Include="Views\SpecialPage\" />
   </ItemGroup>
   <ItemGroup>

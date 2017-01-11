@@ -52,13 +52,6 @@ namespace ScrewTurn.Wiki.Web
             //    new {controller = "User", action = "Activate" }
             //    );
 
-            //routes.MapRoute(
-            //    "Activate",
-            //    "Activate",
-            //    new {controller = "User", action = "Activate"}
-            //    );
-
-
             routes.MapRoute(
                 "Error",
                 "Error/{ns}",
@@ -69,6 +62,12 @@ namespace ScrewTurn.Wiki.Web
                 "AccessDenied",
                 "AccessDenied",
                 new {controller = "Common", action = "AccessDenied"}
+                );
+
+            routes.MapRoute(
+                "Rss",
+                "Rss",
+                new {controller = "Rss", action = "Index"}
                 );
 
             routes.MapRoute(
