@@ -52,6 +52,9 @@ namespace ScrewTurn.Wiki.Web
             //    new {controller = "User", action = "Activate" }
             //    );
 
+
+            
+
             routes.MapRoute(
                 "Error",
                 "Error/{ns}",
@@ -68,6 +71,12 @@ namespace ScrewTurn.Wiki.Web
                 "Rss",
                 "Rss",
                 new {controller = "Rss", action = "Index"}
+                );
+
+            routes.MapRoute(
+                "Language",
+                "Language",
+                new {controller = "User", action = "Language"}
                 );
 
             routes.MapRoute(

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Threading;
 using System.Web;
@@ -52,7 +53,8 @@ namespace ScrewTurn.Wiki.Web.Controllers
             {
                 Users.SetEmailNotification(CurrentWiki, user, currentPage.FullName, pageChanges, !discussionMessages);
             }
-            else {
+            else
+            {
                 Users.SetEmailNotification(CurrentWiki, user, currentPage.FullName, !pageChanges, discussionMessages);
             }
         }
@@ -71,7 +73,7 @@ namespace ScrewTurn.Wiki.Web.Controllers
         }
 
         [HttpGet]
-        public ActionResult Activate(string code ,string username)
+        public ActionResult Activate(string code, string username)
         {
             var model = new LoginModel();
             PrepareBaseModel(model);
@@ -94,7 +96,8 @@ namespace ScrewTurn.Wiki.Web.Controllers
             UserInfo user = Users.FindUser(CurrentWiki, username);
             if (user != null && Tools.ComputeSecurityHash(user.Username, user.Email, user.DateTime).Equals(code))
             {
-                Log.LogEntry("Account activation requested for " + user.Username, EntryType.General, Log.SystemUsername, CurrentWiki);
+                Log.LogEntry("Account activation requested for " + user.Username, EntryType.General, Log.SystemUsername,
+                    CurrentWiki);
                 if (user.Active)
                 {
                     model.ResultCss = "resultok";
@@ -132,7 +135,7 @@ namespace ScrewTurn.Wiki.Web.Controllers
             // without applying a "filter" because the provider might keep logging her in.
             // When she clicks Logout and redirects to Login.aspx?Logout=1 a flag is set,
             // avoiding autologin for the current session - see LoginTools class
-            string logout = (string)TempData["Logout"];
+            string logout = (string) TempData["Logout"];
             if (logout != null && logout == "1")
                 SessionFacade.IsLoggingOut = true; // Request["Logout"]
 
@@ -141,7 +144,8 @@ namespace ScrewTurn.Wiki.Web.Controllers
                 var logoutModel = new LogoutModel();
                 PrepareBaseModel(logoutModel);
                 logoutModel.Description = GetLoginNotice();
-                logoutModel.LogoutText = "<b>" + SessionFacade.CurrentUsername + "</b>, " + Localization.Common.Login.LblLogout_Text;
+                logoutModel.LogoutText = "<b>" + SessionFacade.CurrentUsername + "</b>, " +
+                                         Localization.Common.Login.LblLogout_Text;
                 return View("Logout", logoutModel);
             }
 
@@ -237,7 +241,8 @@ namespace ScrewTurn.Wiki.Web.Controllers
 
                 if (user != null)
                 {
-                    Log.LogEntry("Password reset message sent for " + user.Username, EntryType.General, Log.SystemUsername, CurrentWiki);
+                    Log.LogEntry("Password reset message sent for " + user.Username, EntryType.General,
+                        Log.SystemUsername, CurrentWiki);
 
                     Users.SendPasswordResetMessage(CurrentWiki, user.Username, user.Email, user.DateTime);
 
@@ -316,7 +321,8 @@ namespace ScrewTurn.Wiki.Web.Controllers
         {
             Users.NotifyLogout(CurrentWiki, SessionFacade.CurrentUsername);
             LoginTools.SetLoginCookie("", "", DateTime.Now.AddYears(-1));
-            Log.LogEntry("User " + SessionFacade.CurrentUsername + " logged out", EntryType.General, Log.SystemUsername, CurrentWiki);
+            Log.LogEntry("User " + SessionFacade.CurrentUsername + " logged out", EntryType.General, Log.SystemUsername,
+                CurrentWiki);
             SessionFacade.Clear();
         }
 
@@ -352,5 +358,115 @@ namespace ScrewTurn.Wiki.Web.Controllers
 
         #endregion
 
+        #region Language
+
+        [HttpGet]
+        public ActionResult Language()
+        {
+            if (SessionFacade.LoginKey != null && SessionFacade.GetCurrentUsername() != "admin")
+                return RedirectToAction("Profile"); //UrlTools.Redirect("Profile.aspx");
+
+            var model = new LanguageModel();
+
+            PrepareSAModel(model, CurrentNamespace);
+            model.Title = "Language/Time Zone - " + " - " + Settings.GetWikiTitle(CurrentWiki);
+
+            model.Timezones = LoadTimezones();
+            model.Languages = LoadLanguages();
+
+            HttpCookie cookie = Request.Cookies[GlobalSettings.CultureCookieName];
+
+            string culture = null;
+            if (cookie != null) culture = cookie["C"];
+            else culture = Settings.GetDefaultLanguage(CurrentWiki);
+            model.SelectedLanguage = culture;
+
+            string timezone = null;
+            if (cookie != null) timezone = cookie["T"];
+            else timezone = Settings.GetDefaultTimezone(CurrentWiki);
+            model.SelectedTimezone = timezone;
+
+            return View(model);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Language(LanguageModel model)
+        {
+            string culture = model.SelectedLanguage;
+            string timezone = model.SelectedTimezone;
+            SavePreferences(culture, timezone);
+
+            return RedirectToAction("Language");
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult SetLanguage(string lang, string redirect)
+        {
+            HttpCookie cookie = Request.Cookies[GlobalSettings.CultureCookieName];
+
+            string timezone = null;
+            if (cookie != null) timezone = cookie["T"];
+            else timezone = Settings.GetDefaultTimezone(CurrentWiki);
+
+            SavePreferences(lang, timezone);
+
+            if (redirect != null)
+                return Redirect(UrlTools.GetRedirectUrl(UrlTools.BuildUrl(CurrentWiki, redirect)));
+            if (Request.UrlReferrer != null && !string.IsNullOrEmpty(Request.UrlReferrer.ToString()))
+                return Redirect(UrlTools.GetRedirectUrl(UrlTools.BuildUrl(CurrentWiki, Request.UrlReferrer.FixHost().ToString())));
+
+            return RedirectToAction("Language");
+        }
+
+        /// <summary>
+        /// Saves the preferences into a ookie.
+        /// </summary>
+        /// <param name="culture">The culture.</param>
+        /// <param name="timezone">The timezone.</param>
+        private void SavePreferences(string culture, string timezone)
+        {
+            Preferences.SavePreferencesInCookie(culture, timezone);
+            Thread.CurrentThread.CurrentCulture = new CultureInfo(culture);
+            Thread.CurrentThread.CurrentUICulture = new CultureInfo(culture);
+        }
+
+        /// <summary>
+        /// Loads the timezones.
+        /// </summary>
+        private List<SelectListItem> LoadTimezones()
+        {
+            var timezones = new List<SelectListItem>();
+            foreach (var zone in TimeZoneInfo.GetSystemTimeZones())
+                timezones.Add(new SelectListItem() {Text = zone.DisplayName, Value = zone.Id});
+            //<option value="<%= zone.Id %>"><%= zone.ToString() %></option>
+            return timezones;
+        }
+
+        /// <summary>
+        /// Loads the languages.
+        /// </summary>
+        private List<SelectListItem> LoadLanguages()
+        {
+            string[] c = Tools.AvailableCultures;
+            var languages = new List<SelectListItem>();
+            for (int i = 0; i < c.Length; i++)
+                languages.Add(new SelectListItem() {Text = c[i].Split('|')[1], Value = c[i].Split('|')[0]});
+            return languages;
+        }
+
+        #endregion
+
+        #region Profile
+
+        [HttpGet]
+        public ActionResult Profile()
+        {
+
+            return new EmptyResult();
+        }
+
+        #endregion
     }
 }

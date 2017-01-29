@@ -308,6 +308,7 @@
     <Compile Include="Models\Admin\Home\OrphanPagesModel.cs" />
     <Compile Include="Models\BaseModel.cs" />
     <Compile Include="Models\Common\AccessDeniedModel.cs" />
+    <Compile Include="Models\User\LanguageModel.cs" />
     <Compile Include="Models\User\LoginBaseModel.cs" />
     <Compile Include="Models\Common\PageNotFoundModel.cs" />
     <Compile Include="Models\Common\SearchModel.cs" />
@@ -490,6 +491,7 @@
     <Content Include="Views\User\PasswordReset.cshtml" />
     <Content Include="Views\User\PasswordRecovery.cshtml" />
     <Content Include="Views\Shared\_AdminLayout.cshtml" />
+    <Content Include="Views\User\Language.cshtml" />
     <None Include="Views\Wiki\Discussion.cshtml" />
   </ItemGroup>
   <ItemGroup>

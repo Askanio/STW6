@@ -133,7 +133,10 @@ namespace ScrewTurn.Wiki {
 /*
 			linkedPages = new string[0];
 */
-			List<string> tempLinkedPages = new List<string>(10);
+
+            string currentNamespace = DetectNamespaceInfo(wiki, currentPageFullName)?.Name ?? "";
+
+            List<string> tempLinkedPages = new List<string>(10);
 
 			StringBuilder sb = new StringBuilder(raw);
 			Match match;
@@ -329,12 +332,12 @@ namespace ScrewTurn.Wiki {
 										sb.Insert(match.Index, @"<a href=""" +
 											UrlTools.BuildUrl(wiki, "RSS?Page=", Tools.UrlEncode(currentPageFullName)) +
 											@""" title=""" + Exchanger.ResourceExchanger.GetResource("RssForThisPage") + @"""><img src=""/" +
-											Themes.ListThemeFiles(wiki, Settings.GetTheme(wiki, Tools.DetectCurrentNamespace()), "Images/RSS.png") + @""" alt=""RSS"" /></a>");
-									}
+											Themes.ListThemeFiles(wiki, Settings.GetTheme(wiki, currentNamespace), "Images/RSS.png") + @""" alt=""RSS"" /></a>"); // Tools.DetectCurrentNamespace()
+                                    }
 									break;
 								case "THEMEPATH":
-									sb.Insert(match.Index,  Themes.GetThemePath(wiki, Settings.GetTheme(wiki, Tools.DetectCurrentNamespace())));
-									break;
+									sb.Insert(match.Index,  Themes.GetThemePath(wiki, Settings.GetTheme(wiki, currentNamespace))); // Tools.DetectCurrentNamespace()
+                                    break;
 								case "CLEAR":
 									sb.Insert(match.Index, @"<div style=""clear: both;""></div>");
 									break;
@@ -639,7 +642,7 @@ namespace ScrewTurn.Wiki {
                         //else
                         //    dummy.Append(Exchanger.ResourceExchanger.GetResource("Image"));
                         dummy.Append(@" />");
-                        img.Append(BuildLink(wiki, bigUrl, dummy.ToString(), true, title, forIndexing, bareBones,
+                        img.Append(BuildLink(wiki, currentNamespace, bigUrl, dummy.ToString(), true, title, forIndexing, bareBones,
                                              context, null, tempLinkedPages, isLink || sizeW == 0 ? null : "picture"));
 
                         if (title.Length > 0 && !title.StartsWith("#") && bbframe == "frame")
@@ -682,7 +685,7 @@ namespace ScrewTurn.Wiki {
                     }
                     else
                     {
-                        filelink.Append(BuildLink(wiki, url, title, false, title, forIndexing, bareBones,
+                        filelink.Append(BuildLink(wiki, currentNamespace, url, title, false, title, forIndexing, bareBones,
                      context, null, tempLinkedPages, null));
                         //a = fields[0];
                         //n = fields.Length > 1 ? fields[1] : fields[0]; 
@@ -771,7 +774,7 @@ namespace ScrewTurn.Wiki {
                                         dummy.Append(StripWikiMarkup(StripHtml(title.TrimStart('#'))));
                                     else dummy.Append(Exchanger.ResourceExchanger.GetResource("Image"));
                                     dummy.Append(@""" />");
-                                    img.Append(BuildLink(wiki, bigUrl, dummy.ToString(), true, title, forIndexing,
+                                    img.Append(BuildLink(wiki, currentNamespace, bigUrl, dummy.ToString(), true, title, forIndexing,
                                                          bareBones, context, null, tempLinkedPages));
                                 }
                                 else
@@ -833,7 +836,7 @@ namespace ScrewTurn.Wiki {
                                         dummy.Append(StripWikiMarkup(StripHtml(title.TrimStart('#'))));
                                     else dummy.Append(Exchanger.ResourceExchanger.GetResource("Image"));
                                     dummy.Append(@""" />");
-                                    img.Append(BuildLink(wiki, bigUrl, dummy.ToString(), true, title, forIndexing,
+                                    img.Append(BuildLink(wiki, currentNamespace, bigUrl, dummy.ToString(), true, title, forIndexing,
                                                          bareBones, context, null, tempLinkedPages));
                                 }
                                 else
@@ -877,7 +880,7 @@ namespace ScrewTurn.Wiki {
 					n = "";
 				}
 				if(!done) {
-					sb.Insert(match.Index, BuildLink(wiki, a, n, false, "", forIndexing, bareBones, context, currentPageFullName, tempLinkedPages));
+					sb.Insert(match.Index, BuildLink(wiki, currentNamespace, a, n, false, "", forIndexing, bareBones, context, currentPageFullName, tempLinkedPages));
 				}
 				ComputeNoWiki(sb.ToString(), ref noWikiBegin, ref noWikiEnd);
 				match = LinkRegex.Match(sb.ToString(), end);
@@ -1005,7 +1008,7 @@ namespace ScrewTurn.Wiki {
                                     //else
                                     //    dummy.Append(Exchanger.ResourceExchanger.GetResource("Image"));
                                     dummy.Append(@""" />");
-                                    img.Append(BuildLink(wiki, bigUrl, dummy.ToString(), true, title, forIndexing,
+                                    img.Append(BuildLink(wiki, currentNamespace, bigUrl, dummy.ToString(), true, title, forIndexing,
                                                          bareBones,
                                                          context, null, tempLinkedPages, imageRel));
 
@@ -1177,7 +1180,7 @@ namespace ScrewTurn.Wiki {
 					sb.Remove(match.Index, match.Length);
 					h = match.Value.Substring(4, match.Value.Length - 8 - (match.Value.EndsWith("\n") ? 1 : 0));
 					dummy = new StringBuilder(200);
-					if(currentPageFullName != null && !bareBones && !forIndexing) dummy.Append(BuildEditSectionLink(wiki, count, currentPageFullName));
+					if(currentPageFullName != null && !bareBones && !forIndexing) dummy.Append(BuildEditSectionLink(wiki, currentNamespace, count, currentPageFullName));
 					dummy.Append(@"<h3 class=""separator"">");
 					dummy.Append(h);
 					if(!bareBones && !forIndexing) {
@@ -1198,7 +1201,7 @@ namespace ScrewTurn.Wiki {
 					sb.Remove(match.Index, match.Length);
 					h = match.Value.Substring(3, match.Value.Length - 6 - (match.Value.EndsWith("\n") ? 1 : 0));
 					dummy = new StringBuilder(200);
-					if(currentPageFullName != null && !bareBones && !forIndexing) dummy.Append(BuildEditSectionLink(wiki, count, currentPageFullName));
+					if(currentPageFullName != null && !bareBones && !forIndexing) dummy.Append(BuildEditSectionLink(wiki, currentNamespace, count, currentPageFullName));
 					dummy.Append(@"<h2 class=""separator"">");
 					dummy.Append(h);
 					if(!bareBones && !forIndexing) {
@@ -1219,7 +1222,7 @@ namespace ScrewTurn.Wiki {
 					sb.Remove(match.Index, match.Length);
 					h = match.Value.Substring(2, match.Value.Length - 4 - (match.Value.EndsWith("\n") ? 1 : 0));
 					dummy = new StringBuilder(200);
-					if(currentPageFullName != null && !bareBones && !forIndexing) dummy.Append(BuildEditSectionLink(wiki, count, currentPageFullName));
+					if(currentPageFullName != null && !bareBones && !forIndexing) dummy.Append(BuildEditSectionLink(wiki, currentNamespace, count, currentPageFullName));
 					dummy.Append(@"<h1 class=""separator"">");
 					dummy.Append(h);
 					if(!bareBones && !forIndexing) {
@@ -2134,6 +2137,7 @@ namespace ScrewTurn.Wiki {
 	    /// Builds a Link.
 	    /// </summary>
 	    /// <param name="wiki">The wiki.</param>
+	    /// <param name="currentNamespace"></param>
 	    /// <param name="targetUrl">The (raw) HREF.</param>
 	    /// <param name="title">The name/title.</param>
 	    /// <param name="isImage">True if the link contains an Image as "visible content".</param>
@@ -2145,7 +2149,7 @@ namespace ScrewTurn.Wiki {
 	    /// <param name="linkedPages">The linked pages list (both existent and inexistent).</param>
 	    /// <param name="rel"></param>
 	    /// <returns>The formatted Link.</returns>
-	    private static string BuildLink(string wiki, string targetUrl, string title, bool isImage, string imageTitle,
+	    private static string BuildLink(string wiki, string currentNamespace, string targetUrl, string title, bool isImage, string imageTitle,
             bool forIndexing, bool bareBones, FormattingContext context, string currentPageFullName, List<string> linkedPages, string rel = null)
         {
 
@@ -2175,7 +2179,7 @@ namespace ScrewTurn.Wiki {
 				if(blank) sb.Append(@" target=""_blank""");
 				sb.Append(@" href=""");
 				//sb.Append(a);
-				UrlTools.BuildUrl(wiki, sb, targetUrl);
+				UrlTools.BuildWikiUrl(wiki, currentNamespace, sb, targetUrl);
 				sb.Append(@""" title=""");
 				if(!isImage && title.Length > 0) sb.Append(nstripped);
 				else if(isImage && imageTitle.Length > 0) sb.Append(imageTitleStripped);
@@ -2253,7 +2257,7 @@ namespace ScrewTurn.Wiki {
 				sb.Append(@" href=""");
 				//sb.Append(a);
 				if(targetUrl.ToLowerInvariant().StartsWith("getfile")) sb.Append(targetUrl);
-                else UrlTools.BuildUrl(wiki, sb, targetUrl);
+                else UrlTools.BuildWikiUrl(wiki, currentNamespace, sb, targetUrl);
 				sb.Append(@""" title=""");
 				if(!isImage && title.Length > 0) sb.Append(nstripped);
 				else if(isImage && imageTitle.Length > 0) sb.Append(imageTitleStripped);
@@ -2271,7 +2275,7 @@ namespace ScrewTurn.Wiki {
 					if(blank) sb.Append(@" target=""_blank""");
 					sb.Append(@" href=""");
 					//sb.Append(a);
-					UrlTools.BuildUrl(wiki, sb, targetUrl);
+					UrlTools.BuildWikiUrl(wiki, currentNamespace, sb, targetUrl);
 					sb.Append(@""" title=""");
 					if(!isImage && title.Length > 0) sb.Append(nstripped);
 					else if(isImage && imageTitle.Length > 0) sb.Append(imageTitleStripped);
@@ -2287,7 +2291,7 @@ namespace ScrewTurn.Wiki {
 						//sb.Append(@"<a href=""AllPages?Cat=");
 						//sb.Append(Tools.UrlEncode(a.Substring(2)));
 						sb.Append(@"<a href=""");
-						UrlTools.BuildUrl(wiki, sb, "AllPages?Cat=", Tools.UrlEncode(targetUrl.Substring(2)));
+						UrlTools.BuildWikiUrl(wiki, currentNamespace, sb, "AllPages?Cat=", Tools.UrlEncode(targetUrl.Substring(2)));
 						sb.Append(@""" class=""systemlink"" title=""");
 						if(!isImage && title.Length > 0) sb.Append(nstripped);
 						else if(isImage && imageTitle.Length > 0) sb.Append(imageTitleStripped);
@@ -2346,7 +2350,7 @@ namespace ScrewTurn.Wiki {
 							if(blank) sb.Append(@" target=""_blank""");
 							sb.Append(@" href=""");
 							//sb.Append(a);
-							UrlTools.BuildUrl(wiki, sb, explicitNamespace ? "++" : "", targetUrl);
+							UrlTools.BuildWikiUrl(wiki, currentNamespace, sb, explicitNamespace ? "++" : "", targetUrl);
 							sb.Append(@""" title=""");
 							/*if(!isImage && title.Length > 0) sb.Append(nstripped);
 							else if(isImage && imageTitle.Length > 0) sb.Append(imageTitleStripped);
@@ -2363,7 +2367,7 @@ namespace ScrewTurn.Wiki {
 							if(blank) sb.Append(@" target=""_blank""");
 							sb.Append(@" href=""");
 							//sb.Append(a);
-							UrlTools.BuildUrl(wiki, sb, explicitNamespace ? "++" : "", targetUrl);
+							UrlTools.BuildWikiUrl(wiki, currentNamespace, sb, explicitNamespace ? "++" : "", targetUrl);
 							sb.Append(@""" title=""");
 							/*if(!isImage && title.Length > 0) sb.Append(nstripped);
 							else if(isImage && imageTitle.Length > 0) sb.Append(imageTitleStripped);
@@ -2498,19 +2502,20 @@ namespace ScrewTurn.Wiki {
 			return hPos;
 		}
 
-		/// <summary>
-		/// Builds the "Edit" links for page sections.
-		/// </summary>
-		/// <param name="wiki">The wiki.</param>
-		/// <param name="id">The section ID.</param>
-		/// <param name="page">The page name.</param>
-		/// <returns>The link.</returns>
-		private static string BuildEditSectionLink(string wiki, int id, string page) {
+	    /// <summary>
+	    /// Builds the "Edit" links for page sections.
+	    /// </summary>
+	    /// <param name="wiki">The wiki.</param>
+	    /// <param name="currentNamespace"></param>
+	    /// <param name="id">The section ID.</param>
+	    /// <param name="page">The page name.</param>
+	    /// <returns>The link.</returns>
+	    private static string BuildEditSectionLink(string wiki, string currentNamespace, int id, string page) {
 			if(!Settings.GetEnableSectionEditing(wiki)) return "";
 
 			StringBuilder sb = new StringBuilder(100);
 			sb.Append(@"<a href=""");
-			UrlTools.BuildUrl(wiki, sb, "Edit?Page=", Tools.UrlEncode(page), "&amp;Section=", id.ToString());
+			UrlTools.BuildWikiUrl(wiki, currentNamespace, sb, "Edit?Page=", Tools.UrlEncode(page), "&amp;Section=", id.ToString());
 			sb.Append(@""" class=""editsectionlink"">");
 			sb.Append(EditSectionPlaceHolder);
 			sb.Append("</a>");
@@ -2877,7 +2882,7 @@ namespace ScrewTurn.Wiki {
 					//sb.Append(@"<a href=""AllPages?Cat=");
 					//sb.Append(Tools.UrlEncode(categories[i].FullName));
 					sb.Append(@"<a href=""");
-					UrlTools.BuildUrl(wiki, sb, "AllPages?Cat=", Tools.UrlEncode(categories[i].FullName));
+					UrlTools.BuildWikiUrl(wiki, currentNamespace.Name, sb, "AllPages?Cat=", Tools.UrlEncode(categories[i].FullName));
 					sb.Append(@""" class=""CloudLink"" style=""font-size: ");
 					sb.Append(ComputeSize((float)categories[i].Pages.Length / (float)tot * 100F).ToString());
 					sb.Append(@"px;"">");
@@ -2955,20 +2960,22 @@ namespace ScrewTurn.Wiki {
 			StringBuilder dummy;
 			sb.Append(raw);
 
-			Match match;
+            string ns = DetectNamespaceInfo(wiki, currentPageFullName)?.Name ?? "";
 
-			// Format other Phase3 special tags
-			match = Phase3SpecialTagRegex.Match(sb.ToString());
+            Match match;
+
+            // Format other Phase3 special tags
+            match = Phase3SpecialTagRegex.Match(sb.ToString());
 			while(match.Success) {
 				sb.Remove(match.Index, match.Length);
 				switch(match.Value.Substring(1, match.Value.Length - 2).ToUpperInvariant()) {
 					case "NAMESPACE":
-						string ns = Tools.DetectCurrentNamespace();
-				        if (string.IsNullOrEmpty(ns)) ns = WebUtility.HtmlEncode(Settings.GetRootNamespaceName(wiki));
-						sb.Insert(match.Index, ns);
+						//string ns = DetectNamespaceInfo(wiki, currentPageFullName)?.Name ?? ""; //Tools.DetectCurrentNamespace();
+                        var nsName = string.IsNullOrEmpty(ns) ? WebUtility.HtmlEncode(Settings.GetRootNamespaceName(wiki)) : ns;
+						sb.Insert(match.Index, nsName);
 						break;
-					case "NAMESPACEDROPDOWN":
-						sb.Insert(match.Index, BuildCurrentNamespaceDropDown(wiki));
+					case "NAMESPACEDROPDOWN":  
+                        sb.Insert(match.Index, BuildCurrentNamespaceDropDown(wiki, ns));
 						break;
 					case "INCOMING":
 						sb.Insert(match.Index, BuildIncomingLinksList(wiki, currentPageFullName, context, currentPageFullName));
@@ -3127,14 +3134,15 @@ namespace ScrewTurn.Wiki {
 			return sb.ToString();
 		}
 
-		/// <summary>
-		/// Builds the current namespace drop-down list.
-		/// </summary>
-		/// <param name="wiki">The wiki.</param>
-		/// <returns>The drop-down list HTML markup.</returns>
-		private static string BuildCurrentNamespaceDropDown(string wiki) {
-			string ns = Tools.DetectCurrentNamespace();
-			if(ns == null) ns = "";
+	    /// <summary>
+	    /// Builds the current namespace drop-down list.
+	    /// </summary>
+	    /// <param name="wiki">The wiki.</param>
+	    /// <param name="ns">Namespace</param>
+	    /// <returns>The drop-down list HTML markup.</returns>
+	    private static string BuildCurrentNamespaceDropDown(string wiki, string ns) {
+			//string ns = Tools.DetectCurrentNamespace();
+   //         if (ns == null) ns = "";
 
 			string currentUser = SessionFacade.GetCurrentUsername();
 			string[] currentGroups = SessionFacade.GetCurrentGroupNames(wiki);

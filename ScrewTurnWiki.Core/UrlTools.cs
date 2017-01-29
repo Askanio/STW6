@@ -101,23 +101,26 @@ namespace ScrewTurn.Wiki {
         /// <param name="target">The target URL.</param>
         public static string GetRedirectUrl(string target)
         {
-            return GetRedirectUrl(target, true);
-        }
-
-        /// <summary>
-        /// Redirects the current response to the specified URL, appending the current namespace if requested.
-        /// </summary>
-        /// <param name="target">The target URL.</param>
-        /// <param name="addNamespace">A value indicating whether to add the namespace.</param>
-        public static string GetRedirectUrl(string target, bool addNamespace)
-        {
             if (!target.StartsWith("/"))
                 target = String.Concat("/", target);
-            string nspace = HttpContext.Current.Request["NS"];
-            if (string.IsNullOrEmpty(nspace) || !addNamespace)
-                return target;
-            return target + (target.Contains("?") ? "&" : "?") + "NS=" + Tools.UrlEncode(nspace);
+            return target;
+            //return GetRedirectUrl(target, true);
         }
+
+        ///// <summary>
+        ///// Redirects the current response to the specified URL, appending the current namespace if requested.
+        ///// </summary>
+        ///// <param name="target">The target URL.</param>
+        ///// <param name="addNamespace">A value indicating whether to add the namespace.</param>
+        //public static string GetRedirectUrl(string target, bool addNamespace)
+        //{
+        //    if (!target.StartsWith("/"))
+        //        target = String.Concat("/", target);
+        //    string nspace = HttpContext.Current.Request["NS"];
+        //    if (string.IsNullOrEmpty(nspace) || !addNamespace)
+        //        return target;
+        //    return target + (target.Contains("?") ? "&" : "?") + "NS=" + Tools.UrlEncode(nspace);
+        //}
 
         /// <summary>
         /// Redirects the current response to the specified URL, properly appending the current namespace if any.
