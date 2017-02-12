@@ -7,6 +7,7 @@ using System.Web.Mvc;
 using System.Xml;
 using ScrewTurn.Wiki.Configuration;
 using ScrewTurn.Wiki.PluginFramework;
+using ScrewTurn.Wiki.Web.Code.Attributes;
 using ScrewTurn.Wiki.Web.Localization.Messages;
 
 namespace ScrewTurn.Wiki.Web.Controllers
@@ -18,7 +19,8 @@ namespace ScrewTurn.Wiki.Web.Controllers
         }
 
         [HttpGet]
-        public ActionResult Index()
+        [DetectNamespaceFromPage(PageParamName = "rssPage", Order = 1)]
+        public ActionResult Index(string rssPage)
         {
             RssFeedsMode rssFeedsMode = Settings.GetRssFeedsMode(CurrentWiki);
             if (rssFeedsMode == RssFeedsMode.Disabled)

@@ -161,6 +161,8 @@
     <Compile Include="Code\Extensions\BootstrapHtmlExtensions.cs" />
     <Compile Include="Code\Extensions\UrlHelperExtensions.cs" />
     <Compile Include="Code\LoginTools.cs" />
+    <Compile Include="Code\InfoMessages\InfoMessage.cs" />
+    <Compile Include="Code\InfoMessages\InfoMessageType.cs" />
     <Compile Include="Code\PageHelper.cs" />
     <Compile Include="Code\PageSortingTools.cs" />
     <Compile Include="Code\Providers\ProviderHelper.cs" />
@@ -492,6 +494,7 @@
     <Content Include="Views\User\PasswordRecovery.cshtml" />
     <Content Include="Views\Shared\_AdminLayout.cshtml" />
     <Content Include="Views\User\Language.cshtml" />
+    <Content Include="Views\Common\Sitemap.cshtml" />
     <None Include="Views\Wiki\Discussion.cshtml" />
   </ItemGroup>
   <ItemGroup>
@@ -513,7 +516,6 @@
     <Folder Include="Views\Admin\Users\" />
     <Folder Include="Views\Categories\" />
     <Folder Include="Views\Home\" />
-    <Folder Include="Views\RSS\" />
     <Folder Include="Views\SpecialPage\" />
   </ItemGroup>
   <ItemGroup>

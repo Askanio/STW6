@@ -53,7 +53,11 @@ namespace ScrewTurn.Wiki.Web
             //    );
 
 
-            
+            routes.MapRoute(
+                "Sitemap",
+                "Sitemap",
+                new { controller = "Common", action = "Sitemap" }
+                );
 
             routes.MapRoute(
                 "Error",
@@ -65,12 +69,6 @@ namespace ScrewTurn.Wiki.Web
                 "AccessDenied",
                 "AccessDenied",
                 new {controller = "Common", action = "AccessDenied"}
-                );
-
-            routes.MapRoute(
-                "Rss",
-                "Rss",
-                new {controller = "Rss", action = "Index"}
                 );
 
             routes.MapRoute(
@@ -102,6 +100,13 @@ namespace ScrewTurn.Wiki.Web
             //    "AllPages/{ns}/{page}",
             //    new {controller = "Common", action = "Index", page = UrlParameter.Optional}
             //    );
+
+            routes.MapRoute(
+                "Rss",
+                "{rssPage}",
+                new {controller = "Rss", action = "Index"},
+                new {page = @"^(.*\.|)RSS$"}
+                );
 
             routes.MapRoute(
                 "Search",

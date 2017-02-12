@@ -25,6 +25,12 @@ var ScrewTurn;
                     CommonWizard.prototype.requestConfirm = function () {
                         return confirm(CONFIRM_MESSAGE);
                     };
+                    CommonWizard.showMessage = function (messageType, message) {
+                        var style = "resultok";
+                        if (messageType === 1)
+                            style = "resulterror";
+                        bootbox.alert("<pre class='" + style + "'>" + message + "</pre>");
+                    };
                     CommonWizard.prototype.createCookie = function (name, value, days) {
                         var expires = "";
                         if (days) {

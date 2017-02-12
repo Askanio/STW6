@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using ScrewTurn.Wiki.Web.Code.InfoMessages;
 
 namespace ScrewTurn.Wiki.Web.Models
 {
@@ -20,5 +21,7 @@ namespace ScrewTurn.Wiki.Web.Models
 
         [AllowHtml]
         public List<MvcHtmlString> HtmlHeads { get; set; }
+
+        public InfoMessage Message { get; set; }
     }
 }
