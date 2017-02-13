@@ -15,6 +15,8 @@ namespace ScrewTurn.Wiki.Web
             //routes.IgnoreRoute("favicon.ico");
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
+            routes.MapMvcAttributeRoutes();
+
             routes.MapRoute(
                 "Installer",
                 "Install/{action}",
@@ -32,6 +34,31 @@ namespace ScrewTurn.Wiki.Web
             //    new {controller = "User", action = "CreateMasterPassword"}
             //    );
 
+            //routes.MapRoute(
+            //    "Login",
+            //    "Login",
+            //    new {controller = "User", action = "Login" }
+            //    );
+
+            //routes.MapRoute(
+            //    "ForceLogout",
+            //    "ForceLogout",
+            //    new {controller = "User", action = "ForceLogout" }
+            //    );
+
+            //routes.MapRoute(
+            //    "Activate",
+            //    "Activate",
+            //    new {controller = "User", action = "Activate" }
+            //    );
+
+
+            routes.MapRoute(
+                "Sitemap",
+                "Sitemap",
+                new { controller = "Common", action = "Sitemap" }
+                );
+
             routes.MapRoute(
                 "Error",
                 "Error/{ns}",
@@ -42,6 +69,12 @@ namespace ScrewTurn.Wiki.Web
                 "AccessDenied",
                 "AccessDenied",
                 new {controller = "Common", action = "AccessDenied"}
+                );
+
+            routes.MapRoute(
+                "Language",
+                "Language",
+                new {controller = "User", action = "Language"}
                 );
 
             routes.MapRoute(
@@ -67,6 +100,13 @@ namespace ScrewTurn.Wiki.Web
             //    "AllPages/{ns}/{page}",
             //    new {controller = "Common", action = "Index", page = UrlParameter.Optional}
             //    );
+
+            routes.MapRoute(
+                "Rss",
+                "{rssPage}",
+                new {controller = "Rss", action = "Index"},
+                new {page = @"^(.*\.|)RSS$"}
+                );
 
             routes.MapRoute(
                 "Search",

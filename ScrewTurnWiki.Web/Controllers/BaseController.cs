@@ -32,6 +32,8 @@ namespace ScrewTurn.Wiki.Web.Controllers
         /// </summary>
         public ApplicationSettings AppSettings { get; private set; }
 
+        //public GlobalSettings SettingsService { get; private set; }
+
         /// <summary>
         /// Initializes a new instance of the <see cref="BaseController"/> class.
         /// </summary>
@@ -39,6 +41,7 @@ namespace ScrewTurn.Wiki.Web.Controllers
         protected BaseController(ApplicationSettings appSettings)
         {
             AppSettings = appSettings;
+            InitializeCulture();
         }
 
         /// <summary>
@@ -90,8 +93,6 @@ namespace ScrewTurn.Wiki.Web.Controllers
 
             //    return;
             //}
-
-            InitializeCulture();
         }
 
         protected override void OnException(ExceptionContext filterContext)

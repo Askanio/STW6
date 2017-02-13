@@ -31,5 +31,8 @@ namespace ScrewTurn.Wiki.Web.Models.Common
 
         public IList<SelectListItem> Categories { get; set; }
 
+        [AllowHtml]
+        public MvcHtmlString SearchResult { get; set; }
+
     }
 }

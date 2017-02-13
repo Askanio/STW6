@@ -39,7 +39,7 @@ namespace ScrewTurn.Wiki.Web.Controllers
         public ActionResult GetAllPages(string page, string cat, string sortBy, bool reverse = false)
         {
             var model = new AllPagesModel();
-            base.PrepareDefaultModel(model, CurrentNamespace, CurrentPageFullName);
+            base.PrepareDefaultModel(model, CurrentNamespace, page);
 
             model.SortBy = ParseSortBy(sortBy);
             model.Reverse = reverse;
