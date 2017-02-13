@@ -70,7 +70,7 @@ namespace ScrewTurn.Wiki.Web.Localization.Install {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to An error ocurred installing.
+        ///   Looks up a localized string similar to An error ocurred during installation.
         /// </summary>
         public static string FailureInstall {
             get {
@@ -169,7 +169,7 @@ namespace ScrewTurn.Wiki.Web.Localization.Install {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Something went wrong.
+        ///   Looks up a localized string similar to Unexpected error occured.
         /// </summary>
         public static string SharedUnexpectedError {
             get {
@@ -178,7 +178,7 @@ namespace ScrewTurn.Wiki.Web.Localization.Install {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
+        ///   Looks up a localized string similar to Step 1. Access Check.
         /// </summary>
         public static string Stage1 {
             get {
@@ -187,7 +187,7 @@ namespace ScrewTurn.Wiki.Web.Localization.Install {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
+        ///   Looks up a localized string similar to Step 2. Database Setup.
         /// </summary>
         public static string Stage2 {
             get {
@@ -196,7 +196,7 @@ namespace ScrewTurn.Wiki.Web.Localization.Install {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
+        ///   Looks up a localized string similar to Step 3. Wiki Buildup.
         /// </summary>
         public static string Stage3 {
             get {
@@ -205,7 +205,7 @@ namespace ScrewTurn.Wiki.Web.Localization.Install {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
+        ///   Looks up a localized string similar to Installation completion.
         /// </summary>
         public static string Stage4 {
             get {
@@ -214,7 +214,7 @@ namespace ScrewTurn.Wiki.Web.Localization.Install {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Thank for you downloading ScrewTurnWiki engine..
+        ///   Looks up a localized string similar to Thank you for  downloading ScrewTurnWiki engine. Setup Wizard will help to set the basic configuration and the connection to the databases..
         /// </summary>
         public static string Step1Intro {
             get {
@@ -223,7 +223,7 @@ namespace ScrewTurn.Wiki.Web.Localization.Install {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
+        ///   Looks up a localized string similar to Setting public directory .
         /// </summary>
         public static string Step1PublicDirectory {
             get {
@@ -232,7 +232,7 @@ namespace ScrewTurn.Wiki.Web.Localization.Install {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Unable to write to the public directory..
+        ///   Looks up a localized string similar to Public directory  is missing or it has read-only access..
         /// </summary>
         public static string Step1PublicDirectoryFailureMessage {
             get {
@@ -241,7 +241,7 @@ namespace ScrewTurn.Wiki.Web.Localization.Install {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
+        ///   Looks up a localized string similar to Create directory in the web site root  for data storing and enter its name. The folder shall have write access. Please check the access when the directory was specified..
         /// </summary>
         public static string Step1PublicDirectoryHelp {
             get {
@@ -250,7 +250,7 @@ namespace ScrewTurn.Wiki.Web.Localization.Install {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The public directory can be written to..
+        ///   Looks up a localized string similar to The public directory has write access..
         /// </summary>
         public static string Step1PublicDirectorySuccessMessage {
             get {
@@ -259,7 +259,7 @@ namespace ScrewTurn.Wiki.Web.Localization.Install {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
+        ///   Looks up a localized string similar to Checking access to web.config file.
         /// </summary>
         public static string Step1WebConfig {
             get {
@@ -268,7 +268,7 @@ namespace ScrewTurn.Wiki.Web.Localization.Install {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Unable to write to the web.config file..
+        ///   Looks up a localized string similar to Web.config is read-only file..
         /// </summary>
         public static string Step1WebConfigFailureMessage {
             get {
@@ -277,7 +277,7 @@ namespace ScrewTurn.Wiki.Web.Localization.Install {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to In order to proceed, first we need to test if you have write access to the web.config file..
+        ///   Looks up a localized string similar to In order to proceed, first we need to check if you have the write access to the web.config file..
         /// </summary>
         public static string Step1WebConfigHelp {
             get {
@@ -304,7 +304,7 @@ namespace ScrewTurn.Wiki.Web.Localization.Install {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
+        ///   Looks up a localized string similar to Enter the database connection string.
         /// </summary>
         public static string Step2ConnectionStringsHelp {
             get {
@@ -313,7 +313,7 @@ namespace ScrewTurn.Wiki.Web.Localization.Install {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Connection string.
+        ///   Looks up a localized string similar to Database connection string.
         /// </summary>
         public static string Step2DatabaseConnectionString {
             get {
@@ -331,7 +331,7 @@ namespace ScrewTurn.Wiki.Web.Localization.Install {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Example connection strings.
+        ///   Looks up a localized string similar to Connection string example.
         /// </summary>
         public static string Step2ExampleConnectionStrings {
             get {
@@ -340,7 +340,7 @@ namespace ScrewTurn.Wiki.Web.Localization.Install {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
+        ///   Looks up a localized string similar to We need to set up the connection to the database..
         /// </summary>
         public static string Step2Intro {
             get {
@@ -349,7 +349,7 @@ namespace ScrewTurn.Wiki.Web.Localization.Install {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
+        ///   Looks up a localized string similar to Error occured during checking the connection to the database.
         /// </summary>
         public static string Step2TestDbConnectionFailureMessage {
             get {
@@ -358,7 +358,7 @@ namespace ScrewTurn.Wiki.Web.Localization.Install {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Create new wiki.
+        ///   Looks up a localized string similar to Create a new wiki.
         /// </summary>
         public static string Step3ButtonCreateNewWikiTitle {
             get {
@@ -376,7 +376,7 @@ namespace ScrewTurn.Wiki.Web.Localization.Install {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to All form fields are required..
+        ///   Looks up a localized string similar to All form fields are required  to be filled..
         /// </summary>
         public static string Step3FieldsRequireMessage {
             get {
@@ -385,7 +385,7 @@ namespace ScrewTurn.Wiki.Web.Localization.Install {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Hosts field only allow : any letter, 0-9, underscores, dash, semicolon, point.
+        ///   Looks up a localized string similar to Hosts field only allows : any alphanumeric symbols, underscore, dash, semicolon, dot.
         /// </summary>
         public static string Step3HostsInValidCharacters {
             get {
@@ -394,7 +394,7 @@ namespace ScrewTurn.Wiki.Web.Localization.Install {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
+        ///   Looks up a localized string similar to Hosts.
         /// </summary>
         public static string Step3HostsTitleColumnHeading {
             get {
@@ -403,7 +403,7 @@ namespace ScrewTurn.Wiki.Web.Localization.Install {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
+        ///   Looks up a localized string similar to You are able to create a few wikis and connect them to one or more hosts. If you are not going to use more than one wiki, then skip this step..
         /// </summary>
         public static string Step3Intro {
             get {
@@ -412,7 +412,7 @@ namespace ScrewTurn.Wiki.Web.Localization.Install {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to This wikiname is exists.
+        ///   Looks up a localized string similar to Wiki with such name already exists.
         /// </summary>
         public static string Step3WikinameExistsError {
             get {
@@ -421,7 +421,7 @@ namespace ScrewTurn.Wiki.Web.Localization.Install {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Wikiname field only allow : any letter, 0-9, underscores, dash.
+        ///   Looks up a localized string similar to Wikiname field only allows : any alphanumeric symbols, underscore, dash..
         /// </summary>
         public static string Step3WikinameInValidCharacters {
             get {
@@ -430,7 +430,7 @@ namespace ScrewTurn.Wiki.Web.Localization.Install {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
+        ///   Looks up a localized string similar to Wiki name.
         /// </summary>
         public static string Step3WikiNameTitleColumnHeading {
             get {
@@ -439,7 +439,7 @@ namespace ScrewTurn.Wiki.Web.Localization.Install {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Save Password.
+        ///   Looks up a localized string similar to Save password.
         /// </summary>
         public static string Step4BtnPasswordSave_Text {
             get {
@@ -448,7 +448,7 @@ namespace ScrewTurn.Wiki.Web.Localization.Install {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Set Master Password.
+        ///   Looks up a localized string similar to Set master password.
         /// </summary>
         public static string Step4ChangeMasterPassword_Text {
             get {
@@ -457,7 +457,7 @@ namespace ScrewTurn.Wiki.Web.Localization.Install {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Passwords are not equal.
+        ///   Looks up a localized string similar to Passwords do not match.
         /// </summary>
         public static string Step4CheckEqualPasswordMessage {
             get {
@@ -466,7 +466,7 @@ namespace ScrewTurn.Wiki.Web.Localization.Install {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to You must configure the password for the built-in &apos;admin&apos; account. Make sure you use a very strong password as the built-in &apos;admin&apos; account can perform any operation in the wiki..
+        ///   Looks up a localized string similar to You must configure the  master password for the built-in &apos;admin&apos; account. Make sure you use a very strong password as the built-in &apos;admin&apos; account can perform any operations in the wiki..
         /// </summary>
         public static string Step4DescriptionPassword_Text {
             get {
@@ -484,7 +484,7 @@ namespace ScrewTurn.Wiki.Web.Localization.Install {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to An error occurred during the install.
+        ///   Looks up a localized string similar to An error occurred during the installation.
         /// </summary>
         public static string Step4FailureTitle {
             get {
@@ -493,7 +493,7 @@ namespace ScrewTurn.Wiki.Web.Localization.Install {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Restart site.
+        ///   Looks up a localized string similar to Restarting the site.
         /// </summary>
         public static string Step4FinalizeInstall {
             get {
@@ -502,7 +502,7 @@ namespace ScrewTurn.Wiki.Web.Localization.Install {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Master password saved successfully.
+        ///   Looks up a localized string similar to Master password has been successfully saved.
         /// </summary>
         public static string Step4NewAdminPassResultMessage {
             get {
@@ -511,7 +511,7 @@ namespace ScrewTurn.Wiki.Web.Localization.Install {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to New Password.
+        ///   Looks up a localized string similar to A new password.
         /// </summary>
         public static string Step4NewPassword {
             get {
@@ -529,7 +529,7 @@ namespace ScrewTurn.Wiki.Web.Localization.Install {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Type here the master password.
+        ///   Looks up a localized string similar to Enter the master password.
         /// </summary>
         public static string Step4NewPassword_ToolTip {
             get {
@@ -538,7 +538,7 @@ namespace ScrewTurn.Wiki.Web.Localization.Install {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Password field only allow : a-z 0-9.
+        ///   Looks up a localized string similar to Password field only allows alphanumeric symbols.
         /// </summary>
         public static string Step4PasswordInvalidCharactersMessage {
             get {
@@ -556,7 +556,7 @@ namespace ScrewTurn.Wiki.Web.Localization.Install {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to New Password (Repeat).
+        ///   Looks up a localized string similar to New password (Repeat).
         /// </summary>
         public static string Step4ReNewPassword {
             get {
@@ -583,7 +583,7 @@ namespace ScrewTurn.Wiki.Web.Localization.Install {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
+        ///   Looks up a localized string similar to In order to proceed with site configuration, you need to restart the site. .
         /// </summary>
         public static string Step4SuccessSummary {
             get {
@@ -592,7 +592,7 @@ namespace ScrewTurn.Wiki.Web.Localization.Install {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Installation successful.
+        ///   Looks up a localized string similar to Installation has been succesfully completed!.
         /// </summary>
         public static string Step4SuccessTitle {
             get {

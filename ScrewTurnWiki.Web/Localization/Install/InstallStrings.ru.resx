@@ -124,10 +124,10 @@
     <value>Назад</value>
   </data>
   <data name="SharedCancel" xml:space="preserve">
-    <value>Отменить</value>
+    <value>Отмена</value>
   </data>
   <data name="SharedCheckLengthError1" xml:space="preserve">
-    <value>Длина поля</value>
+    <value>Длинна поля</value>
   </data>
   <data name="SharedCheckLengthError2" xml:space="preserve">
     <value>должна быть от</value>
@@ -142,7 +142,7 @@
     <value>Удалить</value>
   </data>
   <data name="SharedFailure" xml:space="preserve">
-    <value>Сбой!</value>
+    <value>Ошибка!</value>
   </data>
   <data name="SharedNextButton" xml:space="preserve">
     <value>Далее</value>
@@ -172,10 +172,10 @@
     <value>Для того, чтобы продолжить, сначала необходимо проверить, если ли у вас доступ на запись в файл web.config.</value>
   </data>
   <data name="Step3ButtonCreateNewWikiTitle" xml:space="preserve">
-    <value>Создать новую вики</value>
+    <value>Создать новую Wiki</value>
   </data>
   <data name="Step3ButtonCreateWikiTitle" xml:space="preserve">
-    <value>Создать вики</value>
+    <value>Создать Wiki</value>
   </data>
   <data name="Step3FieldsRequireMessage" xml:space="preserve">
     <value>Все поля обязательны к заполнению.</value>
@@ -187,22 +187,22 @@
     <value>Хосты</value>
   </data>
   <data name="Step3Intro" xml:space="preserve">
-    <value>Вы можете создать несколько вики привязав их к одному или нескольким хостам. Если Вы планируете использовать одну вики, то пропустите этот шаг.</value>
+    <value>Вы можете создать несколько Wiki привязав их к одному или нескольким хостам. Если Вы планируете использовать одну Wiki, то пропустите этот шаг.</value>
   </data>
   <data name="Step3WikinameExistsError" xml:space="preserve">
-    <value>Вики с таким именем уже создано</value>
+    <value>Wiki с таким названием уже существует</value>
   </data>
   <data name="Step3WikinameInValidCharacters" xml:space="preserve">
-    <value>В имени вики допуститмы символы: любые буквы, цифры, нижнее подчёркивание, тире</value>
+    <value>В названии Wiki допустимы символы: любые буквы, цифры, нижнее подчёркивание, тире</value>
   </data>
   <data name="Step3WikiNameTitleColumnHeading" xml:space="preserve">
-    <value>Имя вики</value>
+    <value>Название Wiki</value>
   </data>
   <data name="Step2ConnectionStringCreateDatabase" xml:space="preserve">
     <value>Вам необходимо сначала создать базу данных.</value>
   </data>
   <data name="Step2ConnectionStrings" xml:space="preserve">
-    <value />
+    <value>Строка подключения</value>
   </data>
   <data name="Step2ConnectionStringsHelp" xml:space="preserve">
     <value>Введите строку подключения к базе данных</value>
@@ -253,10 +253,10 @@
     <value>Для продолжения необходимо перезагрузить сайт. После перезагрузки Вы сможете произвести настройку сайта.</value>
   </data>
   <data name="FailureInstall" xml:space="preserve">
-    <value>Произошла ошибка при установке</value>
+    <value>Произошла ошибка во время установки</value>
   </data>
   <data name="SharedUnexpectedError" xml:space="preserve">
-    <value>Неопределённая ошибка</value>
+    <value>Непредвиденная ошибка</value>
   </data>
   <data name="Step4BtnPasswordSave_Text" xml:space="preserve">
     <value>Сохранить пароль</value>
@@ -268,10 +268,10 @@
     <value>Пароли не совпадают</value>
   </data>
   <data name="Step4DescriptionPassword_Text" xml:space="preserve">
-    <value>Необходимо настроить пароль администратора. Убедитесь, что вы используете очень надежный пароль, так как под админом можно выполнять любые операции в вики.</value>
+    <value>Необходимо настроить пароль администратора. Убедитесь, что вы используете очень надежный пароль, так как под администратором можно выполнять любые операции в Wiki.</value>
   </data>
   <data name="Step4NewAdminPassResultMessage" xml:space="preserve">
-    <value>Пароль успещно сохранён</value>
+    <value>Пароль успешно сохранён</value>
   </data>
   <data name="Step4NewPassword" xml:space="preserve">
     <value>Новый пароль</value>
