@@ -26,6 +26,20 @@ p {
 	color: #009900;
 }
 
+.loader{
+    position: absolute;
+    z-index: 800;
+    background-image: url('/Content/Images/Wait.gif');
+    background-repeat: no-repeat;
+    background-position: center center;
+    width: 100%;
+    height: 100%;
+    opacity: 0.6;
+    background-color: #CCCCCC;
+    display: none;
+} 
+
+
 input, label {
 	font-family: Verdana, Arial, Helvetica, sans-serif;
 	font-size: 12px;
@@ -50,6 +64,19 @@ div.globalcaptcha input {
 	margin-top: 2px;
 	width: 144px;
 }
+
+.btn {
+    background-color: #D9671E;
+    border: solid 1px #CCCCCC;
+    color: #FFFFFF !important;
+    cursor: pointer;
+    padding: 2px;
+    text-decoration: none !important;
+}
+a.btn:hover {
+    background-color: #214C9A !important;
+}
+
 
 /* Small text */
 .small, small {
@@ -110,6 +137,18 @@ a.unknownlink:hover {
 
 /* Email Link */
 a.emaillink {
+}
+
+.captcha-box {
+	text-align: center;
+	line-height: 0; /*firefox line-height bug fix*/
+}
+.captcha-box > div {
+	display: inline-block;
+	max-width: 100%;
+}
+.captcha-box input {
+	height: auto;
 }
 
 h1 {
@@ -1202,7 +1241,7 @@ p.excerpt b.searchkeyword, b.searchkeyword {
 
 /* END User.aspx */
 
-/* BEGIN AllPages.aspx */
+/* BEGIN AllPages */
 
 #PageSelectorDiv {
 	margin: 6px 0px 6px 0px;
@@ -1226,7 +1265,7 @@ p.excerpt b.searchkeyword, b.searchkeyword {
   font-weight: bold;  
 }
 
-/* END AllPages.aspx */
+/* END AllPages */
 
 /* BEGIN Post.aspx */
 

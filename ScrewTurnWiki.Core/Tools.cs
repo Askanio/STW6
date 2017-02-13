@@ -28,7 +28,7 @@ namespace ScrewTurn.Wiki {
 		public static string GetIncludes(string wiki, string nspace) {
 			StringBuilder result = new StringBuilder(300);
 			string nameTheme = Settings.GetTheme(wiki, nspace);
-			result.Append(GetJavaScriptIncludes());
+			//result.Append(GetJavaScriptIncludes()); // Moved to Layouts
 			List<string> cssList = Themes.ListThemeFiles(wiki, nameTheme, ".css");
 			string firstChunk;
 			if(cssList != null) {
@@ -53,9 +53,9 @@ namespace ScrewTurn.Wiki {
 			if (customEditorCss!= null && customEditorCss.Count>0) result.AppendFormat(@"<link rel=""stylesheet"" href=""/{0}"" type=""text/css"" />" + "\n", customEditorCss[0]);
 			else result.Append(@"<link rel=""stylesheet"" href=""/Content/Themes/Editor.css"" type=""text/css"" />" + "\n");
 			// OpenSearch
-            result.AppendFormat(@"<link rel=""search"" href=""/Search?OpenSearch=1"" type=""application/opensearchdescription+xml"" title=""{0}"" />" + "\n", Settings.GetWikiTitle(wiki) + " - Search");
+            result.AppendFormat(@"<link rel=""search"" href=""/Search/Opensearch"" type=""application/opensearchdescription+xml"" title=""{0}"" />" + "\n", Settings.GetWikiTitle(wiki) + " - Search");
 
-            result.Append(@"<link rel=""stylesheet"" href=""/Content/Themes/prettyPhoto.css"" type=""text/css"" />" + "\n"); // TODO: Вынести настройку в стили
+            result.Append(@"<link rel=""stylesheet"" href=""/Content/Themes/prettyPhoto.css"" type=""text/css"" />" + "\n"); // TODO: Move to adjust styles
 
 			List<string> jsFiles = Themes.ListThemeFiles(wiki, nameTheme, ".js");
 			if(jsFiles != null) {
@@ -113,7 +113,7 @@ namespace ScrewTurn.Wiki {
 			string url = "";
 			string currentWiki = DetectCurrentWiki();
 			if(nspace == null && currentPageFullName == Settings.GetDefaultPage(currentWiki)) url = Settings.GetMainUrl(currentWiki).ToString();
-			else url = Settings.GetMainUrl(currentWiki).ToString().TrimEnd('/') + "/" + currentPageFullName + GlobalSettings.PageExtension;
+			else url = Settings.GetMainUrl(currentWiki).TrimEnd('/') + "/" + currentPageFullName + GlobalSettings.PageExtension;
 
 			// Case sensitive
 			if(url == requestUrl) return "";

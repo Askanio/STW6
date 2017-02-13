@@ -1,13 +1,20 @@
-﻿<!DOCTYPE html>
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Error</title>
-</head>
-<body>
-    <hgroup>
-        <h1>Error.</h1>
-        <h2>An error occurred while processing your request.</h2>
-    </hgroup>
-</body>
-</html>
+﻿@using ScrewTurn.Wiki.Web.Localization.Common
+
+@{
+    Layout = "~/Views/Shared/_SALayout.cshtml";
+}
+
+<h1 class="pagetitlesystem">@Error.LblError_Text</h1>
+<table width="98%">
+    <tr>
+        <td>
+            <img src="/Content/Images/Error.png" alt="Error" />
+        </td>
+        <td>
+            <p>
+                @Html.Raw(@Error.LblDescription_Text)
+            </p>
+        </td>
+    </tr>
+</table>
+

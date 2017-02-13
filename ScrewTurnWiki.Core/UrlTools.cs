@@ -95,11 +95,38 @@ namespace ScrewTurn.Wiki {
 			else return fields[0]; // Namespace.Page
 		}
 
-		/// <summary>
-		/// Redirects the current response to the specified URL, properly appending the current namespace if any.
-		/// </summary>
-		/// <param name="target">The target URL.</param>
-		public static void Redirect(string target) {
+        /// <summary>
+        /// Redirects the current response to the specified URL, properly appending the current namespace if any.
+        /// </summary>
+        /// <param name="target">The target URL.</param>
+        public static string GetRedirectUrl(string target)
+        {
+            if (!target.StartsWith("/"))
+                target = String.Concat("/", target);
+            return target;
+            //return GetRedirectUrl(target, true);
+        }
+
+        ///// <summary>
+        ///// Redirects the current response to the specified URL, appending the current namespace if requested.
+        ///// </summary>
+        ///// <param name="target">The target URL.</param>
+        ///// <param name="addNamespace">A value indicating whether to add the namespace.</param>
+        //public static string GetRedirectUrl(string target, bool addNamespace)
+        //{
+        //    if (!target.StartsWith("/"))
+        //        target = String.Concat("/", target);
+        //    string nspace = HttpContext.Current.Request["NS"];
+        //    if (string.IsNullOrEmpty(nspace) || !addNamespace)
+        //        return target;
+        //    return target + (target.Contains("?") ? "&" : "?") + "NS=" + Tools.UrlEncode(nspace);
+        //}
+
+        /// <summary>
+        /// Redirects the current response to the specified URL, properly appending the current namespace if any.
+        /// </summary>
+        /// <param name="target">The target URL.</param>
+        public static void Redirect(string target) {
 			Redirect(target, true);
 		}
 
@@ -108,19 +135,33 @@ namespace ScrewTurn.Wiki {
 		/// </summary>
 		/// <param name="target">The target URL.</param>
 		/// <param name="addNamespace">A value indicating whether to add the namespace.</param>
-		public static void Redirect(string target, bool addNamespace) {
+		public static void Redirect(string target, bool addNamespace)
+		{
+            if (!target.StartsWith("/"))
+		        target = String.Concat("/", target);
 			string nspace = HttpContext.Current.Request["NS"];
-			if(nspace == null || nspace.Length == 0 || !addNamespace) HttpContext.Current.Response.Redirect(target);
+			if(string.IsNullOrEmpty(nspace) || !addNamespace) HttpContext.Current.Response.Redirect(target);
 			else HttpContext.Current.Response.Redirect(target + (target.Contains("?") ? "&" : "?") + "NS=" + Tools.UrlEncode(nspace));
 		}
 
-		/// <summary>
-		/// Builds a URL properly prepending the namespace to the URL.
-		/// </summary>
-		/// <param name="wiki">The wiki.</param>
-		/// <param name="chunks">The chunks used to build the URL.</param>
-		/// <returns>The complete URL.</returns>
-		public static string BuildUrl(string wiki, params string[] chunks) {
+	    ///// <summary>
+	    ///// Builds a URL properly prepending the namespace to the URL.
+	    ///// </summary>
+	    ///// <param name="wiki">The wiki.</param>
+	    ///// <param name="chunks">The chunks used to build the URL.</param>
+	    ///// <returns>The complete URL.</returns>
+	    //public static string BuildUrl(string wiki, params string[] chunks)
+	    //{
+	    //    return BuildUrl(wiki, null, chunks);
+	    //}
+
+	    /// <summary>
+	    /// Builds a URL properly prepending the namespace to the URL.
+	    /// </summary>
+	    /// <param name="wiki">The wiki.</param>
+	    /// <param name="chunks">The chunks used to build the URL.</param>
+	    /// <returns>The complete URL.</returns>
+	    public static string BuildUrl(string wiki, params string[] chunks) {
 			if(chunks == null) throw new ArgumentNullException("chunks");
 			if(chunks.Length == 0) return ""; // Shortcut
 
@@ -133,8 +174,8 @@ namespace ScrewTurn.Wiki {
 
 			if(tempString.StartsWith("++")) return tempString.Substring(2);
 
-			string nspace = null;
-			if(HttpContext.Current != null) {
+            string nspace = null;
+            if (HttpContext.Current != null) {
 				// HttpContext.Current can be null when executing asynchronous tasks
 				// The point is that BuildUrl is called without namespace info only from the web application, so HttpContext is available in that case
 				// When the context is not available, in all cases BuildUrl is called by the formatter, that has already included namespace info in the URL
@@ -150,7 +191,8 @@ namespace ScrewTurn.Wiki {
                 if ((tempStringLower.Contains(GlobalSettings.PageExtension) || tempStringLower.Contains(".aspx")) && !tempString.StartsWith(Tools.UrlEncode(nspace) + ".")) temp.Insert(0, nspace + ".");
 			}
 
-			return temp.ToString();
+            
+			return String.Concat(temp[0] != '/' ? "/" : "", temp.ToString());
 		}
 
 		/// <summary>
@@ -161,8 +203,7 @@ namespace ScrewTurn.Wiki {
 		/// <param name="chunks">The chunks to append.</param>
 		public static void BuildUrl(string wiki, StringBuilder destination, params string[] chunks) {
 			if(destination == null) throw new ArgumentNullException("destination");
-
-			destination.Append(BuildUrl(wiki, chunks));
+            destination.Append(BuildUrl(wiki, chunks));
 		}
 
 		/// <summary>
@@ -173,6 +214,48 @@ namespace ScrewTurn.Wiki {
 			Redirect(BuildUrl(wiki, Settings.GetDefaultPage(wiki), GlobalSettings.PageExtension));
 		}
 
-	}
+	    /// <summary>
+	    /// Builds a URL properly prepending the namespace to the URL.
+	    /// </summary>
+	    /// <param name="wiki">The wiki.</param>
+	    /// <param name="nspace">The namespace</param>
+	    /// <param name="chunks">The chunks used to build the URL.</param>
+	    /// <returns>The complete URL.</returns>
+	    public static string BuildWikiUrl(string wiki, string nspace, params string[] chunks)
+        {
+            if (chunks == null) throw new ArgumentNullException("chunks");
+            if (chunks.Length == 0) return ""; // Shortcut
+
+            StringBuilder temp = new StringBuilder(chunks.Length * 10);
+            foreach (string chunk in chunks)
+                temp.Append(chunk);
+
+            string tempString = temp.ToString();
+
+            if (tempString.StartsWith("++")) return tempString.Substring(2);
+
+            if (string.IsNullOrEmpty(nspace)) nspace = null;
+            else nspace = Pages.FindNamespace(wiki, nspace).Name;
+
+            if (nspace != null && !tempString.StartsWith(Tools.UrlEncode(nspace) + "."))
+                temp.Insert(0, nspace + ".");
+
+            return String.Concat("/", temp.ToString());
+        }
+
+        /// <summary>
+        /// Builds a URL properly appendind the <b>NS</b> parameter if appropriate.
+        /// </summary>
+        /// <param name="wiki">The wiki.</param>
+        /// <param name="nspace">The namespace</param>
+        /// <param name="destination">The destination <see cref="T:StringBuilder"/>.</param>
+        /// <param name="chunks">The chunks to append.</param>
+        public static void BuildWikiUrl(string wiki, string nspace,StringBuilder destination, params string[] chunks)
+        {
+            if (destination == null) throw new ArgumentNullException("destination");
+            destination.Append(BuildWikiUrl(wiki, nspace, chunks));
+        }
+
+    }
 
 }

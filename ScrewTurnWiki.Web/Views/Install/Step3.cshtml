@@ -55,7 +55,8 @@
     @InstallStrings.Step3Intro
 </p>
 
-<form role="form" method="post" id="step3-form" action="@Url.Action("Step4","Install")">
+<form role="form" method="post" id="step3-form" action="@Url.Action("Step4", "Install")">
+    @Html.AntiForgeryToken()
     @Html.HiddenFor(h => h.LanguageCode)
     @Html.HiddenFor(h => h.PublicDirectory)
     @Html.HiddenFor(h => h.ConnectionString)
@@ -63,11 +64,11 @@
     @Html.HiddenFor(h => h.AdvancedSettings)
     <table id="wikis" class="table table-striped" name="Wikis">
         <thead>
-            <tr>
-                <th>@InstallStrings.Step3WikiNameTitleColumnHeading</th>
-                <th>@InstallStrings.Step3HostsTitleColumnHeading</th>
-                <th></th>
-            </tr>
+        <tr>
+            <th>@InstallStrings.Step3WikiNameTitleColumnHeading</th>
+            <th>@InstallStrings.Step3HostsTitleColumnHeading</th>
+            <th></th>
+        </tr>
         </thead>
         @foreach (var wiki in Model.Wikis)
         {
@@ -82,7 +83,7 @@
             </tr>
         }
     </table>
-    <br />
+    <br/>
     <button id="create-wiki" class="btn btn-primary" type="button">@InstallStrings.Step3ButtonCreateNewWikiTitle</button>
 </form>
 

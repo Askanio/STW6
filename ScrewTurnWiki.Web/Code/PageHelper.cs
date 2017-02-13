@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using ScrewTurn.Wiki.PluginFramework;
 using ScrewTurn.Wiki.Web.Localization.Messages;
-using ScrewTurn.Wiki.Web.Models.Home;
+using ScrewTurn.Wiki.Web.Models.Wiki;
 
 namespace ScrewTurn.Wiki.Web.Code
 {
@@ -54,5 +54,53 @@ namespace ScrewTurn.Wiki.Web.Code
             }
             return null;
         }
+
+        /// <summary>
+        /// Exstract namespace from name of page
+        /// </summary>
+        /// <param name="pageName"></param>
+        /// <returns></returns>
+        public static string DetectNamespace(string pageName)
+        {
+            if (string.IsNullOrEmpty(pageName))
+                return "";
+
+            var index = pageName.IndexOf(".", StringComparison.InvariantCulture);
+            if (index == -1)
+                return "";
+
+            return pageName.Substring(0, index);
+        }
+
+        /// <summary>
+        /// Check that namespace exists
+        /// </summary>
+        /// <param name="currentWiki"></param>
+        /// <param name="currentNamespace"></param>
+        /// <returns></returns>
+        public static bool ExistsCurrentNamespace(string currentWiki, string currentNamespace)
+        {
+            if (!string.IsNullOrEmpty(currentNamespace))
+            {
+                // Verify that namespace exists
+                return Pages.FindNamespace(currentWiki, currentNamespace) != null;
+            }
+            return true; // default "root"
+        }
+
+        ///// <summary>
+        ///// Check and Verify that namespace exists
+        ///// </summary>
+        ///// <param name="currentWiki"></param>
+        ///// <param name="currentNamespace"></param>
+        ///// <returns></returns>
+        //public static string CheckNamespace(string currentWiki, string currentNamespace)
+        //{
+        //    if (string.IsNullOrEmpty(currentNamespace))
+        //        return "";
+
+        //    // Verify that namespace exists
+        //    return Pages.FindNamespace(currentWiki, currentNamespace) != null ? currentNamespace : "";
+        //}
     }
 }

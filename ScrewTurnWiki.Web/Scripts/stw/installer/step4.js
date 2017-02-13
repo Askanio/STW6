@@ -15,48 +15,48 @@ var ScrewTurn;
                 Installer.Step4Messages = Step4Messages;
                 var Step4 = (function () {
                     function Step4(wizard, messages, needMasterPassword) {
-                        this._passForm = $("#setPassword");
-                        this._ok = $("#completed");
-                        this._result = $("#result");
-                        this._pass = $("#newPwd");
-                        this._rePass = $("#reNewPwd");
-                        this._wizard = wizard;
-                        this._messages = messages;
-                        this._needMasterPassword = needMasterPassword;
-                        if (this._needMasterPassword) {
-                            $(this._passForm).show();
-                            $(this._ok).hide();
+                        this.passForm = $("#setPassword");
+                        this.ok = $("#completed");
+                        this.result = $("#result");
+                        this.pass = $("#newPwd");
+                        this.rePass = $("#reNewPwd");
+                        this.wizard = wizard;
+                        this.messages = messages;
+                        this.needMasterPassword = needMasterPassword;
+                        if (this.needMasterPassword) {
+                            $(this.passForm).show();
+                            $(this.ok).hide();
                         }
                         else {
-                            $(this._passForm).hide();
-                            $(this._ok).show();
+                            $(this.passForm).hide();
+                            $(this.ok).show();
                         }
                     }
                     Step4.prototype.checkPassword = function () {
                         // Check Length
-                        if (this._pass.val().length > 30 || this._pass.val().length < 6) {
-                            this.updateTips(this._messages.checkLengthError, false);
+                        if (this.pass.val().length > 30 || this.pass.val().length < 6) {
+                            this.updateTips(this.messages.checkLengthError, false);
                             return false;
                         }
                         // Check Regexp
-                        if (!(/^([0-9a-zA-Z])+$/.test(this._pass.val()))) {
-                            this.updateTips(this._messages.checkRegexpError, false);
+                        if (!(/^([0-9a-zA-Z])+$/.test(this.pass.val()))) {
+                            this.updateTips(this.messages.checkRegexpError, false);
                             return false;
                         }
                         // Check equal
-                        if (this._pass.val() !== this._rePass.val()) {
-                            this.updateTips(this._messages.checkEqualError, false);
+                        if (this.pass.val() !== this.rePass.val()) {
+                            this.updateTips(this.messages.checkEqualError, false);
                             return false;
                         }
-                        $(this._result).removeClass("test-success").removeClass("test-error");
+                        $(this.result).removeClass("test-success").removeClass("test-error");
                         return true;
                     };
                     Step4.prototype.updateTips = function (t, success) {
-                        $(this._result).html(t);
+                        $(this.result).html(t);
                         if (success)
-                            $(this._result).addClass("test-success");
+                            $(this.result).addClass("test-success");
                         else
-                            $(this._result).addClass("test-error");
+                            $(this.result).addClass("test-error");
                     };
                     Step4.prototype.bindEvents = function () {
                         var _this = this;
@@ -69,18 +69,18 @@ var ScrewTurn;
                         var _this = this;
                         var url = STW_SET_MASTERPASSWORD_URL;
                         var jsonData = {
-                            "password": this._pass.val()
+                            "password": this.pass.val()
                         };
-                        this._wizard.makeAjaxRequest(url, jsonData, function (data) { _this.OnSavePasswordSuccess(data); });
+                        this.wizard.makeAjaxRequest(url, jsonData, function (data) { _this.OnSavePasswordSuccess(data); });
                     };
                     Step4.prototype.OnSavePasswordSuccess = function (data) {
                         if (data.Success) {
-                            this.updateTips(this._messages.passwordSaveSuccess, true);
-                            $(this._passForm).hide();
-                            $(this._ok).show();
+                            this.updateTips(this.messages.passwordSaveSuccess, true);
+                            $(this.passForm).hide();
+                            $(this.ok).show();
                         }
                         else {
-                            bootbox.alert("<h2>" + this._messages.titleError + "<h2><pre style='max-height:500px;overflow-y:scroll;'>" + data.ErrorMessage + "</pre>");
+                            bootbox.alert("<h2>" + this.messages.titleError + "<h2><pre style='max-height:500px;overflow-y:scroll;'>" + data.ErrorMessage + "</pre>");
                         }
                     };
                     return Step4;

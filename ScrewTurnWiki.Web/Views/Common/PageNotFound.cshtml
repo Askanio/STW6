@@ -1,0 +1,17 @@
+﻿@using ScrewTurn.Wiki.Web.Localization.Common
+@using ScrewTurn.Wiki.Web.Models.Common
+@model PageNotFoundModel
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1 class="pagetitlesystem">@PageNotFound.LblTitle_Text</h1>
+@if (Model.Description != null)
+{
+    <p>@Model.Description</p>
+}
+<br />
+
+@Model.SearchResults
+
+

@@ -1,0 +1,87 @@
+﻿@using ScrewTurn.Wiki.Web.Code.Extensions
+@using ScrewTurn.Wiki.Web.Localization.Common
+@model ScrewTurn.Wiki.Web.Models.Wiki.HistoryModel
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@Url.StwScriptLink("historypage.js")
+<script type="text/javascript">
+    $(document).ready(function ()
+    {
+        var page = '@Model.PageFullNameEncode';
+        var wizard = new ScrewTurn.Wiki.Web.Common.CommonWizard();
+        var historypage = new ScrewTurn.Wiki.Web.Common.HistoryPage(wizard, page);
+        historypage.bindEvents();
+    });
+</script>
+<h1 class="pagetitlesystem">@Model.LblTitle</h1>
+@if (Model.BtnCompareEnabled)
+{
+    <p>@History.LblCompare_Text</p>
+    @Html.DropDownList("lstRev1", @Model.Rev1List)
+    @Html.Raw(" ")
+    @Html.DropDownList("lstRev2", @Model.Rev2List)
+    <a id ="LinkToCompare" class="btn" href="#">@History.BtnCompare_Text</a>
+}
+<br /><br />
+
+@Model.LblHistory
+
+@if (Model.RevisionRows.Count > 0)
+{
+    <table id="HistoryTable" class="generic" cellpadding="0" cellspacing="0">
+        <thead>
+        <tr class="tableheader">
+            <th style="text-align: right;">#</th>
+            <th>@History.LblTitle2_Text</th>
+            <th>@History.LblSavedOn_Text</th>
+            <th>@History.LblSavedBy_Text</th>
+            <th>@History.LblComment_Text</th>
+            <th>&nbsp;</th>
+        </tr>
+        </thead>
+        <tbody>
+        @for (int i = 0; i < Model.RevisionRows.Count; i++)
+        {
+            if (i%2 == 0)
+            {
+                <tr class="tablerow">
+                    <td style="text-align: right;">@Model.RevisionRows[i].Revision</td>
+                    <td><a href='@Model.RevisionRows[i].UrlToRevision'>@Model.RevisionRows[i].Title</a></td>
+                    <td>@Model.RevisionRows[i].SavedOn</td>
+                    <td>@Model.RevisionRows[i].SavedBy</td>
+                    <td>@Model.RevisionRows[i].Comment</td>
+                    <td>
+                        <td>
+                            @if (@Model.RevisionRows[i].CanRollback)
+                            {
+                                <a class="rollback" href='@UrlHelperExtensions.BuildPageUrl(@Model.PageFullNameEncode, "/Rollback?revision=", @Model.RevisionRows[i].Revision)'>@History.BtnRollback_Text</a>
+                            }
+                        </td>
+                        @*<asp:LinkButton ID="btnRollback" runat="server" Visible='<%# (bool)Eval("CanRollback") %>' Text="Rollback" CommandName="Rollback" CommandArgument='<%# Eval("Revision") %>'
+                                        OnClientClick="javascript:return __RequestConfirm();" meta:resourcekey="btnRollbackResource2"/>*@
+                    </td>
+                </tr>
+            }
+            else
+            {
+                <tr class="tablerowalternate">
+                    <td style="text-align: right;">@Model.RevisionRows[i].Revision</td>
+                    <td><a href='@Model.RevisionRows[i].UrlToRevision'>@Model.RevisionRows[i].Title</a></td>
+                    <td>@Model.RevisionRows[i].SavedOn</td>
+                    <td>@Model.RevisionRows[i].SavedBy</td>
+                    <td>@Model.RevisionRows[i].Comment</td>
+                    <td>
+                        @if (@Model.RevisionRows[i].CanRollback)
+                        {
+                            <a class="rollback" href=@UrlHelperExtensions.BuildPageUrl(@Model.PageFullNameEncode, "/Rollback?revision=", @Model.RevisionRows[i].Revision)>@History.BtnRollback2_Text</a>
+                        }
+                        @*<asp:LinkButton ID="btnRollback" runat="server" Visible='<%# (bool)Eval("CanRollback") %>' Text="Rollback" CommandName="Rollback" CommandArgument='<%# Eval("Revision") %>'
+                                        OnClientClick="javascript:return __RequestConfirm();" meta:resourcekey="btnRollbackResource1" />*@
+                    </td>
+                </tr>
+            }
+        }
+        </tbody>
+    </table>
+}

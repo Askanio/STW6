@@ -1,4 +1,5 @@
 ﻿@using ScrewTurn.Wiki.Web.Code.Extensions
+@using ScrewTurn.Wiki.Web.Localization.Install
 @using ScrewTurnWiki.Web
 <!DOCTYPE html>
 <html>
@@ -13,26 +14,28 @@
     @Styles.Render(BundleConfig.BootstrapCss)
     @Scripts.Render(BundleConfig.BootboxJS)
 
-    @Url.ScriptLink("~/Install/InstallerJsVars")
     @Url.ScriptLink("stw/installer/installwizard.js")
 </head>
 
 <body>
-    <div id="installer-container" class="container">
-        <!-- Logo -->
-        <div id="logo" class="row">
-            <img src="@Url.Content("~/Content/Images/STWLogo.png")" alt="logo" />
-        </div>
+<script type="text/javascript">
+    var STW_INSTALLER_WOOPS = "@InstallStrings.SharedUnexpectedError";
+</script>
+<div id="installer-container" class="container">
+    <!-- Logo -->
+    <div id="logo" class="row">
+        <img src="@Url.Content("~/Content/Images/STWLogo.png")" alt="logo"/>
+    </div>
 
-        <!-- Content-->
-        <div id="content" class="row">
-            @RenderBody()
+    <!-- Content-->
+    <div id="content" class="row">
+        @RenderBody()
 
-            <!-- Previous + Continue buttons -->
-            <div id="bottom-buttons">
-                @RenderSection("BottomButtons")
-            </div>
+        <!-- Previous + Continue buttons -->
+        <div id="bottom-buttons">
+            @RenderSection("BottomButtons")
         </div>
     </div>
+</div>
 </body>
 </html>

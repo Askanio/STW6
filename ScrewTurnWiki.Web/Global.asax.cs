@@ -48,6 +48,7 @@ namespace ScrewTurn.Wiki.Web
 
             // Register Inversion of Control dependencies
             IoCConfig.RegisterDependencies(applicationSettings.Installed);
+
         }
 
         protected void Application_BeginRequest(object sender, EventArgs e)
@@ -179,13 +180,14 @@ namespace ScrewTurn.Wiki.Web
             }
             catch { }
             EmailTools.NotifyError(ex, url);
-            if (!Request.PhysicalPath.ToLowerInvariant().Contains("error.aspx")) ScrewTurn.Wiki.UrlTools.Redirect("Error.aspx"); // TODO: RedirectToAction
+            if (!Request.PhysicalPath.ToLowerInvariant().Contains("error")) ScrewTurn.Wiki.UrlTools.Redirect("Error"); // TODO: RedirectToAction
         }
 
         protected void Application_End(object sender, EventArgs e)
         {
             // Try to cleanly shutdown the application and providers
-            StartupTools.Shutdown();
+            if (ApplicationSettings.Instance.Installed)
+                StartupTools.Shutdown();
         }
 
         protected void Application_EndRequest(object sender, EventArgs e)
@@ -217,7 +219,7 @@ namespace ScrewTurn.Wiki.Web
 
         protected void Application_AcquireRequestState(object sender, EventArgs e)
         {
-            if (HttpContext.Current.Session != null)
+            if (ApplicationSettings.Instance.Installed && HttpContext.Current.Session != null)
             {
                 // Try to automatically login the user through the cookie
                 LoginTools.TryAutoLogin(Tools.DetectCurrentWiki());

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Web.Mvc;
-using ScrewTurn.Wiki.Web.Models.Home;
+using ScrewTurn.Wiki.Web.Models.Wiki;
 
 namespace ScrewTurn.Wiki.Web.Models
 {
@@ -34,6 +34,8 @@ namespace ScrewTurn.Wiki.Web.Models
         public bool AttachmentViewerVisible { get; set; }
 
         public string PageFullName { get; set; }
+
+        public string PageFullNameEncode { get; set; }
 
         [AllowHtml]
         public MvcHtmlString EmailNotification { get; set; }

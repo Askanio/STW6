@@ -3,11 +3,15 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading;
 using System.Web;
 using System.Web.Mvc;
+using Microsoft.Ajax.Utilities;
 using ScrewTurn.Wiki.PluginFramework;
+using ScrewTurn.Wiki.Web.Code;
+using ScrewTurn.Wiki.Web.Localization.Messages;
 using ScrewTurn.Wiki.Web.Models;
 
 namespace ScrewTurn.Wiki.Web.Controllers
@@ -18,89 +22,69 @@ namespace ScrewTurn.Wiki.Web.Controllers
     public class PageController : BaseController
     {
         /// <summary>
-        /// The name of the current wiki using the <b>Wiki</b> parameter in the query string.
+        /// The name of the current namespace using the <b>NS</b> parameter in the query string.
         /// </summary>
-        protected string CurrentWiki { get; private set; }
+        public string CurrentNamespace { get; set; }
 
         /// <summary>
-        /// 
+        /// The correct <see cref="T:PageInfo" /> object associated to the current page using the <b>Page</b> and <b>NS</b> parameters in the query string.
         /// </summary>
-        public ApplicationSettings AppSettings { get; private set; }
+        public string CurrentPageFullName { get; set; }
+
+        /// <summary>
+        /// Page in the given wiki
+        /// </summary>
+        public PageContent CurrentPage { get; set; }
+
+        /// <summary>
+        /// Detects the correct <see cref="T:NamespaceInfo" /> object associated to the current namespace.
+        /// </summary>
+        /// <returns>The correct <see cref="T:NamespaceInfo" /> object, or <c>null</c>.</returns>
+        public NamespaceInfo DetectNamespaceInfo()
+        {
+            NamespaceInfo nsinfo = CurrentNamespace != null ? Pages.FindNamespace(CurrentWiki, CurrentNamespace) : null;
+            return nsinfo;
+        }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="PageController"/> class.
         /// </summary>
-        /// <param name="appSettings"></param>
-        public PageController(ApplicationSettings appSettings)
+        /// <param name="settings"></param>
+        public PageController(ApplicationSettings settings) : base(settings)
         {
-            AppSettings = appSettings;
+        }
+
+        #region SA
+
+        [NonAction]
+        protected void PrepareSAModel(WikiSABaseModel model, string currentNamespace)
+        {
+            string nspace = currentNamespace;
+            if (string.IsNullOrEmpty(nspace)) nspace = "";
+            else nspace += ".";
+            model.LnkMainPageUrl = "/" + nspace + "Default";
+
+                string referrer = Request.UrlReferrer != null ? Request.UrlReferrer.FixHost().ToString() : "";
+                if (!string.IsNullOrEmpty(referrer))
+                    model.LnkPreviousPageUrl = new MvcHtmlString(referrer);
+
+            FillSAHtmlHead(model);
+            FillDefaultHeader(model, currentNamespace, null);
+            FillDefaultFooter(model, currentNamespace, null);
         }
 
         /// <summary>
-        /// Called before the action method is invoked.
+        /// Prints the HTML head tag.
         /// </summary>
-        /// <param name="filterContext">Information about the current request and action.</param>
-        protected override void OnActionExecuting(ActionExecutingContext filterContext)
+        private void FillSAHtmlHead(WikiBaseModel model)
         {
-            // Redirect if ScrewTurnWiki isn't installed or an upgrade is needed.
-            if (!AppSettings.Installed)
-            {
-                if (!(filterContext.Controller is InstallController))
-                    filterContext.Result = new RedirectResult(this.Url.Action("Index", "Install"));
-                return;
-            }
-            if (AppSettings.Installed && AppSettings.NeedMasterPassword)
-            {
-                if (!(filterContext.Controller is InstallController))
-                    filterContext.Result = new RedirectResult(this.Url.Action("Step4", "Install"));
-                return;
-            }
-            //else if (ApplicationSettings.UpgradeRequired)
-            //{
-            //    if (!(filterContext.Controller is UpgradeController))
-            //        filterContext.Result = new RedirectResult(this.Url.Action("Index", "Upgrade"));
-
-            //    return;
-            //}
-
-            CurrentWiki = Tools.DetectCurrentWiki();
-
-            InitializeCulture();
+            var htmlHead =
+                MvcHtmlString.Create(Tools.GetIncludes(CurrentWiki, Tools.DetectCurrentNamespace()) + "\r\n" +
+                                     Host.Instance.GetAllHtmlHeadContent(CurrentWiki));
+            model.HtmlHeads.Add(htmlHead);
         }
 
-        private void InitializeCulture()
-        {
-            // First, look for hard-stored user preferences
-            // If they are not available, look at the cookie
-
-            string culture = Preferences.LoadLanguageFromUserData(CurrentWiki);
-            if (culture == null) culture = Preferences.LoadLanguageFromCookie();
-
-            if (culture != null)
-            {
-                Thread.CurrentThread.CurrentCulture = new CultureInfo(culture);
-                Thread.CurrentThread.CurrentUICulture = new CultureInfo(culture);
-            }
-            else {
-                try
-                {
-                    if (Settings.GetDefaultLanguage(CurrentWiki).Equals("-"))
-                    {
-                        Thread.CurrentThread.CurrentCulture = new CultureInfo("en-US");
-                        Thread.CurrentThread.CurrentUICulture = new CultureInfo("en-US");
-                    }
-                    else {
-                        Thread.CurrentThread.CurrentCulture = new CultureInfo(Settings.GetDefaultLanguage(CurrentWiki));
-                        Thread.CurrentThread.CurrentUICulture = new CultureInfo(Settings.GetDefaultLanguage(CurrentWiki));
-                    }
-                }
-                catch
-                {
-                    Thread.CurrentThread.CurrentCulture = new CultureInfo("en-US");
-                    Thread.CurrentThread.CurrentUICulture = new CultureInfo("en-US");
-                }
-            }
-        }
+        #endregion
 
         #region Default
 
@@ -117,7 +101,7 @@ namespace ScrewTurn.Wiki.Web.Controllers
         /// <summary>
         /// Prints the page header and page footer.
         /// </summary>
-        public void FillDefaultPageHeaderAndFooter(WikiBaseModel model, string currentNamespace, string currentPageFullName)
+        private void FillDefaultPageHeaderAndFooter(WikiBaseModel model, string currentNamespace, string currentPageFullName)
         {
             string h = Settings.GetProvider(CurrentWiki).GetMetaDataItem(MetaDataItem.PageHeader, currentNamespace);
             h = @"<div id=""PageInternalHeaderDiv"">" + FormattingPipeline.FormatWithPhase1And2(CurrentWiki, h, false, FormattingContext.PageHeader, currentPageFullName) + "</div>";
@@ -150,10 +134,10 @@ namespace ScrewTurn.Wiki.Web.Controllers
 
             if (Settings.GetRssFeedsMode(CurrentWiki) != RssFeedsMode.Disabled)
             {
-                sb.AppendFormat(@"<link rel=""alternate"" title=""{0}"" href=""{1}######______NAMESPACE______######RSS.aspx"" type=""application/rss+xml"" />",
+                sb.AppendFormat(@"<link rel=""alternate"" title=""{0}"" href=""{1}######______NAMESPACE______######RSS"" type=""application/rss+xml"" />",
                     Settings.GetWikiTitle(CurrentWiki), Settings.GetMainUrl(CurrentWiki));
                 sb.Append("\n");
-                sb.AppendFormat(@"<link rel=""alternate"" title=""{0}"" href=""{1}######______NAMESPACE______######RSS.aspx?Discuss=1"" type=""application/rss+xml"" />",
+                sb.AppendFormat(@"<link rel=""alternate"" title=""{0}"" href=""{1}######______NAMESPACE______######RSS?Discuss=1"" type=""application/rss+xml"" />",
                     Settings.GetWikiTitle(CurrentWiki) + " - Discussions", Settings.GetMainUrl(CurrentWiki));
                 sb.Append("\n");
             }
@@ -167,7 +151,7 @@ namespace ScrewTurn.Wiki.Web.Controllers
             if (nspace == null) nspace = "";
             else if (nspace.Length > 0) nspace += ".";
 
-            var htmlHead =  MvcHtmlString.Create(
+            var htmlHead = MvcHtmlString.Create(
                     sb.ToString()
                         .Replace("######______INCLUDES______######", Tools.GetIncludes(CurrentWiki, currentNamespace))
                         .Replace("######______NAMESPACE______######", nspace));
@@ -178,7 +162,7 @@ namespace ScrewTurn.Wiki.Web.Controllers
         /// <summary>
         /// Prints the header.
         /// </summary>
-        public void FillDefaultHeader(WikiBaseModel model, string currentNamespace, string currentPageFullName)
+        private void FillDefaultHeader(WikiBaseModel model, string currentNamespace, string currentPageFullName)
         {
             string h = FormattingPipeline.FormatWithPhase1And2(CurrentWiki, Settings.GetProvider(CurrentWiki).GetMetaDataItem(MetaDataItem.Header, currentNamespace),
                 false, FormattingContext.Header, currentPageFullName);
@@ -189,7 +173,7 @@ namespace ScrewTurn.Wiki.Web.Controllers
         /// <summary>
         /// Prints the footer.
         /// </summary>
-        public void FillDefaultFooter(WikiBaseModel model, string currentNamespace, string currentPageFullName)
+        private void FillDefaultFooter(WikiBaseModel model, string currentNamespace, string currentPageFullName)
         {
             string f = FormattingPipeline.FormatWithPhase1And2(CurrentWiki, Settings.GetProvider(CurrentWiki).GetMetaDataItem(MetaDataItem.Footer, currentNamespace),
                 false, FormattingContext.Footer, currentPageFullName);
@@ -199,6 +183,72 @@ namespace ScrewTurn.Wiki.Web.Controllers
 
         #endregion Default
 
+        //#region Detect and set CurrentNamespace and CurrentPage
+
+        ///// <summary>
+        ///// Detect and set CurrentNamespace and CurrentPage
+        ///// </summary>
+        ///// <param name="pageName"></param>
+        ///// <param name="notFoundPageName">Name of Page for redirect if return false</param>
+        ///// <returns>true - ok, false - CurrentNamespace or CurrentPage not exists</returns>
+        //[NonAction]
+        //protected bool InitializeCurrentPage(string pageName, out string notFoundPageName)
+        //{
+        //    // Try to detect current namespace
+        //    CurrentNamespace = PageHelper.DetectNamespace(pageName);
+
+        //    if (!ExistsCurrentNamespace())
+        //    {
+        //        notFoundPageName = pageName;
+        //        return false;
+        //    }
+
+        //    SetCurrentPage(pageName);
+
+        //    // Verifies the need for a redirect and performs it.
+        //    if (CurrentPage == null)
+        //    {
+        //        notFoundPageName = Tools.UrlEncode(CurrentPageFullName);
+        //        return false;
+        //    }
+
+        //    notFoundPageName = null;
+        //    return true;
+        //}
+
+        //private bool ExistsCurrentNamespace()
+        //{
+        //    if (!string.IsNullOrEmpty(CurrentNamespace))
+        //    {
+        //        // Verify that namespace exists
+        //        return Pages.FindNamespace(Tools.DetectCurrentWiki(), CurrentNamespace) != null;
+        //    }
+        //    return true; // default "root"
+        //}
+
+
+        //private void SetCurrentPage(string pageName)
+        //{
+        //    CurrentPageFullName = GetCurrentPageFullName(pageName);
+
+        //    CurrentPage = Pages.FindPage(CurrentWiki, CurrentPageFullName);
+        //}
+
+        //private string GetCurrentPageFullName(string pageName)
+        //{
+        //    // Trim Namespace. from pageName
+        //    if (!string.IsNullOrEmpty(CurrentNamespace))
+        //        pageName = pageName.Substring(CurrentNamespace.Length + 1);
+
+        //    if (string.IsNullOrEmpty(pageName) || pageName == "Default")
+        //        pageName = Settings.GetDefaultPage(CurrentWiki);
+
+        //    return string.IsNullOrEmpty(CurrentNamespace)
+        //        ? pageName
+        //        : $"{CurrentNamespace}.{pageName}";
+        //}
+
+        //#endregion
 
         //#region Clean
 

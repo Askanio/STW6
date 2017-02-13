@@ -1,0 +1,138 @@
+﻿@using ScrewTurn.Wiki.Web.Code.Extensions
+@using ScrewTurn.Wiki.Web.Localization.Common
+@using ScrewTurn.Wiki.Web.Models
+@model WikiPageModel
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@Url.StwScriptLink("wikipage.js")
+<script type="text/javascript">
+    $(document).ready(function () {
+        var wizard = new ScrewTurn.Wiki.Web.Common.CommonWizard();
+        var wikipage = new ScrewTurn.Wiki.Web.Common.WikiPage(wizard);
+        wikipage.bindEvents();
+
+        $("a[rel^='picture']").prettyPhoto({
+            allowresize: false,
+            deeplinking: false,
+            theme: 'dark_square',
+            gallery_markup: ''
+        });
+
+        $(".gallery:not(.slideshow) a[rel^='prettyPhoto']").prettyPhoto({
+            allowresize: false,
+            deeplinking: false,
+            theme: 'dark_square',
+            gallery_markup: ''
+        });
+    });
+</script>
+
+<a id="PageTop"></a>
+
+<div id="PageHeaderDiv">
+
+    <!-- Change this to PageToolbarDiv -->
+    <div id="EditHistoryLinkDiv">
+        @Model.DiscussLink
+        @Model.EditLink
+        @Model.ViewCodeLink
+        @Model.HistoryLink
+        @Model.AttachmentsLink
+        @Model.AdminToolsLink
+
+        @Model.PostMessageLink
+        @Model.BackLink
+    </div>
+
+    <h1 class="pagetitle">
+        @Model.PreviousPage
+        @Model.PageTitle
+        @Model.NextPage
+    </h1>
+
+    <div id="PrintLinkDiv">
+        @Model.PrintLink
+    </div>
+
+    <div id="RssLinkDiv">
+        @Model.RssLink
+    </div>
+
+    <div id="EmailNotificationDiv">
+        @Model.EmailNotification
+    </div>
+
+    @if (Model.PageInfoVisible)
+    {
+        <div id="PageInfoDiv">
+            <span id="ModificationSpan">
+                @if (Model.ModificationVisible)
+                {
+                    @Default.LblModified_Text
+                    @Html.Raw(" ")
+                    @Model.ModifiedDateTime
+                }
+            </span>
+            <span id="AuthorSpan">
+                @if (Model.AuthorVisible)
+                {
+                    @Html.Raw(" ")
+                    @Default.LblBy_Text
+                    @Html.Raw(" ")
+                    @Model.Author
+                }
+            </span>
+            <span id="NavPathsSpan">
+                @if (Model.NavigationPathsVisible)
+                {
+                    @Model.NavigationPaths
+                }
+            </span>
+            <span id="CategoriesSpan">
+                @if (Model.PageCategoriesVisible)
+                {
+                    @Default.LblCategorizedAs_Text
+                    @Html.Raw(" ")
+                    @Model.PageCategories
+                }
+            </span>
+
+            <span id="PageDiscussionSpan">
+                @if (Model.PageDiscussionVisible)
+                {
+                    @Default.LblPageDiscussionFor_Text
+                    @Html.Raw(" ")
+                    @Model.DiscussedPage
+                }
+            </span>
+        </div>
+    }
+
+    @Model.BreadcrumbsTrail
+
+    @Model.RedirectionSource
+
+</div>
+
+<div id="PageContentDiv">
+    @foreach (var content in Model.Contents)
+    {
+        @content
+    }
+</div>
+
+@Model.DoubleClickHandler
+
+<div id="PageAttachmentsDiv" style="position: absolute; left: 10000px;">
+    @if (Model.AttachmentViewerVisible)
+    {
+        @Html.Action("AttachmentViewer", "Attachment", new {pageFullName = @Model.PageFullNameEncode})
+    }
+</div>
+
+<div id="AdminToolsDiv" style="position: absolute; left: 10000px;">
+    @Model.RollbackPage
+    @Model.AdministratePage
+    @Model.SetPagePermissions
+</div>

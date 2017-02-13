@@ -1,0 +1,10 @@
+﻿@using ScrewTurn.Wiki.Web.Code
+@model IEnumerable<SearchResultRow>
+
+@foreach (SearchResultRow row in Model)
+{
+    var cl = String.Concat("searchresult", @row.Type);
+    <h3 class='@cl'><a href='@row.Link' title='@row.Title'>@row.Title</a></h3>
+    var st = @row.FormattedExcerpt.Length > 0 ? "" : "display: none;";
+    <p class="excerpt" style='@st'>@row.FormattedExcerpt</p>
+}

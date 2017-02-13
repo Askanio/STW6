@@ -1,0 +1,12 @@
+﻿@model ScrewTurn.Wiki.Web.Models.Wiki.DiffModel
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h1 class="pagetitlesystem">
+    @Model.LblBack
+    @Html.Raw(" - ")
+    @Model.LblTitle
+</h1>
+<br />
+
+@Model.LblDiff

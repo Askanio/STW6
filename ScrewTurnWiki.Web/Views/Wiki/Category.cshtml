@@ -1,0 +1,10 @@
+﻿@using ScrewTurn.Wiki.Web.Localization.Common
+@model ScrewTurn.Wiki.Web.Models.Wiki.CategoryModel
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h1 class="pagetitlesystem">@Category.LblCategories_Text</h1>
+<p>@Category.LblDescription_Text</p>
+<br />
+
+@Model.CatList

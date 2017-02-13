@@ -1,0 +1,18 @@
+﻿@using ScrewTurn.Wiki.Web.Localization.Common
+@using ScrewTurn.Wiki.Web.Models.Common
+@model AccessDeniedModel
+@{
+    Layout = "~/Views/Shared/_SALayout.cshtml";
+}
+
+<h1 class="pagetitlesystem">@AccessDenied.LblTitle_Text</h1>
+@if (Model.Description != null)
+{
+    @Model.Description
+}
+else
+{
+    @AccessDenied.LblDescription_Text
+}
+
+
