@@ -52,13 +52,13 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Lucene.Net">
-      <HintPath>..\References\Lib\Apache Lucene.Net v3.0.3\Lucene.Net.dll</HintPath>
+      <HintPath>..\..\..\..\Documents\Visual Studio 2015\Projects\STW5\References\Lib\Apache Lucene.Net v3.0.3\Lucene.Net.dll</HintPath>
     </Reference>
     <Reference Include="nunit.framework">
-      <HintPath>..\References\Tools\NUnit\nunit.framework.dll</HintPath>
+      <HintPath>..\..\..\..\Documents\Visual Studio 2015\Projects\STW5\References\Tools\NUnit\framework\nunit.framework.dll</HintPath>
     </Reference>
     <Reference Include="Rhino.Mocks">
-      <HintPath>..\References\Tools\Rhino.Mocks\Rhino.Mocks.dll</HintPath>
+      <HintPath>..\..\..\..\Documents\Visual Studio 2015\Projects\STW5\References\Tools\Rhino.Mocks\Rhino.Mocks.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -128,6 +128,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

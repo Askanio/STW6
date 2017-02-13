@@ -40,14 +40,14 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Ionic.Zip.Reduced">
-      <HintPath>..\References\Lib\DotNetZipLib-DevKit-v1.9\Ionic.Zip.Reduced.dll</HintPath>
+      <HintPath>..\..\..\..\Documents\Visual Studio 2015\Projects\STW5\AzureStorageProviders\bin\Debug\Ionic.Zip.Reduced.dll</HintPath>
     </Reference>
     <Reference Include="Lucene.Net">
-      <HintPath>..\References\Lib\Apache Lucene.Net v3.0.3\Lucene.Net.dll</HintPath>
+      <HintPath>..\..\..\..\Documents\Visual Studio 2015\Projects\STW5\References\Lib\Apache Lucene.Net v3.0.3\Lucene.Net.dll</HintPath>
     </Reference>
     <Reference Include="Lucene.Net.Store.Azure, Version=2.0.5516.2850, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\References\Lib\Lucene.Net.Store.Azure.3.0.5553.21100\Lucene.Net.Store.Azure.dll</HintPath>
+      <HintPath>..\..\..\..\Documents\Visual Studio 2015\Projects\STW5\AzureStorageProviders\bin\Debug\Lucene.Net.Store.Azure.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Data.Services.Client, Version=5.6.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -57,9 +57,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\References\Lib\Unofficial.Microsoft.WindowsAzure.ServiceRuntime.2.5.0.0\Microsoft.WindowsAzure.ServiceRuntime.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.WindowsAzure.Storage, Version=6.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\References\Lib\WindowsAzure.Storage.6.1.0\Microsoft.WindowsAzure.Storage.dll</HintPath>
+    <Reference Include="Microsoft.WindowsAzure.Storage, Version=6.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\WindowsAzure.Storage.6.1.0\lib\net40\Microsoft.WindowsAzure.Storage.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -95,6 +95,10 @@
       <Project>{531A83D6-76F9-4014-91C5-295818E2D948}</Project>
       <Name>ScrewTurn.Wiki.PluginFramework</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

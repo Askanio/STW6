@@ -62,7 +62,7 @@
   <ItemGroup>
     <Reference Include="Lucene.Net, Version=2.9.2.2, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\References\Lib\Apache Lucene.Net v3.0.3\Lucene.Net.dll</HintPath>
+      <HintPath>..\..\..\..\Documents\Visual Studio 2015\Projects\STW5\References\Lib\Apache Lucene.Net v3.0.3\Lucene.Net.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core">

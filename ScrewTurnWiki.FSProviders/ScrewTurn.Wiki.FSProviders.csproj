@@ -53,10 +53,10 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Ionic.Zip.Reduced">
-      <HintPath>..\References\Lib\DotNetZipLib-DevKit-v1.9\Ionic.Zip.Reduced.dll</HintPath>
+      <HintPath>..\..\..\..\Documents\Visual Studio 2015\Projects\STW5\AzureStorageProviders\bin\Debug\Ionic.Zip.Reduced.dll</HintPath>
     </Reference>
     <Reference Include="Lucene.Net">
-      <HintPath>..\References\Lib\Apache Lucene.Net v3.0.3\Lucene.Net.dll</HintPath>
+      <HintPath>..\..\..\..\Documents\Visual Studio 2015\Projects\STW5\References\Lib\Apache Lucene.Net v3.0.3\Lucene.Net.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
