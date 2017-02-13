@@ -134,10 +134,10 @@ namespace ScrewTurn.Wiki.Web.Controllers
 
             if (Settings.GetRssFeedsMode(CurrentWiki) != RssFeedsMode.Disabled)
             {
-                sb.AppendFormat(@"<link rel=""alternate"" title=""{0}"" href=""{1}######______NAMESPACE______######RSS"" type=""application/rss+xml"" />",
+                sb.AppendFormat(@"<link rel=""alternate"" title=""{0}"" href=""{1}######______NAMESPACE______######RSS.aspx"" type=""application/rss+xml"" />",
                     Settings.GetWikiTitle(CurrentWiki), Settings.GetMainUrl(CurrentWiki));
                 sb.Append("\n");
-                sb.AppendFormat(@"<link rel=""alternate"" title=""{0}"" href=""{1}######______NAMESPACE______######RSS?Discuss=1"" type=""application/rss+xml"" />",
+                sb.AppendFormat(@"<link rel=""alternate"" title=""{0}"" href=""{1}######______NAMESPACE______######RSS.aspx?Discuss=1"" type=""application/rss+xml"" />",
                     Settings.GetWikiTitle(CurrentWiki) + " - Discussions", Settings.GetMainUrl(CurrentWiki));
                 sb.Append("\n");
             }

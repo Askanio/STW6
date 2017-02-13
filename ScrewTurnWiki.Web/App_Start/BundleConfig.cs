@@ -17,10 +17,6 @@ namespace ScrewTurnWiki.Web
         public const string RespondJS = "~/bundles/respond";
         public const string BootboxJS = "~/bundles/bootbox";
 
-        public const string AdminCss = "~/Content/Themes/Admin";
-        public const string EditorCss = "~/Content/Themes/Editor";
-        public const string JqueryEasingJS = "~/bundles/Admin/jquery.easing";
-
         // For more information on bundling, visit http://go.microsoft.com/fwlink/?LinkId=301862
         public static void RegisterBundles(BundleCollection bundles)
         {
@@ -55,9 +51,6 @@ namespace ScrewTurnWiki.Web
 
             bundles.Add(new ScriptBundle(BootboxJS).Include("~/Scripts/bootbox.js"));
 
-            bundles.Add(new StyleBundle(AdminCss).Include("~/Content/Themes/Admin.css"));
-            bundles.Add(new StyleBundle(EditorCss).Include("~/Content/Themes/Editor.css"));
-            bundles.Add(new ScriptBundle(JqueryEasingJS).Include("~/Scripts/stw/admin/jquery.easing.1.3.js"));
         }
     }
 

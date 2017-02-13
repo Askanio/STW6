@@ -39,26 +39,6 @@ select {
 	margin: 0px;
 }
 
-.link-button {
-    background-color: #F0F0F0;
-    border: solid 1px #999999;
-    color: #000000 !important;
-    cursor: pointer;
-    padding: 4px;
-    text-decoration: none !important;
-}
-a.link-button:hover {
-    background-color: #CCDDEE !important;
-    border: solid 1px #2D6BCE !important;
-    color: #000000 !important;
-}
-
-.list-line {
-    display:inline-block;
-    list-style-type: none;
-    padding-right: 10px;
-}
-
 #MainDiv {
 	 padding: 10px 5px 10px 5px;
 }
@@ -75,23 +55,6 @@ a.link-button:hover {
 	padding: 10px 20px 20px 20px;
 	border: solid 3px #2D6BCE;
 }
-
-.sidebar-menu {
-    padding: 0;
-    white-space: normal;
-}
-
-.dropdown {
-    /*width: 242px;*/
-    display: none;
-}
-
-/*.dropdown li {
-    border: 1px solid #ccc;
-    margin: 5px 0;
-    padding: 4px 18px;
-}*/
-
 
 /* Small text */
 .small, small {
@@ -538,12 +501,6 @@ input.searchtextbox {
 .leftaligned {
 	float: left;
 	width: 100%;
-}
-
-.messagebox {
-	float: left;
-	width: 100%;
-    margin-top: 20px;
 }
 
 #AclSelectorDiv {

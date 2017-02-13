@@ -26,7 +26,7 @@ namespace ScrewTurn.Wiki.Web.Controllers
         public ActionResult GetCategory(string page)
         {
             var model = new CategoryModel();
-            base.PrepareDefaultModel(model, CurrentNamespace, page);
+            base.PrepareDefaultModel(model, CurrentNamespace, CurrentPageFullName);
 
             model.Title = Messages.CategoryTitle + " - " + Settings.GetWikiTitle(CurrentWiki);
 

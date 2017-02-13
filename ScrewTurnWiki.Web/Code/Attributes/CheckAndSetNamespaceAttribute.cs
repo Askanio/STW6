@@ -11,7 +11,7 @@ namespace ScrewTurn.Wiki.Web.Code.Attributes
     /// <summary>
     /// Check and set namespace to <see cref="PageController"/>
     /// </summary>
-    [AttributeUsage(AttributeTargets.Method)]
+    [AttributeUsage(AttributeTargets.Method, AllowMultiple = false)]
     public class CheckAndSetNamespaceAttribute : ActionFilterAttribute
     {
         public string NamespaceParamName { get; set; }

@@ -10,7 +10,6 @@
         var wizard = new ScrewTurn.Wiki.Web.Common.CommonWizard();
         var search = new ScrewTurn.Wiki.Web.Common.Search(wizard);
         search.bindEvents();
-        $('#Query').focus();
     });
 </script>
 
@@ -28,6 +27,7 @@
 
 @using (Ajax.BeginForm("SearchResult", "Search", ajaxOptions))
 {
+
     @Html.AntiForgeryToken()
     @Html.HiddenFor(model => model.Namespace)
     <div id="SearchControlsDiv">
@@ -73,6 +73,5 @@
     </div>
 }
 <div id="ResultsDiv">
-    @Model.SearchResult
 </div>
 

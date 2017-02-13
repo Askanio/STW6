@@ -30,7 +30,7 @@ namespace ScrewTurn.Wiki.Web.Controllers
             Log.LogEntry("Page rollback requested for " + CurrentPage.FullName + " to rev. " + revision.ToString(), EntryType.General, SessionFacade.GetCurrentUsername(), CurrentWiki);
             Pages.Rollback(CurrentPage, revision);
 
-            var model = GetModel(page, revision, null, null);
+            var model = GetModel(revision, null, null);
 
             return View("History", model);
         }
@@ -40,15 +40,15 @@ namespace ScrewTurn.Wiki.Web.Controllers
         [CheckActionForPageAttribute(Action = CheckActionForPageAttribute.ActionForPages.ReadPage, Order = 2)]
         public ActionResult GetHistory(string page, int? revision, string rev1, string rev2)
         {
-            var model = GetModel(page, revision, rev1, rev2);
+            var model = GetModel(revision, rev1, rev2);
             return View("History", model);
         }
 
 
-        private HistoryModel GetModel(string page, int? revision, string rev1, string rev2)
+        private HistoryModel GetModel(int? revision, string rev1, string rev2)
         {
             var model = new HistoryModel();
-            base.PrepareDefaultModel(model, CurrentNamespace, page);
+            base.PrepareDefaultModel(model, CurrentNamespace, CurrentPageFullName);
             model.PageFullNameEncode = Tools.UrlEncode(CurrentPage.FullName);
 
             model.Title = Messages.HistoryTitle + " - " + Settings.GetWikiTitle(CurrentWiki);
@@ -202,7 +202,7 @@ namespace ScrewTurn.Wiki.Web.Controllers
         public ActionResult Diff(string page, string rev1, string rev2)
         {
             var model = new DiffModel();
-            base.PrepareDefaultModel(model, CurrentNamespace, page);
+            base.PrepareDefaultModel(model, CurrentNamespace, CurrentPageFullName);
             model.PageFullNameEncode = Tools.UrlEncode(CurrentPage.FullName);
 
             model.Title = Messages.DiffTitle + " - " + Settings.GetWikiTitle(CurrentWiki);

@@ -153,18 +153,6 @@ a.unknownlink:hover {
 a.emaillink {
 }
 
-.captcha-box {
-	text-align: center;
-	line-height: 0; /*firefox line-height bug fix*/
-}
-.captcha-box > div {
-	display: inline-block;
-	max-width: 100%;
-}
-.captcha-box input {
-	height: auto;
-}
-
 h1 {
 	font-family: Verdana, Arial, Helvetica, sans-serif;
 	font-size: 18px;

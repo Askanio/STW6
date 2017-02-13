@@ -4894,15 +4894,6 @@ namespace ScrewTurn.Wiki.Web.Localization.Messages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Wrong Captcha.
-        /// </summary>
-        public static string WrongCaptcha {
-            get {
-                return ResourceManager.GetString("WrongCaptcha", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Wrong Control Text.
         /// </summary>
         public static string WrongControlText {

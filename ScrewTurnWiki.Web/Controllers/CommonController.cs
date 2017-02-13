@@ -8,7 +8,6 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
 using System.Web.UI;
-using System.Xml;
 using ScrewTurn.Wiki.Configuration;
 using ScrewTurn.Wiki.PluginFramework;
 using ScrewTurn.Wiki.Web.Code;
@@ -23,8 +22,7 @@ namespace ScrewTurn.Wiki.Web.Controllers
         public CommonController(ApplicationSettings appSettings) : base(appSettings)
         {
         }
-
-        [HttpGet]
+        
         public ActionResult Error(string ns)
         {
             var model = new WikiSABaseModel();
@@ -51,7 +49,6 @@ namespace ScrewTurn.Wiki.Web.Controllers
             return View("Error", model);
         }
 
-        [HttpGet]
         public ActionResult AccessDenied()
         {
             var model = new AccessDeniedModel();
@@ -72,7 +69,6 @@ namespace ScrewTurn.Wiki.Web.Controllers
             return View("AccessDenied", model);
         }
 
-        [HttpGet]
         public ActionResult RandPage()
         {
             List<PageContent> pages = Pages.GetPages(CurrentWiki, Tools.DetectCurrentNamespaceInfo());
@@ -88,7 +84,6 @@ namespace ScrewTurn.Wiki.Web.Controllers
 
         #region PageNotFound
 
-        [HttpGet]
         public ActionResult PageNotFound(string page)
         {
             var model = new PageNotFoundModel();
@@ -166,73 +161,5 @@ namespace ScrewTurn.Wiki.Web.Controllers
         }
 
         #endregion
-
-        #region Sitemap
-
-        [HttpGet]
-        public ActionResult Sitemap()
-        {
-            Response.ClearContent();
-            Response.ContentType = "text/xml;charset=UTF-8";
-            Response.ContentEncoding = System.Text.UTF8Encoding.UTF8;
-
-            string mainUrl = Settings.GetMainUrl(CurrentWiki);
-            string rootDefault = Settings.GetDefaultPage(CurrentWiki).ToLowerInvariant();
-
-            using (XmlWriter writer = XmlWriter.Create(Response.OutputStream))
-            {
-                writer.WriteStartDocument();
-
-                writer.WriteStartElement("urlset", "http://www.sitemaps.org/schemas/sitemap/0.9");
-                writer.WriteAttributeString("xmlns", "xsi", null, "http://www.w3.org/2001/XMLSchema-instance");
-                writer.WriteAttributeString("xsi", "schemaLocation", null, "http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/09/sitemap.xsd");
-
-                string user = SessionFacade.GetCurrentUsername();
-                string[] groups = SessionFacade.GetCurrentGroupNames(CurrentWiki);
-
-
-                AuthChecker authChecker = new AuthChecker(Collectors.CollectorsBox.GetSettingsProvider(CurrentWiki));
-
-                foreach (PageContent page in Pages.GetPages(CurrentWiki, null))
-                {
-                    if (authChecker.CheckActionForPage(page.FullName, Actions.ForPages.ReadPage, user, groups))
-                        WritePage(mainUrl, page.FullName, page.FullName.ToLowerInvariant() == rootDefault, writer);
-                }
-                foreach (NamespaceInfo nspace in Pages.GetNamespaces(CurrentWiki))
-                {
-                    string nspaceDefault = nspace.DefaultPageFullName.ToLowerInvariant();
-
-                    foreach (PageContent page in Pages.GetPages(CurrentWiki, nspace))
-                    {
-                        if (authChecker.CheckActionForPage(page.FullName, Actions.ForPages.ReadPage, user, groups))
-                            WritePage(mainUrl, page.FullName, page.FullName.ToLowerInvariant() == nspaceDefault, writer);
-                    }
-                }
-
-                writer.WriteEndElement();
-                writer.WriteEndDocument();
-            }
-
-            return View("~/Views/Common/Sitemap.cshtml");
-        }
-
-        /// <summary>
-        /// Writes a page to the output XML writer.
-        /// </summary>
-        /// <param name="mainUrl">The main wiki URL.</param>
-        /// <param name="pageFullName">The page full name.</param>
-        /// <param name="isDefault">A value indicating whether the page is the default of its namespace.</param>
-        /// <param name="writer">The writer.</param>
-        private void WritePage(string mainUrl, string pageFullName, bool isDefault, XmlWriter writer)
-        {
-            writer.WriteStartElement("url");
-            writer.WriteElementString("loc", mainUrl + Tools.UrlEncode(pageFullName) + GlobalSettings.PageExtension);
-            writer.WriteElementString("priority", isDefault ? "0.75" : "0.5");
-            writer.WriteElementString("changefreq", "daily");
-            writer.WriteEndElement();
-        }
-
-        #endregion
-
     }
 }

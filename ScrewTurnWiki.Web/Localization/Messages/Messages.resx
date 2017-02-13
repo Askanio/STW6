@@ -1755,7 +1755,4 @@
   <data name="WebApplicationShutdown" xml:space="preserve">
     <value>Web Application has been shut down, please go to the &lt;a href="{0}"&gt;home page&lt;/a&gt;.</value>
   </data>
-  <data name="WrongCaptcha" xml:space="preserve">
-    <value>Wrong Captcha</value>
-  </data>
 </root>

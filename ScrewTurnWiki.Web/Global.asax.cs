@@ -48,7 +48,6 @@ namespace ScrewTurn.Wiki.Web
 
             // Register Inversion of Control dependencies
             IoCConfig.RegisterDependencies(applicationSettings.Installed);
-
         }
 
         protected void Application_BeginRequest(object sender, EventArgs e)

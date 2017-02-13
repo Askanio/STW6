@@ -1070,12 +1070,12 @@ namespace ScrewTurn.Wiki {
             Cache.AddToCache(wiki, "RootNamespaceName", rootNamespaceName);
         }
 
-    }
+	}
 
-    /// <summary>
-    /// Lists legal RSS feeds function modes.
-    /// </summary>
-    public enum RssFeedsMode {
+	/// <summary>
+	/// Lists legal RSS feeds function modes.
+	/// </summary>
+	public enum RssFeedsMode {
 		/// <summary>
 		/// RSS feeds serve full-text content.
 		/// </summary>

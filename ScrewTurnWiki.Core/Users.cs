@@ -364,10 +364,8 @@ namespace ScrewTurn.Wiki {
 		/// <param name="username">The username.</param>
 		/// <param name="email">The email.</param>
 		/// <param name="dateTime">The user registration date/time.</param>
-		public static void SendPasswordResetMessage(string wiki, string username, string email, DateTime dateTime)
-		{
-		    var mainUrl = Settings.GetMainUrl(wiki);
-            string mainLink = mainUrl + (mainUrl.EndsWith("/") ? "" : "/") + "User/PasswordRecovery?ResetCode=" + Tools.ComputeSecurityHash(username, email, dateTime) + "&Username=" + Tools.UrlEncode(username);
+		public static void SendPasswordResetMessage(string wiki, string username, string email, DateTime dateTime) {
+			string mainLink = Settings.GetMainUrl(wiki) + "Login.aspx?ResetCode=" + Tools.ComputeSecurityHash(username, email, dateTime) + "&Username=" + Tools.UrlEncode(username);
 			string body = Settings.GetProvider(wiki).GetMetaDataItem(MetaDataItem.PasswordResetProcedureMessage, null).Replace("##USERNAME##",
 				username).Replace("##LINK##", mainLink).Replace("##WIKITITLE##",
 				Settings.GetWikiTitle(wiki)).Replace("##EMAILADDRESS##", GlobalSettings.ContactEmail);
@@ -524,10 +522,8 @@ namespace ScrewTurn.Wiki {
 
 			UserGroup result = group.Provider.ModifyUserGroup(group, description);
 
-			if(result != null)
-			{
-                Host.Instance.OnUserGroupActivity(result, UserGroupActivity.GroupModified);
-			    Cache.RemoveCachedItem(group.Provider.CurrentWiki, "UserGroups");
+			if(result != null) {
+				Host.Instance.OnUserGroupActivity(result, UserGroupActivity.GroupModified);
 				Log.LogEntry("User Group " + group.Name + " updated", EntryType.General, Log.SystemUsername, group.Provider.CurrentWiki);
 			}
 			else Log.LogEntry("Update failed for User Group " + result.Name, EntryType.Error, Log.SystemUsername, group.Provider.CurrentWiki);
@@ -549,7 +545,7 @@ namespace ScrewTurn.Wiki {
 			bool done = group.Provider.RemoveUserGroup(group);
 
 			if(done) {
-                Host.Instance.OnUserGroupActivity(group, UserGroupActivity.GroupRemoved);
+				Host.Instance.OnUserGroupActivity(group, UserGroupActivity.GroupRemoved);
                 Cache.RemoveCachedItem(wiki, "UserGroups");
 				Log.LogEntry("User Group " + group.Name + " deleted", EntryType.General, Log.SystemUsername, wiki);
 			}
@@ -571,7 +567,7 @@ namespace ScrewTurn.Wiki {
 
 			if(result != null) {
 				Host.Instance.OnUserAccountActivity(result, UserAccountActivity.AccountMembershipChanged);
-                Cache.RemoveCachedItem(user.Provider.CurrentWiki, "UserGroups");
+                Cache.RemoveCachedItems("UserGroups");
 				Log.LogEntry("Group membership set for User " + user.Username, EntryType.General, Log.SystemUsername, user.Provider.CurrentWiki);
 			}
 			else Log.LogEntry("Could not set group membership for User " + user.Username, EntryType.Error, Log.SystemUsername, user.Provider.CurrentWiki);

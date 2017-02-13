@@ -67,14 +67,6 @@
       <HintPath>..\packages\Newtonsoft.Json.8.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="nunit.framework, Version=3.5.0.0, Culture=neutral, PublicKeyToken=2638cd05610744eb, processorArchitecture=MSIL">
-      <HintPath>..\packages\NUnit.3.5.0\lib\net45\nunit.framework.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Recaptcha, Version=1.0.5.0, Culture=neutral, PublicKeyToken=9afc4d65b28c38c2, processorArchitecture=MSIL">
-      <HintPath>..\packages\recaptcha.1.0.5.0\lib\.NetFramework 4.0\Recaptcha.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -140,64 +132,25 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="Code\AclResources.cs" />
-    <Compile Include="Code\AdminMenu.cs" />
-    <Compile Include="Code\Attributes\CaptchaValidatorAttribute.cs" />
-    <Compile Include="Code\Attributes\CheckActionForGlobalsAttribute.cs" />
     <Compile Include="Code\Attributes\CheckActionForPageAttribute.cs" />
     <Compile Include="Code\Attributes\CheckActionForNamespaceAttribute.cs" />
     <Compile Include="Code\Attributes\CheckExistPageAttribute.cs" />
     <Compile Include="Code\Attributes\DetectNamespaceFromPageAttribute.cs" />
     <Compile Include="Code\Attributes\CheckAndSetNamespaceAttribute.cs" />
-    <Compile Include="Code\Attributes\AuthenticationRequiredAttribute.cs" />
     <Compile Include="Code\ExtendedPageInfo.cs" />
-    <Compile Include="Code\Extensions\CaptchaExtensions.cs" />
-    <Compile Include="Code\Extensions\HtmlExtensions.cs" />
     <Compile Include="Code\FileDataExtension.cs" />
     <Compile Include="Code\Files\AttachmentRouteHandler.cs" />
     <Compile Include="Code\ImageHelper.cs" />
-    <Compile Include="Code\IndexRow.cs" />
     <Compile Include="Code\IoCConfig.cs" />
     <Compile Include="Code\Extensions\BootstrapHtmlExtensions.cs" />
     <Compile Include="Code\Extensions\UrlHelperExtensions.cs" />
     <Compile Include="Code\LoginTools.cs" />
-    <Compile Include="Code\InfoMessages\InfoMessage.cs" />
-    <Compile Include="Code\InfoMessages\InfoMessageType.cs" />
     <Compile Include="Code\PageHelper.cs" />
     <Compile Include="Code\PageSortingTools.cs" />
-    <Compile Include="Code\Providers\ProviderHelper.cs" />
-    <Compile Include="Code\Providers\ProviderType.cs" />
-    <Compile Include="Code\Providers\UsersProviderIntendedUse.cs" />
     <Compile Include="Code\ResourceExchanger.cs" />
     <Compile Include="Code\RevisionRow.cs" />
     <Compile Include="Code\Attributes\WikisValidatorAttribute.cs" />
     <Compile Include="Code\SearchResultRow.cs" />
-    <Compile Include="Code\UserGroupRow.cs" />
-    <Compile Include="Code\Validators\BaseReqularExpressionAttribute.cs" />
-    <Compile Include="Code\Validators\DynamicReqularExpressionAttribute.cs" />
-    <Compile Include="Code\Validators\PasswordValidationAttribute.cs" />
-    <Compile Include="Code\Validators\RequiredSelectedValidationAttribute .cs" />
-    <Compile Include="Code\Validators\NewUserGroupNameValidationAttribute.cs" />
-    <Compile Include="Code\WantedPageRow.cs" />
-    <Compile Include="Controllers\Admin\AclActionsSelectorController.cs" />
-    <Compile Include="Controllers\Admin\CategoriesController.cs" />
-    <Compile Include="Controllers\Admin\ConfigController.cs" />
-    <Compile Include="Controllers\Admin\ContentController.cs" />
-    <Compile Include="Controllers\Admin\GlobalConfigController.cs" />
-    <Compile Include="Controllers\Admin\GlobalHomeController.cs" />
-    <Compile Include="Controllers\Admin\GroupsController.cs" />
-    <Compile Include="Controllers\Admin\HomeController.cs" />
-    <Compile Include="Controllers\Admin\BaseController.cs" />
-    <Compile Include="Controllers\Admin\ImportExportController.cs" />
-    <Compile Include="Controllers\Admin\LogController.cs" />
-    <Compile Include="Controllers\Admin\NamespacesController.cs" />
-    <Compile Include="Controllers\Admin\NavPathsController.cs" />
-    <Compile Include="Controllers\Admin\PagesController.cs" />
-    <Compile Include="Controllers\Admin\PluginsController.cs" />
-    <Compile Include="Controllers\Admin\ProvidersManagementController.cs" />
-    <Compile Include="Controllers\Admin\SnippetsController.cs" />
-    <Compile Include="Controllers\Admin\ThemeController.cs" />
-    <Compile Include="Controllers\Admin\UsersController.cs" />
     <Compile Include="Controllers\AllPagesController.cs" />
     <Compile Include="Controllers\AttachmentController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
@@ -207,7 +160,6 @@
     <Compile Include="Controllers\HistoryController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PageController.cs" />
-    <Compile Include="Controllers\RssController.cs" />
     <Compile Include="Controllers\SearchController.cs" />
     <Compile Include="Controllers\WikiController.cs" />
     <Compile Include="Controllers\InstallController.cs" />
@@ -216,30 +168,10 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Code\Files\FileHandler.cs" />
-    <Compile Include="Localization\Admin\AclActionsSelector.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>AclActionsSelector.resx</DependentUpon>
-    </Compile>
     <Compile Include="Localization\Common\AccessDenied.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>AccessDenied.resx</DependentUpon>
-    </Compile>
-    <Compile Include="Localization\Admin\Admin.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Admin.resx</DependentUpon>
-    </Compile>
-    <Compile Include="Localization\Admin\AdminGroups.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>AdminGroups.resx</DependentUpon>
-    </Compile>
-    <Compile Include="Localization\Admin\AdminHome.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>AdminHome.resx</DependentUpon>
     </Compile>
     <Compile Include="Localization\Common\AllPages.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -271,11 +203,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>History.resx</DependentUpon>
     </Compile>
-    <Compile Include="Localization\Common\Login.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Login.resx</DependentUpon>
-    </Compile>
     <Compile Include="Localization\Common\MasterPageSA.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -301,23 +228,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Messages.resx</DependentUpon>
     </Compile>
-    <Compile Include="Models\Admin\Common\AclActionsSelectorModel.cs" />
-    <Compile Include="Models\Admin\AdminBaseModel.cs" />
-    <Compile Include="Models\Admin\Groups\EditUserGroupModel.cs" />
-    <Compile Include="Models\Admin\Groups\UserGroupsModel.cs" />
-    <Compile Include="Models\Admin\Home\MissingPagesModel.cs" />
-    <Compile Include="Models\Admin\Home\BulkEmailModel.cs" />
-    <Compile Include="Models\Admin\Home\OrphanPagesModel.cs" />
-    <Compile Include="Models\BaseModel.cs" />
     <Compile Include="Models\Common\AccessDeniedModel.cs" />
-    <Compile Include="Models\User\LanguageModel.cs" />
-    <Compile Include="Models\User\LoginBaseModel.cs" />
     <Compile Include="Models\Common\PageNotFoundModel.cs" />
     <Compile Include="Models\Common\SearchModel.cs" />
-    <Compile Include="Models\User\LoginModel.cs" />
-    <Compile Include="Models\User\LogoutModel.cs" />
-    <Compile Include="Models\User\PasswordRecoveryModel.cs" />
-    <Compile Include="Models\User\PasswordResetModel.cs" />
     <Compile Include="Models\Wiki\AttachmentViewerModel.cs" />
     <Compile Include="Models\Wiki\CategoryModel.cs" />
     <Compile Include="Models\Wiki\DiffModel.cs" />
@@ -343,11 +256,8 @@
     <Content Include="Content\css\stw.installer.css" />
     <Content Include="Content\Images\Blank.png" />
     <Content Include="Content\Images\Comment.png" />
-    <Content Include="Content\Images\Enlarge.png" />
     <Content Include="Content\Images\Error.png" />
     <Content Include="Content\Images\File.png" />
-    <Content Include="Content\Images\Icon.ico" />
-    <Content Include="Content\Images\Refresh.png" />
     <Content Include="Content\Images\SearchIcon.ico" />
     <Content Include="Content\Images\STWLogo.png" />
     <Content Include="Content\Images\Wait.gif" />
@@ -443,14 +353,12 @@
     <Content Include="Scripts\respond.matchmedia.addListener.js" />
     <Content Include="Scripts\respond.matchmedia.addListener.min.js" />
     <Content Include="Scripts\respond.min.js" />
-    <Content Include="Scripts\stw\admin\jquery.easing.1.3.js" />
     <Content Include="Scripts\stw\common\common.js" />
     <Content Include="Views\Shared\EmailNotification.cshtml" />
     <Content Include="Views\Shared\_SALayout.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\History\History.cshtml" />
     <Content Include="Views\Shared\RegionContent.cshtml" />
-    <Content Include="Views\Wiki\Rss.cshtml" />
     <TypeScriptCompile Include="Scripts\stw\common\historypage.ts" />
     <TypeScriptCompile Include="Scripts\stw\common\search.ts" />
     <TypeScriptCompile Include="Scripts\stw\common\wikipage.ts" />
@@ -474,12 +382,6 @@
     <Content Include="Views\Install\Step3.cshtml" />
     <Content Include="Views\Install\Step4.cshtml" />
     <Content Include="Views\Shared\_CleanLayout.cshtml" />
-    <Content Include="Views\Admin\Home\MissingPages.cshtml" />
-    <Content Include="Views\Admin\Home\BulkEmail.cshtml" />
-    <Content Include="Views\Admin\Home\OrphanPages.cshtml" />
-    <Content Include="Views\Admin\Groups\UserGroups.cshtml" />
-    <Content Include="Views\Admin\Groups\EditUserGroup.cshtml" />
-    <Content Include="Views\Admin\Common\AclActionsSelector.cshtml" />
     <None Include="Views\Attachment\AttachmentViewer.cshtml" />
     <Content Include="Views\Common\PageNotFound.cshtml" />
     <Content Include="Views\History\Diff.cshtml" />
@@ -488,40 +390,17 @@
     <Content Include="Views\Wiki\Category.cshtml" />
     <Content Include="Views\Common\Search\Search.cshtml" />
     <Content Include="Views\Common\Search\SearchResult.cshtml" />
-    <Content Include="Views\User\Login.cshtml" />
-    <Content Include="Views\User\Logout.cshtml" />
-    <Content Include="Views\User\PasswordReset.cshtml" />
-    <Content Include="Views\User\PasswordRecovery.cshtml" />
-    <Content Include="Views\Shared\_AdminLayout.cshtml" />
-    <Content Include="Views\User\Language.cshtml" />
-    <Content Include="Views\Common\Sitemap.cshtml" />
     <None Include="Views\Wiki\Discussion.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Admin\Categories\" />
-    <Folder Include="Views\Admin\Config\" />
-    <Folder Include="Views\Admin\Content\" />
-    <Folder Include="Views\Admin\GlobalConfig\" />
-    <Folder Include="Views\Admin\GlobalHome\" />
-    <Folder Include="Views\Admin\ImportExport\" />
-    <Folder Include="Views\Admin\Log\" />
-    <Folder Include="Views\Admin\Namespaces\" />
-    <Folder Include="Views\Admin\NavPaths\" />
-    <Folder Include="Views\Admin\Pages\" />
-    <Folder Include="Views\Admin\Plugins\" />
-    <Folder Include="Views\Admin\ProvidersManagement\" />
-    <Folder Include="Views\Admin\Snippets\" />
-    <Folder Include="Views\Admin\Theme\" />
-    <Folder Include="Views\Admin\Users\" />
     <Folder Include="Views\Categories\" />
     <Folder Include="Views\Home\" />
     <Folder Include="Views\SpecialPage\" />
+    <Folder Include="Views\User\" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="packages.config">
-      <SubType>Designer</SubType>
-    </Content>
+    <Content Include="packages.config" />
     <Content Include="Content\Themes\Default-v2\Default-v2.rar" />
     <Content Include="Content\web.config" />
     <None Include="Project_Readme.html" />
@@ -552,38 +431,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Localization\Admin\AclActionsSelector.af-ZA.resx" />
-    <EmbeddedResource Include="Localization\Admin\AclActionsSelector.cs-CZ.resx" />
-    <EmbeddedResource Include="Localization\Admin\AclActionsSelector.da-DK.resx" />
-    <EmbeddedResource Include="Localization\Admin\AclActionsSelector.de-DE.resx" />
-    <EmbeddedResource Include="Localization\Admin\AclActionsSelector.es-ES.resx" />
-    <EmbeddedResource Include="Localization\Admin\AclActionsSelector.fa-IR.resx" />
-    <EmbeddedResource Include="Localization\Admin\AclActionsSelector.fr-FR.resx" />
-    <EmbeddedResource Include="Localization\Admin\AclActionsSelector.hi-IN.resx" />
-    <EmbeddedResource Include="Localization\Admin\AclActionsSelector.hu-HU.resx" />
-    <EmbeddedResource Include="Localization\Admin\AclActionsSelector.it-IT.resx" />
-    <EmbeddedResource Include="Localization\Admin\AclActionsSelector.ja-JP.resx" />
-    <EmbeddedResource Include="Localization\Admin\AclActionsSelector.ko-KR.resx" />
-    <EmbeddedResource Include="Localization\Admin\AclActionsSelector.lv-LV.resx" />
-    <EmbeddedResource Include="Localization\Admin\AclActionsSelector.nb-NO.resx" />
-    <EmbeddedResource Include="Localization\Admin\AclActionsSelector.nl-NL.resx" />
-    <EmbeddedResource Include="Localization\Admin\AclActionsSelector.pl-PL.resx" />
-    <EmbeddedResource Include="Localization\Admin\AclActionsSelector.pt-BR.resx" />
-    <EmbeddedResource Include="Localization\Admin\AclActionsSelector.pt-PT.resx" />
-    <EmbeddedResource Include="Localization\Admin\AclActionsSelector.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>AclActionsSelector.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Localization\Admin\AclActionsSelector.ro-RO.resx" />
-    <EmbeddedResource Include="Localization\Admin\AclActionsSelector.ru-RU.resx" />
-    <EmbeddedResource Include="Localization\Admin\AclActionsSelector.sk-SK.resx" />
-    <EmbeddedResource Include="Localization\Admin\AclActionsSelector.sr-Latn-CS.resx" />
-    <EmbeddedResource Include="Localization\Admin\AclActionsSelector.sv-SE.resx" />
-    <EmbeddedResource Include="Localization\Admin\AclActionsSelector.tr-TR.resx" />
-    <EmbeddedResource Include="Localization\Admin\AclActionsSelector.uk-UA.resx" />
-    <EmbeddedResource Include="Localization\Admin\AclActionsSelector.vi-VN.resx" />
-    <EmbeddedResource Include="Localization\Admin\AclActionsSelector.zh-cn.resx" />
-    <EmbeddedResource Include="Localization\Admin\AclActionsSelector.zh-tw.resx" />
     <EmbeddedResource Include="Localization\Common\AccessDenied.af-ZA.resx" />
     <EmbeddedResource Include="Localization\Common\AccessDenied.cs-CZ.resx" />
     <EmbeddedResource Include="Localization\Common\AccessDenied.da-DK.resx" />
@@ -616,102 +463,6 @@
     <EmbeddedResource Include="Localization\Common\AccessDenied.vi-VN.resx" />
     <EmbeddedResource Include="Localization\Common\AccessDenied.zh-cn.resx" />
     <EmbeddedResource Include="Localization\Common\AccessDenied.zh-tw.resx" />
-    <EmbeddedResource Include="Localization\Admin\Admin.af-ZA.resx" />
-    <EmbeddedResource Include="Localization\Admin\Admin.cs-CZ.resx" />
-    <EmbeddedResource Include="Localization\Admin\Admin.da-DK.resx" />
-    <EmbeddedResource Include="Localization\Admin\Admin.de-DE.resx" />
-    <EmbeddedResource Include="Localization\Admin\Admin.es-ES.resx" />
-    <EmbeddedResource Include="Localization\Admin\Admin.fa-IR.resx" />
-    <EmbeddedResource Include="Localization\Admin\Admin.fr-FR.resx" />
-    <EmbeddedResource Include="Localization\Admin\Admin.hi-IN.resx" />
-    <EmbeddedResource Include="Localization\Admin\Admin.hu-HU.resx" />
-    <EmbeddedResource Include="Localization\Admin\Admin.it-IT.resx" />
-    <EmbeddedResource Include="Localization\Admin\Admin.ja-JP.resx" />
-    <EmbeddedResource Include="Localization\Admin\Admin.ko-KR.resx" />
-    <EmbeddedResource Include="Localization\Admin\Admin.lv-LV.resx" />
-    <EmbeddedResource Include="Localization\Admin\Admin.nb-NO.resx" />
-    <EmbeddedResource Include="Localization\Admin\Admin.nl-NL.resx" />
-    <EmbeddedResource Include="Localization\Admin\Admin.pl-PL.resx" />
-    <EmbeddedResource Include="Localization\Admin\Admin.pt-BR.resx" />
-    <EmbeddedResource Include="Localization\Admin\Admin.pt-PT.resx" />
-    <EmbeddedResource Include="Localization\Admin\Admin.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>Admin.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Localization\Admin\Admin.ro-RO.resx" />
-    <EmbeddedResource Include="Localization\Admin\Admin.ru-RU.resx" />
-    <EmbeddedResource Include="Localization\Admin\Admin.sk-SK.resx" />
-    <EmbeddedResource Include="Localization\Admin\Admin.sr-Latn-CS.resx" />
-    <EmbeddedResource Include="Localization\Admin\Admin.sv-SE.resx" />
-    <EmbeddedResource Include="Localization\Admin\Admin.tr-TR.resx" />
-    <EmbeddedResource Include="Localization\Admin\Admin.uk-UA.resx" />
-    <EmbeddedResource Include="Localization\Admin\Admin.vi-VN.resx" />
-    <EmbeddedResource Include="Localization\Admin\Admin.zh-cn.resx" />
-    <EmbeddedResource Include="Localization\Admin\Admin.zh-tw.resx" />
-    <EmbeddedResource Include="Localization\Admin\AdminGroups.af-ZA.resx" />
-    <EmbeddedResource Include="Localization\Admin\AdminGroups.cs-CZ.resx" />
-    <EmbeddedResource Include="Localization\Admin\AdminGroups.da-DK.resx" />
-    <EmbeddedResource Include="Localization\Admin\AdminGroups.de-DE.resx" />
-    <EmbeddedResource Include="Localization\Admin\AdminGroups.es-ES.resx" />
-    <EmbeddedResource Include="Localization\Admin\AdminGroups.fa-IR.resx" />
-    <EmbeddedResource Include="Localization\Admin\AdminGroups.fr-FR.resx" />
-    <EmbeddedResource Include="Localization\Admin\AdminGroups.hi-IN.resx" />
-    <EmbeddedResource Include="Localization\Admin\AdminGroups.hu-HU.resx" />
-    <EmbeddedResource Include="Localization\Admin\AdminGroups.it-IT.resx" />
-    <EmbeddedResource Include="Localization\Admin\AdminGroups.ja-JP.resx" />
-    <EmbeddedResource Include="Localization\Admin\AdminGroups.ko-KR.resx" />
-    <EmbeddedResource Include="Localization\Admin\AdminGroups.lv-LV.resx" />
-    <EmbeddedResource Include="Localization\Admin\AdminGroups.nb-NO.resx" />
-    <EmbeddedResource Include="Localization\Admin\AdminGroups.nl-NL.resx" />
-    <EmbeddedResource Include="Localization\Admin\AdminGroups.pl-PL.resx" />
-    <EmbeddedResource Include="Localization\Admin\AdminGroups.pt-BR.resx" />
-    <EmbeddedResource Include="Localization\Admin\AdminGroups.pt-PT.resx" />
-    <EmbeddedResource Include="Localization\Admin\AdminGroups.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>AdminGroups.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Localization\Admin\AdminGroups.ro-RO.resx" />
-    <EmbeddedResource Include="Localization\Admin\AdminGroups.ru-RU.resx" />
-    <EmbeddedResource Include="Localization\Admin\AdminGroups.sk-SK.resx" />
-    <EmbeddedResource Include="Localization\Admin\AdminGroups.sr-Latn-CS.resx" />
-    <EmbeddedResource Include="Localization\Admin\AdminGroups.sv-SE.resx" />
-    <EmbeddedResource Include="Localization\Admin\AdminGroups.tr-TR.resx" />
-    <EmbeddedResource Include="Localization\Admin\AdminGroups.uk-UA.resx" />
-    <EmbeddedResource Include="Localization\Admin\AdminGroups.vi-VN.resx" />
-    <EmbeddedResource Include="Localization\Admin\AdminGroups.zh-cn.resx" />
-    <EmbeddedResource Include="Localization\Admin\AdminGroups.zh-tw.resx" />
-    <EmbeddedResource Include="Localization\Admin\AdminHome.af-ZA.resx" />
-    <EmbeddedResource Include="Localization\Admin\AdminHome.cs-CZ.resx" />
-    <EmbeddedResource Include="Localization\Admin\AdminHome.da-DK.resx" />
-    <EmbeddedResource Include="Localization\Admin\AdminHome.de-DE.resx" />
-    <EmbeddedResource Include="Localization\Admin\AdminHome.es-ES.resx" />
-    <EmbeddedResource Include="Localization\Admin\AdminHome.fa-IR.resx" />
-    <EmbeddedResource Include="Localization\Admin\AdminHome.fr-FR.resx" />
-    <EmbeddedResource Include="Localization\Admin\AdminHome.hi-IN.resx" />
-    <EmbeddedResource Include="Localization\Admin\AdminHome.hu-HU.resx" />
-    <EmbeddedResource Include="Localization\Admin\AdminHome.it-IT.resx" />
-    <EmbeddedResource Include="Localization\Admin\AdminHome.ja-JP.resx" />
-    <EmbeddedResource Include="Localization\Admin\AdminHome.ko-KR.resx" />
-    <EmbeddedResource Include="Localization\Admin\AdminHome.lv-LV.resx" />
-    <EmbeddedResource Include="Localization\Admin\AdminHome.nb-NO.resx" />
-    <EmbeddedResource Include="Localization\Admin\AdminHome.nl-NL.resx" />
-    <EmbeddedResource Include="Localization\Admin\AdminHome.pl-PL.resx" />
-    <EmbeddedResource Include="Localization\Admin\AdminHome.pt-BR.resx" />
-    <EmbeddedResource Include="Localization\Admin\AdminHome.pt-PT.resx" />
-    <EmbeddedResource Include="Localization\Admin\AdminHome.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>AdminHome.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Localization\Admin\AdminHome.ro-RO.resx" />
-    <EmbeddedResource Include="Localization\Admin\AdminHome.ru-RU.resx" />
-    <EmbeddedResource Include="Localization\Admin\AdminHome.sk-SK.resx" />
-    <EmbeddedResource Include="Localization\Admin\AdminHome.sr-Latn-CS.resx" />
-    <EmbeddedResource Include="Localization\Admin\AdminHome.sv-SE.resx" />
-    <EmbeddedResource Include="Localization\Admin\AdminHome.tr-TR.resx" />
-    <EmbeddedResource Include="Localization\Admin\AdminHome.uk-UA.resx" />
-    <EmbeddedResource Include="Localization\Admin\AdminHome.vi-VN.resx" />
-    <EmbeddedResource Include="Localization\Admin\AdminHome.zh-cn.resx" />
-    <EmbeddedResource Include="Localization\Admin\AdminHome.zh-tw.resx" />
     <EmbeddedResource Include="Localization\Common\AllPages.af-ZA.resx" />
     <EmbeddedResource Include="Localization\Common\AllPages.cs-CZ.resx" />
     <EmbeddedResource Include="Localization\Common\AllPages.da-DK.resx" />
@@ -904,38 +655,6 @@
     <EmbeddedResource Include="Localization\Common\History.vi-VN.resx" />
     <EmbeddedResource Include="Localization\Common\History.zh-cn.resx" />
     <EmbeddedResource Include="Localization\Common\History.zh-tw.resx" />
-    <EmbeddedResource Include="Localization\Common\Login.af-ZA.resx" />
-    <EmbeddedResource Include="Localization\Common\Login.cs-CZ.resx" />
-    <EmbeddedResource Include="Localization\Common\Login.da-DK.resx" />
-    <EmbeddedResource Include="Localization\Common\Login.de-DE.resx" />
-    <EmbeddedResource Include="Localization\Common\Login.es-ES.resx" />
-    <EmbeddedResource Include="Localization\Common\Login.fa-IR.resx" />
-    <EmbeddedResource Include="Localization\Common\Login.fr-FR.resx" />
-    <EmbeddedResource Include="Localization\Common\Login.hi-IN.resx" />
-    <EmbeddedResource Include="Localization\Common\Login.hu-HU.resx" />
-    <EmbeddedResource Include="Localization\Common\Login.it-IT.resx" />
-    <EmbeddedResource Include="Localization\Common\Login.ja-JP.resx" />
-    <EmbeddedResource Include="Localization\Common\Login.ko-KR.resx" />
-    <EmbeddedResource Include="Localization\Common\Login.lv-LV.resx" />
-    <EmbeddedResource Include="Localization\Common\Login.nb-NO.resx" />
-    <EmbeddedResource Include="Localization\Common\Login.nl-NL.resx" />
-    <EmbeddedResource Include="Localization\Common\Login.pl-PL.resx" />
-    <EmbeddedResource Include="Localization\Common\Login.pt-BR.resx" />
-    <EmbeddedResource Include="Localization\Common\Login.pt-PT.resx" />
-    <EmbeddedResource Include="Localization\Common\Login.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>Login.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Localization\Common\Login.ro-RO.resx" />
-    <EmbeddedResource Include="Localization\Common\Login.ru-RU.resx" />
-    <EmbeddedResource Include="Localization\Common\Login.sk-SK.resx" />
-    <EmbeddedResource Include="Localization\Common\Login.sr-Latn-CS.resx" />
-    <EmbeddedResource Include="Localization\Common\Login.sv-SE.resx" />
-    <EmbeddedResource Include="Localization\Common\Login.tr-TR.resx" />
-    <EmbeddedResource Include="Localization\Common\Login.uk-UA.resx" />
-    <EmbeddedResource Include="Localization\Common\Login.vi-VN.resx" />
-    <EmbeddedResource Include="Localization\Common\Login.zh-cn.resx" />
-    <EmbeddedResource Include="Localization\Common\Login.zh-tw.resx" />
     <EmbeddedResource Include="Localization\Common\MasterPageSA.af-ZA.resx" />
     <EmbeddedResource Include="Localization\Common\MasterPageSA.cs-CZ.resx" />
     <EmbeddedResource Include="Localization\Common\MasterPageSA.da-DK.resx" />

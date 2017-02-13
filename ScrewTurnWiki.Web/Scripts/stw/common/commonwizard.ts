@@ -24,13 +24,6 @@ module ScrewTurn.Wiki.Web.Common {
             return confirm(CONFIRM_MESSAGE);
         }
 
-        public static showMessage(messageType, message) {
-            var style = "resultok";
-            if (messageType === 1)
-                style = "resulterror";
-            bootbox.alert("<pre class='" + style + "'>" + message + "</pre>");
-        }
-
         public createCookie(name, value, days) {
             var expires = "";
             if (days) {

@@ -55,7 +55,7 @@
                         <td>
                             @if (@Model.RevisionRows[i].CanRollback)
                             {
-                                <a class="rollback" href='@UrlHelperExtensions.BuildPageUrl(@Model.PageFullNameEncode, "/Rollback?revision=", @Model.RevisionRows[i].Revision)'>@History.BtnRollback_Text</a>
+                                <a class="rollback" href=@UrlHelperExtensions.BuildPageUrl(@Model.PageFullNameEncode, "/Rollback?revision=", @Model.RevisionRows[i].Revision)>@History.BtnRollback_Text</a>
                             }
                         </td>
                         @*<asp:LinkButton ID="btnRollback" runat="server" Visible='<%# (bool)Eval("CanRollback") %>' Text="Rollback" CommandName="Rollback" CommandArgument='<%# Eval("Revision") %>'

@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using System.Web.Mvc;
 using ScrewTurn.Wiki.PluginFramework;
 
 namespace ScrewTurn.Wiki.Web.Code
@@ -39,9 +38,7 @@ namespace ScrewTurn.Wiki.Web.Code
                 {
                     SetupSession(wiki, user);
                     Log.LogEntry("User " + user.Username + " logged in through cookie", EntryType.General, Log.SystemUsername, wiki);
-
-                    var formattedRedirect = GetFormatedRedirect(wiki, false);
-                    HttpContext.Current.Response.Redirect(formattedRedirect);
+                    TryRedirect(wiki, false);
                 }
                 else {
                     // Cookie is not valid, delete it
@@ -57,9 +54,7 @@ namespace ScrewTurn.Wiki.Web.Code
                 {
                     SetupSession(wiki, user);
                     Log.LogEntry("User " + user.Username + " logged in via " + user.Provider.GetType().FullName + " autologin", EntryType.General, Log.SystemUsername, wiki);
-
-                    var formattedRedirect = GetFormatedRedirect(wiki, false);
-                    HttpContext.Current.Response.Redirect(formattedRedirect);
+                    TryRedirect(wiki, false);
                 }
             }
         }
@@ -80,61 +75,19 @@ namespace ScrewTurn.Wiki.Web.Code
             }
         }
 
-        ///// <summary>
-        ///// Tries to redirect the user to any specified URL.
-        ///// </summary>
-        ///// <param name="wiki">The wiki.</param>
-        ///// <param name="goHome">A value indicating whether to redirect to the home page if no explicit redirect URL is found.</param>
-        //public static void TryRedirect(string wiki, bool goHome)
-        //{
-        //    TryRedirect(HttpContext.Current.Request["Redirect"], wiki, goHome);
-        //}
-
-        ///// <summary>
-        ///// Tries to redirect the user to any specified URL.
-        ///// </summary>
-        ///// <param name="redirect"></param>
-        ///// <param name="wiki">The wiki.</param>
-        ///// <param name="goHome">A value indicating whether to redirect to the home page if no explicit redirect URL is found.</param>
-        //public static void TryRedirect(string redirect, string wiki, bool goHome)
-        //{
-        //    if (redirect != null)
-        //    {
-        //        string target = HttpContext.Current.Request["Redirect"];
-        //        if (target.StartsWith("http:") || target.StartsWith("https:")) HttpContext.Current.Response.Redirect(target);
-        //        else UrlTools.Redirect(UrlTools.BuildUrl(wiki, target));
-        //    }
-        //    else if (goHome) UrlTools.Redirect(UrlTools.BuildUrl(wiki, "Default"));
-        //}
-
         /// <summary>
         /// Tries to redirect the user to any specified URL.
         /// </summary>
-        /// <param name="wiki">The wiki.</param>
         /// <param name="goHome">A value indicating whether to redirect to the home page if no explicit redirect URL is found.</param>
-        public static string GetFormatedRedirect(string wiki, bool goHome)
+        public static void TryRedirect(string wiki, bool goHome)
         {
-            return GetFormatedRedirect(HttpContext.Current.Request["Redirect"], wiki, goHome);
-        }
-
-        /// <summary>
-        /// Tries to redirect the user to any specified URL.
-        /// </summary>
-        /// <param name="redirect"></param>
-        /// <param name="wiki">The wiki.</param>
-        /// <param name="goHome">A value indicating whether to redirect to the home page if no explicit redirect URL is found.</param>
-        public static string GetFormatedRedirect(string redirect, string wiki, bool goHome)
-        {
-            if (redirect != null)
+            if (HttpContext.Current.Request["Redirect"] != null)
             {
-                string target = redirect;
-                if (target.StartsWith("http:") || target.StartsWith("https:"))
-                    return target;
-                return UrlTools.GetRedirectUrl(UrlTools.BuildUrl(wiki, target));
+                string target = HttpContext.Current.Request["Redirect"];
+                if (target.StartsWith("http:") || target.StartsWith("https:")) HttpContext.Current.Response.Redirect(target);
+                else UrlTools.Redirect(UrlTools.BuildUrl(wiki, target));
             }
-            else if (goHome)
-                return UrlTools.GetRedirectUrl(UrlTools.BuildUrl(wiki, "Default"));
-            return null;
+            else if (goHome) UrlTools.Redirect(UrlTools.BuildUrl(wiki, "Default"));
         }
 
         /// <summary>
@@ -170,8 +123,8 @@ namespace ScrewTurn.Wiki.Web.Code
 
             if (!canViewNamespace)
             {
-                if (SessionFacade.CurrentUsername == null) UrlTools.Redirect("User/Login?ReturnUrl=" + Tools.UrlEncode(Tools.GetCurrentUrlFixed())); // TODO: RedirectToAction
-                else UrlTools.Redirect("AccessDenied"); // TODO: RedirectToAction
+                if (SessionFacade.CurrentUsername == null) UrlTools.Redirect("Login.aspx?Redirect=" + Tools.UrlEncode(Tools.GetCurrentUrlFixed())); // TODO: RedirectToAction
+                else UrlTools.Redirect("AccessDenied.aspx"); // TODO: RedirectToAction
             }
         }
 
