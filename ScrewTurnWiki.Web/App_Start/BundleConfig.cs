@@ -17,6 +17,8 @@ namespace ScrewTurnWiki.Web
         public const string RespondJS = "~/bundles/respond";
         public const string BootboxJS = "~/bundles/bootbox";
 
+        public const string NotyJS = "~/bundles/noty";
+
         public const string AdminCss = "~/Content/Themes/Admin";
         public const string EditorCss = "~/Content/Themes/Editor";
         public const string JqueryEasingJS = "~/bundles/Admin/jquery.easing";
@@ -54,6 +56,8 @@ namespace ScrewTurnWiki.Web
             bundles.Add(new StyleBundle(BootstrapCss).Include("~/Content/bootstrap/css/bootstrap.css"));
 
             bundles.Add(new ScriptBundle(BootboxJS).Include("~/Scripts/bootbox.js"));
+
+            bundles.Add(new ScriptBundle(NotyJS).Include("~/Scripts/noty/jquery.noty.packaged.js"));
 
             bundles.Add(new StyleBundle(AdminCss).Include("~/Content/Themes/Admin.css"));
             bundles.Add(new StyleBundle(EditorCss).Include("~/Content/Themes/Editor.css"));

@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using System.Security.Cryptography;
+using System.Text;
 using System.Threading;
 using System.Web;
 using System.Web.Caching;
@@ -11,6 +13,7 @@ using ScrewTurn.Wiki.Configuration;
 using ScrewTurn.Wiki.PluginFramework;
 using ScrewTurn.Wiki.Web.Code;
 using ScrewTurn.Wiki.Web.Code.Attributes;
+using ScrewTurn.Wiki.Web.Code.InfoMessages;
 using ScrewTurn.Wiki.Web.Localization.Messages;
 using ScrewTurn.Wiki.Web.Models.User;
 
@@ -454,6 +457,140 @@ namespace ScrewTurn.Wiki.Web.Controllers
             for (int i = 0; i < c.Length; i++)
                 languages.Add(new SelectListItem() {Text = c[i].Split('|')[1], Value = c[i].Split('|')[0]});
             return languages;
+        }
+
+        #endregion
+
+        #region User
+
+        [HttpGet]
+        public ActionResult User(string username) //, string subject)string user, 
+        {
+            var model = new UserModel();
+            PrepareSAModel(model, CurrentNamespace);
+
+            model.Title = Messages.UserTitle + " - " + Settings.GetWikiTitle(CurrentWiki);
+
+            //currentUsername = Request["User"];
+            //if (string.IsNullOrEmpty(user)) user = username; //Request["Username"];
+            if (string.IsNullOrEmpty(username)) UrlTools.Redirect("Default"); // TODO:
+
+            UserInfo currentUser = null;
+
+            if (username == "admin")
+                currentUser = Users.GetGlobalAdministratorAccount();
+            else
+                currentUser = Users.FindUser(CurrentWiki, username);
+
+            if (currentUser == null)
+                UrlTools.Redirect("Default"); // TODO:
+
+            model.LblTitle = Localization.Common.User.LblTitle_Text.Replace("##NAME##", Users.GetDisplayName(currentUser));
+
+            //model.Subject = subject; //Request["Subject"];
+            //if (model.Subject != "" && SessionFacade.LoginKey == null)
+            //    UrlTools.Redirect("Login?Redirect=" + Tools.UrlEncode(Tools.GetCurrentUrlFixed())); // TODO:
+
+            model.PanelMessageVisible = SessionFacade.LoginKey != null;
+            model.UserName = username;
+
+            DisplayGravatar(model, currentUser);
+
+            DisplayRecentActivity(model, currentUser);
+            
+            return View(model);
+        }
+
+        /// <summary>
+        /// Displays the gravatar of the user.
+        /// </summary>
+        private void DisplayGravatar(UserModel model, UserInfo currentUser)
+        {
+            if (Settings.GetDisplayGravatars(CurrentWiki))
+            {
+                model.Gravatar =
+                    new HtmlString(
+                        string.Format(
+                            @"<img src=""http://www.gravatar.com/avatar/{0}?d=identicon"" alt=""Gravatar"" />",
+                            GetGravatarHash(currentUser.Email)));
+            }
+        }
+
+        /// <summary>
+        /// Gets the gravatar hash of an email.
+        /// </summary>
+        /// <param name="email">The email.</param>
+        /// <returns>The hash.</returns>
+        private static string GetGravatarHash(string email)
+        {
+            MD5 md5 = MD5.Create();
+            byte[] bytes = md5.ComputeHash(Encoding.ASCII.GetBytes(email.ToLowerInvariant()));
+
+            StringBuilder sb = new StringBuilder(100);
+            foreach (byte b in bytes)
+                sb.AppendFormat("{0:x2}", b);
+
+            return sb.ToString();
+        }
+
+        /// <summary>
+        /// Displays the recent activity.
+        /// </summary>
+        private void DisplayRecentActivity(UserModel model, UserInfo currentUser)
+        {
+            RecentChange[] changes = RecentChanges.GetAllChanges(CurrentWiki);
+
+            List<RecentChange> result = new List<RecentChange>(Settings.GetMaxRecentChangesToDisplay(CurrentWiki));
+
+            foreach (RecentChange c in changes)
+                if (c.User == currentUser.Username)
+                    result.Add(c);
+
+            // Sort by date/time descending
+            result.Reverse();
+
+            model.NoActivityVisible = result.Count == 0;
+
+            model.RecentActivity =
+                new HtmlString(Formatter.BuildRecentChangesTable(CurrentWiki, result, FormattingContext.Other, null));
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [AuthenticationRequired]
+        public PartialViewResult EmailMessage(EmailMessageModel model)
+        {
+            model.Message = new InfoMessage();
+            if (ModelState.IsValid)
+            {
+                UserInfo currentUser = null;
+
+                if (model.UserName == "admin")
+                    currentUser = Users.GetGlobalAdministratorAccount();
+                else
+                    currentUser = Users.FindUser(CurrentWiki, model.UserName);
+
+                UserInfo loggedUser = SessionFacade.GetCurrentUser(CurrentWiki);
+
+                Log.LogEntry("Sending Email to " + currentUser.Username, EntryType.General, loggedUser.Username, CurrentWiki);
+                EmailTools.AsyncSendEmail(currentUser.Email,
+                    "\"" + Users.GetDisplayName(loggedUser) + "\" <" + GlobalSettings.SenderEmail + ">",
+                    model.Subject,
+                    Users.GetDisplayName(loggedUser) + " sent you this message from " +
+                    Settings.GetWikiTitle(CurrentWiki) + ". To reply, please go to " + Settings.GetMainUrl(CurrentWiki) +
+                    "User?Username=" + Tools.UrlEncode(loggedUser.Username) + "&Subject=" +
+                    Tools.UrlEncode("Re: " + model.Subject) +
+                    "\nPlease do not reply to this Email.\n\n------------\n\n" + model.Body,
+                    false);
+
+                ModelState.Clear();
+                model.Message.Text = Messages.MessageSent;
+                model.Message.Type = InfoMessageType.Success;
+                model.Subject = null;
+                model.Body = null;
+            }
+
+            return PartialView(model);
         }
 
         #endregion

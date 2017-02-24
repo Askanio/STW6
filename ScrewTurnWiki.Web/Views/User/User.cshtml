@@ -1,0 +1,65 @@
+﻿@using System.Web.Mvc.Html
+@using ScrewTurn.Wiki.Web.Models.User
+@using loc = ScrewTurn.Wiki.Web.Localization.Common
+@model UserModel
+@{
+    Layout = "~/Views/Shared/_SALayout.cshtml";
+}
+<script type="text/javascript">
+    var wizard;
+    $(document).ready(function() {
+        wizard = new ScrewTurn.Wiki.Web.Common.CommonWizard();
+    });
+
+    function OnSuccess(data) {
+        if ($('#MessageText').val().length > 0) {
+            wizard.showMessage($('#MessageType').val(), $('#MessageText').val());
+        }
+    }
+
+    //function OnFailure(request, error) {
+    //    if ($('#MessageText').val().length > 0) {
+    //        wizard.showMessage($('#MessageType').val(), $('#MessageText').val());
+    //    }
+    //}
+
+</script>
+@{
+    AjaxOptions ajaxOptions = new AjaxOptions
+    {
+        //OnFailure = "OnFailure",
+        OnSuccess = "OnSuccess",
+        UpdateTargetId = "EmailMessageDiv",
+        InsertionMode = InsertionMode.Replace,
+        //LoadingElementDuration = 1000,
+        //LoadingElementId = "loading"
+
+    };
+}
+<h1 class="pagetitlesystem">
+    @Model.LblTitle
+</h1>
+
+<div id="UserGravatarDiv">
+    @Html.Raw(Model.Gravatar)
+</div>
+
+@Html.Raw(loc.User.LblActivity_Text)
+<br /><br />
+@if (Model.NoActivityVisible)
+{
+    @Html.Raw(loc.User.LblNoActivity_Text)
+}
+@Html.Raw(Model.RecentActivity)
+
+@if (Model.PanelMessageVisible)
+{
+    using (Ajax.BeginForm("EmailMessage", "User", ajaxOptions))
+    {
+        @Html.AntiForgeryToken()
+        @Html.HiddenFor(model => model.UserName)
+        <div id="EmailMessageDiv">
+            @{ Html.RenderPartial("EmailMessage", new EmailMessageModel()); }
+        </div>
+    }
+}

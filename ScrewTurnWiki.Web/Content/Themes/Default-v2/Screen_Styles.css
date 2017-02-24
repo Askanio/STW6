@@ -1211,7 +1211,7 @@ p.excerpt b.searchkeyword, b.searchkeyword {
 
 /* END Non-content pages */
 
-/* BEGIN User.aspx */
+/* BEGIN User */
 
 #UserGravatarDiv {
 	float: right;
@@ -1239,7 +1239,7 @@ p.excerpt b.searchkeyword, b.searchkeyword {
 	font-size: 12px;
 }
 
-/* END User.aspx */
+/* END User */
 
 /* BEGIN AllPages */
 

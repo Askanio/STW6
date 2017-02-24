@@ -25,11 +25,24 @@ var ScrewTurn;
                     CommonWizard.prototype.requestConfirm = function () {
                         return confirm(CONFIRM_MESSAGE);
                     };
-                    CommonWizard.showMessage = function (messageType, message) {
-                        var style = "resultok";
+                    CommonWizard.prototype.showMessage = function (messageType, message) {
+                        var type = "success";
                         if (messageType === 1)
-                            style = "resulterror";
-                        bootbox.alert("<pre class='" + style + "'>" + message + "</pre>");
+                            type = "alert";
+                        if (messageType === 2)
+                            type = "error";
+                        if (messageType === 3)
+                            type = "warning";
+                        if (messageType === 4)
+                            type = "information";
+                        if (messageType === 5)
+                            type = "notification";
+                        noty({
+                            text: message,
+                            layout: 'center',
+                            closeWith: ['click', 'hover'],
+                            type: type // alert, success, error, warning, information, notification
+                        });
                     };
                     CommonWizard.prototype.createCookie = function (name, value, days) {
                         var expires = "";
@@ -64,4 +77,3 @@ var ScrewTurn;
         })(Web = Wiki.Web || (Wiki.Web = {}));
     })(Wiki = ScrewTurn.Wiki || (ScrewTurn.Wiki = {}));
 })(ScrewTurn || (ScrewTurn = {}));
-//# sourceMappingURL=commonwizard.js.map

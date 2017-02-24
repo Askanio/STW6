@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="..\packages\Microsoft.Net.Compilers.1.2.1\build\Microsoft.Net.Compilers.props" Condition="Exists('..\packages\Microsoft.Net.Compilers.1.2.1\build\Microsoft.Net.Compilers.props')" />
-  <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.1\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.1\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
+  <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.3\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.3\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
+  <Import Project="..\packages\Microsoft.Net.Compilers.1.3.2\build\Microsoft.Net.Compilers.props" Condition="Exists('..\packages\Microsoft.Net.Compilers.1.3.2\build\Microsoft.Net.Compilers.props')" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
@@ -50,25 +50,25 @@
       <HintPath>..\packages\Antlr.3.5.0.2\lib\Antlr3.Runtime.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Autofac, Version=3.5.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
-      <HintPath>..\packages\Autofac.3.5.2\lib\net40\Autofac.dll</HintPath>
+    <Reference Include="Autofac, Version=4.3.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+      <HintPath>..\packages\Autofac.4.3.0\lib\net45\Autofac.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Autofac.Integration.Mvc, Version=3.3.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
-      <HintPath>..\packages\Autofac.Mvc5.3.3.4\lib\net45\Autofac.Integration.Mvc.dll</HintPath>
+    <Reference Include="Autofac.Integration.Mvc, Version=4.0.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+      <HintPath>..\packages\Autofac.Mvc5.4.0.1\lib\net45\Autofac.Integration.Mvc.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.1\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
+    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.3\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
-    <Reference Include="Newtonsoft.Json, Version=8.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.8.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="nunit.framework, Version=3.5.0.0, Culture=neutral, PublicKeyToken=2638cd05610744eb, processorArchitecture=MSIL">
-      <HintPath>..\packages\NUnit.3.5.0\lib\net45\nunit.framework.dll</HintPath>
+    <Reference Include="nunit.framework, Version=3.6.0.0, Culture=neutral, PublicKeyToken=2638cd05610744eb, processorArchitecture=MSIL">
+      <HintPath>..\packages\NUnit.3.6.0\lib\net45\nunit.framework.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Recaptcha, Version=1.0.5.0, Culture=neutral, PublicKeyToken=9afc4d65b28c38c2, processorArchitecture=MSIL">
@@ -291,6 +291,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Search.resx</DependentUpon>
     </Compile>
+    <Compile Include="Localization\Common\User.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>User.resx</DependentUpon>
+    </Compile>
     <Compile Include="Localization\Install\InstallStrings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -310,6 +315,7 @@
     <Compile Include="Models\Admin\Home\OrphanPagesModel.cs" />
     <Compile Include="Models\BaseModel.cs" />
     <Compile Include="Models\Common\AccessDeniedModel.cs" />
+    <Compile Include="Models\User\EmailMessageModel.cs" />
     <Compile Include="Models\User\LanguageModel.cs" />
     <Compile Include="Models\User\LoginBaseModel.cs" />
     <Compile Include="Models\Common\PageNotFoundModel.cs" />
@@ -318,6 +324,7 @@
     <Compile Include="Models\User\LogoutModel.cs" />
     <Compile Include="Models\User\PasswordRecoveryModel.cs" />
     <Compile Include="Models\User\PasswordResetModel.cs" />
+    <Compile Include="Models\User\UserModel.cs" />
     <Compile Include="Models\Wiki\AttachmentViewerModel.cs" />
     <Compile Include="Models\Wiki\CategoryModel.cs" />
     <Compile Include="Models\Wiki\DiffModel.cs" />
@@ -335,6 +342,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\bootstrap-theme.css" />
+    <Content Include="Content\bootstrap-theme.min.css" />
+    <Content Include="Content\bootstrap.css" />
+    <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\bootstrap\css\bootstrap-theme.css" />
     <Content Include="Content\bootstrap\css\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap\css\bootstrap.css" />
@@ -363,15 +374,26 @@
     <Content Include="Content\jquery\css\images\ui-icons_777777_256x240.png" />
     <Content Include="Content\jquery\css\images\ui-icons_cc0000_256x240.png" />
     <Content Include="Content\jquery\css\images\ui-icons_ffffff_256x240.png" />
-    <None Include="Scripts\jquery-2.2.3.intellisense.js" />
     <Content Include="Content\Themes\Default\Scripts.js" />
-    <Content Include="Scripts\jquery-2.2.3.js" />
-    <Content Include="Scripts\jquery-2.2.3.min.js" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="Content\bootstrap.min.css.map" />
+    <Content Include="Content\bootstrap.css.map" />
+    <Content Include="Content\bootstrap-theme.min.css.map" />
+    <Content Include="Content\bootstrap-theme.css.map" />
+    <None Include="Scripts\jquery-3.1.1.intellisense.js" />
+    <Content Include="Scripts\bootstrap.js" />
+    <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\jquery-3.1.1.js" />
+    <Content Include="Scripts\jquery-3.1.1.min.js" />
+    <Content Include="Scripts\jquery-3.1.1.slim.js" />
+    <Content Include="Scripts\jquery-3.1.1.slim.min.js" />
     <Content Include="Scripts\jquery-ui.js" />
     <Content Include="Scripts\jquery-ui.min.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Scripts\noty\jquery.noty.packaged.js" />
+    <Content Include="Scripts\noty\jquery.noty.packaged.min.js" />
     <Content Include="Scripts\Readme.txt" />
     <Content Include="Content\Themes\Admin.css" />
     <Content Include="Content\Themes\Default-v2\Icon.ico" />
@@ -432,8 +454,8 @@
     <Content Include="Content\bootstrap\css\bootstrap.css.map" />
     <Content Include="Content\bootstrap\css\bootstrap-theme.min.css.map" />
     <Content Include="Content\bootstrap\css\bootstrap-theme.css.map" />
-    <Content Include="fonts\glyphicons-halflings-regular.woff2" />
-    <Content Include="Scripts\jquery-2.2.3.min.map" />
+    <Content Include="Scripts\jquery-3.1.1.slim.min.map" />
+    <Content Include="Scripts\jquery-3.1.1.min.map" />
     <None Include="Scripts\_references.js" />
     <Content Include="Scripts\bootbox.js" />
     <Content Include="Scripts\bootbox.min.js" />
@@ -495,6 +517,8 @@
     <Content Include="Views\Shared\_AdminLayout.cshtml" />
     <Content Include="Views\User\Language.cshtml" />
     <Content Include="Views\Common\Sitemap.cshtml" />
+    <Content Include="Views\User\User.cshtml" />
+    <Content Include="Views\User\EmailMessage.cshtml" />
     <None Include="Views\Wiki\Discussion.cshtml" />
   </ItemGroup>
   <ItemGroup>
@@ -1032,6 +1056,38 @@
     <EmbeddedResource Include="Localization\Common\Search.vi-VN.resx" />
     <EmbeddedResource Include="Localization\Common\Search.zh-cn.resx" />
     <EmbeddedResource Include="Localization\Common\Search.zh-tw.resx" />
+    <EmbeddedResource Include="Localization\Common\User.af-ZA.resx" />
+    <EmbeddedResource Include="Localization\Common\User.cs-CZ.resx" />
+    <EmbeddedResource Include="Localization\Common\User.da-DK.resx" />
+    <EmbeddedResource Include="Localization\Common\User.de-DE.resx" />
+    <EmbeddedResource Include="Localization\Common\User.es-ES.resx" />
+    <EmbeddedResource Include="Localization\Common\User.fa-IR.resx" />
+    <EmbeddedResource Include="Localization\Common\User.fr-FR.resx" />
+    <EmbeddedResource Include="Localization\Common\User.hi-IN.resx" />
+    <EmbeddedResource Include="Localization\Common\User.hu-HU.resx" />
+    <EmbeddedResource Include="Localization\Common\User.it-IT.resx" />
+    <EmbeddedResource Include="Localization\Common\User.ja-JP.resx" />
+    <EmbeddedResource Include="Localization\Common\User.ko-KR.resx" />
+    <EmbeddedResource Include="Localization\Common\User.lv-LV.resx" />
+    <EmbeddedResource Include="Localization\Common\User.nb-NO.resx" />
+    <EmbeddedResource Include="Localization\Common\User.nl-NL.resx" />
+    <EmbeddedResource Include="Localization\Common\User.pl-PL.resx" />
+    <EmbeddedResource Include="Localization\Common\User.pt-BR.resx" />
+    <EmbeddedResource Include="Localization\Common\User.pt-PT.resx" />
+    <EmbeddedResource Include="Localization\Common\User.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>User.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Localization\Common\User.ro-RO.resx" />
+    <EmbeddedResource Include="Localization\Common\User.ru-RU.resx" />
+    <EmbeddedResource Include="Localization\Common\User.sk-SK.resx" />
+    <EmbeddedResource Include="Localization\Common\User.sr-Latn-CS.resx" />
+    <EmbeddedResource Include="Localization\Common\User.sv-SE.resx" />
+    <EmbeddedResource Include="Localization\Common\User.tr-TR.resx" />
+    <EmbeddedResource Include="Localization\Common\User.uk-UA.resx" />
+    <EmbeddedResource Include="Localization\Common\User.vi-VN.resx" />
+    <EmbeddedResource Include="Localization\Common\User.zh-cn.resx" />
+    <EmbeddedResource Include="Localization\Common\User.zh-tw.resx" />
     <EmbeddedResource Include="Localization\Install\InstallStrings.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>InstallStrings.Designer.cs</LastGenOutput>
@@ -1142,8 +1198,8 @@
     <PropertyGroup>
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
-    <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.1\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.1\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
-    <Error Condition="!Exists('..\packages\Microsoft.Net.Compilers.1.2.1\build\Microsoft.Net.Compilers.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Net.Compilers.1.2.1\build\Microsoft.Net.Compilers.props'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.Net.Compilers.1.3.2\build\Microsoft.Net.Compilers.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Net.Compilers.1.3.2\build\Microsoft.Net.Compilers.props'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.3\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.3\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
   </Target>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
        Other similar extension points exist, see Microsoft.Common.targets.

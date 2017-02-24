@@ -1,0 +1,29 @@
+﻿@model ScrewTurn.Wiki.Web.Models.User.EmailMessageModel
+@using loc = ScrewTurn.Wiki.Web.Localization.Common
+
+<h2 class="separator">
+    @Html.Raw(loc.User.LblMessageTitle_Text)
+    </h2>
+@Html.Raw(loc.User.LblMessageInfo_Text)
+<br /><br />
+@loc.User.LblSubject_Text
+<br />
+@Html.TextBoxFor(m => m.Subject, @Model.Subject, new { @class = "bigtextbox large" })
+@Html.ValidationMessageFor(model => model.Subject, "", new { @class = "resulterror" })
+<br />
+@Html.TextAreaFor(m => m.Body, new { @class = "body" })
+@Html.ValidationMessageFor(model => model.Body, "", new { @class = "resulterror" })
+<br />
+<input type="submit" value="@loc.User.BtnSend_Text" />
+@if (!MvcHtmlString.IsNullOrEmpty(Html.ValidationSummary(true)))
+{
+    <div class="resulterror">@Html.ValidationSummary(true)</div>
+}
+@if (@Model.Message != null)
+{
+    @Html.Hidden("MessageType", @Model.Message.Type)
+    @Html.Hidden("MessageText", @Model.Message.Text)
+}
+
+
+

@@ -24,7 +24,7 @@ namespace ScrewTurn.Wiki {
 			}
 			catch(ArgumentException) {
 				// Illegal characters in path
-				HttpContext.Current.Response.Redirect("~/PageNotFound.aspx");
+				HttpContext.Current.Response.Redirect("~/PageNotFound");
 				return;
 			}
 
@@ -43,7 +43,7 @@ namespace ScrewTurn.Wiki {
 			string nspace = GetCurrentNamespace() + "";
 			if(!string.IsNullOrEmpty(nspace)) {
 				// Verify that namespace exists
-				if(Pages.FindNamespace(Tools.DetectCurrentWiki(), nspace) == null) HttpContext.Current.Response.Redirect("~/PageNotFound.aspx?Page=" + pageName);
+				if(Pages.FindNamespace(Tools.DetectCurrentWiki(), nspace) == null) HttpContext.Current.Response.Redirect("~/PageNotFound?Page=" + pageName);
 			}
 			// Trim Namespace. from pageName
 			if(!string.IsNullOrEmpty(nspace)) pageName = pageName.Substring(nspace.Length + 1);

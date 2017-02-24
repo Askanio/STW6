@@ -246,4 +246,3 @@ var ScrewTurn;
         })(Web = Wiki.Web || (Wiki.Web = {}));
     })(Wiki = ScrewTurn.Wiki || (ScrewTurn.Wiki = {}));
 })(ScrewTurn || (ScrewTurn = {}));
-//# sourceMappingURL=wikipage.js.map

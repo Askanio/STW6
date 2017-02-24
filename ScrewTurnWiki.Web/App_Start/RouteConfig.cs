@@ -34,11 +34,11 @@ namespace ScrewTurn.Wiki.Web
             //    new {controller = "User", action = "CreateMasterPassword"}
             //    );
 
-            //routes.MapRoute(
-            //    "Login",
-            //    "Login",
-            //    new {controller = "User", action = "Login" }
-            //    );
+            routes.MapRoute(
+                "Login",
+                "Login",
+                new { controller = "User", action = "Login" }
+                );
 
             //routes.MapRoute(
             //    "ForceLogout",
@@ -51,6 +51,12 @@ namespace ScrewTurn.Wiki.Web
             //    "Activate",
             //    new {controller = "User", action = "Activate" }
             //    );
+
+            routes.MapRoute(
+                "User",
+                "User",
+                new { controller = "User", action = "User" }
+                );
 
 
             routes.MapRoute(

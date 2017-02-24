@@ -24,11 +24,24 @@ module ScrewTurn.Wiki.Web.Common {
             return confirm(CONFIRM_MESSAGE);
         }
 
-        public static showMessage(messageType, message) {
-            var style = "resultok";
+        public showMessage(messageType, message) {
+            var type = "success";
             if (messageType === 1)
-                style = "resulterror";
-            bootbox.alert("<pre class='" + style + "'>" + message + "</pre>");
+                type = "alert";
+            if (messageType === 2)
+                type = "error";
+            if (messageType === 3)
+                type = "warning";
+            if (messageType === 4)
+                type = "information";
+            if (messageType === 5)
+                type = "notification";
+            noty({
+                text: message,
+                layout: 'center',
+                closeWith: ['click', 'hover'],
+                type: type // alert, success, error, warning, information, notification
+            });
         }
 
         public createCookie(name, value, days) {
