@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using ScrewTurn.Wiki.Configuration;
 using ScrewTurn.Wiki.PluginFramework;
+using ScrewTurn.Wiki.Web.Models;
 
 namespace ScrewTurn.Wiki.Web.Controllers
 {
@@ -144,5 +145,12 @@ namespace ScrewTurn.Wiki.Web.Controllers
                 }
             }
         }
+
+        protected void ClearMessage(BaseModel model)
+        {
+            ModelState["Message.Text"].Value = null;
+            model.Message.Text = "";
+        }
+
     }
 }

@@ -174,10 +174,15 @@
     <Compile Include="Code\SearchResultRow.cs" />
     <Compile Include="Code\UserGroupRow.cs" />
     <Compile Include="Code\Validators\BaseReqularExpressionAttribute.cs" />
+    <Compile Include="Code\Validators\CheckExistsEmailAttribute.cs" />
+    <Compile Include="Code\Validators\DisplayUserNameValidationAttribute.cs" />
     <Compile Include="Code\Validators\DynamicReqularExpressionAttribute.cs" />
+    <Compile Include="Code\Validators\EmailValidationAttribute.cs" />
+    <Compile Include="Code\Validators\OldPasswordValidationAttribute.cs" />
     <Compile Include="Code\Validators\PasswordValidationAttribute.cs" />
     <Compile Include="Code\Validators\RequiredSelectedValidationAttribute .cs" />
     <Compile Include="Code\Validators\NewUserGroupNameValidationAttribute.cs" />
+    <Compile Include="Code\Validators\UserNameValidationAttribute.cs" />
     <Compile Include="Code\WantedPageRow.cs" />
     <Compile Include="Controllers\Admin\AclActionsSelectorController.cs" />
     <Compile Include="Controllers\Admin\CategoriesController.cs" />
@@ -286,6 +291,16 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>PageNotFound.resx</DependentUpon>
     </Compile>
+    <Compile Include="Localization\Common\Profile.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Profile.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Localization\Common\Register.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Register.resx</DependentUpon>
+    </Compile>
     <Compile Include="Localization\Common\Search.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -314,6 +329,11 @@
     <Compile Include="Models\Admin\Home\BulkEmailModel.cs" />
     <Compile Include="Models\Admin\Home\OrphanPagesModel.cs" />
     <Compile Include="Models\BaseModel.cs" />
+    <Compile Include="Models\User\ProfileDisplayNameModel.cs" />
+    <Compile Include="Models\User\ProfileEmailModel.cs" />
+    <Compile Include="Models\User\ProfilePasswordModel.cs" />
+    <Compile Include="Models\User\RegisterModel.cs" />
+    <Compile Include="Models\WikiBaseModel.cs" />
     <Compile Include="Models\Common\AccessDeniedModel.cs" />
     <Compile Include="Models\User\EmailMessageModel.cs" />
     <Compile Include="Models\User\LanguageModel.cs" />
@@ -324,7 +344,10 @@
     <Compile Include="Models\User\LogoutModel.cs" />
     <Compile Include="Models\User\PasswordRecoveryModel.cs" />
     <Compile Include="Models\User\PasswordResetModel.cs" />
+    <Compile Include="Models\User\ProfileLanguageModel.cs" />
+    <Compile Include="Models\User\UserProfileModel.cs" />
     <Compile Include="Models\User\UserModel.cs" />
+    <Compile Include="Models\User\NotificationsStatusModel.cs" />
     <Compile Include="Models\Wiki\AttachmentViewerModel.cs" />
     <Compile Include="Models\Wiki\CategoryModel.cs" />
     <Compile Include="Models\Wiki\DiffModel.cs" />
@@ -332,7 +355,7 @@
     <Compile Include="Models\InstallViewModel.cs" />
     <Compile Include="Models\LanguageViewModel.cs" />
     <Compile Include="Models\TestResult.cs" />
-    <Compile Include="Models\WikiBaseModel.cs" />
+    <Compile Include="Models\WikiModel.cs" />
     <Compile Include="Models\WikiPageModel.cs" />
     <Compile Include="Models\Wiki\DiscussionModel.cs" />
     <Compile Include="Models\WikiSABaseModel.cs" />
@@ -519,6 +542,13 @@
     <Content Include="Views\Common\Sitemap.cshtml" />
     <Content Include="Views\User\User.cshtml" />
     <Content Include="Views\User\EmailMessage.cshtml" />
+    <Content Include="Views\User\UserProfile.cshtml" />
+    <Content Include="Views\User\NotificationsStatus.cshtml" />
+    <Content Include="Views\User\ProfileLanguage.cshtml" />
+    <Content Include="Views\User\ProfileDisplayName.cshtml" />
+    <Content Include="Views\User\ProfileEmail.cshtml" />
+    <Content Include="Views\User\ProfilePassword.cshtml" />
+    <Content Include="Views\User\Register.cshtml" />
     <None Include="Views\Wiki\Discussion.cshtml" />
   </ItemGroup>
   <ItemGroup>
@@ -1024,6 +1054,70 @@
     <EmbeddedResource Include="Localization\Common\PageNotFound.vi-VN.resx" />
     <EmbeddedResource Include="Localization\Common\PageNotFound.zh-cn.resx" />
     <EmbeddedResource Include="Localization\Common\PageNotFound.zh-tw.resx" />
+    <EmbeddedResource Include="Localization\Common\Profile.af-ZA.resx" />
+    <EmbeddedResource Include="Localization\Common\Profile.cs-CZ.resx" />
+    <EmbeddedResource Include="Localization\Common\Profile.da-DK.resx" />
+    <EmbeddedResource Include="Localization\Common\Profile.de-DE.resx" />
+    <EmbeddedResource Include="Localization\Common\Profile.es-ES.resx" />
+    <EmbeddedResource Include="Localization\Common\Profile.fa-IR.resx" />
+    <EmbeddedResource Include="Localization\Common\Profile.fr-FR.resx" />
+    <EmbeddedResource Include="Localization\Common\Profile.hi-IN.resx" />
+    <EmbeddedResource Include="Localization\Common\Profile.hu-HU.resx" />
+    <EmbeddedResource Include="Localization\Common\Profile.it-IT.resx" />
+    <EmbeddedResource Include="Localization\Common\Profile.ja-JP.resx" />
+    <EmbeddedResource Include="Localization\Common\Profile.ko-KR.resx" />
+    <EmbeddedResource Include="Localization\Common\Profile.lv-LV.resx" />
+    <EmbeddedResource Include="Localization\Common\Profile.nb-NO.resx" />
+    <EmbeddedResource Include="Localization\Common\Profile.nl-NL.resx" />
+    <EmbeddedResource Include="Localization\Common\Profile.pl-PL.resx" />
+    <EmbeddedResource Include="Localization\Common\Profile.pt-BR.resx" />
+    <EmbeddedResource Include="Localization\Common\Profile.pt-PT.resx" />
+    <EmbeddedResource Include="Localization\Common\Profile.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Profile.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Localization\Common\Profile.ro-RO.resx" />
+    <EmbeddedResource Include="Localization\Common\Profile.ru-RU.resx" />
+    <EmbeddedResource Include="Localization\Common\Profile.sk-SK.resx" />
+    <EmbeddedResource Include="Localization\Common\Profile.sr-Latn-CS.resx" />
+    <EmbeddedResource Include="Localization\Common\Profile.sv-SE.resx" />
+    <EmbeddedResource Include="Localization\Common\Profile.tr-TR.resx" />
+    <EmbeddedResource Include="Localization\Common\Profile.uk-UA.resx" />
+    <EmbeddedResource Include="Localization\Common\Profile.vi-VN.resx" />
+    <EmbeddedResource Include="Localization\Common\Profile.zh-cn.resx" />
+    <EmbeddedResource Include="Localization\Common\Profile.zh-tw.resx" />
+    <EmbeddedResource Include="Localization\Common\Register.af-ZA.resx" />
+    <EmbeddedResource Include="Localization\Common\Register.cs-CZ.resx" />
+    <EmbeddedResource Include="Localization\Common\Register.da-DK.resx" />
+    <EmbeddedResource Include="Localization\Common\Register.de-DE.resx" />
+    <EmbeddedResource Include="Localization\Common\Register.es-ES.resx" />
+    <EmbeddedResource Include="Localization\Common\Register.fa-IR.resx" />
+    <EmbeddedResource Include="Localization\Common\Register.fr-FR.resx" />
+    <EmbeddedResource Include="Localization\Common\Register.hi-IN.resx" />
+    <EmbeddedResource Include="Localization\Common\Register.hu-HU.resx" />
+    <EmbeddedResource Include="Localization\Common\Register.it-IT.resx" />
+    <EmbeddedResource Include="Localization\Common\Register.ja-JP.resx" />
+    <EmbeddedResource Include="Localization\Common\Register.ko-KR.resx" />
+    <EmbeddedResource Include="Localization\Common\Register.lv-LV.resx" />
+    <EmbeddedResource Include="Localization\Common\Register.nb-NO.resx" />
+    <EmbeddedResource Include="Localization\Common\Register.nl-NL.resx" />
+    <EmbeddedResource Include="Localization\Common\Register.pl-PL.resx" />
+    <EmbeddedResource Include="Localization\Common\Register.pt-BR.resx" />
+    <EmbeddedResource Include="Localization\Common\Register.pt-PT.resx" />
+    <EmbeddedResource Include="Localization\Common\Register.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Register.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Localization\Common\Register.ro-RO.resx" />
+    <EmbeddedResource Include="Localization\Common\Register.ru-RU.resx" />
+    <EmbeddedResource Include="Localization\Common\Register.sk-SK.resx" />
+    <EmbeddedResource Include="Localization\Common\Register.sr-Latn-CS.resx" />
+    <EmbeddedResource Include="Localization\Common\Register.sv-SE.resx" />
+    <EmbeddedResource Include="Localization\Common\Register.tr-TR.resx" />
+    <EmbeddedResource Include="Localization\Common\Register.uk-UA.resx" />
+    <EmbeddedResource Include="Localization\Common\Register.vi-VN.resx" />
+    <EmbeddedResource Include="Localization\Common\Register.zh-cn.resx" />
+    <EmbeddedResource Include="Localization\Common\Register.zh-tw.resx" />
     <EmbeddedResource Include="Localization\Common\Search.af-ZA.resx" />
     <EmbeddedResource Include="Localization\Common\Search.cs-CZ.resx" />
     <EmbeddedResource Include="Localization\Common\Search.da-DK.resx" />

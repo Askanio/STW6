@@ -17,5 +17,7 @@ References\Tools\ResxSync\resxsync.exe ScrewTurnWiki.Web\Localization\Common\Sea
 References\Tools\ResxSync\resxsync.exe ScrewTurnWiki.Web\Localization\Common\AllPages.resx *
 References\Tools\ResxSync\resxsync.exe ScrewTurnWiki.Web\Localization\Common\Category.resx *
 References\Tools\ResxSync\resxsync.exe ScrewTurnWiki.Web\Localization\Common\Login.resx *
+References\Tools\ResxSync\resxsync.exe ScrewTurnWiki.Web\Localization\Common\Profile.resx *
+References\Tools\ResxSync\resxsync.exe ScrewTurnWiki.Web\Localization\Common\Register.resx *
 
 References\Tools\ResxSync\resxsync.exe ScrewTurnWiki.Web\Localization\Messages\Messages.resx *

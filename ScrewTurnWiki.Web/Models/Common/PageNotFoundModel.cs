@@ -2,7 +2,7 @@
 
 namespace ScrewTurn.Wiki.Web.Models.Common
 {
-    public class PageNotFoundModel : WikiBaseModel
+    public class PageNotFoundModel : WikiModel
     {
         public string Description { get; set; }
 

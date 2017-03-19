@@ -1,0 +1,100 @@
+﻿@using System.Web.Mvc.Html
+@using ScrewTurn.Wiki.Web.Code.Extensions
+@using ScrewTurn.Wiki.Web.Localization.Common
+@model ScrewTurn.Wiki.Web.Models.User.RegisterModel
+@{
+    Layout = "~/Views/Shared/_SALayout.cshtml";
+}
+
+<h1 class="pagetitlesystem">
+    @Register.LblTitle_Text
+</h1>
+    <p>@Html.Raw(@Model.Description)</p>
+    <br/>
+    <div class="warning">@Html.Raw(@Model.AccountActivationMode)</div>
+    <p>@Html.Raw(@Model.Result)</p>
+
+@using (Html.BeginForm("Register", "User"))
+{
+    @Html.AntiForgeryToken()
+    if (Model.RegisterVisible)
+    {
+        <br/>
+        <br/>
+        <table width="600" cellpadding="0" cellspacing="4">
+            <tr>
+                <td>
+                    <p style="text-align: right;">@Html.Raw(@Register.LblUsername_Text):</p></td>
+                <td>
+                    @Html.EditorFor(model => model.Username, @Model.Username, new {title = Register.TxtUsername_ToolTip, width = "200px"})
+                    @Html.ValidationMessageFor(model => model.Username, "", new {@class = "resulterror"})
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <p style="text-align: right">@Html.Raw(@Register.LblDisplayName_Text):
+                    </p>
+                </td>
+                <td>
+                    @Html.EditorFor(model => model.DisplayName, @Model.DisplayName, new {title = Register.TxtDisplayName_ToolTip, width = "200px"})
+                    @Html.ValidationMessageFor(model => model.DisplayName, "", new {@class = "resulterror"})
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <p style="text-align: right;">@Html.Raw(@Register.LblEmail1_Text):</p></td>
+                <td>
+                    @Html.EditorFor(model => model.Email1, @Model.Email1, new {title = Register.TxtEmail1_ToolTip, width = "200px"})
+                    @Html.ValidationMessageFor(model => model.Email1, "", new {@class = "resulterror"})
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <p style="text-align: right;">@Html.Raw(@Register.LblEmail2_Text):</p></td>
+                <td>
+                    @Html.EditorFor(model => model.Email2, @Model.Email2, new {title = Register.TxtEmail2_ToolTip, width = "200px"})
+                    @Html.ValidationMessageFor(model => model.Email2, "", new {@class = "resulterror"})
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <p style="text-align: right;">@Html.Raw(@Register.LblPassword1_Text):</p></td>
+                <td>
+                    @Html.EditorFor(model => model.NewPassword, @Model.NewPassword, new {title = Register.TxtPassword1_ToolTip, width = "200px"})
+                    @Html.ValidationMessageFor(model => model.NewPassword, "", new {@class = "resulterror"})
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <p style="text-align: right;">@Html.Raw(@Register.LblPassword2_Text):</p></td>
+                <td>
+                    @Html.EditorFor(model => model.ConfirmNewPassword, @Model.ConfirmNewPassword, new {title = Register.TxtPassword2_ToolTip, width = "200px"})
+                    @Html.ValidationMessageFor(model => model.ConfirmNewPassword, "", new {@class = "resulterror"})
+                </td>
+            </tr>
+            <tr>
+                <td style="vertical-align: top;">
+                    <p style="text-align: right;">
+                        @if (Model.DisplayCaptcha)
+                        {
+                            @Html.Raw(@Register.LblCaptcha_Text)
+                        }
+                        :</p></td>
+                <td>
+                    @if (Model.DisplayCaptcha)
+                    {
+                        <div class="captcha-box">
+                            @Html.Raw(Html.GenerateCaptcha())
+                        </div>
+                    }
+                </td>
+            </tr>
+            <tr>
+                <td>&nbsp;</td>
+                <td>
+                    <input type="submit" class="button" value="@Register.BtnRegister_Text" title="@Register.BtnRegister_ToolTip"/>
+                </td>
+            </tr>
+        </table>
+    }
+}

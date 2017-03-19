@@ -76,7 +76,7 @@ namespace ScrewTurn.Wiki.Web.Controllers
         /// <summary>
         /// Prints the HTML head tag.
         /// </summary>
-        private void FillSAHtmlHead(WikiBaseModel model)
+        private void FillSAHtmlHead(WikiModel model)
         {
             var htmlHead =
                 MvcHtmlString.Create(Tools.GetIncludes(CurrentWiki, Tools.DetectCurrentNamespace()) + "\r\n" +
@@ -89,7 +89,7 @@ namespace ScrewTurn.Wiki.Web.Controllers
         #region Default
 
         [NonAction]
-        protected void PrepareDefaultModel(WikiBaseModel model, string currentNamespace, string currentPageFullName)
+        protected void PrepareDefaultModel(WikiModel model, string currentNamespace, string currentPageFullName)
         {
             FillDefaultHtmlHead(model, currentNamespace);
             FillDefaultHeader(model, currentNamespace, currentPageFullName);
@@ -101,7 +101,7 @@ namespace ScrewTurn.Wiki.Web.Controllers
         /// <summary>
         /// Prints the page header and page footer.
         /// </summary>
-        private void FillDefaultPageHeaderAndFooter(WikiBaseModel model, string currentNamespace, string currentPageFullName)
+        private void FillDefaultPageHeaderAndFooter(WikiModel model, string currentNamespace, string currentPageFullName)
         {
             string h = Settings.GetProvider(CurrentWiki).GetMetaDataItem(MetaDataItem.PageHeader, currentNamespace);
             h = @"<div id=""PageInternalHeaderDiv"">" + FormattingPipeline.FormatWithPhase1And2(CurrentWiki, h, false, FormattingContext.PageHeader, currentPageFullName) + "</div>";
@@ -117,7 +117,7 @@ namespace ScrewTurn.Wiki.Web.Controllers
         /// <summary>
         /// Prints the sidebar.
         /// </summary>
-        private void FillDefaultSidebar(WikiBaseModel model, string currentNamespace, string currentPageFullName)
+        private void FillDefaultSidebar(WikiModel model, string currentNamespace, string currentPageFullName)
         {
             string s = FormattingPipeline.FormatWithPhase1And2(CurrentWiki, Settings.GetProvider(CurrentWiki).GetMetaDataItem(MetaDataItem.Sidebar, currentNamespace),
                 false, FormattingContext.Sidebar, currentPageFullName);
@@ -128,7 +128,7 @@ namespace ScrewTurn.Wiki.Web.Controllers
         /// <summary>
         /// Prints the HTML head tag.
         /// </summary>
-        private void FillDefaultHtmlHead(WikiBaseModel model, string currentNamespace)
+        private void FillDefaultHtmlHead(WikiModel model, string currentNamespace)
         {
             StringBuilder sb = new StringBuilder(100);
 
@@ -162,7 +162,7 @@ namespace ScrewTurn.Wiki.Web.Controllers
         /// <summary>
         /// Prints the header.
         /// </summary>
-        private void FillDefaultHeader(WikiBaseModel model, string currentNamespace, string currentPageFullName)
+        private void FillDefaultHeader(WikiModel model, string currentNamespace, string currentPageFullName)
         {
             string h = FormattingPipeline.FormatWithPhase1And2(CurrentWiki, Settings.GetProvider(CurrentWiki).GetMetaDataItem(MetaDataItem.Header, currentNamespace),
                 false, FormattingContext.Header, currentPageFullName);
@@ -173,7 +173,7 @@ namespace ScrewTurn.Wiki.Web.Controllers
         /// <summary>
         /// Prints the footer.
         /// </summary>
-        private void FillDefaultFooter(WikiBaseModel model, string currentNamespace, string currentPageFullName)
+        private void FillDefaultFooter(WikiModel model, string currentNamespace, string currentPageFullName)
         {
             string f = FormattingPipeline.FormatWithPhase1And2(CurrentWiki, Settings.GetProvider(CurrentWiki).GetMetaDataItem(MetaDataItem.Footer, currentNamespace),
                 false, FormattingContext.Footer, currentPageFullName);

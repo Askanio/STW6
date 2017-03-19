@@ -1758,4 +1758,7 @@
   <data name="WrongCaptcha" xml:space="preserve">
     <value>Wrong Captcha</value>
   </data>
+  <data name="UsersCannotRegister" xml:space="preserve">
+    <value>Users can not register</value>
+  </data>
 </root>

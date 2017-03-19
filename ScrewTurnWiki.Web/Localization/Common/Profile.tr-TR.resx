@@ -1,0 +1,264 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="LblDiscussionMessagesInfo2_Text" xml:space="preserve">
+    <value>Receive an email notification whenever a &lt;b&gt;message&lt;/b&gt; is posted for a page in the following namespaces (only discussions you have access to):</value>
+  </data>
+  <data name="LblPageChangesInfo2_Text" xml:space="preserve">
+    <value>Receive an email notification whenever a &lt;b&gt;page&lt;/b&gt; in the following namespaces is updated (only pages you have access to):</value>
+  </data>
+  <data name="LblNoChanges_Text" xml:space="preserve">
+    <value>Mevcut sistem ayarları, kişisel bilgilerinizde değişiklik yapmaya izin vermiyor.</value>
+  </data>
+  <data name="BtnSaveDisplayName_Text" xml:space="preserve">
+    <value>Görünür Adı Kaydet</value>
+  </data>
+  <data name="BtnSaveDisplayName_ToolTip" xml:space="preserve">
+    <value>Görünür adınızı kaydetmek için tıklayın</value>
+  </data>
+  <data name="LblDisplayName_Text" xml:space="preserve">
+    <value>Görünür ad</value>
+  </data>
+  <data name="LblEditEmailPassword_Text" xml:space="preserve">
+    <value>Görünür adı, emaili ve parolayı değiştirin</value>
+  </data>
+  <data name="RxvDisplayName_ErrorMessage" xml:space="preserve">
+    <value>Geçersiz görünür ad</value>
+  </data>
+  <data name="TxtDisplayName_ToolTip" xml:space="preserve">
+    <value>Buraya hesabınız için bir görünür ad yazın</value>
+  </data>
+  <data name="BtnSaveLanguage_Text" xml:space="preserve">
+    <value>Kaydet</value>
+  </data>
+  <data name="LblGroups_Text" xml:space="preserve">
+    <value>Aşağıdaki guruplara mensupsunuz:</value>
+  </data>
+  <data name="LblLanguageTimeZone_Text" xml:space="preserve">
+    <value>Dil ve Saat Dilimi</value>
+  </data>
+  <data name="BtnSaveNotifications_Text" xml:space="preserve">
+    <value>Kaydet</value>
+  </data>
+  <data name="CvEmail1_ErrorMessage" xml:space="preserve">
+    <value>Email adresleri aynı değil</value>
+  </data>
+  <data name="CvEmail2_ErrorMessage" xml:space="preserve">
+    <value>Email adresleri aynı değil</value>
+  </data>
+  <data name="CvOldPassword_ErrorMessage" xml:space="preserve">
+    <value>Geçersiz parola</value>
+  </data>
+  <data name="CvPassword1_ErrorMessage" xml:space="preserve">
+    <value>Parolalar aynı değil</value>
+  </data>
+  <data name="CvPassword2_ErrorMessage" xml:space="preserve">
+    <value>Parolalar aynı değil</value>
+  </data>
+  <data name="LblNotifications_Text" xml:space="preserve">
+    <value>Email Bildirim Ayarları</value>
+  </data>
+  <data name="RfvEmail1_ErrorMessage" xml:space="preserve">
+    <value>Email gereklidir</value>
+  </data>
+  <data name="RfvEmail2_ErrorMessage" xml:space="preserve">
+    <value>Email gereklidir</value>
+  </data>
+  <data name="RfvOldPassword_ErrorMessage" xml:space="preserve">
+    <value>Eski parola gereklidir</value>
+  </data>
+  <data name="RfvPassword1_ErrorMessage" xml:space="preserve">
+    <value>Parola gereklidir</value>
+  </data>
+  <data name="RfvPassword2_ErrorMessage" xml:space="preserve">
+    <value>Parola gereklidir</value>
+  </data>
+  <data name="RxvEmail1_ErrorMessage" xml:space="preserve">
+    <value>Geçersiz email adresi</value>
+  </data>
+  <data name="RxvPassword1_ErrorMessage" xml:space="preserve">
+    <value>Geçersiz parola</value>
+  </data>
+  <data name="BtnConfirm_Text" xml:space="preserve">
+    <value>Doğrula</value>
+  </data>
+  <data name="BtnDeleteAccount_Text" xml:space="preserve">
+    <value>Hesabı Sil</value>
+  </data>
+  <data name="BtnSaveEmail_Text" xml:space="preserve">
+    <value>E-Posta adresini kaydet</value>
+  </data>
+  <data name="BtnSaveEmail_ToolTip" xml:space="preserve">
+    <value>E-Posta adresini kaydetmek için buraya basın</value>
+  </data>
+  <data name="BtnSavePassword_Text" xml:space="preserve">
+    <value>Şifreyi kaydet</value>
+  </data>
+  <data name="BtnSavePassword_ToolTip" xml:space="preserve">
+    <value>Şifreyi kaydetmek için buraya basın</value>
+  </data>
+  <data name="LblDeleteAccountInfo_Text" xml:space="preserve">
+    <value>Hesabınızı "Hesabı Sil" tuşuna basıp "Doğrula" butonu ile onaylayarak silebilirsiniz. &lt;br /&gt;&lt;b&gt;İkaz&lt;/b&gt;: bu işlemin geri dönüşü yoktur.</value>
+  </data>
+  <data name="LblDeleteAccount_Text" xml:space="preserve">
+    <value>Hesabı Sil</value>
+  </data>
+  <data name="LblDescription_Text" xml:space="preserve">
+    <value>Profil sayfanıza hoş geldiniz, </value>
+  </data>
+  <data name="LblEmail1_Text" xml:space="preserve">
+    <value>E-Posta</value>
+  </data>
+  <data name="LblEmail2_Text" xml:space="preserve">
+    <value>E-Postal (tekrar)</value>
+  </data>
+  <data name="LblInfo_Text" xml:space="preserve">
+    <value>Buradan e-posta adresi ve şifre gibi profil ayarlarınızı düzenleyebilirsiniz. Kullanıcı adınızı ise değiştiremiyorsunuz.</value>
+  </data>
+  <data name="LblOldPassword_Text" xml:space="preserve">
+    <value>Şimdiki şifre</value>
+  </data>
+  <data name="LblPassword1_Text" xml:space="preserve">
+    <value>Şifre</value>
+  </data>
+  <data name="LblPassword2_Text" xml:space="preserve">
+    <value>Şifre (tekrar)</value>
+  </data>
+  <data name="LblTitle_Text" xml:space="preserve">
+    <value>Kullanıcı Profili</value>
+  </data>
+  <data name="Page_Title" xml:space="preserve">
+    <value>Başlıksız Sayfa</value>
+  </data>
+  <data name="TxtEmail1_ToolTip" xml:space="preserve">
+    <value>Buraya e-posta adresinizi yazın</value>
+  </data>
+  <data name="TxtEmail2_ToolTip" xml:space="preserve">
+    <value>Buraya e-posta adresinizi tekrar yazın</value>
+  </data>
+  <data name="TxtOldPassword_ToolTip" xml:space="preserve">
+    <value>Buraya şimdiki şifrenizi yazın</value>
+  </data>
+  <data name="TxtPassword1_ToolTip" xml:space="preserve">
+    <value>Buraya yeni şifrenizi yazın</value>
+  </data>
+  <data name="TxtPassword2_ToolTip" xml:space="preserve">
+    <value>Buraya yeni şifrenizi tekrar yazın</value>
+  </data>
+</root>

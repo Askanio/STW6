@@ -4687,6 +4687,15 @@ namespace ScrewTurn.Wiki.Web.Localization.Messages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Users can not register.
+        /// </summary>
+        public static string UsersCannotRegister {
+            get {
+                return ResourceManager.GetString("UsersCannotRegister", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to User&apos;s Details.
         /// </summary>
         public static string UserTitle {

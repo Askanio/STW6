@@ -58,6 +58,12 @@ namespace ScrewTurn.Wiki.Web
                 new { controller = "User", action = "User" }
                 );
 
+            routes.MapRoute(
+                "UserProfile",
+                "User/Profile",
+                new { controller = "User", action = "UserProfile" }
+                );
+
 
             routes.MapRoute(
                 "Sitemap",

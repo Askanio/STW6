@@ -1,0 +1,46 @@
+﻿@model ScrewTurn.Wiki.Web.Models.User.NotificationsStatusModel
+@using loc = ScrewTurn.Wiki.Web.Localization.Common.Profile
+
+<table cellpadding="0" cellspacing="0">
+    <tr>
+        <td style="width: 40%; padding-right: 20px; vertical-align: top;">
+            @Html.Raw(@loc.LblPageChangesInfo2_Text)
+            <br/><br/>
+            @for (var i = 0; i < Model.PageChanges.Count(); i++)
+            {
+                var cat = Model.PageChanges[i];
+                @Html.HiddenFor(model => model.PageChanges[i].Text)
+                @Html.HiddenFor(model => model.PageChanges[i].Value)
+                @Html.CheckBoxFor(model => model.PageChanges[i].Selected)
+                @Html.LabelFor(model => model.PageChanges[i].Value, cat.Text)
+                <br/>
+            }
+            @*<asp:CheckBoxList ID="lstPageChanges" runat="server" meta:resourcekey="lstPageChangesResource1"/>*@
+        </td>
+        <td style="width: 40%; padding-left: 20px; vertical-align: top;">
+            @Html.Raw(@loc.LblDiscussionMessagesInfo2_Text)
+            <br/><br/>
+            @for (var i = 0; i < Model.DiscussionMessages.Count(); i++)
+            {
+                var cat = Model.DiscussionMessages[i];
+                @Html.HiddenFor(model => model.DiscussionMessages[i].Text)
+                @Html.HiddenFor(model => model.DiscussionMessages[i].Value)
+                @Html.CheckBoxFor(model => model.DiscussionMessages[i].Selected)
+                @Html.LabelFor(model => model.DiscussionMessages[i].Value, cat.Text)
+                <br/>
+            }
+            @*<asp:CheckBoxList ID="lstDiscussionMessages" runat="server" meta:resourcekey="lstDiscussionMessagesResource1"/>*@
+        </td>
+    </tr>
+    <tr>
+        <td colspan="2" style="vertical-align: top; padding-top: 20px;">
+            <input type="submit" value="@loc.BtnSaveNotifications_Text"/>
+            @if (!MvcHtmlString.IsNullOrEmpty(Html.ValidationSummary(true)))
+            {
+                <br/>
+                <div class="resulterror">@Html.ValidationSummary(true)</div>
+            }@*<asp:Label ID="lblNotificationsResult" runat="server" meta:resourcekey="lblNotificationsResultResource1" />*@</td>
+    </tr>
+</table>
+@Html.HiddenFor(model => model.Message.Type)
+@Html.HiddenFor(model => model.Message.Text)

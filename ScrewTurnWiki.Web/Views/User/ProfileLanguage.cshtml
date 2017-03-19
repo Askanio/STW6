@@ -1,0 +1,20 @@
+﻿@model ScrewTurn.Wiki.Web.Models.User.ProfileLanguageModel
+@using loc = ScrewTurn.Wiki.Web.Localization.Common.Profile
+
+@Html.DropDownListFor(m => m.SelectedLanguage, Model.Languages, new { })
+@Html.Raw(" ")
+@Html.DropDownListFor(m => m.SelectedTimezone, Model.Timezones, new { })
+<br />
+<br/>
+<input type="submit" value="@loc.BtnSaveLanguage_Text" />
+@if (!MvcHtmlString.IsNullOrEmpty(Html.ValidationSummary(true)))
+{
+    <br/>
+    <div class="resulterror">@Html.ValidationSummary(true)</div>
+}
+@Html.HiddenFor(model => model.Message.Type)
+@Html.HiddenFor(model => model.Message.Text)
+
+
+
+    

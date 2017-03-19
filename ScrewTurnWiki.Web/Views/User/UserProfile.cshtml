@@ -1,0 +1,148 @@
+﻿@using System.Web.Mvc.Html
+@using ScrewTurn.Wiki.Web.Models.User
+@using loc = ScrewTurn.Wiki.Web.Localization.Common.Profile
+@model ScrewTurn.Wiki.Web.Models.User.UserProfileModel
+@{
+    Layout = "~/Views/Shared/_SALayout.cshtml";
+}
+<script type="text/javascript">
+    var wizard;
+    $(document).ready(function() {
+        wizard = new ScrewTurn.Wiki.Web.Common.CommonWizard();
+    });
+    
+    function OnSuccess(data) {
+        var messageText = $(data).filter("#Message_Text").attr("value");
+        var messageType = $(data).filter("#Message_Type").attr("value");
+        if (messageText && messageText.length > 0)
+            wizard.showMessage(messageType, messageText);
+    };
+
+    function OnFailure(request, error) {
+        wizard.showMessage(2, error);
+    };
+
+    function OnDeleteAccount() {
+        var promptText = "@loc.BtnDeleteAccount_Text" + ". " + "@loc.BtnConfirm_Text";
+        return confirm(promptText);
+    };
+</script>
+<h1 class="pagetitlesystem">
+    @loc.LblTitle_Text
+</h1>
+
+<p>
+    @Html.Raw(loc.LblDescription_Text)
+    <b>@Html.Raw(@Model.Username)</b>.
+    @Html.Raw(loc.LblGroups_Text)
+    @Html.Raw(@Model.Groups).<br/>
+    @Html.Raw(loc.LblInfo_Text)
+</p>
+<br />
+
+@if (Model.UserDataVisible)
+{
+    <h2 class="separator">@Html.Raw(@loc.LblNotifications_Text)</h2>
+    using (Ajax.BeginForm("NotificationsStatus", "User", new AjaxOptions
+    {
+        OnFailure = "OnFailure",
+        OnSuccess = "OnSuccess",
+        UpdateTargetId = "NotificationsStatus",
+        InsertionMode = InsertionMode.Replace,
+    }))
+    {
+        @Html.AntiForgeryToken()
+        <div id="NotificationsStatus">
+            @{ Html.RenderPartial("NotificationsStatus", new NotificationsStatusModel() {PageChanges = Model.PageChanges, DiscussionMessages = Model.DiscussionMessages}); }
+        </div>
+    }
+    <br/>
+
+    <h2 class="separator">@Html.Raw(@loc.LblLanguageTimeZone_Text)</h2>
+    using (Ajax.BeginForm("ProfileLanguage", "User", new AjaxOptions
+    {
+        OnFailure = "OnFailure",
+        OnSuccess = "OnSuccess",
+        UpdateTargetId = "ProfileLanguage",
+        InsertionMode = InsertionMode.Replace,
+    }))
+    {
+        @Html.AntiForgeryToken()
+        <div id="ProfileLanguage">
+            @{ Html.RenderPartial("ProfileLanguage", new ProfileLanguageModel() {Languages = Model.Languages, Timezones = Model.Timezones, SelectedLanguage = Model.SelectedLanguage, SelectedTimezone = Model.SelectedTimezone}); }
+        </div>
+    }
+    <br/>
+    <br/>
+
+}
+
+@if (Model.AccountVisible)
+{
+    <h2 class="separator">@Html.Raw(@loc.LblEditEmailPassword_Text)</h2>
+
+    using (Ajax.BeginForm("ProfileDisplayName", "User", new AjaxOptions
+    {
+        OnFailure = "OnFailure",
+        OnSuccess = "OnSuccess",
+        UpdateTargetId = "ProfileDisplayName",
+        InsertionMode = InsertionMode.Replace,
+    }))
+    {
+        @Html.AntiForgeryToken()
+        <div id="ProfileDisplayName">
+            @{ Html.RenderPartial("ProfileDisplayName", new ProfileDisplayNameModel() {DisplayName = Model.DisplayName }); }
+        </div>
+    }
+    <br />
+    <br />
+    using (Ajax.BeginForm("ProfileEmail", "User", new AjaxOptions
+    {
+        OnFailure = "OnFailure",
+        OnSuccess = "OnSuccess",
+        UpdateTargetId = "ProfileEmail",
+        InsertionMode = InsertionMode.Replace,
+    }))
+    {
+        @Html.AntiForgeryToken()
+        <div id="ProfileEmail">
+            @{ Html.RenderPartial("ProfileEmail", new ProfileEmailModel() { Email1 = Model.Email }); }
+        </div>
+    }
+    <br />
+    <br/>
+    using (Ajax.BeginForm("ProfilePassword", "User", new AjaxOptions
+    {
+        OnFailure = "OnFailure",
+        OnSuccess = "OnSuccess",
+        UpdateTargetId = "ProfilePassword",
+        InsertionMode = InsertionMode.Replace,
+    }))
+    {
+        @Html.AntiForgeryToken()
+        <div id="ProfilePassword">
+            @{ Html.RenderPartial("ProfilePassword", new ProfilePasswordModel());}
+        </div>
+    }
+
+    <br/>
+    <h2 class="separator">@Html.Raw(loc.LblDeleteAccount_Text)</h2>
+    <p>
+        @Html.Raw(loc.LblDeleteAccountInfo_Text)
+    </p>
+    <br/>
+
+    using (Html.BeginForm("DeleteAccount", "User"))
+    {
+        @Html.AntiForgeryToken()
+        <input type="submit" class="button" value="@loc.BtnDeleteAccount_Text" onclick="return OnDeleteAccount()" />  @*data-confirmprompt = "@loc.BtnConfirm_Text"/>*@
+    }
+}
+
+@if (Model.NoChangesVisible)
+{
+    <br/>
+    <i>
+        @Html.Raw(loc.LblNoChanges_Text)
+    </i>
+}

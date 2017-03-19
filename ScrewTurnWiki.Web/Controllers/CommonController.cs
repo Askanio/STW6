@@ -91,6 +91,8 @@ namespace ScrewTurn.Wiki.Web.Controllers
         [HttpGet]
         public ActionResult PageNotFound(string page)
         {
+            //string page = (string)TempData["Page"];
+
             var model = new PageNotFoundModel();
             model.Title = Messages.PageNotFoundTitle + " - " + Settings.GetWikiTitle(CurrentWiki);
 

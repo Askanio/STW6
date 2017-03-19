@@ -5,7 +5,7 @@ using ScrewTurn.Wiki.Web.Models.Wiki;
 
 namespace ScrewTurn.Wiki.Web.Models
 {
-    public class WikiPageModel : WikiBaseModel
+    public class WikiPageModel : WikiModel
     {
         public WikiPageModel()
         {

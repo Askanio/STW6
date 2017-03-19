@@ -8,7 +8,7 @@ using ScrewTurn.Wiki.Web.Code;
 
 namespace ScrewTurn.Wiki.Web.Models.Admin
 {
-    public class AdminBaseModel : BaseModel
+    public class AdminBaseModel : WikiBaseModel
     {
         public AdminBaseModel()
         {
