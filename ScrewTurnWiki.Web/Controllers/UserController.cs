@@ -895,9 +895,6 @@ namespace ScrewTurn.Wiki.Web.Controllers
         public ActionResult Register()
         {
             var model = new RegisterModel();
-            PrepareSAModel(model, CurrentNamespace);
-
-            model.Title = Messages.RegisterTitle + " - " + Settings.GetWikiTitle(CurrentWiki);
 
             if (SessionFacade.LoginKey != null)
             {
@@ -913,14 +910,32 @@ namespace ScrewTurn.Wiki.Web.Controllers
                 UrlTools.Redirect(UrlTools.BuildUrl(CurrentWiki, "Error")); // TODO:
             }
 
-            model.RegisterVisible = true;
-            model.Description = new HtmlString(Localization.Common.Register.LblRegisterDescription_Text);
-            PrintRegisterNotice(model);
-
             if (!Settings.UsersCanRegister(CurrentWiki))
             {
                 UrlTools.Redirect(UrlTools.BuildUrl(CurrentWiki, "AccessDenied")); // TODO:
             }
+
+            PrepareRegisterModel(model);
+
+            //if (Page.IsPostBack)
+            //{
+            //    // Preserve password value (a bit insecure but much more usable)
+            //    txtPassword1.Attributes.Add("value", txtPassword1.Text);
+            //    txtPassword2.Attributes.Add("value", txtPassword2.Text);
+            //}
+
+            return View(model);
+        }
+
+        private void PrepareRegisterModel(RegisterModel model)
+        {
+            PrepareSAModel(model, CurrentNamespace);
+
+            model.Title = Messages.RegisterTitle + " - " + Settings.GetWikiTitle(CurrentWiki);
+
+            model.RegisterVisible = true;
+            model.Description = new HtmlString(Localization.Common.Register.LblRegisterDescription_Text);
+            PrintRegisterNotice(model);
 
             switch (Settings.GetAccountActivationMode(CurrentWiki))
             {
@@ -936,15 +951,6 @@ namespace ScrewTurn.Wiki.Web.Controllers
             }
 
             model.DisplayCaptcha = !Settings.GetDisableCaptchaControl(CurrentWiki);
-
-            //if (Page.IsPostBack)
-            //{
-            //    // Preserve password value (a bit insecure but much more usable)
-            //    txtPassword1.Attributes.Add("value", txtPassword1.Text);
-            //    txtPassword2.Attributes.Add("value", txtPassword2.Text);
-            //}
-
-            return View(model);
         }
 
         /// <summary>
@@ -971,9 +977,7 @@ namespace ScrewTurn.Wiki.Web.Controllers
                 ModelState.AddModelError("", Messages.WrongCaptcha);
             }
 
-            model.RegisterVisible = true;
-            model.Description = new HtmlString(Localization.Common.Register.LblRegisterDescription_Text);
-            PrintRegisterNotice(model);
+            PrepareRegisterModel(model);
 
             if (!Settings.UsersCanRegister(CurrentWiki))
             {
@@ -1017,7 +1021,7 @@ namespace ScrewTurn.Wiki.Web.Controllers
                 model.Result = new HtmlString("<br /><br />" + Messages.AccountCreated);
                 model.RegisterVisible = false;
             }
-            PrepareSAModel(model, CurrentNamespace);
+
             return View(model);
         }
 
