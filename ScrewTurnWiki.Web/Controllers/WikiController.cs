@@ -98,7 +98,7 @@ namespace ScrewTurn.Wiki.Web.Controllers
 
             if (Request["Edit"] == "1")
             {
-                UrlTools.Redirect(UrlTools.BuildUrl(CurrentWiki, "Edit.aspx?Page=", Tools.UrlEncode(CurrentPage.FullName))); // TODO:
+                UrlTools.Redirect(UrlTools.BuildUrl(CurrentWiki, "Edit?Page=", Tools.UrlEncode(CurrentPage.FullName))); // TODO:
             }
             //if (Request["History"] == "1")
             //{

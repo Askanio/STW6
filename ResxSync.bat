@@ -19,5 +19,6 @@ References\Tools\ResxSync\resxsync.exe ScrewTurnWiki.Web\Localization\Common\Cat
 References\Tools\ResxSync\resxsync.exe ScrewTurnWiki.Web\Localization\Common\Login.resx *
 References\Tools\ResxSync\resxsync.exe ScrewTurnWiki.Web\Localization\Common\Profile.resx *
 References\Tools\ResxSync\resxsync.exe ScrewTurnWiki.Web\Localization\Common\Register.resx *
+References\Tools\ResxSync\resxsync.exe ScrewTurnWiki.Web\Localization\Common\Edit.resx *
 
 References\Tools\ResxSync\resxsync.exe ScrewTurnWiki.Web\Localization\Messages\Messages.resx *

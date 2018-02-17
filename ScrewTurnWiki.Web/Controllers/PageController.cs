@@ -68,7 +68,7 @@ namespace ScrewTurn.Wiki.Web.Controllers
                 if (!string.IsNullOrEmpty(referrer))
                     model.LnkPreviousPageUrl = new MvcHtmlString(referrer);
 
-            FillSAHtmlHead(model);
+            FillSAHtmlHead(model, currentNamespace);
             FillDefaultHeader(model, currentNamespace, null);
             FillDefaultFooter(model, currentNamespace, null);
         }
@@ -76,10 +76,10 @@ namespace ScrewTurn.Wiki.Web.Controllers
         /// <summary>
         /// Prints the HTML head tag.
         /// </summary>
-        private void FillSAHtmlHead(WikiModel model)
+        private void FillSAHtmlHead(WikiModel model, string currentNamespace)
         {
             var htmlHead =
-                MvcHtmlString.Create(Tools.GetIncludes(CurrentWiki, Tools.DetectCurrentNamespace()) + "\r\n" +
+                MvcHtmlString.Create(Tools.GetIncludes(CurrentWiki, currentNamespace) + "\r\n" +
                                      Host.Instance.GetAllHtmlHeadContent(CurrentWiki));
             model.HtmlHeads.Add(htmlHead);
         }

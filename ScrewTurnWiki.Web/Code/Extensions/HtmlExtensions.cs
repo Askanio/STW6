@@ -37,5 +37,20 @@ namespace ScrewTurn.Wiki.Web.Code.Extensions
             }
             return htmlHelper.DropDownListFor(expression, selectList, attributes);
         }
+
+        public static IHtmlString WikiCheckBoxFor<TModel>(
+            this HtmlHelper<TModel> htmlHelper,
+            Expression<Func<TModel, bool>> expression,
+            object htmlAttributes,
+            bool disabled
+            )
+        {
+            var attributes = new RouteValueDictionary(htmlAttributes);
+            if (disabled)
+            {
+                attributes["disabled"] = "disabled";
+            }
+            return htmlHelper.CheckBoxFor(expression, attributes);
+        }
     }
 }

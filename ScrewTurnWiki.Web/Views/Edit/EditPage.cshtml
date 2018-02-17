@@ -1,0 +1,224 @@
+﻿@using System.Web.Mvc.Html
+@using ScrewTurn.Wiki.Web.Code.Extensions
+@using ScrewTurn.Wiki.Web.Localization.Common
+@model ScrewTurn.Wiki.Web.Models.Edit.EditModel
+@{
+    Layout = "~/Views/Shared/_SALayout.cshtml";
+}
+<script type="text/javascript">
+    //var wizard;
+    //$(document).ready(function() {
+    //    wizard = new ScrewTurn.Wiki.Web.Common.CommonWizard();
+    //});
+
+    function HideAutoTemplate() {
+        $('.autotemplate').hide();
+    };
+
+    function HideTemplates() {
+        $('#TemplatesDiv').hide();
+    }
+</script>
+
+<asp:Panel ID="pnlCollisions" runat="server" Visible="False"
+           CssClass="collisionsmanagement" meta:resourcekey="pnlCollisionsResource1">
+    <asp:Literal ID="lblConcurrentEditing" runat="server" Text="&lt;b&gt;Warning&lt;/b&gt;: this Page is being edited by another user" meta:resourcekey="lblConcurrentEditingResource1" />
+    <asp:Literal ID="lblConcurrentEditingUsername" runat="server" meta:resourcekey="lblConcurrentEditingUsernameResource1" />.
+    <asp:Literal ID="lblSaveDangerous" runat="server" Visible="False" Text="Saving this Page might result in a &lt;b&gt;data-loss&lt;/b&gt;." meta:resourcekey="lblSaveDangerousResource1" />
+    <asp:Literal ID="lblSaveDisabled" runat="server" Visible="False" Text="The Administrators don't allow to save this Page." meta:resourcekey="lblSaveDisabledResource1" />
+    <asp:Literal ID="lblRefreshLink" runat="server" meta:resourcekey="lblRefreshLinkResource1" />
+</asp:Panel>
+
+<asp:Panel ID="pnlAnonymous" runat="server" Visible="False" CssClass="anonymous" meta:resourcekey="pnlAnonymousResource1">
+    <asp:Literal ID="lblIpLogged" runat="server" Text="Since you are not logged in, your IP Address will be used as Username." meta:resourcekey="lblIpLoggedResource1" />
+</asp:Panel>
+
+<asp:Panel ID="pnlDraft" runat="server" Visible="False" CssClass="draftmanagement" meta:resourcekey="pnlDraftResource1">
+    <asp:Literal ID="lblDraftInfo" runat="server" Text="You are currently editing a previously saved <b>draft</b> of this page, edited by <b>##USER##</b> on <b>##DATETIME##</b> (##VIEWCHANGES##)."
+                 meta:resourcekey="lblDraftInfoResource1" />
+    <asp:Literal ID="lblDraftInfo2" runat="server" Text="If you think this content is ready for display, simply unckeck the 'Save as Draft' checkbox near the 'Save' button. Note: drafts are not versioned."
+                 meta:resourcekey="lblDraftInfo2Resource1" /><br />
+</asp:Panel>
+
+<asp:Panel ID="pnlApprovalRequired" runat="server" Visible="False" CssClass="draftmanagement" meta:resourcekey="pnlApprovalRequiredResource1">
+    <asp:Literal ID="lblApprovalRequiredInfo" runat="server" Text="Your changes to this page will be saved in a draft and they will not be published until an editor or administrator approves them."
+                 EnableViewState="False" meta:resourcekey="lblApprovalRequiredInfoResource1" />
+</asp:Panel>
+
+<div id="EditNoticeDiv">
+    @Html.Raw(Model.EditNotice)
+</div>
+
+<div id="ButtonsDiv">
+    <asp:Button ID="btnSave" runat="server" Text="Save" OnClick="btnSave_Click" ValidationGroup="nametitle" meta:resourcekey="btnSaveResource1" />
+    <asp:Button ID="btnSaveAndContinue" runat="server" Text="Save &amp; Continue" OnClick="btnSave_Click" ValidationGroup="nametitle" meta:resourcekey="btnSaveAndContinueResource1" />
+    <asp:Button ID="btnCancel" runat="server" Text="Cancel" CausesValidation="False" OnClick="btnCancel_Click" meta:resourcekey="btnCancelResource1" />
+    <div id="SaveOptionsDiv">
+        @if (Model.MinorChangeVisible)
+        {
+            @Html.WikiCheckBoxFor(m => m.MinorChange, new { @class = "textbox" }, !Model.MinorChangeEnabled)
+            @Html.LabelFor(model => model.MinorChange, @Edit.ChkMinorChange_Text)
+            @*< asp:CheckBox ID = "chkMinorChange" runat = "server" Text = "Minor Change (no backup)" OnCheckedChanged = "chkMinorChange_CheckedChanged"
+                          meta: resourcekey = "chkMinorChangeResource1" />*@
+             <br/>
+        }
+        @if (Model.SaveAsDraftVisible)
+        {
+            @Html.WikiCheckBoxFor(m => m.SaveAsDraft, new {@class = "textbox"}, !Model.SaveAsDraftEnabled)
+            @Html.LabelFor(model => model.SaveAsDraft, @Edit.ChkSaveAsDraft_Text)
+            @*<asp:CheckBox ID="chkSaveAsDraft" runat="server" Text="Save as Draft" OnCheckedChanged="chkSaveAsDraft_CheckedChanged"
+                          meta:resourcekey="chkSaveAsDraftResource1"/>*@
+        }
+    </div>
+    <div id="ResultDiv">
+        <asp:Label ID="lblResult" runat="server" EnableViewState="False" meta:resourcekey="lblResultResource1" />
+    </div>
+</div>
+
+<div id="PageNameAndTitleDiv">
+    @if (Model.PageNameVisible)
+    { 
+        <div>
+           @if (Model.NameEnabled)
+           {
+                @Html.Raw(Edit.LblName_Text)
+                @Html.TextBoxFor(m => m.Name, new {@class = "bigtextbox large", title = @Edit.TxtName2_ToolTip})
+            @*<asp:CustomValidator ID="cvName1" runat="server" CssClass="resulterror" ErrorMessage="Invalid Page Name"
+                                 Display="Dynamic" ControlToValidate="txtName" OnServerValidate="cvName1_ServerValidate" ValidationGroup="nametitle" meta:resourcekey="cvName1Resource1" />
+            <asp:CustomValidator ID="cvName2" runat="server" CssClass="resulterror" ErrorMessage="Page already exists"
+                                 Display="Dynamic" ControlToValidate="txtName" OnServerValidate="cvName2_ServerValidate" ValidationGroup="nametitle" meta:resourcekey="cvName2Resource1" />*@
+            }
+            <br/>
+        </div>
+    }
+    @if (Model.ManualNameVisible)
+    {
+        <div>
+            <asp:LinkButton ID="btnManualName" runat="server" Text="Specify page name manually..."
+                            OnClick="btnManualName_Click" CssClass="small" meta:resourcekey="btnManualNameResource1"/>
+            <br/>
+        </div>
+    }
+    @Html.Raw(Edit.LblTitle_Text)<br/>
+    @Html.TextBoxFor(m => m.PageTitle, new {@class = "bigtextbox large", title = @Edit.TxtTitle2_ToolTip})
+</div>
+
+<div id="TemplatesDiv">
+    <asp:LinkButton ID="btnTemplates" runat="server" Text="Content Templates..." OnClick="btnTemplates_Click"
+                    meta:resourcekey="btnTemplatesResource1" CssClass="small" />
+
+    <asp:Panel ID="pnlTemplates" runat="server" Visible="False" meta:resourcekey="pnlTemplatesResource1">
+        <div id="TemplatesInternalDiv">
+            <asp:DropDownList ID="lstTemplates" runat="server" OnSelectedIndexChanged="lstTemplates_SelectedIndexChanged" AutoPostBack="true"
+                              meta:resourcekey="lstTemplatesResource1" />
+            <div id="TemplatePreviewDiv">
+                <asp:Label ID="lblTemplatePreview" runat="server" meta:resourcekey="lblTemplatePreviewResource1" />
+            </div>
+            <small>
+                <asp:LinkButton ID="btnUseTemplate" runat="server" Text="Use Template" ToolTip="Use this Template (replace current content)"
+                                CausesValidation="False" Visible="False" OnClick="btnUseTemplate_Click"
+                                meta:resourcekey="btnUseTemplateResource1" />
+                &bull;
+                @Html.ActionLink(@Edit.BtnCancelTemplate_Text, "#", "", null, new { title = @Edit.BtnCancelTemplate_ToolTip, onclick = "HideTemplates()" });
+                @*<asp:LinkButton ID="btnCancelTemplate" runat="server" Text="Cancel" ToolTip="Close the Templates toolbar"
+                                CausesValidation="False" OnClick="btnCancelTemplate_Click" meta:resourcekey="btnCancelTemplateResource1" />*@
+            </small>
+        </div>
+    </asp:Panel>
+</div>
+
+@if (Model.AutoTemplateVisible)
+{
+    <div class="autotemplate">
+        @Html.Raw(Model.AutoTemplateLabel)
+        @Html.ActionLink(@Edit.BtnAutoTemplateOK_Text, "#", "", null, new { title = @Edit.BtnAutoTemplateOK_ToolTip, onclick = "HideAutoTemplate()" });
+        @*<a id="btnAutoTemplateOK" title="@Edit.BtnAutoTemplateOK_ToolTip" onclick="HideAutoTemplate();">@Edit.BtnAutoTemplateOK_Text</a>*@
+    </div>
+}
+
+<div id="EditorDiv">
+    <st:Editor ID="editor" runat="server" OnSelectedTabChanged="editor_SelectedTabChanged" />
+</div>
+
+@if (Model.DisplayCaptcha)
+{
+    <div class="captcha">
+            <div class="captcha-box">
+                @Html.Raw(Html.GenerateCaptcha())
+            </div>
+        @*<asp:Panel ID="pnlCaptcha" runat="server" CssClass="captcha" meta:resourcekey="pnlCaptchaResource1">
+            <st:Captcha ID="captcha" runat="server" />
+        </asp:Panel>*@
+    </div>
+}
+
+    <div id="CategoriesDiv">
+        <div>
+            <h3 class="separator"><asp:Literal ID="lblCategories" runat="server" Text="Page Categories" EnableViewState="False" meta:resourcekey="lblCategoriesResource1" /></h3>
+            <div id="CategoriesListDiv">
+                <asp:CheckBoxList ID="lstCategories" runat="server" CssClass="medium h_short" RepeatLayout="Flow"
+                                  meta:resourcekey="lstCategoriesResource1" />
+            </div>
+            <asp:Panel ID="pnlCategoryCreation" runat="server" CssClass="categorycreation"
+                       meta:resourcekey="pnlCategoryCreationResource1">
+                <asp:Literal ID="lblNewCategory" runat="server" Text="New Category" EnableViewState="False" meta:resourcekey="lblNewCategoryResource1" /><br />
+                <asp:TextBox ID="txtCategory" runat="server" CssClass="short" ToolTip="Type the name of the category here" ValidationGroup="category"
+                             meta:resourcekey="txtCategoryResource2" />
+                <asp:Button ID="btnCreateCategory" runat="server" Text="Create" ValidationGroup="category" OnClick="btnCreateCategory_Click"
+                            meta:resourcekey="btnCreateCategoryResource1" /><br />
+                <asp:RequiredFieldValidator ID="rfvCategory" runat="server" ValidationGroup="category" ControlToValidate="txtCategory" Display="Dynamic"
+                                            ErrorMessage="Name is required" meta:resourcekey="rfvCategoryResource1" />
+                <asp:CustomValidator ID="cvCategory1" runat="server" ValidationGroup="category" ControlToValidate="txtCategory" Display="Dynamic"
+                                     ErrorMessage="Invalid Name" OnServerValidate="cvCategory1_ServerValidate" meta:resourcekey="cvCategory1Resource1" />
+                <asp:CustomValidator ID="cvCategory2" runat="server" ValidationGroup="category" ControlToValidate="txtCategory" Display="Dynamic"
+                                     ErrorMessage="Category already exists" OnServerValidate="cvCategory2_ServerValidate" meta:resourcekey="cvCategory2Resource1" />
+                <asp:Label ID="lblCategoryResult" runat="server" meta:resourcekey="lblCategoryResultResource1" />
+            </asp:Panel>
+        </div>
+    </div>
+
+    <div id="EditCommentDiv">
+        <h3 class="separator"><asp:Literal ID="lblMeta" runat="server" Text="Meta Information" EnableViewState="False" meta:resourcekey="lblMetaResource1"/>
+        </h3>
+        @Html.Raw(@Edit.LblKeywords_Text)<br />
+        @Html.TextBoxFor(m => m.Keywords, new {title = @Edit.TxtKeywords2_ToolTip}) <br/>
+        @Html.Raw(@Edit.LblDescription_Text)<br/>
+        @Html.TextBoxFor(m => m.Description, new { title = @Edit.TxtDescription2_ToolTip })
+        @Html.Raw(@Edit.LblComment_Text)<br/>
+        @Html.TextBoxFor(m => m.Comment, new { title = @Edit.TxtComment2_ToolTip })
+    </div>
+
+    <div id="AttachmentsDiv">
+        <h3 class="separator"><asp:Literal ID="lblAttachmentManager" runat="server" Text="Page Attachments Management" meta:resourcekey="lblAttachmentManagerResource1" /></h3>
+        <st:AttachmentManager ID="attachmentManager" runat="server" />
+    </div>
+
+    <asp:Literal ID="lblSessionRefresh" runat="server" EnableViewState="False" meta:resourcekey="lblSessionRefreshResource1" />
+
+    @*<script type="text/javascript">
+            <!--
+                __GetServerElementById("btnSave").onclick = __SetSubmitted;
+                if(__GetServerElementById("btnSaveAndContinue")) {
+                    __GetServerElementById("btnSaveAndContinue").onclick = __SetSubmitted;
+                }
+                __GetServerElementById("btnCancel").onclick = __SetSubmitted;
+                if(__GetServerElementById("btnNewCategory")) {
+                    __GetServerElementById("btnNewCategory").onclick = __SetSubmitted;
+                }
+
+                $(function() {
+                    $("#<%= txtTitle.ClientID %>").focus().keydown(function(event) {
+                        if(event.keyCode == 9 /* TAB */) {
+                            event.preventDefault();
+                            __FocusEditorWindow();
+                        }
+                    });
+                });
+            // -->
+        </script>*@
+
+    <asp:Literal ID="lblUnloadPage" runat="server" meta:resourcekey="lblUnloadPageResource1" />
+
+    <div class="cleanup"></div>
+
+    <st:KeepAlive runat="server" ID="keepAlive" />

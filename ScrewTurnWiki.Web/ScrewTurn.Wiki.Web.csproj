@@ -266,6 +266,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Default.resx</DependentUpon>
     </Compile>
+    <Compile Include="Localization\Common\Edit.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Edit.resx</DependentUpon>
+    </Compile>
     <Compile Include="Localization\Common\Error.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -553,6 +558,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Models\Edit\" />
     <Folder Include="Views\Admin\Categories\" />
     <Folder Include="Views\Admin\Config\" />
     <Folder Include="Views\Admin\Content\" />
@@ -569,6 +575,7 @@
     <Folder Include="Views\Admin\Theme\" />
     <Folder Include="Views\Admin\Users\" />
     <Folder Include="Views\Categories\" />
+    <Folder Include="Views\Edit\" />
     <Folder Include="Views\Home\" />
     <Folder Include="Views\SpecialPage\" />
   </ItemGroup>
@@ -894,6 +901,38 @@
     <EmbeddedResource Include="Localization\Common\Default.vi-VN.resx" />
     <EmbeddedResource Include="Localization\Common\Default.zh-cn.resx" />
     <EmbeddedResource Include="Localization\Common\Default.zh-tw.resx" />
+    <EmbeddedResource Include="Localization\Common\Edit.af-ZA.resx" />
+    <EmbeddedResource Include="Localization\Common\Edit.cs-CZ.resx" />
+    <EmbeddedResource Include="Localization\Common\Edit.da-DK.resx" />
+    <EmbeddedResource Include="Localization\Common\Edit.de-DE.resx" />
+    <EmbeddedResource Include="Localization\Common\Edit.es-ES.resx" />
+    <EmbeddedResource Include="Localization\Common\Edit.fa-IR.resx" />
+    <EmbeddedResource Include="Localization\Common\Edit.fr-FR.resx" />
+    <EmbeddedResource Include="Localization\Common\Edit.hi-IN.resx" />
+    <EmbeddedResource Include="Localization\Common\Edit.hu-HU.resx" />
+    <EmbeddedResource Include="Localization\Common\Edit.it-IT.resx" />
+    <EmbeddedResource Include="Localization\Common\Edit.ja-JP.resx" />
+    <EmbeddedResource Include="Localization\Common\Edit.ko-KR.resx" />
+    <EmbeddedResource Include="Localization\Common\Edit.lv-LV.resx" />
+    <EmbeddedResource Include="Localization\Common\Edit.nb-NO.resx" />
+    <EmbeddedResource Include="Localization\Common\Edit.nl-NL.resx" />
+    <EmbeddedResource Include="Localization\Common\Edit.pl-PL.resx" />
+    <EmbeddedResource Include="Localization\Common\Edit.pt-BR.resx" />
+    <EmbeddedResource Include="Localization\Common\Edit.pt-PT.resx" />
+    <EmbeddedResource Include="Localization\Common\Edit.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Edit.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Localization\Common\Edit.ro-RO.resx" />
+    <EmbeddedResource Include="Localization\Common\Edit.ru-RU.resx" />
+    <EmbeddedResource Include="Localization\Common\Edit.sk-SK.resx" />
+    <EmbeddedResource Include="Localization\Common\Edit.sr-Latn-CS.resx" />
+    <EmbeddedResource Include="Localization\Common\Edit.sv-SE.resx" />
+    <EmbeddedResource Include="Localization\Common\Edit.tr-TR.resx" />
+    <EmbeddedResource Include="Localization\Common\Edit.uk-UA.resx" />
+    <EmbeddedResource Include="Localization\Common\Edit.vi-VN.resx" />
+    <EmbeddedResource Include="Localization\Common\Edit.zh-CN.resx" />
+    <EmbeddedResource Include="Localization\Common\Edit.zh-TW.resx" />
     <EmbeddedResource Include="Localization\Common\Error.af-ZA.resx" />
     <EmbeddedResource Include="Localization\Common\Error.cs-CZ.resx" />
     <EmbeddedResource Include="Localization\Common\Error.da-DK.resx" />

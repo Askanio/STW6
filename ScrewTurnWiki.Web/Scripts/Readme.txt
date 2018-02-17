@@ -30,5 +30,5 @@ JQuery-ui-1.11.4 include
 
 
 
-Bootstrap - The Twitter CSS framework, also used for dialogs and responsive themes.
+Bootstrap - The Twitter CSS framework, also used for dialogs and responsive themes in Installer
 http://getbootstrap.com/
